@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2026-05-18 19:01:56
+-- 產生時間： 2026-05-22 13:34:06
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- 資料庫： `4915`
 --
+CREATE DATABASE IF NOT EXISTS `4915` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `4915`;
 
 -- --------------------------------------------------------
 
@@ -27,6 +29,7 @@ SET time_zone = "+00:00";
 -- 資料表結構 `complaint`
 --
 
+DROP TABLE IF EXISTS `complaint`;
 CREATE TABLE `complaint` (
   `ComplaintID` varchar(10) NOT NULL,
   `CustomerID` int(100) NOT NULL,
@@ -53,6 +56,7 @@ INSERT INTO `complaint` (`ComplaintID`, `CustomerID`, `OrderID`, `SerialNumber`,
 -- 資料表結構 `customdesign`
 --
 
+DROP TABLE IF EXISTS `customdesign`;
 CREATE TABLE `customdesign` (
   `DesignID` varchar(10) NOT NULL,
   `CustomerID` int(100) NOT NULL,
@@ -76,6 +80,7 @@ INSERT INTO `customdesign` (`DesignID`, `CustomerID`, `UserID`, `SketchDetail`, 
 -- 資料表結構 `customdesign_orderitem`
 --
 
+DROP TABLE IF EXISTS `customdesign_orderitem`;
 CREATE TABLE `customdesign_orderitem` (
   `DesignID` varchar(10) NOT NULL,
   `OrderItemID` varchar(10) NOT NULL
@@ -94,6 +99,7 @@ INSERT INTO `customdesign_orderitem` (`DesignID`, `OrderItemID`) VALUES
 -- 資料表結構 `customer`
 --
 
+DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `CustomerID` int(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -118,6 +124,7 @@ INSERT INTO `customer` (`CustomerID`, `Name`, `Company`, `Email`, `Phone`) VALUE
 -- 資料表結構 `deliveryconfirmation`
 --
 
+DROP TABLE IF EXISTS `deliveryconfirmation`;
 CREATE TABLE `deliveryconfirmation` (
   `ConfirmationID` varchar(10) NOT NULL,
   `ShipmentID` varchar(10) NOT NULL,
@@ -141,6 +148,7 @@ INSERT INTO `deliveryconfirmation` (`ConfirmationID`, `ShipmentID`, `ReceivedDat
 -- 資料表結構 `deliveryitem`
 --
 
+DROP TABLE IF EXISTS `deliveryitem`;
 CREATE TABLE `deliveryitem` (
   `DeliveryItemID` varchar(10) NOT NULL,
   `ShipmentID` varchar(10) NOT NULL,
@@ -162,6 +170,7 @@ INSERT INTO `deliveryitem` (`DeliveryItemID`, `ShipmentID`, `SerialNumber`, `Qua
 -- 資料表結構 `employee_salesorder`
 --
 
+DROP TABLE IF EXISTS `employee_salesorder`;
 CREATE TABLE `employee_salesorder` (
   `UserID` int(100) NOT NULL,
   `OrderID` varchar(10) NOT NULL
@@ -182,6 +191,7 @@ INSERT INTO `employee_salesorder` (`UserID`, `OrderID`) VALUES
 -- 資料表結構 `inventory`
 --
 
+DROP TABLE IF EXISTS `inventory`;
 CREATE TABLE `inventory` (
   `InventoryID` varchar(10) NOT NULL,
   `MaterialID` varchar(10) NOT NULL,
@@ -209,6 +219,7 @@ INSERT INTO `inventory` (`InventoryID`, `MaterialID`, `ProductID`, `SerialNumber
 -- 資料表結構 `materialrequest`
 --
 
+DROP TABLE IF EXISTS `materialrequest`;
 CREATE TABLE `materialrequest` (
   `RequestID` varchar(10) NOT NULL,
   `UserID` int(100) NOT NULL,
@@ -232,6 +243,7 @@ INSERT INTO `materialrequest` (`RequestID`, `UserID`, `BatchID`, `RequestDate`, 
 -- 資料表結構 `materialrequestitem`
 --
 
+DROP TABLE IF EXISTS `materialrequestitem`;
 CREATE TABLE `materialrequestitem` (
   `RequestItemID` varchar(10) NOT NULL,
   `RequestID` varchar(10) NOT NULL,
@@ -254,6 +266,7 @@ INSERT INTO `materialrequestitem` (`RequestItemID`, `RequestID`, `MaterialID`, `
 -- 資料表結構 `orderitem`
 --
 
+DROP TABLE IF EXISTS `orderitem`;
 CREATE TABLE `orderitem` (
   `OrderItemID` varchar(10) NOT NULL,
   `Quantity` int(10) NOT NULL,
@@ -277,6 +290,7 @@ INSERT INTO `orderitem` (`OrderItemID`, `Quantity`, `UnitPrice`, `Subtotal`, `Cu
 -- 資料表結構 `orderitem_product`
 --
 
+DROP TABLE IF EXISTS `orderitem_product`;
 CREATE TABLE `orderitem_product` (
   `ProductID` varchar(10) NOT NULL,
   `OrderItemID` varchar(10) NOT NULL
@@ -297,6 +311,7 @@ INSERT INTO `orderitem_product` (`ProductID`, `OrderItemID`) VALUES
 -- 資料表結構 `product`
 --
 
+DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `ProductID` varchar(10) NOT NULL,
   `UserID` int(100) NOT NULL,
@@ -326,6 +341,7 @@ INSERT INTO `product` (`ProductID`, `UserID`, `Name`, `Description`, `Category`,
 -- 資料表結構 `productinstance`
 --
 
+DROP TABLE IF EXISTS `productinstance`;
 CREATE TABLE `productinstance` (
   `SerialNumber` varchar(10) NOT NULL,
   `ProductID` varchar(10) NOT NULL,
@@ -352,6 +368,7 @@ INSERT INTO `productinstance` (`SerialNumber`, `ProductID`, `BatchID`, `Producti
 -- 資料表結構 `productionbatch`
 --
 
+DROP TABLE IF EXISTS `productionbatch`;
 CREATE TABLE `productionbatch` (
   `BatchID` varchar(10) NOT NULL,
   `StartDate` date NOT NULL,
@@ -374,6 +391,7 @@ INSERT INTO `productionbatch` (`BatchID`, `StartDate`, `EndDate`, `Status`) VALU
 -- 資料表結構 `quotation`
 --
 
+DROP TABLE IF EXISTS `quotation`;
 CREATE TABLE `quotation` (
   `QuotationID` varchar(10) NOT NULL,
   `CustomerID` int(100) NOT NULL,
@@ -399,6 +417,7 @@ INSERT INTO `quotation` (`QuotationID`, `CustomerID`, `EmployeeID`, `QuotationDa
 -- 資料表結構 `quotation_salesorder`
 --
 
+DROP TABLE IF EXISTS `quotation_salesorder`;
 CREATE TABLE `quotation_salesorder` (
   `QuotationID` varchar(10) NOT NULL,
   `OrderID` varchar(10) NOT NULL
@@ -418,6 +437,7 @@ INSERT INTO `quotation_salesorder` (`QuotationID`, `OrderID`) VALUES
 -- 資料表結構 `rawmaterial`
 --
 
+DROP TABLE IF EXISTS `rawmaterial`;
 CREATE TABLE `rawmaterial` (
   `MaterialID` varchar(10) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -445,6 +465,7 @@ INSERT INTO `rawmaterial` (`MaterialID`, `Name`, `Type`, `Unit`, `UnitCost`, `Re
 -- 資料表結構 `salesorder`
 --
 
+DROP TABLE IF EXISTS `salesorder`;
 CREATE TABLE `salesorder` (
   `OrderID` varchar(10) NOT NULL,
   `CustomerID` int(100) NOT NULL,
@@ -471,6 +492,7 @@ INSERT INTO `salesorder` (`OrderID`, `CustomerID`, `OrderDate`, `TotalAmount`, `
 -- 資料表結構 `shipment`
 --
 
+DROP TABLE IF EXISTS `shipment`;
 CREATE TABLE `shipment` (
   `ShipmentID` varchar(10) NOT NULL,
   `OrderID` varchar(10) NOT NULL,
@@ -494,6 +516,7 @@ INSERT INTO `shipment` (`ShipmentID`, `OrderID`, `UserID`, `DeliveryMethod`, `Tr
 -- 資料表結構 `transfer`
 --
 
+DROP TABLE IF EXISTS `transfer`;
 CREATE TABLE `transfer` (
   `TransferID` varchar(10) NOT NULL,
   `RequestID` varchar(10) NOT NULL,
@@ -518,6 +541,7 @@ INSERT INTO `transfer` (`TransferID`, `RequestID`, `BatchID`, `ApprovedBy`, `Tra
 -- 資料表結構 `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `UserID` int(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -525,19 +549,20 @@ CREATE TABLE `user` (
   `Role` varchar(10) DEFAULT NULL,
   `Department` varchar(50) NOT NULL,
   `Email` varchar(100) NOT NULL,
-  `Phone` varchar(20) NOT NULL
+  `Phone` varchar(20) NOT NULL,
+  `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- 傾印資料表的資料 `user`
 --
 
-INSERT INTO `user` (`UserID`, `Name`, `position`, `Role`, `Department`, `Email`, `Phone`) VALUES
-(101, 'Alice Cheung', 'Manager', 'ADMIN', 'Sales', 'alice.cheung@company.com', '852-55501234'),
-(102, 'Bob Tam', 'Designer', 'STAFF', 'Design', 'bob.tam@company.com', '852-55501235'),
-(103, 'Carol Ho', 'Supervisor', 'STAFF', 'Production', 'carol.ho@company.com', '852-55501236'),
-(104, 'Daniel Ng', 'Sales Rep', 'STAFF', 'Sales', 'daniel.ng@company.com', '852-55501237'),
-(105, 'Emma Lau', 'Manager', 'STAFF', 'Warehouse', 'emma.lau@company.com', '852-55501238');
+INSERT INTO `user` (`UserID`, `Name`, `position`, `Role`, `Department`, `Email`, `Phone`, `password`) VALUES
+(101, 'Alice Cheung', 'Manager', 'ADMIN', 'Sales', 'alice.cheung@company.com', '852-55501234', '12345678'),
+(102, 'Bob Tam', 'Designer', 'STAFF', 'Design', 'bob.tam@company.com', '852-55501235', ''),
+(103, 'Carol Ho', 'Supervisor', 'STAFF', 'Production', 'carol.ho@company.com', '852-55501236', ''),
+(104, 'Daniel Ng', 'Sales Rep', 'STAFF', 'Sales', 'daniel.ng@company.com', '852-55501237', ''),
+(105, 'Emma Lau', 'Manager', 'STAFF', 'Warehouse', 'emma.lau@company.com', '852-55501238', '');
 
 -- --------------------------------------------------------
 
@@ -545,6 +570,7 @@ INSERT INTO `user` (`UserID`, `Name`, `position`, `Role`, `Department`, `Email`,
 -- 資料表結構 `user_productionbatch`
 --
 
+DROP TABLE IF EXISTS `user_productionbatch`;
 CREATE TABLE `user_productionbatch` (
   `BatchID` varchar(10) NOT NULL,
   `UserID` int(100) NOT NULL
