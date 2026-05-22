@@ -1,6 +1,6 @@
 ﻿namespace _4915project
 {
-    partial class Form1
+    partial class LoginPage
     {
         /// <summary>
         ///  Required designer variable.
@@ -39,7 +39,7 @@
             // button1
             // 
             button1.Location = new Point(127, 264);
-            button1.Margin = new Padding(2, 2, 2, 2);
+            button1.Margin = new Padding(2);
             button1.Name = "button1";
             button1.Size = new Size(71, 22);
             button1.TabIndex = 0;
@@ -50,18 +50,20 @@
             // textBoxEmail
             // 
             textBoxEmail.Location = new Point(127, 125);
-            textBoxEmail.Margin = new Padding(2, 2, 2, 2);
+            textBoxEmail.Margin = new Padding(2);
             textBoxEmail.Name = "textBoxEmail";
             textBoxEmail.Size = new Size(97, 23);
             textBoxEmail.TabIndex = 1;
             // 
             // textBoxPwd
             // 
+            textBoxPwd.AcceptsReturn = true;
             textBoxPwd.Location = new Point(127, 213);
-            textBoxPwd.Margin = new Padding(2, 2, 2, 2);
+            textBoxPwd.Margin = new Padding(2);
             textBoxPwd.Name = "textBoxPwd";
             textBoxPwd.Size = new Size(97, 23);
             textBoxPwd.TabIndex = 2;
+            textBoxPwd.KeyDown += textBoxPwd_KeyDown;
             // 
             // Email
             // 
@@ -93,7 +95,7 @@
             LTitle.TabIndex = 5;
             LTitle.Text = "Login";
             // 
-            // Form1
+            // LoginPage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -104,9 +106,9 @@
             Controls.Add(textBoxPwd);
             Controls.Add(textBoxEmail);
             Controls.Add(button1);
-            Margin = new Padding(2, 2, 2, 2);
-            Name = "Form1";
-            Text = "Form1";
+            Margin = new Padding(2);
+            Name = "LoginPage";
+            Text = "LoginPage";
             ResumeLayout(false);
             PerformLayout();
         }

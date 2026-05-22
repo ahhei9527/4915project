@@ -16,7 +16,6 @@ C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\runtimes\win-x64\native\krb5_64.dll
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\runtimes\win-x64\native\krbcc64.dll
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.csproj.AssemblyReference.cache
-C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\_4915project.Form1.resources
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.csproj.GenerateResource.cache
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.AssemblyInfoInputs.cache
@@ -29,3 +28,5 @@ C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.pdb
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.genruntimeconfig.cache
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\ref\4915project.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\_4915project.DashBoard.resources
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\_4915project.LoginPage.resources

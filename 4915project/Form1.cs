@@ -1,61 +1,106 @@
+using _4915project;
 using MySql.Data.MySqlClient;
+using Mysqlx.Session;
+using MySqlX.XDevAPI.Common;
+using MySqlX.XDevAPI.Relational;
 using System.Data;
 
 namespace _4915project
 {
-    public partial class Form1 : Form
+    public partial class LoginPage : Form
     {
-        public Form1()
+
+
+        public LoginPage()
         {
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            Login();
+        }
 
-            // Using 'using' statements automatically closes connections and prevents memory leaks
-            using (MySqlConnection con = new MySqlConnection(constring))
+        private void textBoxPwd_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
             {
-                // Use a parameter (@Email) instead of direct string addition
-                string query = "SELECT password FROM user WHERE Email = @Email LIMIT 1";
+                Login();
+            }
+        }
 
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
+        public void Login()
+        {
+            string constring = "server=localhost;user id=root;password=;database=4915";
+            // Basic input validation
+            if (string.IsNullOrWhiteSpace(textBoxEmail.Text) || string.IsNullOrWhiteSpace(textBoxPwd.Text))
+            {
+                MessageBox.Show("Please enter both Email and Password.", "Input Error",
+                              MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(constring))
                 {
-                    // Safely pass the text box value to the SQL query
-                    cmd.Parameters.AddWithValue("@Email", textBoxEmail.Text);
+                    con.Open();
 
-                    try
+                    string query = "SELECT password, role FROM user WHERE Email = @Email LIMIT 1";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
-                        con.Open();
+                        cmd.Parameters.AddWithValue("@Email", textBoxEmail.Text.Trim());
 
-                        // ExecuteScalar is better when you only need a single value back
-                        object result = cmd.ExecuteScalar();
-
-                        if (result != null)
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            string dbPassword = result.ToString();
-
-                            // Compare the database password with user input
-                            if (dbPassword == textBoxPwd.Text)
+                            if (reader.Read())
                             {
-                                MessageBox.Show("Login successful");
+                                string dbPassword = reader["password"].ToString();
+                                string dbRole = reader["role"].ToString();
+
+                                if (dbPassword == textBoxPwd.Text)
+                                {
+                                    MessageBox.Show("Login successful!", "Success",
+                                                  MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                    // Redirect based on role
+                                    if (dbRole == "ADMIN")
+                                    {
+                                        DashBoard dashboard = new DashBoard();
+                                        dashboard.Show();
+                                        this.Hide();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Unknown role. Access denied.", "Error",
+                                                      MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Incorrect password.", "Login Failed",
+                                                  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Wrong password");
+                                MessageBox.Show("Email not found.", "Login Failed",
+                                              MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
-                        else
-                        {
-                            MessageBox.Show("Email not found");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error: " + ex.Message);
                     }
                 }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Database connection error: {ex.Message}", "Database Error",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
