@@ -15,3 +15,17 @@ C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.pdb
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.genruntimeconfig.cache
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\ref\4915project.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.csproj.AssemblyReference.cache
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\BouncyCastle.Cryptography.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\Google.Protobuf.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\K4os.Compression.LZ4.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\K4os.Compression.LZ4.Streams.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\K4os.Hash.xxHash.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\MySql.Data.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\ZstdSharp.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\runtimes\win-x64\native\comerr64.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\runtimes\win-x64\native\gssapi64.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\runtimes\win-x64\native\k5sprt64.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\runtimes\win-x64\native\krb5_64.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\runtimes\win-x64\native\krbcc64.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915proj.CAAFAC4A.Up2Date
