@@ -1,0 +1,17 @@
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\_4915project.Form1.resources
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.csproj.GenerateResource.cache
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.AssemblyInfoInputs.cache
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.AssemblyInfo.cs
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.csproj.CoreCompileInputs.cache
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.sourcelink.json
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\4915project.exe
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\4915project.deps.json
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\4915project.runtimeconfig.json
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\4915project.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\4915project.pdb
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\refint\4915project.dll
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.pdb
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\4915project.genruntimeconfig.cache
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\ref\4915project.dll
