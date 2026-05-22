@@ -33,13 +33,15 @@
             textBoxPwd = new TextBox();
             Email = new Label();
             Pwd = new Label();
+            LTitle = new Label();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(338, 321);
+            button1.Location = new Point(127, 264);
+            button1.Margin = new Padding(2, 2, 2, 2);
             button1.Name = "button1";
-            button1.Size = new Size(112, 34);
+            button1.Size = new Size(71, 22);
             button1.TabIndex = 0;
             button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
@@ -47,46 +49,62 @@
             // 
             // textBoxEmail
             // 
-            textBoxEmail.Location = new Point(338, 108);
+            textBoxEmail.Location = new Point(127, 125);
+            textBoxEmail.Margin = new Padding(2, 2, 2, 2);
             textBoxEmail.Name = "textBoxEmail";
-            textBoxEmail.Size = new Size(150, 30);
+            textBoxEmail.Size = new Size(97, 23);
             textBoxEmail.TabIndex = 1;
             // 
             // textBoxPwd
             // 
-            textBoxPwd.Location = new Point(338, 242);
+            textBoxPwd.Location = new Point(127, 213);
+            textBoxPwd.Margin = new Padding(2, 2, 2, 2);
             textBoxPwd.Name = "textBoxPwd";
-            textBoxPwd.Size = new Size(150, 30);
+            textBoxPwd.Size = new Size(97, 23);
             textBoxPwd.TabIndex = 2;
             // 
             // Email
             // 
             Email.AutoSize = true;
-            Email.Location = new Point(245, 111);
+            Email.Location = new Point(68, 127);
+            Email.Margin = new Padding(2, 0, 2, 0);
             Email.Name = "Email";
-            Email.Size = new Size(57, 23);
+            Email.Size = new Size(38, 15);
             Email.TabIndex = 3;
             Email.Text = "Email";
             // 
             // Pwd
             // 
             Pwd.AutoSize = true;
-            Pwd.Location = new Point(245, 242);
+            Pwd.Location = new Point(68, 213);
+            Pwd.Margin = new Padding(2, 0, 2, 0);
             Pwd.Name = "Pwd";
-            Pwd.Size = new Size(90, 23);
+            Pwd.Size = new Size(60, 15);
             Pwd.TabIndex = 4;
             Pwd.Text = "Password";
             // 
+            // LTitle
+            // 
+            LTitle.AutoSize = true;
+            LTitle.Font = new Font("Microsoft JhengHei UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            LTitle.Location = new Point(107, 47);
+            LTitle.Name = "LTitle";
+            LTitle.Size = new Size(118, 47);
+            LTitle.TabIndex = 5;
+            LTitle.Text = "Login";
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(11F, 23F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(322, 358);
+            Controls.Add(LTitle);
             Controls.Add(Pwd);
             Controls.Add(Email);
             Controls.Add(textBoxPwd);
             Controls.Add(textBoxEmail);
             Controls.Add(button1);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
@@ -100,5 +118,6 @@
         private TextBox textBoxPwd;
         private Label Email;
         private Label Pwd;
+        private Label LTitle;
     }
 }
