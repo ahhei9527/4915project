@@ -1,9 +1,11 @@
 using _4915project;
+using Microsoft.VisualBasic.ApplicationServices;
 using MySql.Data.MySqlClient;
 using Mysqlx.Session;
 using MySqlX.XDevAPI.Common;
 using MySqlX.XDevAPI.Relational;
 using System.Data;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace _4915project
 {
@@ -46,7 +48,8 @@ namespace _4915project
                 {
                     con.Open();
 
-                    string query = "SELECT password, role FROM user WHERE Email = @Email LIMIT 1";
+                    string query = @"
+                    SELECT userid, name, password, role, email FROM user WHERE Email = @Email LIMIT 1";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
@@ -56,14 +59,30 @@ namespace _4915project
                         {
                             if (reader.Read())
                             {
-                                string dbPassword = reader["password"].ToString();
-                                string dbRole = reader["role"].ToString();
+                                int userId = reader.GetInt32("userid");
+                                string dbUsername = reader["name"]?.ToString() ?? "";
+                                string dbPassword = reader["password"]?.ToString() ?? "";
+                                string dbRole = reader["role"]?.ToString() ?? "User";
+                                string dbEmail = reader["email"]?.ToString() ?? "";
 
                                 if (dbPassword == textBoxPwd.Text)
                                 {
+                                    CurrentUser.Login(
+                                        userId: userId,
+                                        username: dbUsername,
+                                        role: dbRole,
+                                        email: dbEmail
+                                    );
+                                    AuditHelper.Log(
+                                        tableName: "user",
+                                        recordId: userId.ToString(),
+                                        action: "LOGIN",
+                                        userId: userId,
+                                        username: dbUsername,
+                                        description: $"User {dbUsername} logged in"
+                                    );
                                     MessageBox.Show("Login successful!", "Success",
                                                   MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                                     // Redirect based on role
                                     if (dbRole == "ADMIN")
                                     {

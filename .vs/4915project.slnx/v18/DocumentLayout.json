@@ -3,20 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\dashboard.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\dashboard.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\audithelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\audithelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\loginpage.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\loginpage.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -43,6 +55,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "DashBoard.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\DashBoard.Designer.cs",
+              "RelativeDocumentMoniker": "4915project\\DashBoard.Designer.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\DashBoard.Designer.cs",
+              "RelativeToolTip": "4915project\\DashBoard.Designer.cs",
+              "ViewState": "AgIAAHUAAAAAAAAAAIBAwIQAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-28T12:25:50.668Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DashBoard.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\DashBoard.cs",
+              "RelativeDocumentMoniker": "4915project\\DashBoard.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\DashBoard.cs",
+              "RelativeToolTip": "4915project\\DashBoard.cs",
+              "ViewState": "AgIAAM4AAAAAAAAAAAAxwOQAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-28T12:25:46.811Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "DashBoard.cs [\u8A2D\u8A08]",
               "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\DashBoard.cs",
               "RelativeDocumentMoniker": "4915project\\DashBoard.cs",
@@ -54,41 +92,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Form1.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Form1.cs",
-              "RelativeDocumentMoniker": "4915project\\Form1.cs",
-              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Form1.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "4915project\\Form1.cs [\u8A2D\u8A08]",
+              "DocumentIndex": 4,
+              "Title": "AuditHelper.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\AuditHelper.cs",
+              "RelativeDocumentMoniker": "4915project\\AuditHelper.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\AuditHelper.cs",
+              "RelativeToolTip": "4915project\\AuditHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-22T11:36:39.307Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Form1.cs",
-              "RelativeDocumentMoniker": "4915project\\Form1.cs",
-              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Form1.cs",
-              "RelativeToolTip": "4915project\\Form1.cs",
-              "ViewState": "AgIAADMAAAAAAAAAAAAgwFQAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-22T11:12:03.884Z",
+              "WhenOpened": "2026-05-28T11:56:56.352Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Form1.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Form1.Designer.cs",
-              "RelativeDocumentMoniker": "4915project\\Form1.Designer.cs",
-              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Form1.Designer.cs",
-              "RelativeToolTip": "4915project\\Form1.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
+              "Title": "LoginPage.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\LoginPage.cs",
+              "RelativeDocumentMoniker": "4915project\\LoginPage.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\LoginPage.cs",
+              "RelativeToolTip": "4915project\\LoginPage.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAA1wFoAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-22T11:12:09.655Z",
+              "WhenOpened": "2026-05-28T11:34:12.269Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "LoginPage.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\LoginPage.Designer.cs",
+              "RelativeDocumentMoniker": "4915project\\LoginPage.Designer.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\LoginPage.Designer.cs",
+              "RelativeToolTip": "4915project\\LoginPage.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-28T11:33:03.264Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "LoginPage.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\LoginPage.cs",
+              "RelativeDocumentMoniker": "4915project\\LoginPage.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\LoginPage.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "4915project\\LoginPage.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-28T11:33:29.655Z",
+              "EditorCaption": " [\u8A2D\u8A08]"
             }
           ]
         }
