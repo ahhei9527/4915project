@@ -94,7 +94,7 @@ namespace _4915project
                                     }
                                     else if (dbDepartment == "Sales")
                                     {
-                                        FormOrder salesForm = new FormOrder();
+                                        SalesOrder salesForm = new SalesOrder();
                                         salesForm.Show();
                                         this.Hide();
                                     }

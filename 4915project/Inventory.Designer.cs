@@ -1,0 +1,567 @@
+﻿namespace ITP4915M
+{
+    partial class Inventory
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            label1SystemName = new Label();
+            tabControl1 = new TabControl();
+            tabPage1 = new TabPage();
+            groupBox1 = new GroupBox();
+            button1 = new Button();
+            dataGridView1 = new DataGridView();
+            btSearch = new Button();
+            checkBox1 = new CheckBox();
+            tbItemID = new TextBox();
+            label3 = new Label();
+            label2 = new Label();
+            cmWearhouse = new ComboBox();
+            tabPage2 = new TabPage();
+            groupBox2 = new GroupBox();
+            dataGridView2 = new DataGridView();
+            date = new DateTimePicker();
+            numQuantity = new NumericUpDown();
+            btSubmit = new Button();
+            cbWearhouse = new ComboBox();
+            cmItem = new ComboBox();
+            cbSupplier = new ComboBox();
+            tbBatch = new TextBox();
+            tbInventoryID = new TextBox();
+            label10 = new Label();
+            label9 = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            label6 = new Label();
+            label5 = new Label();
+            lbInventoryID = new Label();
+            Menu = new GroupBox();
+            AfterSales = new Button();
+            Production = new Button();
+            SubmitDesign = new Button();
+            btDashBoard = new Button();
+            SalesOrder = new Button();
+            Logistics = new Button();
+            Logoutbt = new LinkLabel();
+            lblWelcome = new Label();
+            tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            tabPage2.SuspendLayout();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numQuantity).BeginInit();
+            Menu.SuspendLayout();
+            SuspendLayout();
+            // 
+            // label1SystemName
+            // 
+            label1SystemName.AutoSize = true;
+            label1SystemName.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            label1SystemName.Location = new Point(18, 12);
+            label1SystemName.Margin = new Padding(2, 0, 2, 0);
+            label1SystemName.Name = "label1SystemName";
+            label1SystemName.Size = new Size(509, 30);
+            label1SystemName.TabIndex = 1;
+            label1SystemName.Text = "Premium Living Centralized Manage System";
+            // 
+            // tabControl1
+            // 
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Location = new Point(169, 63);
+            tabControl1.Margin = new Padding(2);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(659, 393);
+            tabControl1.TabIndex = 4;
+            // 
+            // tabPage1
+            // 
+            tabPage1.BackColor = Color.DarkGray;
+            tabPage1.Controls.Add(groupBox1);
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Margin = new Padding(2);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(2);
+            tabPage1.Size = new Size(651, 365);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Stock Overview";
+            // 
+            // groupBox1
+            // 
+            groupBox1.BackColor = Color.Gainsboro;
+            groupBox1.Controls.Add(button1);
+            groupBox1.Controls.Add(dataGridView1);
+            groupBox1.Controls.Add(btSearch);
+            groupBox1.Controls.Add(checkBox1);
+            groupBox1.Controls.Add(tbItemID);
+            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(cmWearhouse);
+            groupBox1.Location = new Point(4, 14);
+            groupBox1.Margin = new Padding(2);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(2);
+            groupBox1.Size = new Size(647, 352);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Search / Filter";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(263, 318);
+            button1.Margin = new Padding(2);
+            button1.Name = "button1";
+            button1.Size = new Size(95, 22);
+            button1.TabIndex = 6;
+            button1.Text = "Export to Excel";
+            button1.UseCompatibleTextRendering = true;
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(14, 80);
+            dataGridView1.Margin = new Padding(2);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 62;
+            dataGridView1.Size = new Size(620, 226);
+            dataGridView1.TabIndex = 1;
+            // 
+            // btSearch
+            // 
+            btSearch.Location = new Point(545, 53);
+            btSearch.Margin = new Padding(2);
+            btSearch.Name = "btSearch";
+            btSearch.Size = new Size(71, 22);
+            btSearch.TabIndex = 5;
+            btSearch.Text = "Search";
+            btSearch.UseVisualStyleBackColor = true;
+            btSearch.Click += btSearch_Click;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(14, 53);
+            checkBox1.Margin = new Padding(2);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(146, 19);
+            checkBox1.TabIndex = 4;
+            checkBox1.Text = "Show Low Stock Only";
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // tbItemID
+            // 
+            tbItemID.Location = new Point(392, 19);
+            tbItemID.Margin = new Padding(2);
+            tbItemID.Name = "tbItemID";
+            tbItemID.Size = new Size(97, 23);
+            tbItemID.TabIndex = 3;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(301, 21);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(90, 15);
+            label3.TabIndex = 2;
+            label3.Text = "Item Name/ID:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(14, 21);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(74, 15);
+            label2.TabIndex = 1;
+            label2.Text = "Warehouse:";
+            // 
+            // cmWearhouse
+            // 
+            cmWearhouse.FormattingEnabled = true;
+            cmWearhouse.Location = new Point(88, 19);
+            cmWearhouse.Margin = new Padding(2);
+            cmWearhouse.Name = "cmWearhouse";
+            cmWearhouse.Size = new Size(125, 23);
+            cmWearhouse.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            tabPage2.BackColor = Color.DarkGray;
+            tabPage2.Controls.Add(groupBox2);
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Margin = new Padding(2);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(2);
+            tabPage2.Size = new Size(651, 365);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Inward Goods";
+            // 
+            // groupBox2
+            // 
+            groupBox2.BackColor = Color.Gainsboro;
+            groupBox2.Controls.Add(dataGridView2);
+            groupBox2.Controls.Add(date);
+            groupBox2.Controls.Add(numQuantity);
+            groupBox2.Controls.Add(btSubmit);
+            groupBox2.Controls.Add(cbWearhouse);
+            groupBox2.Controls.Add(cmItem);
+            groupBox2.Controls.Add(cbSupplier);
+            groupBox2.Controls.Add(tbBatch);
+            groupBox2.Controls.Add(tbInventoryID);
+            groupBox2.Controls.Add(label10);
+            groupBox2.Controls.Add(label9);
+            groupBox2.Controls.Add(label8);
+            groupBox2.Controls.Add(label7);
+            groupBox2.Controls.Add(label6);
+            groupBox2.Controls.Add(label5);
+            groupBox2.Controls.Add(lbInventoryID);
+            groupBox2.Location = new Point(4, 14);
+            groupBox2.Margin = new Padding(2);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new Padding(2);
+            groupBox2.Size = new Size(647, 352);
+            groupBox2.TabIndex = 0;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Record New Inward Goods";
+            // 
+            // dataGridView2
+            // 
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Location = new Point(15, 125);
+            dataGridView2.Margin = new Padding(2);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.RowHeadersWidth = 62;
+            dataGridView2.Size = new Size(619, 213);
+            dataGridView2.TabIndex = 15;
+            // 
+            // date
+            // 
+            date.Location = new Point(338, 28);
+            date.Margin = new Padding(2);
+            date.Name = "date";
+            date.Size = new Size(124, 23);
+            date.TabIndex = 14;
+            // 
+            // numQuantity
+            // 
+            numQuantity.Location = new Point(338, 76);
+            numQuantity.Margin = new Padding(2);
+            numQuantity.Name = "numQuantity";
+            numQuantity.Size = new Size(122, 23);
+            numQuantity.TabIndex = 13;
+            // 
+            // btSubmit
+            // 
+            btSubmit.Location = new Point(522, 99);
+            btSubmit.Margin = new Padding(2);
+            btSubmit.Name = "btSubmit";
+            btSubmit.Size = new Size(112, 22);
+            btSubmit.TabIndex = 12;
+            btSubmit.Text = "Submit Receipt";
+            btSubmit.UseVisualStyleBackColor = true;
+            btSubmit.Click += btSubmit_Click;
+            // 
+            // cbWearhouse
+            // 
+            cbWearhouse.FormattingEnabled = true;
+            cbWearhouse.Location = new Point(338, 52);
+            cbWearhouse.Margin = new Padding(2);
+            cbWearhouse.Name = "cbWearhouse";
+            cbWearhouse.Size = new Size(124, 23);
+            cbWearhouse.TabIndex = 11;
+            // 
+            // cmItem
+            // 
+            cmItem.FormattingEnabled = true;
+            cmItem.Location = new Point(82, 75);
+            cmItem.Margin = new Padding(2);
+            cmItem.Name = "cmItem";
+            cmItem.Size = new Size(117, 23);
+            cmItem.TabIndex = 10;
+            // 
+            // cbSupplier
+            // 
+            cbSupplier.FormattingEnabled = true;
+            cbSupplier.Location = new Point(82, 52);
+            cbSupplier.Margin = new Padding(2);
+            cbSupplier.Name = "cbSupplier";
+            cbSupplier.Size = new Size(117, 23);
+            cbSupplier.TabIndex = 9;
+            // 
+            // tbBatch
+            // 
+            tbBatch.Location = new Point(82, 99);
+            tbBatch.Margin = new Padding(2);
+            tbBatch.Name = "tbBatch";
+            tbBatch.Size = new Size(117, 23);
+            tbBatch.TabIndex = 8;
+            // 
+            // tbInventoryID
+            // 
+            tbInventoryID.Location = new Point(82, 28);
+            tbInventoryID.Margin = new Padding(2);
+            tbInventoryID.Name = "tbInventoryID";
+            tbInventoryID.Size = new Size(117, 23);
+            tbInventoryID.TabIndex = 7;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(283, 77);
+            label10.Margin = new Padding(2, 0, 2, 0);
+            label10.Name = "label10";
+            label10.Size = new Size(58, 15);
+            label10.TabIndex = 6;
+            label10.Text = "Quantity:";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(270, 53);
+            label9.Margin = new Padding(2, 0, 2, 0);
+            label9.Name = "label9";
+            label9.Size = new Size(74, 15);
+            label9.TabIndex = 5;
+            label9.Text = "Warehouse:";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(305, 30);
+            label8.Margin = new Padding(2, 0, 2, 0);
+            label8.Name = "label8";
+            label8.Size = new Size(37, 15);
+            label8.TabIndex = 4;
+            label8.Text = "Date:";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(7, 99);
+            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(64, 15);
+            label7.TabIndex = 3;
+            label7.Text = "Batch/Lot:";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(35, 77);
+            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(35, 15);
+            label6.TabIndex = 2;
+            label6.Text = "Item:";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(15, 53);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(57, 15);
+            label5.TabIndex = 1;
+            label5.Text = "Supplier:";
+            // 
+            // lbInventoryID
+            // 
+            lbInventoryID.AutoSize = true;
+            lbInventoryID.Location = new Point(4, 30);
+            lbInventoryID.Margin = new Padding(2, 0, 2, 0);
+            lbInventoryID.Name = "lbInventoryID";
+            lbInventoryID.Size = new Size(74, 15);
+            lbInventoryID.TabIndex = 0;
+            lbInventoryID.Text = "InventoryID:";
+            // 
+            // Menu
+            // 
+            Menu.Controls.Add(AfterSales);
+            Menu.Controls.Add(Production);
+            Menu.Controls.Add(SubmitDesign);
+            Menu.Controls.Add(btDashBoard);
+            Menu.Controls.Add(SalesOrder);
+            Menu.Controls.Add(Logistics);
+            Menu.Location = new Point(12, 50);
+            Menu.Name = "Menu";
+            Menu.Size = new Size(145, 499);
+            Menu.TabIndex = 7;
+            Menu.TabStop = false;
+            Menu.Text = "Menu";
+            // 
+            // AfterSales
+            // 
+            AfterSales.Location = new Point(22, 385);
+            AfterSales.Name = "AfterSales";
+            AfterSales.Size = new Size(103, 52);
+            AfterSales.TabIndex = 5;
+            AfterSales.Text = "AfterSales";
+            AfterSales.UseVisualStyleBackColor = true;
+            // 
+            // Production
+            // 
+            Production.Location = new Point(22, 239);
+            Production.Name = "Production";
+            Production.Size = new Size(103, 52);
+            Production.TabIndex = 4;
+            Production.Text = "Production";
+            Production.UseVisualStyleBackColor = true;
+            // 
+            // SubmitDesign
+            // 
+            SubmitDesign.Location = new Point(22, 309);
+            SubmitDesign.Name = "SubmitDesign";
+            SubmitDesign.Size = new Size(103, 52);
+            SubmitDesign.TabIndex = 3;
+            SubmitDesign.Text = "SubmitDesign";
+            SubmitDesign.UseVisualStyleBackColor = true;
+            // 
+            // btDashBoard
+            // 
+            btDashBoard.Location = new Point(22, 35);
+            btDashBoard.Name = "btDashBoard";
+            btDashBoard.Size = new Size(103, 52);
+            btDashBoard.TabIndex = 2;
+            btDashBoard.Text = "DashBoard";
+            btDashBoard.UseVisualStyleBackColor = true;
+            btDashBoard.Click += btDashBoard_Click;
+            // 
+            // SalesOrder
+            // 
+            SalesOrder.Location = new Point(22, 104);
+            SalesOrder.Name = "SalesOrder";
+            SalesOrder.Size = new Size(103, 52);
+            SalesOrder.TabIndex = 1;
+            SalesOrder.Text = "Sales/Order";
+            SalesOrder.UseVisualStyleBackColor = true;
+            SalesOrder.Click += SalesOrder_Click;
+            // 
+            // Logistics
+            // 
+            Logistics.Location = new Point(8, 165);
+            Logistics.Name = "Logistics";
+            Logistics.Size = new Size(117, 68);
+            Logistics.TabIndex = 0;
+            Logistics.Text = "Logistics/Delivery";
+            Logistics.UseVisualStyleBackColor = true;
+            // 
+            // Logoutbt
+            // 
+            Logoutbt.AutoSize = true;
+            Logoutbt.Location = new Point(770, 10);
+            Logoutbt.Name = "Logoutbt";
+            Logoutbt.Size = new Size(50, 15);
+            Logoutbt.TabIndex = 13;
+            Logoutbt.TabStop = true;
+            Logoutbt.Text = "LogOut";
+            Logoutbt.LinkClicked += Logoutbt_LinkClicked;
+            // 
+            // lblWelcome
+            // 
+            lblWelcome.Font = new Font("Microsoft JhengHei UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            lblWelcome.Location = new Point(593, 33);
+            lblWelcome.Name = "lblWelcome";
+            lblWelcome.Size = new Size(228, 39);
+            lblWelcome.TabIndex = 12;
+            // 
+            // Inventory
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(872, 561);
+            Controls.Add(Logoutbt);
+            Controls.Add(lblWelcome);
+            Controls.Add(Menu);
+            Controls.Add(tabControl1);
+            Controls.Add(label1SystemName);
+            Location = new Point(28, 19);
+            Margin = new Padding(2);
+            Name = "Inventory";
+            Text = "Inventory";
+            Load += Inventory_Load;
+            tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            tabPage2.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numQuantity).EndInit();
+            Menu.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+
+        private Label label1SystemName;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private GroupBox groupBox1;
+        private TextBox tbItemID;
+        private Label label3;
+        private Label label2;
+        private ComboBox cmWearhouse;
+        private CheckBox checkBox1;
+        private Button btSearch;
+        private DataGridView dataGridView1;
+        private Button button1;
+        private GroupBox groupBox2;
+        private Label label10;
+        private Label label9;
+        private Label label8;
+        private Label label7;
+        private Label label6;
+        private Label label5;
+        private Label lbInventoryID;
+        private ComboBox cmItem;
+        private ComboBox cbSupplier;
+        private TextBox tbBatch;
+        private TextBox tbInventoryID;
+        private DataGridView dataGridView2;
+        private DateTimePicker date;
+        private NumericUpDown numQuantity;
+        private Button btSubmit;
+        private ComboBox cbWearhouse;
+        private GroupBox Menu;
+        private Button AfterSales;
+        private Button Production;
+        private Button SubmitDesign;
+        private Button btDashBoard;
+        private Button SalesOrder;
+        private Button Logistics;
+        private LinkLabel Logoutbt;
+        private Label lblWelcome;
+    }
+}

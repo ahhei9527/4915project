@@ -216,7 +216,7 @@ namespace _4915project
         }
 
         // ==================== STOCK REPORT ====================
-        private void LoadStockReport()
+        public void LoadStockReport()
         {
             string query = @"
         SELECT 
@@ -457,9 +457,16 @@ namespace _4915project
 
         private void SalesOrder_Click(object sender, EventArgs e)
         {
-            FormOrder formOrder = new FormOrder();
+            SalesOrder formOrder = new SalesOrder();
             formOrder.Show();
             this.Hide();
+        }
+
+        private void Inventory_Click(object sender, EventArgs e)
+        {
+            Inventory inventory = new Inventory();
+            inventory.Show();
+            this.Close();
         }
     }
 }
