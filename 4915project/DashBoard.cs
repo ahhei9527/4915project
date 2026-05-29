@@ -1,4 +1,7 @@
-﻿using MySql.Data.MySqlClient;
+﻿using ITP4915M;
+using Microsoft.VisualBasic.ApplicationServices;
+using MySql.Data.MySqlClient;
+using Mysqlx.Crud;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -16,7 +19,8 @@ namespace _4915project
         {
             SetupWelcomeMessage();
             SetupAuditTab();
-            SetupReportTab();           // New: Report in tabPage2
+            SetupReportTab();
+            setupOverviewTab();
         }
 
         private void SetupWelcomeMessage()
@@ -284,10 +288,178 @@ namespace _4915project
             LoadReport();
         }
 
+        private void cmbReportType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadReport();
+        }
+
+        private void setupOverviewTab()
+        {
+            tbPendOrder.Text = GetPendingOrdersCount().ToString();
+            tbLowAlert.Text = GetLowStockCount().ToString();
+            tbCom.Text = GetOpenComplaintsCount().ToString();
+        }
+
+        private int GetPendingOrdersCount()
+        {
+            string constring = "server=localhost;user id=root;password=;database=4915";
+            // Use COUNT(*) and join the tables on a matching ID (e.g., MaterialID)
+            string penOrder = @"
+        SELECT COUNT(*) 
+        FROM shipment s
+        WHERE s.STATUS != 'Delivered'";
+
+            int penOrderCount = 0;
+
+            // Replace 'yourConnectionString' with your actual database connection string
+            using (MySqlConnection connection = new MySqlConnection(constring))
+            {
+                using (MySqlCommand command = new MySqlCommand(penOrder, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        // ExecuteScalar is used because the query returns a single value
+                        penOrderCount = Convert.ToInt32(command.ExecuteScalar());
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle exceptions (e.g., log the error)
+                        MessageBox.Show("Database error: " + ex.Message);
+                    }
+                }
+            }
+
+            return penOrderCount;
+        }
+
+        private int GetLowStockCount()
+        {
+            string constring = "server=localhost;user id=root;password=;database=4915";
+            // Use COUNT(*) and join the tables on a matching ID (e.g., MaterialID)
+            string lowStock = @"
+        SELECT COUNT(*) 
+        FROM inventory i
+        INNER JOIN rawmaterial r ON i.MaterialID = r.MaterialID
+        WHERE i.QuantityOnHand <= r.ReorderLevel;";
+
+            int lowStockCount = 0;
+
+            // Replace 'yourConnectionString' with your actual database connection string
+            using (MySqlConnection connection = new MySqlConnection(constring))
+            {
+                using (MySqlCommand command = new MySqlCommand(lowStock, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        // ExecuteScalar is used because the query returns a single value
+                        lowStockCount = Convert.ToInt32(command.ExecuteScalar());
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle exceptions (e.g., log the error)
+                        MessageBox.Show("Database error: " + ex.Message);
+                    }
+                }
+            }
+
+            return lowStockCount;
+        }
+
+        private int GetOpenComplaintsCount()
+        {
+            string constring = "server=localhost;user id=root;password=;database=4915";
+            // Use COUNT(*) and join the tables on a matching ID (e.g., MaterialID)
+            string complaint = @"
+        SELECT COUNT(*) 
+        FROM complaint";
+
+            int complaintCount = 0;
+
+            // Replace 'yourConnectionString' with your actual database connection string
+            using (MySqlConnection connection = new MySqlConnection(constring))
+            {
+                using (MySqlCommand command = new MySqlCommand(complaint, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        // ExecuteScalar is used because the query returns a single value
+                        complaintCount = Convert.ToInt32(command.ExecuteScalar());
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle exceptions (e.g., log the error)
+                        MessageBox.Show("Database error: " + ex.Message);
+                    }
+                }
+            }
+
+            return complaintCount;
+        }
+
         private void Logoutbt_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            CurrentUser.Logout();
+            try
+            {
+                string constring = "server=localhost;user id=root;password=;database=4915";
+
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+                    con.Open();
+
+                    // Optional: You can still verify user exists, but usually not necessary for logout
+                    string query = @"
+                SELECT userid, name FROM user 
+                WHERE userid = @UserId 
+                LIMIT 1";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", CurrentUser.UserID);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int userId = reader.GetInt32("userid");
+                                string username = reader["name"]?.ToString() ?? "Unknown";
+
+                                // Log the audit
+                                AuditHelper.Log(
+                                    tableName: "user",
+                                    recordId: userId.ToString(),
+                                    action: "LOGOUT",
+                                    userId: userId,
+                                    username: username,
+                                    description: $"User {username} logged out"
+                                );
+                            }
+                        }
+                    }
+                }
+
+                // Logout from application
+                CurrentUser.Logout();
+
+                MessageBox.Show("Logout successful!", "Success",
+                               MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Logout error: {ex.Message}", "Error",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             this.Close();
+        }
+
+        private void SalesOrder_Click(object sender, EventArgs e)
+        {
+            FormOrder formOrder = new FormOrder();
+            formOrder.Show();
+            this.Hide();
         }
     }
 }

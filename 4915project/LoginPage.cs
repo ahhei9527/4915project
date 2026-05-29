@@ -1,4 +1,5 @@
 using _4915project;
+using ITP4915M;
 using Microsoft.VisualBasic.ApplicationServices;
 using MySql.Data.MySqlClient;
 using Mysqlx.Session;
@@ -49,7 +50,7 @@ namespace _4915project
                     con.Open();
 
                     string query = @"
-                    SELECT userid, name, password, role, email FROM user WHERE Email = @Email LIMIT 1";
+                    SELECT userid, name, password, role, Department, email FROM user WHERE Email = @Email LIMIT 1";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
@@ -64,6 +65,7 @@ namespace _4915project
                                 string dbPassword = reader["password"]?.ToString() ?? "";
                                 string dbRole = reader["role"]?.ToString() ?? "User";
                                 string dbEmail = reader["email"]?.ToString() ?? "";
+                                string dbDepartment = reader["department"].ToString() ?? "";
 
                                 if (dbPassword == textBoxPwd.Text)
                                 {
@@ -88,6 +90,12 @@ namespace _4915project
                                     {
                                         DashBoard dashboard = new DashBoard();
                                         dashboard.Show();
+                                        this.Hide();
+                                    }
+                                    else if (dbDepartment == "Sales")
+                                    {
+                                        FormOrder salesForm = new FormOrder();
+                                        salesForm.Show();
                                         this.Hide();
                                     }
                                     else

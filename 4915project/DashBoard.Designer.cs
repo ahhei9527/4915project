@@ -36,6 +36,15 @@ namespace _4915project
             cmbTableFilter = new ComboBox();
             lblWelcome = new Label();
             DashBoardtabControl = new TabControl();
+            Overview = new TabPage();
+            panel2 = new Panel();
+            tbCom = new TextBox();
+            tbLowAlert = new TextBox();
+            tbPendOrder = new TextBox();
+            labelNewComplaints = new Label();
+            labelLowStockAlerts = new Label();
+            labelPendingOrders = new Label();
+            label1 = new Label();
             Audit = new TabPage();
             Report = new TabPage();
             btnRefreshReport = new Button();
@@ -43,14 +52,16 @@ namespace _4915project
             dgvReport = new DataGridView();
             Logoutbt = new LinkLabel();
             Menu = new GroupBox();
-            Logistics = new Button();
-            SalesOrder = new Button();
-            Inventory = new Button();
-            SubmitDesign = new Button();
-            Production = new Button();
             AfterSales = new Button();
+            Production = new Button();
+            SubmitDesign = new Button();
+            Inventory = new Button();
+            SalesOrder = new Button();
+            Logistics = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvAuditLogs).BeginInit();
             DashBoardtabControl.SuspendLayout();
+            Overview.SuspendLayout();
+            panel2.SuspendLayout();
             Audit.SuspendLayout();
             Report.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvReport).BeginInit();
@@ -61,17 +72,20 @@ namespace _4915project
             // 
             dgvAuditLogs.AllowUserToAddRows = false;
             dgvAuditLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAuditLogs.Location = new Point(17, 94);
+            dgvAuditLogs.Location = new Point(27, 144);
+            dgvAuditLogs.Margin = new Padding(5);
             dgvAuditLogs.Name = "dgvAuditLogs";
             dgvAuditLogs.ReadOnly = true;
-            dgvAuditLogs.Size = new Size(838, 289);
+            dgvAuditLogs.RowHeadersWidth = 62;
+            dgvAuditLogs.Size = new Size(1317, 443);
             dgvAuditLogs.TabIndex = 0;
             // 
             // btnRefreshAudit
             // 
-            btnRefreshAudit.Location = new Point(17, 403);
+            btnRefreshAudit.Location = new Point(27, 618);
+            btnRefreshAudit.Margin = new Padding(5);
             btnRefreshAudit.Name = "btnRefreshAudit";
-            btnRefreshAudit.Size = new Size(190, 48);
+            btnRefreshAudit.Size = new Size(299, 74);
             btnRefreshAudit.TabIndex = 1;
             btnRefreshAudit.Text = "Refresh Audit Logs";
             btnRefreshAudit.UseVisualStyleBackColor = true;
@@ -80,39 +94,136 @@ namespace _4915project
             // 
             cmbTableFilter.FormattingEnabled = true;
             cmbTableFilter.Items.AddRange(new object[] { "(All)", "user", "complaint", "customdesign" });
-            cmbTableFilter.Location = new Point(702, 45);
+            cmbTableFilter.Location = new Point(1103, 69);
+            cmbTableFilter.Margin = new Padding(5);
             cmbTableFilter.Name = "cmbTableFilter";
-            cmbTableFilter.Size = new Size(121, 23);
+            cmbTableFilter.Size = new Size(188, 31);
             cmbTableFilter.TabIndex = 2;
             cmbTableFilter.SelectedIndexChanged += cmbTableFilter_SelectedIndexChanged;
             // 
             // lblWelcome
             // 
             lblWelcome.Font = new Font("Microsoft JhengHei UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            lblWelcome.Location = new Point(794, 32);
+            lblWelcome.Location = new Point(1248, 49);
+            lblWelcome.Margin = new Padding(5, 0, 5, 0);
             lblWelcome.Name = "lblWelcome";
-            lblWelcome.Size = new Size(228, 39);
+            lblWelcome.Size = new Size(358, 60);
             lblWelcome.TabIndex = 3;
             // 
             // DashBoardtabControl
             // 
+            DashBoardtabControl.Controls.Add(Overview);
             DashBoardtabControl.Controls.Add(Audit);
             DashBoardtabControl.Controls.Add(Report);
-            DashBoardtabControl.Location = new Point(163, 74);
+            DashBoardtabControl.Location = new Point(256, 113);
+            DashBoardtabControl.Margin = new Padding(5);
             DashBoardtabControl.Name = "DashBoardtabControl";
             DashBoardtabControl.SelectedIndex = 0;
-            DashBoardtabControl.Size = new Size(882, 503);
+            DashBoardtabControl.Size = new Size(1386, 771);
             DashBoardtabControl.TabIndex = 4;
+            // 
+            // Overview
+            // 
+            Overview.Controls.Add(panel2);
+            Overview.Location = new Point(4, 32);
+            Overview.Name = "Overview";
+            Overview.Size = new Size(1378, 735);
+            Overview.TabIndex = 2;
+            Overview.Text = "Overview";
+            Overview.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(tbCom);
+            panel2.Controls.Add(tbLowAlert);
+            panel2.Controls.Add(tbPendOrder);
+            panel2.Controls.Add(labelNewComplaints);
+            panel2.Controls.Add(labelLowStockAlerts);
+            panel2.Controls.Add(labelPendingOrders);
+            panel2.Controls.Add(label1);
+            panel2.Location = new Point(15, 19);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(749, 395);
+            panel2.TabIndex = 10;
+            // 
+            // tbCom
+            // 
+            tbCom.BackColor = SystemColors.ScrollBar;
+            tbCom.Location = new Point(247, 199);
+            tbCom.Name = "tbCom";
+            tbCom.ReadOnly = true;
+            tbCom.Size = new Size(56, 30);
+            tbCom.TabIndex = 6;
+            // 
+            // tbLowAlert
+            // 
+            tbLowAlert.BackColor = SystemColors.ScrollBar;
+            tbLowAlert.Location = new Point(247, 137);
+            tbLowAlert.Name = "tbLowAlert";
+            tbLowAlert.ReadOnly = true;
+            tbLowAlert.Size = new Size(56, 30);
+            tbLowAlert.TabIndex = 5;
+            // 
+            // tbPendOrder
+            // 
+            tbPendOrder.BackColor = SystemColors.ScrollBar;
+            tbPendOrder.Location = new Point(247, 78);
+            tbPendOrder.Name = "tbPendOrder";
+            tbPendOrder.ReadOnly = true;
+            tbPendOrder.Size = new Size(56, 30);
+            tbPendOrder.TabIndex = 4;
+            // 
+            // labelNewComplaints
+            // 
+            labelNewComplaints.AutoSize = true;
+            labelNewComplaints.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            labelNewComplaints.Location = new Point(75, 196);
+            labelNewComplaints.Name = "labelNewComplaints";
+            labelNewComplaints.Size = new Size(147, 30);
+            labelNewComplaints.TabIndex = 3;
+            labelNewComplaints.Text = "Complaints:";
+            // 
+            // labelLowStockAlerts
+            // 
+            labelLowStockAlerts.AutoSize = true;
+            labelLowStockAlerts.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            labelLowStockAlerts.Location = new Point(35, 134);
+            labelLowStockAlerts.Name = "labelLowStockAlerts";
+            labelLowStockAlerts.Size = new Size(206, 30);
+            labelLowStockAlerts.TabIndex = 2;
+            labelLowStockAlerts.Text = "Low Stock Alerts:";
+            // 
+            // labelPendingOrders
+            // 
+            labelPendingOrders.AutoSize = true;
+            labelPendingOrders.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            labelPendingOrders.Location = new Point(35, 78);
+            labelPendingOrders.Name = "labelPendingOrders";
+            labelPendingOrders.Size = new Size(197, 30);
+            labelPendingOrders.TabIndex = 1;
+            labelPendingOrders.Text = "Pending Orders:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            label1.Location = new Point(35, 11);
+            label1.Name = "label1";
+            label1.Size = new Size(187, 46);
+            label1.TabIndex = 0;
+            label1.Text = "Welcome,";
             // 
             // Audit
             // 
             Audit.Controls.Add(dgvAuditLogs);
             Audit.Controls.Add(cmbTableFilter);
             Audit.Controls.Add(btnRefreshAudit);
-            Audit.Location = new Point(4, 24);
+            Audit.Location = new Point(4, 32);
+            Audit.Margin = new Padding(5);
             Audit.Name = "Audit";
-            Audit.Padding = new Padding(3);
-            Audit.Size = new Size(874, 475);
+            Audit.Padding = new Padding(5);
+            Audit.Size = new Size(1378, 735);
             Audit.TabIndex = 0;
             Audit.Text = "Audit";
             Audit.UseVisualStyleBackColor = true;
@@ -123,19 +234,21 @@ namespace _4915project
             Report.Controls.Add(btnRefreshReport);
             Report.Controls.Add(cmbReportType);
             Report.Controls.Add(dgvReport);
-            Report.Location = new Point(4, 24);
+            Report.Location = new Point(4, 32);
+            Report.Margin = new Padding(5);
             Report.Name = "Report";
-            Report.Padding = new Padding(3);
-            Report.Size = new Size(874, 475);
+            Report.Padding = new Padding(5);
+            Report.Size = new Size(1378, 735);
             Report.TabIndex = 1;
             Report.Text = "Report";
             Report.UseVisualStyleBackColor = true;
             // 
             // btnRefreshReport
             // 
-            btnRefreshReport.Location = new Point(56, 424);
+            btnRefreshReport.Location = new Point(88, 650);
+            btnRefreshReport.Margin = new Padding(5);
             btnRefreshReport.Name = "btnRefreshReport";
-            btnRefreshReport.Size = new Size(115, 23);
+            btnRefreshReport.Size = new Size(181, 35);
             btnRefreshReport.TabIndex = 7;
             btnRefreshReport.Text = "Refresh Report";
             btnRefreshReport.UseVisualStyleBackColor = true;
@@ -144,25 +257,30 @@ namespace _4915project
             // cmbReportType
             // 
             cmbReportType.FormattingEnabled = true;
-            cmbReportType.Location = new Point(708, 23);
+            cmbReportType.Location = new Point(1113, 35);
+            cmbReportType.Margin = new Padding(5);
             cmbReportType.Name = "cmbReportType";
-            cmbReportType.Size = new Size(121, 23);
+            cmbReportType.Size = new Size(188, 31);
             cmbReportType.TabIndex = 6;
+            cmbReportType.SelectedIndexChanged += cmbReportType_SelectedIndexChanged;
             // 
             // dgvReport
             // 
             dgvReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvReport.Location = new Point(30, 64);
+            dgvReport.Location = new Point(47, 98);
+            dgvReport.Margin = new Padding(5);
             dgvReport.Name = "dgvReport";
-            dgvReport.Size = new Size(799, 328);
+            dgvReport.RowHeadersWidth = 62;
+            dgvReport.Size = new Size(1256, 503);
             dgvReport.TabIndex = 0;
             // 
             // Logoutbt
             // 
             Logoutbt.AutoSize = true;
-            Logoutbt.Location = new Point(972, 9);
+            Logoutbt.Location = new Point(1527, 14);
+            Logoutbt.Margin = new Padding(5, 0, 5, 0);
             Logoutbt.Name = "Logoutbt";
-            Logoutbt.Size = new Size(50, 15);
+            Logoutbt.Size = new Size(74, 23);
             Logoutbt.TabIndex = 5;
             Logoutbt.TabStop = true;
             Logoutbt.Text = "LogOut";
@@ -176,81 +294,94 @@ namespace _4915project
             Menu.Controls.Add(Inventory);
             Menu.Controls.Add(SalesOrder);
             Menu.Controls.Add(Logistics);
-            Menu.Location = new Point(12, 74);
+            Menu.Location = new Point(19, 113);
+            Menu.Margin = new Padding(5);
             Menu.Name = "Menu";
-            Menu.Size = new Size(145, 499);
+            Menu.Padding = new Padding(5);
+            Menu.Size = new Size(228, 765);
             Menu.TabIndex = 6;
             Menu.TabStop = false;
             Menu.Text = "Menu";
             // 
-            // Logistics
-            // 
-            Logistics.Location = new Point(8, 22);
-            Logistics.Name = "Logistics";
-            Logistics.Size = new Size(117, 68);
-            Logistics.TabIndex = 0;
-            Logistics.Text = "Logistics/Delivery";
-            Logistics.UseVisualStyleBackColor = true;
-            // 
-            // SalesOrder
-            // 
-            SalesOrder.Location = new Point(22, 112);
-            SalesOrder.Name = "SalesOrder";
-            SalesOrder.Size = new Size(103, 52);
-            SalesOrder.TabIndex = 1;
-            SalesOrder.Text = "Sales/Order";
-            SalesOrder.UseVisualStyleBackColor = true;
-            // 
-            // Inventory
-            // 
-            Inventory.Location = new Point(22, 170);
-            Inventory.Name = "Inventory";
-            Inventory.Size = new Size(103, 52);
-            Inventory.TabIndex = 2;
-            Inventory.Text = "Inventory";
-            Inventory.UseVisualStyleBackColor = true;
-            // 
-            // SubmitDesign
-            // 
-            SubmitDesign.Location = new Point(22, 309);
-            SubmitDesign.Name = "SubmitDesign";
-            SubmitDesign.Size = new Size(103, 52);
-            SubmitDesign.TabIndex = 3;
-            SubmitDesign.Text = "SubmitDesign";
-            SubmitDesign.UseVisualStyleBackColor = true;
-            // 
-            // Production
-            // 
-            Production.Location = new Point(22, 239);
-            Production.Name = "Production";
-            Production.Size = new Size(103, 52);
-            Production.TabIndex = 4;
-            Production.Text = "Production";
-            Production.UseVisualStyleBackColor = true;
-            // 
             // AfterSales
             // 
-            AfterSales.Location = new Point(22, 385);
+            AfterSales.Location = new Point(35, 590);
+            AfterSales.Margin = new Padding(5);
             AfterSales.Name = "AfterSales";
-            AfterSales.Size = new Size(103, 52);
+            AfterSales.Size = new Size(162, 80);
             AfterSales.TabIndex = 5;
             AfterSales.Text = "AfterSales";
             AfterSales.UseVisualStyleBackColor = true;
             // 
+            // Production
+            // 
+            Production.Location = new Point(35, 366);
+            Production.Margin = new Padding(5);
+            Production.Name = "Production";
+            Production.Size = new Size(162, 80);
+            Production.TabIndex = 4;
+            Production.Text = "Production";
+            Production.UseVisualStyleBackColor = true;
+            // 
+            // SubmitDesign
+            // 
+            SubmitDesign.Location = new Point(35, 474);
+            SubmitDesign.Margin = new Padding(5);
+            SubmitDesign.Name = "SubmitDesign";
+            SubmitDesign.Size = new Size(162, 80);
+            SubmitDesign.TabIndex = 3;
+            SubmitDesign.Text = "SubmitDesign";
+            SubmitDesign.UseVisualStyleBackColor = true;
+            // 
+            // Inventory
+            // 
+            Inventory.Location = new Point(35, 261);
+            Inventory.Margin = new Padding(5);
+            Inventory.Name = "Inventory";
+            Inventory.Size = new Size(162, 80);
+            Inventory.TabIndex = 2;
+            Inventory.Text = "Inventory";
+            Inventory.UseVisualStyleBackColor = true;
+            // 
+            // SalesOrder
+            // 
+            SalesOrder.Location = new Point(35, 172);
+            SalesOrder.Margin = new Padding(5);
+            SalesOrder.Name = "SalesOrder";
+            SalesOrder.Size = new Size(162, 80);
+            SalesOrder.TabIndex = 1;
+            SalesOrder.Text = "Sales/Order";
+            SalesOrder.UseVisualStyleBackColor = true;
+            SalesOrder.Click += SalesOrder_Click;
+            // 
+            // Logistics
+            // 
+            Logistics.Location = new Point(13, 34);
+            Logistics.Margin = new Padding(5);
+            Logistics.Name = "Logistics";
+            Logistics.Size = new Size(184, 104);
+            Logistics.TabIndex = 0;
+            Logistics.Text = "Logistics/Delivery";
+            Logistics.UseVisualStyleBackColor = true;
+            // 
             // DashBoard
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(11F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1077, 596);
+            ClientSize = new Size(1692, 914);
             Controls.Add(Menu);
             Controls.Add(Logoutbt);
             Controls.Add(DashBoardtabControl);
             Controls.Add(lblWelcome);
+            Margin = new Padding(5);
             Name = "DashBoard";
             Text = "DashBoard";
             Load += DashBoard_Load;
             ((System.ComponentModel.ISupportInitialize)dgvAuditLogs).EndInit();
             DashBoardtabControl.ResumeLayout(false);
+            Overview.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             Audit.ResumeLayout(false);
             Report.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvReport).EndInit();
@@ -280,5 +411,14 @@ namespace _4915project
         private Button Inventory;
         private Button SalesOrder;
         private Button Logistics;
+        private TabPage Overview;
+        private Panel panel2;
+        private TextBox tbCom;
+        private TextBox tbLowAlert;
+        private TextBox tbPendOrder;
+        private Label labelNewComplaints;
+        private Label labelLowStockAlerts;
+        private Label labelPendingOrders;
+        private Label label1;
     }
 }

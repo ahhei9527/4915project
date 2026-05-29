@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2026-05-22 13:34:06
+-- 產生時間： 2026-05-29 11:20:31
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -26,11 +26,108 @@ USE `4915`;
 -- --------------------------------------------------------
 
 --
+-- 資料表結構 `audit_log`
+--
+
+DROP TABLE IF EXISTS `audit_log`;
+CREATE TABLE IF NOT EXISTS `audit_log` (
+  `AuditLogId` bigint(20) NOT NULL AUTO_INCREMENT,
+  `TableName` varchar(100) NOT NULL,
+  `RecordId` varchar(50) NOT NULL,
+  `Action` varchar(20) NOT NULL,
+  `UserID` int(11) DEFAULT NULL,
+  `Username` varchar(100) DEFAULT NULL,
+  `ChangedDate` datetime DEFAULT current_timestamp(),
+  `OldValues` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`OldValues`)),
+  `NewValues` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`NewValues`)),
+  `Description` varchar(500) DEFAULT NULL,
+  `IpAddress` varchar(45) DEFAULT NULL,
+  `MachineName` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`AuditLogId`),
+  KEY `idx_audit_table` (`TableName`,`RecordId`),
+  KEY `idx_audit_date` (`ChangedDate`)
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `audit_log`
+--
+
+INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserID`, `Username`, `ChangedDate`, `OldValues`, `NewValues`, `Description`, `IpAddress`, `MachineName`) VALUES
+(1, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:23:35', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(2, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:42:06', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(3, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:44:52', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(4, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:45:51', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(5, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:47:03', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(6, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:48:47', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(7, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:51:32', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(8, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:52:28', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(9, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:55:08', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(10, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:56:56', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(11, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:59:31', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(12, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:02:25', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(13, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:04:50', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(14, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:06:00', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(15, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:07:48', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(16, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:08:23', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(17, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:11:00', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(18, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:11:28', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(19, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:13:05', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(20, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:16:05', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(21, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:19:00', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(22, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:20:10', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(23, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:21:36', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(24, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:22:33', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(25, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:23:45', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(26, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:24:57', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(27, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:27:50', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(28, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:30:40', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(29, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:33:36', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(30, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:34:04', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(31, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:36:49', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(32, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:42:52', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(33, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:59:14', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(34, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:07:48', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(35, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:15:27', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(36, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:18:57', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(37, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:19:59', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(38, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:24:48', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(39, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:28:19', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(40, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:29:13', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(41, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:29:40', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(42, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:30:49', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(43, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-29 10:08:12', NULL, NULL, 'User Alice Cheung logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(44, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-29 10:16:51', NULL, NULL, 'User Alice Cheung logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(45, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-29 10:22:41', NULL, NULL, 'User Alice Cheung logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(46, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-29 10:25:53', NULL, NULL, 'User Alice Cheung logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(47, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-05-29 10:25:57', NULL, NULL, 'User Alice Cheung logged out', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(48, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-29 10:52:49', NULL, NULL, 'User Alice Cheung logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(49, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-05-29 10:54:43', NULL, NULL, 'User Alice Cheung logged out', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(50, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-29 11:16:44', NULL, NULL, 'User Alice Cheung logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(51, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-05-29 11:19:11', NULL, NULL, 'User Alice Cheung logged out', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(52, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-29 11:22:20', NULL, NULL, 'User Alice Cheung logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(53, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-05-29 11:22:30', NULL, NULL, 'User Alice Cheung logged out', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(54, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-29 11:23:17', NULL, NULL, 'User Alice Cheung logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(55, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-05-29 11:23:23', NULL, NULL, 'User Alice Cheung logged out', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(56, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-29 11:26:12', NULL, NULL, 'User Alice Cheung logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(57, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-05-29 11:26:56', NULL, NULL, 'User Alice Cheung logged out', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(58, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-29 11:45:59', NULL, NULL, 'User Alice Cheung logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(59, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-29 11:53:09', NULL, NULL, 'User Alice Cheung logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(60, 'user', '104', 'LOGIN', 104, 'Daniel Ng', '2026-05-29 11:54:03', NULL, NULL, 'User Daniel Ng logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(61, 'user', '104', 'LOGIN', 104, 'Daniel Ng', '2026-05-29 11:56:09', NULL, NULL, 'User Daniel Ng logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(62, 'user', '104', 'LOGIN', 104, 'Daniel Ng', '2026-05-29 11:57:55', NULL, NULL, 'User Daniel Ng logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(63, 'user', '104', 'LOGIN', 104, 'Daniel Ng', '2026-05-29 13:26:41', NULL, NULL, 'User Daniel Ng logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(64, 'user', '104', 'LOGIN', 104, 'Daniel Ng', '2026-05-29 13:37:55', NULL, NULL, 'User Daniel Ng logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(65, 'user', '104', 'LOGIN', 104, 'Daniel Ng', '2026-05-29 13:41:15', NULL, NULL, 'User Daniel Ng logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP'),
+(66, 'user', '104', 'LOGIN', 104, 'Daniel Ng', '2026-05-29 13:51:33', NULL, NULL, 'User Daniel Ng logged in', 'fe80::5957:7bd:263d:1876%17', 'AHHEI_LAPTOP');
+
+-- --------------------------------------------------------
+
+--
 -- 資料表結構 `complaint`
 --
 
 DROP TABLE IF EXISTS `complaint`;
-CREATE TABLE `complaint` (
+CREATE TABLE IF NOT EXISTS `complaint` (
   `ComplaintID` varchar(10) NOT NULL,
   `CustomerID` int(100) NOT NULL,
   `OrderID` varchar(10) NOT NULL,
@@ -40,7 +137,12 @@ CREATE TABLE `complaint` (
   `Description` varchar(255) NOT NULL,
   `TYPE` varchar(20) NOT NULL,
   `Resolution` varchar(255) DEFAULT NULL,
-  `ResolutionDate` date DEFAULT NULL
+  `ResolutionDate` date DEFAULT NULL,
+  PRIMARY KEY (`ComplaintID`),
+  KEY `CustomerID` (`CustomerID`),
+  KEY `OrderID` (`OrderID`),
+  KEY `SerialNumber` (`SerialNumber`),
+  KEY `UserID` (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -57,14 +159,17 @@ INSERT INTO `complaint` (`ComplaintID`, `CustomerID`, `OrderID`, `SerialNumber`,
 --
 
 DROP TABLE IF EXISTS `customdesign`;
-CREATE TABLE `customdesign` (
+CREATE TABLE IF NOT EXISTS `customdesign` (
   `DesignID` varchar(10) NOT NULL,
   `CustomerID` int(100) NOT NULL,
   `UserID` int(100) NOT NULL,
   `SketchDetail` varchar(255) NOT NULL,
   `RequirementsText` varchar(255) NOT NULL,
   `ApprovalDate` date DEFAULT NULL,
-  `Status` varchar(20) NOT NULL
+  `Status` varchar(20) NOT NULL,
+  PRIMARY KEY (`DesignID`),
+  KEY `CustomerID` (`CustomerID`),
+  KEY `UserID` (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -81,9 +186,11 @@ INSERT INTO `customdesign` (`DesignID`, `CustomerID`, `UserID`, `SketchDetail`, 
 --
 
 DROP TABLE IF EXISTS `customdesign_orderitem`;
-CREATE TABLE `customdesign_orderitem` (
+CREATE TABLE IF NOT EXISTS `customdesign_orderitem` (
   `DesignID` varchar(10) NOT NULL,
-  `OrderItemID` varchar(10) NOT NULL
+  `OrderItemID` varchar(10) NOT NULL,
+  KEY `DesignID` (`DesignID`),
+  KEY `OrderItemID` (`OrderItemID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -100,12 +207,13 @@ INSERT INTO `customdesign_orderitem` (`DesignID`, `OrderItemID`) VALUES
 --
 
 DROP TABLE IF EXISTS `customer`;
-CREATE TABLE `customer` (
+CREATE TABLE IF NOT EXISTS `customer` (
   `CustomerID` int(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
   `Company` varchar(50) DEFAULT NULL,
   `Email` varchar(100) DEFAULT NULL,
-  `Phone` varchar(20) DEFAULT NULL
+  `Phone` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`CustomerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -125,14 +233,16 @@ INSERT INTO `customer` (`CustomerID`, `Name`, `Company`, `Email`, `Phone`) VALUE
 --
 
 DROP TABLE IF EXISTS `deliveryconfirmation`;
-CREATE TABLE `deliveryconfirmation` (
+CREATE TABLE IF NOT EXISTS `deliveryconfirmation` (
   `ConfirmationID` varchar(10) NOT NULL,
   `ShipmentID` varchar(10) NOT NULL,
   `ReceivedDate` date NOT NULL,
   `ReceiverName` varchar(50) NOT NULL,
   `ItemCondition` varchar(50) NOT NULL,
   `Notes` varchar(50) DEFAULT NULL,
-  `CustomerConfirmation` varchar(10) NOT NULL
+  `CustomerConfirmation` varchar(10) NOT NULL,
+  PRIMARY KEY (`ConfirmationID`),
+  KEY `ShipmentID` (`ShipmentID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -149,11 +259,14 @@ INSERT INTO `deliveryconfirmation` (`ConfirmationID`, `ShipmentID`, `ReceivedDat
 --
 
 DROP TABLE IF EXISTS `deliveryitem`;
-CREATE TABLE `deliveryitem` (
+CREATE TABLE IF NOT EXISTS `deliveryitem` (
   `DeliveryItemID` varchar(10) NOT NULL,
   `ShipmentID` varchar(10) NOT NULL,
   `SerialNumber` varchar(10) NOT NULL,
-  `Quantity` int(10) NOT NULL
+  `Quantity` int(10) NOT NULL,
+  PRIMARY KEY (`DeliveryItemID`),
+  KEY `ShipmentID` (`ShipmentID`),
+  KEY `SerialNumber` (`SerialNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -171,9 +284,11 @@ INSERT INTO `deliveryitem` (`DeliveryItemID`, `ShipmentID`, `SerialNumber`, `Qua
 --
 
 DROP TABLE IF EXISTS `employee_salesorder`;
-CREATE TABLE `employee_salesorder` (
+CREATE TABLE IF NOT EXISTS `employee_salesorder` (
   `UserID` int(100) NOT NULL,
-  `OrderID` varchar(10) NOT NULL
+  `OrderID` varchar(10) NOT NULL,
+  KEY `UserID` (`UserID`),
+  KEY `OrderID` (`OrderID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -192,7 +307,7 @@ INSERT INTO `employee_salesorder` (`UserID`, `OrderID`) VALUES
 --
 
 DROP TABLE IF EXISTS `inventory`;
-CREATE TABLE `inventory` (
+CREATE TABLE IF NOT EXISTS `inventory` (
   `InventoryID` varchar(10) NOT NULL,
   `MaterialID` varchar(10) NOT NULL,
   `ProductID` varchar(10) NOT NULL,
@@ -200,7 +315,11 @@ CREATE TABLE `inventory` (
   `WarehouseLocation` varchar(255) NOT NULL,
   `QuantityOnHand` int(10) DEFAULT NULL,
   `LastUpdated` date NOT NULL,
-  `ReorderLevel` varchar(10) NOT NULL
+  `ReorderLevel` varchar(10) NOT NULL,
+  PRIMARY KEY (`InventoryID`),
+  KEY `MaterialID` (`MaterialID`),
+  KEY `ProductID` (`ProductID`),
+  KEY `SerialNumber` (`SerialNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -220,14 +339,17 @@ INSERT INTO `inventory` (`InventoryID`, `MaterialID`, `ProductID`, `SerialNumber
 --
 
 DROP TABLE IF EXISTS `materialrequest`;
-CREATE TABLE `materialrequest` (
+CREATE TABLE IF NOT EXISTS `materialrequest` (
   `RequestID` varchar(10) NOT NULL,
   `UserID` int(100) NOT NULL,
   `BatchID` varchar(10) NOT NULL,
   `RequestDate` date NOT NULL,
   `RequestByDate` date NOT NULL,
   `Urgency` varchar(10) NOT NULL,
-  `Status` varchar(50) NOT NULL
+  `Status` varchar(50) NOT NULL,
+  PRIMARY KEY (`RequestID`),
+  KEY `UserID` (`UserID`),
+  KEY `BatchID` (`BatchID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -244,13 +366,16 @@ INSERT INTO `materialrequest` (`RequestID`, `UserID`, `BatchID`, `RequestDate`, 
 --
 
 DROP TABLE IF EXISTS `materialrequestitem`;
-CREATE TABLE `materialrequestitem` (
+CREATE TABLE IF NOT EXISTS `materialrequestitem` (
   `RequestItemID` varchar(10) NOT NULL,
   `RequestID` varchar(10) NOT NULL,
   `MaterialID` varchar(10) NOT NULL,
   `QuantityRequested` int(10) NOT NULL,
   `QuantityApproved` int(10) DEFAULT NULL,
-  `QuantityIssued` varchar(255) DEFAULT NULL
+  `QuantityIssued` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`RequestItemID`),
+  KEY `RequestID` (`RequestID`),
+  KEY `MaterialID` (`MaterialID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -267,12 +392,13 @@ INSERT INTO `materialrequestitem` (`RequestItemID`, `RequestID`, `MaterialID`, `
 --
 
 DROP TABLE IF EXISTS `orderitem`;
-CREATE TABLE `orderitem` (
+CREATE TABLE IF NOT EXISTS `orderitem` (
   `OrderItemID` varchar(10) NOT NULL,
   `Quantity` int(10) NOT NULL,
   `UnitPrice` decimal(12,2) NOT NULL,
   `Subtotal` decimal(12,2) DEFAULT NULL,
-  `CustomNotes` varchar(255) DEFAULT NULL
+  `CustomNotes` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`OrderItemID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -291,9 +417,11 @@ INSERT INTO `orderitem` (`OrderItemID`, `Quantity`, `UnitPrice`, `Subtotal`, `Cu
 --
 
 DROP TABLE IF EXISTS `orderitem_product`;
-CREATE TABLE `orderitem_product` (
+CREATE TABLE IF NOT EXISTS `orderitem_product` (
   `ProductID` varchar(10) NOT NULL,
-  `OrderItemID` varchar(10) NOT NULL
+  `OrderItemID` varchar(10) NOT NULL,
+  KEY `ProductID` (`ProductID`),
+  KEY `OrderItemID` (`OrderItemID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -312,7 +440,7 @@ INSERT INTO `orderitem_product` (`ProductID`, `OrderItemID`) VALUES
 --
 
 DROP TABLE IF EXISTS `product`;
-CREATE TABLE `product` (
+CREATE TABLE IF NOT EXISTS `product` (
   `ProductID` varchar(10) NOT NULL,
   `UserID` int(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -322,7 +450,9 @@ CREATE TABLE `product` (
   `Type` varchar(10) NOT NULL,
   `Dimensions` varchar(100) DEFAULT NULL,
   `MaterialSummary` varchar(100) NOT NULL,
-  `ApprovedDate` date NOT NULL
+  `ApprovedDate` date NOT NULL,
+  PRIMARY KEY (`ProductID`),
+  KEY `UserID` (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -342,13 +472,16 @@ INSERT INTO `product` (`ProductID`, `UserID`, `Name`, `Description`, `Category`,
 --
 
 DROP TABLE IF EXISTS `productinstance`;
-CREATE TABLE `productinstance` (
+CREATE TABLE IF NOT EXISTS `productinstance` (
   `SerialNumber` varchar(10) NOT NULL,
   `ProductID` varchar(10) NOT NULL,
   `BatchID` varchar(10) NOT NULL,
   `ProductionDate` date NOT NULL,
   `CurrentStatus` varchar(20) NOT NULL,
-  `WarrantyEndDate` date NOT NULL
+  `WarrantyEndDate` date NOT NULL,
+  PRIMARY KEY (`SerialNumber`),
+  KEY `ProductID` (`ProductID`),
+  KEY `BatchID` (`BatchID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -369,11 +502,12 @@ INSERT INTO `productinstance` (`SerialNumber`, `ProductID`, `BatchID`, `Producti
 --
 
 DROP TABLE IF EXISTS `productionbatch`;
-CREATE TABLE `productionbatch` (
+CREATE TABLE IF NOT EXISTS `productionbatch` (
   `BatchID` varchar(10) NOT NULL,
   `StartDate` date NOT NULL,
   `EndDate` date NOT NULL,
-  `Status` varchar(20) NOT NULL
+  `Status` varchar(20) NOT NULL,
+  PRIMARY KEY (`BatchID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -392,7 +526,7 @@ INSERT INTO `productionbatch` (`BatchID`, `StartDate`, `EndDate`, `Status`) VALU
 --
 
 DROP TABLE IF EXISTS `quotation`;
-CREATE TABLE `quotation` (
+CREATE TABLE IF NOT EXISTS `quotation` (
   `QuotationID` varchar(10) NOT NULL,
   `CustomerID` int(100) NOT NULL,
   `EmployeeID` int(100) NOT NULL,
@@ -400,7 +534,10 @@ CREATE TABLE `quotation` (
   `TotalAmount` decimal(12,2) NOT NULL,
   `EstimatedDeliveryDate` date NOT NULL,
   `PaymentTerms` varchar(20) DEFAULT NULL,
-  `Status` varchar(20) NOT NULL
+  `Status` varchar(20) NOT NULL,
+  PRIMARY KEY (`QuotationID`),
+  KEY `CustomerID` (`CustomerID`),
+  KEY `EmployeeID` (`EmployeeID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -418,9 +555,11 @@ INSERT INTO `quotation` (`QuotationID`, `CustomerID`, `EmployeeID`, `QuotationDa
 --
 
 DROP TABLE IF EXISTS `quotation_salesorder`;
-CREATE TABLE `quotation_salesorder` (
+CREATE TABLE IF NOT EXISTS `quotation_salesorder` (
   `QuotationID` varchar(10) NOT NULL,
-  `OrderID` varchar(10) NOT NULL
+  `OrderID` varchar(10) NOT NULL,
+  KEY `QuotationID` (`QuotationID`),
+  KEY `OrderID` (`OrderID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -438,14 +577,15 @@ INSERT INTO `quotation_salesorder` (`QuotationID`, `OrderID`) VALUES
 --
 
 DROP TABLE IF EXISTS `rawmaterial`;
-CREATE TABLE `rawmaterial` (
+CREATE TABLE IF NOT EXISTS `rawmaterial` (
   `MaterialID` varchar(10) NOT NULL,
   `Name` varchar(100) NOT NULL,
   `Type` varchar(100) NOT NULL,
   `Unit` varchar(10) NOT NULL,
   `UnitCost` int(10) NOT NULL,
   `ReorderLevel` int(10) DEFAULT NULL,
-  `PreferredSupplier` varchar(50) NOT NULL
+  `PreferredSupplier` varchar(50) NOT NULL,
+  PRIMARY KEY (`MaterialID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -466,7 +606,7 @@ INSERT INTO `rawmaterial` (`MaterialID`, `Name`, `Type`, `Unit`, `UnitCost`, `Re
 --
 
 DROP TABLE IF EXISTS `salesorder`;
-CREATE TABLE `salesorder` (
+CREATE TABLE IF NOT EXISTS `salesorder` (
   `OrderID` varchar(10) NOT NULL,
   `CustomerID` int(100) NOT NULL,
   `OrderDate` date NOT NULL,
@@ -474,7 +614,9 @@ CREATE TABLE `salesorder` (
   `RequestDeliveryDate` date NOT NULL,
   `Status` varchar(20) NOT NULL,
   `EstimatedDeliveryDate` date NOT NULL,
-  `ActualDeliveryDate` date DEFAULT NULL
+  `ActualDeliveryDate` date DEFAULT NULL,
+  PRIMARY KEY (`OrderID`),
+  KEY `CustomerID` (`CustomerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -493,13 +635,16 @@ INSERT INTO `salesorder` (`OrderID`, `CustomerID`, `OrderDate`, `TotalAmount`, `
 --
 
 DROP TABLE IF EXISTS `shipment`;
-CREATE TABLE `shipment` (
+CREATE TABLE IF NOT EXISTS `shipment` (
   `ShipmentID` varchar(10) NOT NULL,
   `OrderID` varchar(10) NOT NULL,
   `UserID` int(100) NOT NULL,
   `DeliveryMethod` varchar(50) NOT NULL,
   `TrackingInfo` varchar(100) DEFAULT NULL,
-  `STATUS` varchar(50) NOT NULL
+  `STATUS` varchar(50) NOT NULL,
+  PRIMARY KEY (`ShipmentID`),
+  KEY `OrderID` (`OrderID`),
+  KEY `UserID` (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -517,7 +662,7 @@ INSERT INTO `shipment` (`ShipmentID`, `OrderID`, `UserID`, `DeliveryMethod`, `Tr
 --
 
 DROP TABLE IF EXISTS `transfer`;
-CREATE TABLE `transfer` (
+CREATE TABLE IF NOT EXISTS `transfer` (
   `TransferID` varchar(10) NOT NULL,
   `RequestID` varchar(10) NOT NULL,
   `BatchID` varchar(10) NOT NULL,
@@ -525,7 +670,11 @@ CREATE TABLE `transfer` (
   `TransferDate` date NOT NULL,
   `TransferNumber` int(10) NOT NULL,
   `FromDepartment` varchar(50) NOT NULL,
-  `ToDepartment` varchar(50) NOT NULL
+  `ToDepartment` varchar(50) NOT NULL,
+  PRIMARY KEY (`TransferID`),
+  KEY `RequestID` (`RequestID`),
+  KEY `BatchID` (`BatchID`),
+  KEY `ApprovedBy` (`ApprovedBy`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -542,7 +691,7 @@ INSERT INTO `transfer` (`TransferID`, `RequestID`, `BatchID`, `ApprovedBy`, `Tra
 --
 
 DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `UserID` int(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
   `position` varchar(10) DEFAULT NULL,
@@ -550,7 +699,8 @@ CREATE TABLE `user` (
   `Department` varchar(50) NOT NULL,
   `Email` varchar(100) NOT NULL,
   `Phone` varchar(20) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(100) NOT NULL,
+  PRIMARY KEY (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -561,7 +711,7 @@ INSERT INTO `user` (`UserID`, `Name`, `position`, `Role`, `Department`, `Email`,
 (101, 'Alice Cheung', 'Manager', 'ADMIN', 'Sales', 'alice.cheung@company.com', '852-55501234', '12345678'),
 (102, 'Bob Tam', 'Designer', 'STAFF', 'Design', 'bob.tam@company.com', '852-55501235', ''),
 (103, 'Carol Ho', 'Supervisor', 'STAFF', 'Production', 'carol.ho@company.com', '852-55501236', ''),
-(104, 'Daniel Ng', 'Sales Rep', 'STAFF', 'Sales', 'daniel.ng@company.com', '852-55501237', ''),
+(104, 'Daniel Ng', 'Sales Rep', 'STAFF', 'Sales', 'daniel.ng@company.com', '852-55501237', '11111111'),
 (105, 'Emma Lau', 'Manager', 'STAFF', 'Warehouse', 'emma.lau@company.com', '852-55501238', '');
 
 -- --------------------------------------------------------
@@ -571,184 +721,12 @@ INSERT INTO `user` (`UserID`, `Name`, `position`, `Role`, `Department`, `Email`,
 --
 
 DROP TABLE IF EXISTS `user_productionbatch`;
-CREATE TABLE `user_productionbatch` (
+CREATE TABLE IF NOT EXISTS `user_productionbatch` (
   `BatchID` varchar(10) NOT NULL,
-  `UserID` int(100) NOT NULL
+  `UserID` int(100) NOT NULL,
+  KEY `BatchID` (`BatchID`),
+  KEY `UserID` (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- 已傾印資料表的索引
---
-
---
--- 資料表索引 `complaint`
---
-ALTER TABLE `complaint`
-  ADD PRIMARY KEY (`ComplaintID`),
-  ADD KEY `CustomerID` (`CustomerID`),
-  ADD KEY `OrderID` (`OrderID`),
-  ADD KEY `SerialNumber` (`SerialNumber`),
-  ADD KEY `UserID` (`UserID`);
-
---
--- 資料表索引 `customdesign`
---
-ALTER TABLE `customdesign`
-  ADD PRIMARY KEY (`DesignID`),
-  ADD KEY `CustomerID` (`CustomerID`),
-  ADD KEY `UserID` (`UserID`);
-
---
--- 資料表索引 `customdesign_orderitem`
---
-ALTER TABLE `customdesign_orderitem`
-  ADD KEY `DesignID` (`DesignID`),
-  ADD KEY `OrderItemID` (`OrderItemID`);
-
---
--- 資料表索引 `customer`
---
-ALTER TABLE `customer`
-  ADD PRIMARY KEY (`CustomerID`);
-
---
--- 資料表索引 `deliveryconfirmation`
---
-ALTER TABLE `deliveryconfirmation`
-  ADD PRIMARY KEY (`ConfirmationID`),
-  ADD KEY `ShipmentID` (`ShipmentID`);
-
---
--- 資料表索引 `deliveryitem`
---
-ALTER TABLE `deliveryitem`
-  ADD PRIMARY KEY (`DeliveryItemID`),
-  ADD KEY `ShipmentID` (`ShipmentID`),
-  ADD KEY `SerialNumber` (`SerialNumber`);
-
---
--- 資料表索引 `employee_salesorder`
---
-ALTER TABLE `employee_salesorder`
-  ADD KEY `UserID` (`UserID`),
-  ADD KEY `OrderID` (`OrderID`);
-
---
--- 資料表索引 `inventory`
---
-ALTER TABLE `inventory`
-  ADD PRIMARY KEY (`InventoryID`),
-  ADD KEY `MaterialID` (`MaterialID`),
-  ADD KEY `ProductID` (`ProductID`),
-  ADD KEY `SerialNumber` (`SerialNumber`);
-
---
--- 資料表索引 `materialrequest`
---
-ALTER TABLE `materialrequest`
-  ADD PRIMARY KEY (`RequestID`),
-  ADD KEY `UserID` (`UserID`),
-  ADD KEY `BatchID` (`BatchID`);
-
---
--- 資料表索引 `materialrequestitem`
---
-ALTER TABLE `materialrequestitem`
-  ADD PRIMARY KEY (`RequestItemID`),
-  ADD KEY `RequestID` (`RequestID`),
-  ADD KEY `MaterialID` (`MaterialID`);
-
---
--- 資料表索引 `orderitem`
---
-ALTER TABLE `orderitem`
-  ADD PRIMARY KEY (`OrderItemID`);
-
---
--- 資料表索引 `orderitem_product`
---
-ALTER TABLE `orderitem_product`
-  ADD KEY `ProductID` (`ProductID`),
-  ADD KEY `OrderItemID` (`OrderItemID`);
-
---
--- 資料表索引 `product`
---
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`ProductID`),
-  ADD KEY `UserID` (`UserID`);
-
---
--- 資料表索引 `productinstance`
---
-ALTER TABLE `productinstance`
-  ADD PRIMARY KEY (`SerialNumber`),
-  ADD KEY `ProductID` (`ProductID`),
-  ADD KEY `BatchID` (`BatchID`);
-
---
--- 資料表索引 `productionbatch`
---
-ALTER TABLE `productionbatch`
-  ADD PRIMARY KEY (`BatchID`);
-
---
--- 資料表索引 `quotation`
---
-ALTER TABLE `quotation`
-  ADD PRIMARY KEY (`QuotationID`),
-  ADD KEY `CustomerID` (`CustomerID`),
-  ADD KEY `EmployeeID` (`EmployeeID`);
-
---
--- 資料表索引 `quotation_salesorder`
---
-ALTER TABLE `quotation_salesorder`
-  ADD KEY `QuotationID` (`QuotationID`),
-  ADD KEY `OrderID` (`OrderID`);
-
---
--- 資料表索引 `rawmaterial`
---
-ALTER TABLE `rawmaterial`
-  ADD PRIMARY KEY (`MaterialID`);
-
---
--- 資料表索引 `salesorder`
---
-ALTER TABLE `salesorder`
-  ADD PRIMARY KEY (`OrderID`),
-  ADD KEY `CustomerID` (`CustomerID`);
-
---
--- 資料表索引 `shipment`
---
-ALTER TABLE `shipment`
-  ADD PRIMARY KEY (`ShipmentID`),
-  ADD KEY `OrderID` (`OrderID`),
-  ADD KEY `UserID` (`UserID`);
-
---
--- 資料表索引 `transfer`
---
-ALTER TABLE `transfer`
-  ADD PRIMARY KEY (`TransferID`),
-  ADD KEY `RequestID` (`RequestID`),
-  ADD KEY `BatchID` (`BatchID`),
-  ADD KEY `ApprovedBy` (`ApprovedBy`);
-
---
--- 資料表索引 `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`UserID`);
-
---
--- 資料表索引 `user_productionbatch`
---
-ALTER TABLE `user_productionbatch`
-  ADD KEY `BatchID` (`BatchID`),
-  ADD KEY `UserID` (`UserID`);
 
 --
 -- 已傾印資料表的限制式
