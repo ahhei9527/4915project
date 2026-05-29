@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\4915project",
+    "\\4915project\\bin",
+    "\\4915project\\obj"
   ],
+  "SelectedNode": "\\4915project.slnx",
   "PreviewInSolutionExplorer": false
 }
