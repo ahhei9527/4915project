@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2026-05-22 13:34:06
+-- 產生時間： 2026-05-29 02:57:04
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -22,6 +22,76 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `4915` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `4915`;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `audit_log`
+--
+
+DROP TABLE IF EXISTS `audit_log`;
+CREATE TABLE `audit_log` (
+  `AuditLogId` bigint(20) NOT NULL,
+  `TableName` varchar(100) NOT NULL,
+  `RecordId` varchar(50) NOT NULL,
+  `Action` varchar(20) NOT NULL,
+  `UserID` int(11) DEFAULT NULL,
+  `Username` varchar(100) DEFAULT NULL,
+  `ChangedDate` datetime DEFAULT current_timestamp(),
+  `OldValues` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`OldValues`)),
+  `NewValues` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`NewValues`)),
+  `Description` varchar(500) DEFAULT NULL,
+  `IpAddress` varchar(45) DEFAULT NULL,
+  `MachineName` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `audit_log`
+--
+
+INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserID`, `Username`, `ChangedDate`, `OldValues`, `NewValues`, `Description`, `IpAddress`, `MachineName`) VALUES
+(1, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:23:35', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(2, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:42:06', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(3, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:44:52', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(4, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:45:51', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(5, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:47:03', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(6, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:48:47', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(7, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:51:32', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(8, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:52:28', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(9, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:55:08', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(10, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:56:56', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(11, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 20:59:31', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(12, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:02:25', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(13, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:04:50', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(14, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:06:00', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(15, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:07:48', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(16, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:08:23', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(17, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:11:00', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(18, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:11:28', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(19, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:13:05', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(20, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:16:05', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(21, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:19:00', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(22, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:20:10', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(23, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:21:36', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(24, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:22:33', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(25, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:23:45', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(26, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:24:57', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(27, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:27:50', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(28, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:30:40', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(29, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:33:36', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(30, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:34:04', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(31, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:36:49', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(32, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:42:52', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(33, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 21:59:14', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(34, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:07:48', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(35, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:15:27', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(36, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:18:57', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(37, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:19:59', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(38, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:24:48', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(39, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:28:19', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(40, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:29:13', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(41, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:29:40', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(42, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-28 22:30:49', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC');
 
 -- --------------------------------------------------------
 
@@ -581,6 +651,14 @@ CREATE TABLE `user_productionbatch` (
 --
 
 --
+-- 資料表索引 `audit_log`
+--
+ALTER TABLE `audit_log`
+  ADD PRIMARY KEY (`AuditLogId`),
+  ADD KEY `idx_audit_table` (`TableName`,`RecordId`),
+  ADD KEY `idx_audit_date` (`ChangedDate`);
+
+--
 -- 資料表索引 `complaint`
 --
 ALTER TABLE `complaint`
@@ -749,6 +827,16 @@ ALTER TABLE `user`
 ALTER TABLE `user_productionbatch`
   ADD KEY `BatchID` (`BatchID`),
   ADD KEY `UserID` (`UserID`);
+
+--
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+--
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `audit_log`
+--
+ALTER TABLE `audit_log`
+  MODIFY `AuditLogId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- 已傾印資料表的限制式
