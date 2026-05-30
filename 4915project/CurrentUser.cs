@@ -24,5 +24,13 @@
             Role = string.Empty;
             Email = string.Empty;
         }
+
+        public static void CreateOrder(int userId, string username, string role, string email = "")
+        {
+            UserID = userId;
+            Username = username ?? "Unknown";
+            Role = role ?? "User";
+            Email = email ?? "";
+        }
     }
 }

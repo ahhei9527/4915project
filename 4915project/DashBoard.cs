@@ -468,5 +468,11 @@ namespace _4915project
             inventory.Show();
             this.Close();
         }
+
+        private void btSetting_Click(object sender, EventArgs e)
+        {
+            FormSetting setting = new FormSetting();
+            setting.Show();
+        }
     }
 }

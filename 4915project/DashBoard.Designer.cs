@@ -58,6 +58,7 @@ namespace _4915project
             Inventory = new Button();
             SalesOrder = new Button();
             Logistics = new Button();
+            btSetting = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvAuditLogs).BeginInit();
             DashBoardtabControl.SuspendLayout();
             Overview.SuspendLayout();
@@ -286,6 +287,7 @@ namespace _4915project
             // 
             // Menu
             // 
+            Menu.Controls.Add(btSetting);
             Menu.Controls.Add(AfterSales);
             Menu.Controls.Add(Production);
             Menu.Controls.Add(SubmitDesign);
@@ -355,6 +357,16 @@ namespace _4915project
             Logistics.Text = "Logistics/Delivery";
             Logistics.UseVisualStyleBackColor = true;
             // 
+            // btSetting
+            // 
+            btSetting.Location = new Point(22, 448);
+            btSetting.Name = "btSetting";
+            btSetting.Size = new Size(103, 45);
+            btSetting.TabIndex = 6;
+            btSetting.Text = "Setting";
+            btSetting.UseVisualStyleBackColor = true;
+            btSetting.Click += btSetting_Click;
+            // 
             // DashBoard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -410,5 +422,6 @@ namespace _4915project
         private Label labelLowStockAlerts;
         private Label labelPendingOrders;
         private Label label1;
+        private Button btSetting;
     }
 }

@@ -67,7 +67,7 @@ namespace ITP4915M
                             lblWelcome.Text = $"Welcome, {dbUsername}({dbRole})";
                             if (dbRole != "ADMIN")
                             {
-                                
+
                             }
                         }
                     }
@@ -225,7 +225,8 @@ namespace ITP4915M
 
         private void buttonEditOrder_Click(object sender, EventArgs e)
         {
-
+            editOrder editOrderForm = new editOrder();
+            editOrderForm.Show();
         }
 
         private void SalesOrder_Click(object sender, EventArgs e)
@@ -233,6 +234,12 @@ namespace ITP4915M
             DashBoard dashboard = new DashBoard();
             dashboard.Show();
             this.Close();
+        }
+
+        private void btSetting_Click(object sender, EventArgs e)
+        {
+            FormSetting setting = new FormSetting();
+            setting.Show();
         }
     }
 }

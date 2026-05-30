@@ -33,3 +33,7 @@ C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\ITP4915M.FormOrdelDetail.resources
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\ITP4915M.Inventory.resources
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\ITP4915M.SalesOrder.resources
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\ITP4915M.FormSetting.resources
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\ITP4915M.FormComplaints.resources
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\_4915project.editOrder.resources
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\ITP4915M.FormLogistics.resources

@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\editorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\editorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\inventory.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\inventory.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\createorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\createorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\editorder.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\editorder.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,48 +23,56 @@
       "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\salesorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\salesorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\salesorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\salesorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\createorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\createorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\salesorder.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\salesorder.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\dashboard.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\dashboard.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\createorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\createorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\editorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\editorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\createorder.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\createorder.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\inventory.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\inventory.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\loginpage.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\loginpage.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\salesorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\salesorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\salesorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\salesorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\currentuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\currentuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\createorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\createorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\logistics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\logistics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\audithelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\audithelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\salesorder.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\salesorder.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -70,7 +82,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -82,45 +94,133 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Inventory.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Inventory.Designer.cs",
-              "RelativeDocumentMoniker": "4915project\\Inventory.Designer.cs",
-              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Inventory.Designer.cs",
-              "RelativeToolTip": "4915project\\Inventory.Designer.cs",
-              "ViewState": "AgIAANMBAAAAAAAAAAAUwOQBAAA4AAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "editOrder.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\editOrder.Designer.cs",
+              "RelativeDocumentMoniker": "4915project\\editOrder.Designer.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\editOrder.Designer.cs",
+              "RelativeToolTip": "4915project\\editOrder.Designer.cs",
+              "ViewState": "AgIAAJUAAAAAAAAAAAAMwK8AAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-29T14:15:25.636Z",
+              "WhenOpened": "2026-05-30T07:11:23.441Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Inventory.cs",
-              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Inventory.cs",
-              "RelativeDocumentMoniker": "4915project\\Inventory.cs",
-              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Inventory.cs",
-              "RelativeToolTip": "4915project\\Inventory.cs",
-              "ViewState": "AgIAAJYBAAAAAAAAAAAkwKABAAAZAAAAAAAAAA==",
+              "Title": "editOrder.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\editOrder.cs",
+              "RelativeDocumentMoniker": "4915project\\editOrder.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\editOrder.cs",
+              "RelativeToolTip": "4915project\\editOrder.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAAwD8AAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-29T14:07:56.243Z",
+              "WhenOpened": "2026-05-30T07:11:13.6Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "editOrder.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\editOrder.cs",
+              "RelativeDocumentMoniker": "4915project\\editOrder.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\editOrder.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "4915project\\editOrder.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-30T07:08:39.33Z",
+              "EditorCaption": " [\u8A2D\u8A08]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Logistics.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Logistics.cs",
+              "RelativeDocumentMoniker": "4915project\\Logistics.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Logistics.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "4915project\\Logistics.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-30T07:05:50.098Z",
+              "EditorCaption": " [\u8A2D\u8A08]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "AuditHelper.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\AuditHelper.cs",
+              "RelativeDocumentMoniker": "4915project\\AuditHelper.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\AuditHelper.cs",
+              "RelativeToolTip": "4915project\\AuditHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-30T07:01:10.635Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
+              "Title": "CurrentUser.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\CurrentUser.cs",
+              "RelativeDocumentMoniker": "4915project\\CurrentUser.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\CurrentUser.cs",
+              "RelativeToolTip": "4915project\\CurrentUser.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAA5wCEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-30T06:56:55.002Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "CreateOrder.cs [\u8A2D\u8A08]",
               "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\CreateOrder.cs",
               "RelativeDocumentMoniker": "4915project\\CreateOrder.cs",
               "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\CreateOrder.cs [\u8A2D\u8A08]",
               "RelativeToolTip": "4915project\\CreateOrder.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-29T12:24:23.309Z",
+              "WhenOpened": "2026-05-30T06:54:04.613Z",
               "EditorCaption": " [\u8A2D\u8A08]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 14,
+              "Title": "Inventory.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Inventory.cs",
+              "RelativeDocumentMoniker": "4915project\\Inventory.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Inventory.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "4915project\\Inventory.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-29T14:08:03.538Z",
+              "EditorCaption": " [\u8A2D\u8A08]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Inventory.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Inventory.Designer.cs",
+              "RelativeDocumentMoniker": "4915project\\Inventory.Designer.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Inventory.Designer.cs",
+              "RelativeToolTip": "4915project\\Inventory.Designer.cs",
+              "ViewState": "AgIAAOEBAAAAAAAAAAAUwPIBAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-29T14:15:25.636Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Inventory.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Inventory.cs",
+              "RelativeDocumentMoniker": "4915project\\Inventory.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Inventory.cs",
+              "RelativeToolTip": "4915project\\Inventory.cs",
+              "ViewState": "AgIAAKoBAAAAAAAAAIAzwL8BAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-29T14:07:56.243Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "SalesOrder.cs [\u8A2D\u8A08]",
               "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\SalesOrder.cs",
               "RelativeDocumentMoniker": "4915project\\SalesOrder.cs",
@@ -132,97 +232,85 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "SalesOrder.cs",
               "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\SalesOrder.cs",
               "RelativeDocumentMoniker": "4915project\\SalesOrder.cs",
               "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\SalesOrder.cs",
               "RelativeToolTip": "4915project\\SalesOrder.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAUwEkAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAANYAAAAAAAAAAIBDwOMAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-29T09:29:51.557Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
               "Title": "CreateOrder.cs",
               "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\CreateOrder.cs",
               "RelativeDocumentMoniker": "4915project\\CreateOrder.cs",
               "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\CreateOrder.cs",
               "RelativeToolTip": "4915project\\CreateOrder.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAUwDYAAABwAAAAAAAAAA==",
+              "ViewState": "AgIAAGoAAAAAAAAAAIA4wH8AAABpAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-29T11:08:31.53Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 7,
               "Title": "CreateOrder.Designer.cs",
               "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\CreateOrder.Designer.cs",
               "RelativeDocumentMoniker": "4915project\\CreateOrder.Designer.cs",
               "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\CreateOrder.Designer.cs",
               "RelativeToolTip": "4915project\\CreateOrder.Designer.cs",
-              "ViewState": "AgIAANQAAAAAAAAAAAASwN4AAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAANQAAAAAAAAAAAASwOgAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-29T09:43:39.59Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 17,
               "Title": "SalesOrder.Designer.cs",
               "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\SalesOrder.Designer.cs",
               "RelativeDocumentMoniker": "4915project\\SalesOrder.Designer.cs",
               "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\SalesOrder.Designer.cs",
               "RelativeToolTip": "4915project\\SalesOrder.Designer.cs",
-              "ViewState": "AgIAAMAAAAAAAAAAAIAxwM4AAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAMEAAAAAAAAAAIAxwM8AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-29T09:45:05.293Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "LoginPage.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\LoginPage.cs",
-              "RelativeDocumentMoniker": "4915project\\LoginPage.cs",
-              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\LoginPage.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "4915project\\LoginPage.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-28T11:33:29.655Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 5,
               "Title": "DashBoard.Designer.cs",
               "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\DashBoard.Designer.cs",
               "RelativeDocumentMoniker": "4915project\\DashBoard.Designer.cs",
               "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\DashBoard.Designer.cs",
               "RelativeToolTip": "4915project\\DashBoard.Designer.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAawJoBAAApAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAawKYBAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-28T12:25:50.668Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "DashBoard.cs",
               "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\DashBoard.cs",
               "RelativeDocumentMoniker": "4915project\\DashBoard.cs",
               "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\DashBoard.cs",
               "RelativeToolTip": "4915project\\DashBoard.cs",
-              "ViewState": "AgIAAK0BAAAAAAAAAAApwMYBAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAwwE4AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-28T12:25:46.811Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "DashBoard.cs [\u8A2D\u8A08]",
               "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\DashBoard.cs",
               "RelativeDocumentMoniker": "4915project\\DashBoard.cs",
@@ -230,65 +318,6 @@
               "RelativeToolTip": "4915project\\DashBoard.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-22T11:50:50.742Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "LoginPage.cs",
-              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\LoginPage.cs",
-              "RelativeDocumentMoniker": "4915project\\LoginPage.cs",
-              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\LoginPage.cs",
-              "RelativeToolTip": "4915project\\LoginPage.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAzwFoAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-28T11:34:12.269Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "LoginPage.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\LoginPage.Designer.cs",
-              "RelativeDocumentMoniker": "4915project\\LoginPage.Designer.cs",
-              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\LoginPage.Designer.cs",
-              "RelativeToolTip": "4915project\\LoginPage.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-28T11:33:03.264Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "f9aa3b08-fd1d-44e0-a031-2c96608ce665",
-        "Display": 1,
-        "X": 1339,
-        "Y": 415,
-        "Width": 1057,
-        "Height": 733,
-        "WindowState": 0
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Inventory.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Inventory.cs",
-              "RelativeDocumentMoniker": "4915project\\Inventory.cs",
-              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Inventory.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "4915project\\Inventory.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-29T14:08:03.538Z",
               "EditorCaption": " [\u8A2D\u8A08]"
             }
           ]

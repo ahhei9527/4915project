@@ -56,6 +56,7 @@
             Inventory = new Button();
             btDashBoard = new Button();
             Logistics = new Button();
+            btSetting = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvOrderItems).BeginInit();
             Menu.SuspendLayout();
@@ -285,6 +286,7 @@
             // 
             // Menu
             // 
+            Menu.Controls.Add(btSetting);
             Menu.Controls.Add(AfterSales);
             Menu.Controls.Add(Production);
             Menu.Controls.Add(SubmitDesign);
@@ -353,6 +355,16 @@
             Logistics.Text = "Logistics/Delivery";
             Logistics.UseVisualStyleBackColor = true;
             // 
+            // btSetting
+            // 
+            btSetting.Location = new Point(20, 448);
+            btSetting.Name = "btSetting";
+            btSetting.Size = new Size(103, 45);
+            btSetting.TabIndex = 7;
+            btSetting.Text = "Setting";
+            btSetting.UseVisualStyleBackColor = true;
+            btSetting.Click += btSetting_Click;
+            // 
             // SalesOrder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -406,5 +418,6 @@
         private Button Inventory;
         private Button btDashBoard;
         private Button Logistics;
+        private Button btSetting;
     }
 }

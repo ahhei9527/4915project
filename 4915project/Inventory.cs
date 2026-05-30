@@ -90,6 +90,18 @@ namespace ITP4915M
 
             GenerateInventoryID();
 
+            LoadInward();
+            LoadStock();
+        }
+
+        private void btRefresh_Click(object sender, EventArgs e)
+        {
+            LoadStock();
+        }
+
+        private void LoadInward()
+        {
+            string constring = "server=localhost;user id=root;password=;database=4915";
             string query = @"
                 SELECT 
                     i.InventoryID, 
@@ -124,8 +136,12 @@ namespace ITP4915M
                     }
                 }
             }
-            //string query2 = "SELECT * from inventory;";
-            string query2 = @"
+        }
+
+        private void LoadStock()
+        {
+            string constring = "server=localhost;user id=root;password=;database=4915";
+            string query = @"
             SELECT 
             r.Name as 'Material Name',
             i.QuantityOnHand as 'Current Stock',
@@ -141,12 +157,12 @@ namespace ITP4915M
         ORDER BY i.QuantityOnHand ASC";
             using (MySqlConnection con = new MySqlConnection(constring))
             {
-                using (MySqlCommand cmd2 = new MySqlCommand(query2, con))
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
                     try
                     {
                         con.Open();
-                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd2))
+                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
                         {
                             DataTable dt = new DataTable();
                             da.Fill(dt);
@@ -160,6 +176,7 @@ namespace ITP4915M
                 }
             }
         }
+
         private void btSubmit_Click(object sender, EventArgs e)
         {
             string constring = "server=localhost;user id=root;password=;database=4915";
@@ -331,6 +348,11 @@ namespace ITP4915M
                         cmd.Parameters.AddWithValue("@WarehouseLocation", selectedWarehouse);
                     }
 
+                    if (cbLowStock.Checked)
+                    {
+                        query += " AND i.QuantityOnHand <= r.ReorderLevel";
+                    }
+
                     // 4. 最後補上排序（注意前面要留空格）
                     query += " ORDER BY i.QuantityOnHand ASC;";
 
@@ -415,6 +437,12 @@ namespace ITP4915M
             }
 
             this.Close();
+        }
+
+        private void btSetting_Click(object sender, EventArgs e)
+        {
+            FormSetting setting = new FormSetting();
+            setting.Show();
         }
     }
 }

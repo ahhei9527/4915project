@@ -32,10 +32,11 @@
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             groupBox1 = new GroupBox();
+            btRefresh = new Button();
             button1 = new Button();
             dataGridView1 = new DataGridView();
             btSearch = new Button();
-            checkBox1 = new CheckBox();
+            cbLowStock = new CheckBox();
             tbItemID = new TextBox();
             label3 = new Label();
             label2 = new Label();
@@ -67,6 +68,7 @@
             Logistics = new Button();
             Logoutbt = new LinkLabel();
             lblWelcome = new Label();
+            btSetting = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -115,10 +117,11 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.Gainsboro;
+            groupBox1.Controls.Add(btRefresh);
             groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(dataGridView1);
             groupBox1.Controls.Add(btSearch);
-            groupBox1.Controls.Add(checkBox1);
+            groupBox1.Controls.Add(cbLowStock);
             groupBox1.Controls.Add(tbItemID);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
@@ -131,6 +134,16 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Search / Filter";
+            // 
+            // btRefresh
+            // 
+            btRefresh.Location = new Point(28, 314);
+            btRefresh.Name = "btRefresh";
+            btRefresh.Size = new Size(75, 23);
+            btRefresh.TabIndex = 7;
+            btRefresh.Text = "Refresh";
+            btRefresh.UseVisualStyleBackColor = true;
+            btRefresh.Click += btRefresh_Click;
             // 
             // button1
             // 
@@ -164,16 +177,16 @@
             btSearch.UseVisualStyleBackColor = true;
             btSearch.Click += btSearch_Click;
             // 
-            // checkBox1
+            // cbLowStock
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(14, 53);
-            checkBox1.Margin = new Padding(2);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(146, 19);
-            checkBox1.TabIndex = 4;
-            checkBox1.Text = "Show Low Stock Only";
-            checkBox1.UseVisualStyleBackColor = true;
+            cbLowStock.AutoSize = true;
+            cbLowStock.Location = new Point(14, 53);
+            cbLowStock.Margin = new Padding(2);
+            cbLowStock.Name = "cbLowStock";
+            cbLowStock.Size = new Size(146, 19);
+            cbLowStock.TabIndex = 4;
+            cbLowStock.Text = "Show Low Stock Only";
+            cbLowStock.UseVisualStyleBackColor = true;
             // 
             // tbItemID
             // 
@@ -404,6 +417,7 @@
             // 
             // Menu
             // 
+            Menu.Controls.Add(btSetting);
             Menu.Controls.Add(AfterSales);
             Menu.Controls.Add(Production);
             Menu.Controls.Add(SubmitDesign);
@@ -492,6 +506,16 @@
             lblWelcome.Size = new Size(228, 39);
             lblWelcome.TabIndex = 12;
             // 
+            // btSetting
+            // 
+            btSetting.Location = new Point(22, 443);
+            btSetting.Name = "btSetting";
+            btSetting.Size = new Size(103, 45);
+            btSetting.TabIndex = 7;
+            btSetting.Text = "Setting";
+            btSetting.UseVisualStyleBackColor = true;
+            btSetting.Click += this.btSetting_Click;
+            // 
             // Inventory
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -533,7 +557,7 @@
         private Label label3;
         private Label label2;
         private ComboBox cmWearhouse;
-        private CheckBox checkBox1;
+        private CheckBox cbLowStock;
         private Button btSearch;
         private DataGridView dataGridView1;
         private Button button1;
@@ -563,5 +587,7 @@
         private Button Logistics;
         private LinkLabel Logoutbt;
         private Label lblWelcome;
+        private Button btRefresh;
+        private Button btSetting;
     }
 }
