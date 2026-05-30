@@ -67,7 +67,7 @@ namespace ITP4915M
                             lblWelcome.Text = $"Welcome, {dbUsername}({dbRole})";
                             if (dbRole != "ADMIN")
                             {
-
+                                gbMenu.Visible = false; // 隱藏管理員專用的功能區塊
                             }
                         }
                     }
@@ -240,6 +240,20 @@ namespace ITP4915M
         {
             FormSetting setting = new FormSetting();
             setting.Show();
+        }
+
+        private void Inventory_Click(object sender, EventArgs e)
+        {
+            Inventory inventory = new Inventory();
+            inventory.Show();
+            this.Close();
+        }
+
+        private void Logistics_Click(object sender, EventArgs e)
+        {
+            FormLogistics log = new FormLogistics();
+            log.Show();
+            this.Close();
         }
     }
 }

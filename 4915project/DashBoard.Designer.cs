@@ -52,13 +52,13 @@ namespace _4915project
             dgvReport = new DataGridView();
             Logoutbt = new LinkLabel();
             Menu = new GroupBox();
+            btSetting = new Button();
             AfterSales = new Button();
             Production = new Button();
             SubmitDesign = new Button();
             Inventory = new Button();
             SalesOrder = new Button();
             Logistics = new Button();
-            btSetting = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvAuditLogs).BeginInit();
             DashBoardtabControl.SuspendLayout();
             Overview.SuspendLayout();
@@ -301,6 +301,16 @@ namespace _4915project
             Menu.TabStop = false;
             Menu.Text = "Menu";
             // 
+            // btSetting
+            // 
+            btSetting.Location = new Point(22, 448);
+            btSetting.Name = "btSetting";
+            btSetting.Size = new Size(103, 45);
+            btSetting.TabIndex = 6;
+            btSetting.Text = "Setting";
+            btSetting.UseVisualStyleBackColor = true;
+            btSetting.Click += btSetting_Click;
+            // 
             // AfterSales
             // 
             AfterSales.Location = new Point(22, 385);
@@ -356,16 +366,7 @@ namespace _4915project
             Logistics.TabIndex = 0;
             Logistics.Text = "Logistics/Delivery";
             Logistics.UseVisualStyleBackColor = true;
-            // 
-            // btSetting
-            // 
-            btSetting.Location = new Point(22, 448);
-            btSetting.Name = "btSetting";
-            btSetting.Size = new Size(103, 45);
-            btSetting.TabIndex = 6;
-            btSetting.Text = "Setting";
-            btSetting.UseVisualStyleBackColor = true;
-            btSetting.Click += btSetting_Click;
+            Logistics.Click += Logistics_Click;
             // 
             // DashBoard
             // 

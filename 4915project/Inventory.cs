@@ -59,7 +59,7 @@ namespace ITP4915M
                             lblWelcome.Text = $"Welcome, {dbUsername}({dbRole})";
                             if (dbRole != "ADMIN")
                             {
-
+                                gbMenu.Visible = false;
                             }
                         }
                     }
@@ -436,6 +436,13 @@ namespace ITP4915M
                                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            this.Close();
+        }
+
+        private void Logistics_Click(object sender, EventArgs e)
+        {
+            FormLogistics log = new FormLogistics();
+            log.Show();
             this.Close();
         }
 

@@ -49,17 +49,17 @@
             label2Order = new Label();
             Logoutbt = new LinkLabel();
             lblWelcome = new Label();
-            Menu = new GroupBox();
+            gbMenu = new GroupBox();
+            btSetting = new Button();
             AfterSales = new Button();
             Production = new Button();
             SubmitDesign = new Button();
             Inventory = new Button();
             btDashBoard = new Button();
             Logistics = new Button();
-            btSetting = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvOrderItems).BeginInit();
-            Menu.SuspendLayout();
+            gbMenu.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -284,21 +284,31 @@
             lblWelcome.Size = new Size(228, 39);
             lblWelcome.TabIndex = 10;
             // 
-            // Menu
+            // gbMenu
             // 
-            Menu.Controls.Add(btSetting);
-            Menu.Controls.Add(AfterSales);
-            Menu.Controls.Add(Production);
-            Menu.Controls.Add(SubmitDesign);
-            Menu.Controls.Add(Inventory);
-            Menu.Controls.Add(btDashBoard);
-            Menu.Controls.Add(Logistics);
-            Menu.Location = new Point(12, 50);
-            Menu.Name = "Menu";
-            Menu.Size = new Size(145, 499);
-            Menu.TabIndex = 12;
-            Menu.TabStop = false;
-            Menu.Text = "Menu";
+            gbMenu.Controls.Add(btSetting);
+            gbMenu.Controls.Add(AfterSales);
+            gbMenu.Controls.Add(Production);
+            gbMenu.Controls.Add(SubmitDesign);
+            gbMenu.Controls.Add(Inventory);
+            gbMenu.Controls.Add(btDashBoard);
+            gbMenu.Controls.Add(Logistics);
+            gbMenu.Location = new Point(12, 50);
+            gbMenu.Name = "gbMenu";
+            gbMenu.Size = new Size(145, 499);
+            gbMenu.TabIndex = 12;
+            gbMenu.TabStop = false;
+            gbMenu.Text = "Menu";
+            // 
+            // btSetting
+            // 
+            btSetting.Location = new Point(20, 448);
+            btSetting.Name = "btSetting";
+            btSetting.Size = new Size(103, 45);
+            btSetting.TabIndex = 7;
+            btSetting.Text = "Setting";
+            btSetting.UseVisualStyleBackColor = true;
+            btSetting.Click += btSetting_Click;
             // 
             // AfterSales
             // 
@@ -335,6 +345,7 @@
             Inventory.TabIndex = 2;
             Inventory.Text = "Inventory";
             Inventory.UseVisualStyleBackColor = true;
+            Inventory.Click += Inventory_Click;
             // 
             // btDashBoard
             // 
@@ -354,23 +365,14 @@
             Logistics.TabIndex = 0;
             Logistics.Text = "Logistics/Delivery";
             Logistics.UseVisualStyleBackColor = true;
-            // 
-            // btSetting
-            // 
-            btSetting.Location = new Point(20, 448);
-            btSetting.Name = "btSetting";
-            btSetting.Size = new Size(103, 45);
-            btSetting.TabIndex = 7;
-            btSetting.Text = "Setting";
-            btSetting.UseVisualStyleBackColor = true;
-            btSetting.Click += btSetting_Click;
+            Logistics.Click += Logistics_Click;
             // 
             // SalesOrder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(872, 561);
-            Controls.Add(Menu);
+            Controls.Add(gbMenu);
             Controls.Add(Logoutbt);
             Controls.Add(lblWelcome);
             Controls.Add(label2Order);
@@ -383,7 +385,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvOrderItems).EndInit();
-            Menu.ResumeLayout(false);
+            gbMenu.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -411,7 +413,7 @@
         private LinkLabel Logoutbt;
         private Label lblWelcome;
         private DataGridView dgvOrderItems;
-        private GroupBox Menu;
+        private GroupBox gbMenu;
         private Button AfterSales;
         private Button Production;
         private Button SubmitDesign;

@@ -114,6 +114,7 @@
             buttonSaveOrder.TabIndex = 10;
             buttonSaveOrder.Text = "Save Order";
             buttonSaveOrder.UseVisualStyleBackColor = true;
+            buttonSaveOrder.Click += buttonSaveOrder_Click;
             // 
             // tbTotal
             // 
@@ -229,6 +230,7 @@
             deliveryDate.Name = "deliveryDate";
             deliveryDate.Size = new Size(126, 23);
             deliveryDate.TabIndex = 7;
+            deliveryDate.ValueChanged += deliveryDate_ValueChanged;
             // 
             // lblRequestDeliveryDate
             // 

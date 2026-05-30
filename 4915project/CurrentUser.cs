@@ -32,5 +32,53 @@
             Role = role ?? "User";
             Email = email ?? "";
         }
+
+        public static void UpdateOrder(int userId, string username, string role, string email = "")
+        {
+            UserID = userId;
+            Username = username ?? "Unknown";
+            Role = role ?? "User";
+            Email = email ?? "";
+        }
+
+        public static void UpdateShipment(int userId, string username, string role, string email = "")
+        {
+            UserID = userId;
+            Username = username ?? "Unknown";
+            Role = role ?? "User";
+            Email = email ?? "";
+        }
+
+        public static void CreateShipment(int userId, string username, string role, string email = "")
+        {
+            UserID = userId;
+            Username = username ?? "Unknown";
+            Role = role ?? "User";
+            Email = email ?? "";
+        }
+
+        public static void UpdateSalesOrder(int userId, string username, string role, string email = "")
+        {
+            UserID = userId;
+            Username = username ?? "Unknown";
+            Role = role ?? "User";
+            Email = email ?? "";
+        }
+
+        public static void UpdateDeliveryconfirmation(int userId, string username, string role, string email = "")
+        {
+            UserID = userId;
+            Username = username ?? "Unknown";
+            Role = role ?? "User";
+            Email = email ?? "";
+        }
+
+        public static void CreateDeliveryconfirmation(int userId, string username, string role, string email = "")
+        {
+            UserID = userId;
+            Username = username ?? "Unknown";
+            Role = role ?? "User";
+            Email = email ?? "";
+        }
     }
 }

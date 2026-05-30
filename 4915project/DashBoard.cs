@@ -474,5 +474,12 @@ namespace _4915project
             FormSetting setting = new FormSetting();
             setting.Show();
         }
+
+        private void Logistics_Click(object sender, EventArgs e)
+        {
+            FormLogistics logistics = new FormLogistics();
+            logistics.Show();
+            this.Close();
+        }
     }
 }

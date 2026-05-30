@@ -59,7 +59,8 @@
             label6 = new Label();
             label5 = new Label();
             lbInventoryID = new Label();
-            Menu = new GroupBox();
+            gbMenu = new GroupBox();
+            btSetting = new Button();
             AfterSales = new Button();
             Production = new Button();
             SubmitDesign = new Button();
@@ -68,7 +69,6 @@
             Logistics = new Button();
             Logoutbt = new LinkLabel();
             lblWelcome = new Label();
-            btSetting = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -77,7 +77,7 @@
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numQuantity).BeginInit();
-            Menu.SuspendLayout();
+            gbMenu.SuspendLayout();
             SuspendLayout();
             // 
             // label1SystemName
@@ -415,21 +415,31 @@
             lbInventoryID.TabIndex = 0;
             lbInventoryID.Text = "InventoryID:";
             // 
-            // Menu
+            // gbMenu
             // 
-            Menu.Controls.Add(btSetting);
-            Menu.Controls.Add(AfterSales);
-            Menu.Controls.Add(Production);
-            Menu.Controls.Add(SubmitDesign);
-            Menu.Controls.Add(btDashBoard);
-            Menu.Controls.Add(SalesOrder);
-            Menu.Controls.Add(Logistics);
-            Menu.Location = new Point(12, 50);
-            Menu.Name = "Menu";
-            Menu.Size = new Size(145, 499);
-            Menu.TabIndex = 7;
-            Menu.TabStop = false;
-            Menu.Text = "Menu";
+            gbMenu.Controls.Add(btSetting);
+            gbMenu.Controls.Add(AfterSales);
+            gbMenu.Controls.Add(Production);
+            gbMenu.Controls.Add(SubmitDesign);
+            gbMenu.Controls.Add(btDashBoard);
+            gbMenu.Controls.Add(SalesOrder);
+            gbMenu.Controls.Add(Logistics);
+            gbMenu.Location = new Point(12, 50);
+            gbMenu.Name = "gbMenu";
+            gbMenu.Size = new Size(145, 499);
+            gbMenu.TabIndex = 7;
+            gbMenu.TabStop = false;
+            gbMenu.Text = "Menu";
+            // 
+            // btSetting
+            // 
+            btSetting.Location = new Point(22, 443);
+            btSetting.Name = "btSetting";
+            btSetting.Size = new Size(103, 45);
+            btSetting.TabIndex = 7;
+            btSetting.Text = "Setting";
+            btSetting.UseVisualStyleBackColor = true;
+            btSetting.Click += btSetting_Click;
             // 
             // AfterSales
             // 
@@ -486,6 +496,7 @@
             Logistics.TabIndex = 0;
             Logistics.Text = "Logistics/Delivery";
             Logistics.UseVisualStyleBackColor = true;
+            Logistics.Click += this.Logistics_Click;
             // 
             // Logoutbt
             // 
@@ -506,16 +517,6 @@
             lblWelcome.Size = new Size(228, 39);
             lblWelcome.TabIndex = 12;
             // 
-            // btSetting
-            // 
-            btSetting.Location = new Point(22, 443);
-            btSetting.Name = "btSetting";
-            btSetting.Size = new Size(103, 45);
-            btSetting.TabIndex = 7;
-            btSetting.Text = "Setting";
-            btSetting.UseVisualStyleBackColor = true;
-            btSetting.Click += this.btSetting_Click;
-            // 
             // Inventory
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -523,7 +524,7 @@
             ClientSize = new Size(872, 561);
             Controls.Add(Logoutbt);
             Controls.Add(lblWelcome);
-            Controls.Add(Menu);
+            Controls.Add(gbMenu);
             Controls.Add(tabControl1);
             Controls.Add(label1SystemName);
             Location = new Point(28, 19);
@@ -541,7 +542,7 @@
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ((System.ComponentModel.ISupportInitialize)numQuantity).EndInit();
-            Menu.ResumeLayout(false);
+            gbMenu.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -578,7 +579,7 @@
         private NumericUpDown numQuantity;
         private Button btSubmit;
         private ComboBox cbWearhouse;
-        private GroupBox Menu;
+        private GroupBox gbMenu;
         private Button AfterSales;
         private Button Production;
         private Button SubmitDesign;
