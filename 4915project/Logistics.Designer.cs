@@ -231,6 +231,7 @@
             btUpdateCreate.TabIndex = 16;
             btUpdateCreate.Text = "Update Status & Complete Order";
             btUpdateCreate.UseVisualStyleBackColor = true;
+            btUpdateCreate.Click += btUpdateCreate_Click;
             // 
             // label12
             // 
@@ -336,6 +337,7 @@
             AfterSales.TabIndex = 5;
             AfterSales.Text = "AfterSales";
             AfterSales.UseVisualStyleBackColor = true;
+            AfterSales.Click += AfterSales_Click;
             // 
             // Production
             // 

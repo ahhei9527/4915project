@@ -368,7 +368,7 @@ namespace ITP4915M
             string prefix = "ORD"; // ORD
 
             // 查詢今天最大的流水號
-            string query = "SELECT OrderID FROM salesorder WHERE OrderID LIKE @Prefix ORDER BY OrderID DESC LIMIT 1";
+            string query = "SELECT OrderID FROM salesorder";
 
             using (MySqlConnection con = new MySqlConnection(constring))
             {

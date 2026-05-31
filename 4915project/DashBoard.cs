@@ -481,5 +481,12 @@ namespace _4915project
             logistics.Show();
             this.Close();
         }
+
+        private void AfterSales_Click(object sender, EventArgs e)
+        {
+            AfterSales afterSales = new AfterSales();
+            afterSales.Show();
+            this.Close();
+        }
     }
 }

@@ -43,6 +43,15 @@
             cmWearhouse = new ComboBox();
             tabPage2 = new TabPage();
             groupBox2 = new GroupBox();
+            cmbCStatus = new ComboBox();
+            lblCurrentStus = new Label();
+            tbSN = new TextBox();
+            lblSN = new Label();
+            cmbPID = new ComboBox();
+            lblProductID = new Label();
+            cmbStatus = new ComboBox();
+            lblStatus = new Label();
+            cmbBatch = new ComboBox();
             dataGridView2 = new DataGridView();
             date = new DateTimePicker();
             numQuantity = new NumericUpDown();
@@ -50,7 +59,6 @@
             cbWearhouse = new ComboBox();
             cmItem = new ComboBox();
             cbSupplier = new ComboBox();
-            tbBatch = new TextBox();
             tbInventoryID = new TextBox();
             label10 = new Label();
             label9 = new Label();
@@ -99,7 +107,7 @@
             tabControl1.Margin = new Padding(2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(659, 393);
+            tabControl1.Size = new Size(659, 462);
             tabControl1.TabIndex = 4;
             // 
             // tabPage1
@@ -110,7 +118,7 @@
             tabPage1.Margin = new Padding(2);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(2);
-            tabPage1.Size = new Size(651, 365);
+            tabPage1.Size = new Size(651, 434);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Stock Overview";
             // 
@@ -233,13 +241,22 @@
             tabPage2.Margin = new Padding(2);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(2);
-            tabPage2.Size = new Size(651, 365);
+            tabPage2.Size = new Size(651, 434);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Inward Goods";
             // 
             // groupBox2
             // 
             groupBox2.BackColor = Color.Gainsboro;
+            groupBox2.Controls.Add(cmbCStatus);
+            groupBox2.Controls.Add(lblCurrentStus);
+            groupBox2.Controls.Add(tbSN);
+            groupBox2.Controls.Add(lblSN);
+            groupBox2.Controls.Add(cmbPID);
+            groupBox2.Controls.Add(lblProductID);
+            groupBox2.Controls.Add(cmbStatus);
+            groupBox2.Controls.Add(lblStatus);
+            groupBox2.Controls.Add(cmbBatch);
             groupBox2.Controls.Add(dataGridView2);
             groupBox2.Controls.Add(date);
             groupBox2.Controls.Add(numQuantity);
@@ -247,7 +264,6 @@
             groupBox2.Controls.Add(cbWearhouse);
             groupBox2.Controls.Add(cmItem);
             groupBox2.Controls.Add(cbSupplier);
-            groupBox2.Controls.Add(tbBatch);
             groupBox2.Controls.Add(tbInventoryID);
             groupBox2.Controls.Add(label10);
             groupBox2.Controls.Add(label9);
@@ -260,15 +276,93 @@
             groupBox2.Margin = new Padding(2);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(2);
-            groupBox2.Size = new Size(647, 352);
+            groupBox2.Size = new Size(647, 416);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "Record New Inward Goods";
             // 
+            // cmbCStatus
+            // 
+            cmbCStatus.FormattingEnabled = true;
+            cmbCStatus.Location = new Point(105, 156);
+            cmbCStatus.Name = "cmbCStatus";
+            cmbCStatus.Size = new Size(117, 23);
+            cmbCStatus.TabIndex = 25;
+            // 
+            // lblCurrentStus
+            // 
+            lblCurrentStus.AutoSize = true;
+            lblCurrentStus.Location = new Point(7, 159);
+            lblCurrentStus.Margin = new Padding(2, 0, 2, 0);
+            lblCurrentStus.Name = "lblCurrentStus";
+            lblCurrentStus.Size = new Size(93, 15);
+            lblCurrentStus.TabIndex = 24;
+            lblCurrentStus.Text = "Instance Status:";
+            // 
+            // tbSN
+            // 
+            tbSN.Location = new Point(341, 132);
+            tbSN.Name = "tbSN";
+            tbSN.Size = new Size(119, 23);
+            tbSN.TabIndex = 23;
+            // 
+            // lblSN
+            // 
+            lblSN.AutoSize = true;
+            lblSN.Location = new Point(303, 132);
+            lblSN.Margin = new Padding(2, 0, 2, 0);
+            lblSN.Name = "lblSN";
+            lblSN.Size = new Size(27, 15);
+            lblSN.TabIndex = 21;
+            lblSN.Text = "SN:";
+            // 
+            // cmbPID
+            // 
+            cmbPID.FormattingEnabled = true;
+            cmbPID.Location = new Point(82, 129);
+            cmbPID.Name = "cmbPID";
+            cmbPID.Size = new Size(117, 23);
+            cmbPID.TabIndex = 20;
+            // 
+            // lblProductID
+            // 
+            lblProductID.AutoSize = true;
+            lblProductID.Location = new Point(7, 128);
+            lblProductID.Margin = new Padding(2, 0, 2, 0);
+            lblProductID.Name = "lblProductID";
+            lblProductID.Size = new Size(66, 15);
+            lblProductID.TabIndex = 19;
+            lblProductID.Text = "ProductID:";
+            // 
+            // cmbStatus
+            // 
+            cmbStatus.FormattingEnabled = true;
+            cmbStatus.Location = new Point(341, 100);
+            cmbStatus.Name = "cmbStatus";
+            cmbStatus.Size = new Size(121, 23);
+            cmbStatus.TabIndex = 18;
+            // 
+            // lblStatus
+            // 
+            lblStatus.AutoSize = true;
+            lblStatus.Location = new Point(283, 103);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(47, 15);
+            lblStatus.TabIndex = 17;
+            lblStatus.Text = "Status: ";
+            // 
+            // cmbBatch
+            // 
+            cmbBatch.FormattingEnabled = true;
+            cmbBatch.Location = new Point(82, 100);
+            cmbBatch.Name = "cmbBatch";
+            cmbBatch.Size = new Size(117, 23);
+            cmbBatch.TabIndex = 16;
+            // 
             // dataGridView2
             // 
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(15, 125);
+            dataGridView2.Location = new Point(7, 188);
             dataGridView2.Margin = new Padding(2);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowHeadersWidth = 62;
@@ -293,7 +387,7 @@
             // 
             // btSubmit
             // 
-            btSubmit.Location = new Point(522, 99);
+            btSubmit.Location = new Point(514, 160);
             btSubmit.Margin = new Padding(2);
             btSubmit.Name = "btSubmit";
             btSubmit.Size = new Size(112, 22);
@@ -328,14 +422,6 @@
             cbSupplier.Name = "cbSupplier";
             cbSupplier.Size = new Size(117, 23);
             cbSupplier.TabIndex = 9;
-            // 
-            // tbBatch
-            // 
-            tbBatch.Location = new Point(82, 99);
-            tbBatch.Margin = new Padding(2);
-            tbBatch.Name = "tbBatch";
-            tbBatch.Size = new Size(117, 23);
-            tbBatch.TabIndex = 8;
             // 
             // tbInventoryID
             // 
@@ -449,6 +535,7 @@
             AfterSales.TabIndex = 5;
             AfterSales.Text = "AfterSales";
             AfterSales.UseVisualStyleBackColor = true;
+            AfterSales.Click += AfterSales_Click;
             // 
             // Production
             // 
@@ -496,7 +583,7 @@
             Logistics.TabIndex = 0;
             Logistics.Text = "Logistics/Delivery";
             Logistics.UseVisualStyleBackColor = true;
-            Logistics.Click += this.Logistics_Click;
+            Logistics.Click += Logistics_Click;
             // 
             // Logoutbt
             // 
@@ -572,7 +659,6 @@
         private Label lbInventoryID;
         private ComboBox cmItem;
         private ComboBox cbSupplier;
-        private TextBox tbBatch;
         private TextBox tbInventoryID;
         private DataGridView dataGridView2;
         private DateTimePicker date;
@@ -590,5 +676,14 @@
         private Label lblWelcome;
         private Button btRefresh;
         private Button btSetting;
+        private ComboBox cmbBatch;
+        private ComboBox cmbStatus;
+        private Label lblStatus;
+        private ComboBox cmbPID;
+        private Label lblProductID;
+        private TextBox tbSN;
+        private Label lblSN;
+        private ComboBox cmbCStatus;
+        private Label lblCurrentStus;
     }
 }

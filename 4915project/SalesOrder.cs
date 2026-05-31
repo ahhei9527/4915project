@@ -255,5 +255,12 @@ namespace ITP4915M
             log.Show();
             this.Close();
         }
+
+        private void AfterSales_Click(object sender, EventArgs e)
+        {
+            AfterSales afterSales = new AfterSales();
+            afterSales.Show();
+            this.Close();
+        }
     }
 }

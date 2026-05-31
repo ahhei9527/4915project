@@ -80,5 +80,21 @@
             Role = role ?? "User";
             Email = email ?? "";
         }
+
+        public static void AddInward(int userId, string username, string role, string email = "")
+        {
+            UserID = userId;
+            Username = username ?? "Unknown";
+            Role = role ?? "User";
+            Email = email ?? "";
+        }
+
+        public static void AddComplaint(int userId, string username, string role, string email = "")
+        {
+            UserID = userId;
+            Username = username ?? "Unknown";
+            Role = role ?? "User";
+            Email = email ?? "";
+        }
     }
 }

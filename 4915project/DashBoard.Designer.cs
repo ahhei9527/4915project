@@ -319,6 +319,7 @@ namespace _4915project
             AfterSales.TabIndex = 5;
             AfterSales.Text = "AfterSales";
             AfterSales.UseVisualStyleBackColor = true;
+            AfterSales.Click += AfterSales_Click;
             // 
             // Production
             // 
