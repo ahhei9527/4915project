@@ -1310,7 +1310,7 @@ namespace ITP4915M
             {
                 sfd.Filter = "PDF Files (*.pdf)|*.pdf";
                 // Default filename uses Reply Slip ID if available, otherwise defaults to timestamp
-                string defaultFileName = !string.IsNullOrWhiteSpace(tbReplySlipID.Text) ? tbReplySlipID.Text.Trim() : DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                string defaultFileName = !string.IsNullOrWhiteSpace(tbReplyID.Text) ? tbReplyID.Text.Trim() : DateTime.Now.ToString("yyyyMMdd_HHmmss");
                 sfd.FileName = $"ReplySlip_{defaultFileName}.pdf";
 
                 if (sfd.ShowDialog() == DialogResult.OK)
@@ -1339,17 +1339,17 @@ namespace ITP4915M
                         metaTable.SetWidths(new float[] { 1f, 1f }); // Equal column splitting
 
                         // Row 1
-                        metaTable.AddCell(new PdfPCell(new Phrase($"Reply Slip ID: {tbReplySlipID.Text.Trim()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
-                        metaTable.AddCell(new PdfPCell(new Phrase($"Order ID: {tbOrderID.Text.Trim()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
+                        metaTable.AddCell(new PdfPCell(new Phrase($"Reply Slip ID: {tbReplyID.Text.Trim()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
+                        metaTable.AddCell(new PdfPCell(new Phrase($"Order ID: {tbReplyOrderID.Text.Trim()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
 
                         // Row 2
                         metaTable.AddCell(new PdfPCell(new Phrase($"Delivery Note ID: {cmbDeliveryID.SelectedItem?.ToString()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
                         metaTable.AddCell(new PdfPCell(new Phrase($"Delivery Status: Completed", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
 
                         // Row 3
-                        metaTable.AddCell(new PdfPCell(new Phrase($"Recipient: {tbRecipient.Text.Trim()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
-                        metaTable.AddCell(new PdfPCell(new Phrase($"Delivery Date: {dtpDeliveryDate.Value.ToString("yyyy-MM-dd")}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
-
+                        metaTable.AddCell(new PdfPCell(new Phrase($"Recipient: {tbReplyCustName.Text.Trim()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
+                        metaTable.AddCell(new PdfPCell(new Phrase($"Delivery Date: {dateDeliveryDate.Value.ToString("yyyy-MM-dd")}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
+                        metaTable.AddCell(new PdfPCell(new Phrase($"Delivery Date: {tbReplyAddress.Text.Trim()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
                         document.Add(metaTable);
 
                         // --- Full Width Address Section ---
@@ -1457,4 +1457,5 @@ namespace ITP4915M
                 Console.WriteLine("Audit Log failed: " + ex.Message);
             }
         }
+    }
 }
