@@ -19,40 +19,233 @@ namespace ITP4915M
 {
     public partial class FormOrdelDetail : Form
     {
-        string OrderItemID;
+        private DataTable orderItemsTable;
+
         public FormOrdelDetail()
         {
             InitializeComponent();
         }
 
-        private void labelOrderDetail_Click(object sender, EventArgs e)
+        private void FormOrdelDetail_Load(object sender, EventArgs e)
         {
+            orderItemsTable = new DataTable();
+            orderItemsTable.Columns.Add("ProductID", typeof(string));
+            orderItemsTable.Columns.Add("Product ID/Name", typeof(string));
+            orderItemsTable.Columns.Add("Unit Price", typeof(decimal));
+            orderItemsTable.Columns.Add("Quantity", typeof(int));
+            orderItemsTable.Columns.Add("Subtotal", typeof(decimal));
 
+            dgvOrderItems.DataSource = orderItemsTable;
+
+            if (dgvOrderItems.Columns["ProductID"] != null)
+                dgvOrderItems.Columns["ProductID"].Visible = false;
+
+            tbAddress.Enabled = false;
+            tbTotal.Enabled = false;
+            textBoxUnitPrice.Enabled = false;
+
+            LoadProducts();
+            LoadCustomers();
+            GenerateSequenceOrderID();
         }
 
-        private void labelTotalAmount_Click(object sender, EventArgs e)
+        private void LoadProducts()
         {
+            string constring = "server=localhost;user id=root;password=;database=4915";
+            string query = "SELECT ProductID, Name FROM product";
 
+            using (MySqlConnection con = new MySqlConnection(constring))
+            using (MySqlCommand cmd = new MySqlCommand(query, con))
+            {
+                try
+                {
+                    con.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string productID = reader["ProductID"].ToString();
+                            string name = reader["Name"].ToString();
+                            comboBoxProductIDName.Items.Add(name);  // 顯示 Name
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to load products: " + ex.Message);
+                }
+            }
         }
+
+        private void LoadCustomers()
+        {
+            string constring = "server=localhost;user id=root;password=;database=4915";
+            string query = "SELECT Name FROM customer";
+
+            using (MySqlConnection con = new MySqlConnection(constring))
+            using (MySqlCommand cmd = new MySqlCommand(query, con))
+            {
+                try
+                {
+                    con.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            cmbCustName.Items.Add(reader["Name"].ToString());
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to load customers: " + ex.Message);
+                }
+            }
+        }
+
+        private void comboBoxProductIDName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxProductIDName.SelectedItem == null) return;
+            getPrice(comboBoxProductIDName.SelectedItem.ToString());
+        }
+
+        private void cmbCustName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbCustName.SelectedItem == null) return;
+            getAddress(cmbCustName.SelectedItem.ToString());
+        }
+
+        private void getPrice(string name)
+        {
+            string constring = "server=localhost;user id=root;password=;database=4915";
+            string query = "SELECT UnitPrice FROM product WHERE Name = @ProductName";
+
+            using (MySqlConnection con = new MySqlConnection(constring))
+            using (MySqlCommand cmd = new MySqlCommand(query, con))
+            {
+                cmd.Parameters.AddWithValue("@ProductName", name);
+                try
+                {
+                    con.Open();
+                    object result = cmd.ExecuteScalar();
+                    textBoxUnitPrice.Text = result?.ToString() ?? "0";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("資料庫存取失敗: " + ex.Message);
+                    textBoxUnitPrice.Text = "0";
+                }
+            }
+        }
+
+        private void getAddress(string name)
+        {
+            string constring = "server=localhost;user id=root;password=;database=4915";
+            string query = "SELECT Address FROM customer WHERE Name = @Name";
+
+            using (MySqlConnection con = new MySqlConnection(constring))
+            using (MySqlCommand cmd = new MySqlCommand(query, con))
+            {
+                cmd.Parameters.AddWithValue("@Name", name);
+                try
+                {
+                    con.Open();
+                    object result = cmd.ExecuteScalar();
+                    tbAddress.Text = result?.ToString() ?? "";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("資料庫存取失敗: " + ex.Message);
+                    tbAddress.Text = "";
+                }
+            }
+        }
+
+        private void buttonAddItem_Click(object sender, EventArgs e)
+        {
+            if (comboBoxProductIDName.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a product first.");
+                return;
+            }
+            if (numericUpDownQuantity.Value <= 0)
+            {
+                MessageBox.Show("Quantity must be greater than 0.");
+                return;
+            }
+
+            string productName = comboBoxProductIDName.SelectedItem.ToString();
+            decimal unitPrice = decimal.Parse(textBoxUnitPrice.Text);
+            int quantity = (int)numericUpDownQuantity.Value;
+            decimal subtotal = unitPrice * quantity;
+
+            // 取得 ProductID（建議改用 Dictionary 快取更佳）
+            string productID = GetProductIDByName(productName);
+
+            orderItemsTable.Rows.Add(productID, productName, unitPrice, quantity, subtotal);
+            UpdateTotalAmount();
+        }
+
+        private string GetProductIDByName(string productName)
+        {
+            string constring = "server=localhost;user id=root;password=;database=4915";
+            string query = "SELECT ProductID FROM product WHERE Name = @Name";
+
+            using (MySqlConnection con = new MySqlConnection(constring))
+            using (MySqlCommand cmd = new MySqlCommand(query, con))
+            {
+                cmd.Parameters.AddWithValue("@Name", productName);
+                try
+                {
+                    con.Open();
+                    object result = cmd.ExecuteScalar();
+                    return result?.ToString() ?? "";
+                }
+                catch
+                {
+                    return "";
+                }
+            }
+        }
+
+        private void UpdateTotalAmount()
+        {
+            decimal total = 0;
+            foreach (DataRow row in orderItemsTable.Rows)
+            {
+                total += Convert.ToDecimal(row["Subtotal"]);
+            }
+            tbTotal.Text = total.ToString("F2"); // 格式化顯示
+        }
+
+        // ====================== buttonSaveOrder_Click 等其他方法 ======================
+        // （以下保留你原本的邏輯，只做小修正）
 
         private void buttonSaveOrder_Click(object sender, EventArgs e)
         {
-            string orderIDs = tbOrderID.Text; // 取得目前的訂單編號
+            string orderIDs = tbOrderID.Text.Trim();
+            if (string.IsNullOrEmpty(orderIDs))
+            {
+                MessageBox.Show("Order ID is required.");
+                return;
+            }
+
             string constring = "server=localhost;user id=root;password=;database=4915";
 
             string queryGetCustomerID = "SELECT CustomerID FROM customer WHERE Name = @CustomerName LIMIT 1";
-
             string queryInsertOrder = @"
-                INSERT INTO salesorder (OrderID, CustomerID, OrderDate, TotalAmount, 
-                                        RequestDeliveryDate, Status, EstimatedDeliveryDate) 
-                VALUES (@OrderID, @CustomerID, @OrderDate, @TotalAmount, 
-                        @RequestDeliveryDate, @Status, @EstimatedDeliveryDate)";
+        INSERT INTO salesorder (OrderID, CustomerID, OrderDate, TotalAmount, 
+                                RequestDeliveryDate, Status, EstimatedDeliveryDate) 
+        VALUES (@OrderID, @CustomerID, @OrderDate, @TotalAmount, 
+                @RequestDeliveryDate, @Status, @EstimatedDeliveryDate)";
 
             string queryInsertItem = @"
-                INSERT INTO orderitem (OrderItemID, OrderID, quantity, UnitPrice, Subtotal) 
-                VALUES (@OrderItemID, @OrderID, @Quantity, @UnitPrice, @Subtotal)";
+        INSERT INTO orderitem (OrderItemID, OrderID, quantity, UnitPrice, Subtotal) 
+        VALUES (@OrderItemID, @OrderID, @Quantity, @UnitPrice, @Subtotal)";
 
-            string customerID = null;
+            string queryInsertItemProduct = @"
+        INSERT INTO orderitem_product (OrderItemID, ProductID) 
+        VALUES (@OrderItemID, @ProductID)";
 
             using (MySqlConnection con = new MySqlConnection(constring))
             {
@@ -60,23 +253,21 @@ namespace ITP4915M
                 {
                     con.Open();
 
-                    // 1. 取得客戶 ID
+                    // 取得 CustomerID
+                    string customerID = null;
                     using (MySqlCommand cmdGetCust = new MySqlCommand(queryGetCustomerID, con))
                     {
                         cmdGetCust.Parameters.AddWithValue("@CustomerName", cmbCustName.SelectedItem?.ToString() ?? "");
                         using (MySqlDataReader reader = cmdGetCust.ExecuteReader())
                         {
                             if (reader.Read())
-                            {
                                 customerID = reader["CustomerID"].ToString();
-                            }
-                        } // 這裡 reader 會自動關閉，釋放連線
+                        }
                     }
 
-                    // 防呆檢查
                     if (string.IsNullOrEmpty(customerID))
                     {
-                        MessageBox.Show("Cannot find the selected customer. Please check the name.");
+                        MessageBox.Show("Cannot find the selected customer.");
                         return;
                     }
 
@@ -86,12 +277,17 @@ namespace ITP4915M
                         return;
                     }
 
-                    // 使用 Transaction 確保主檔與明細同時成功或同時失敗
+                    if (dgvOrderItems.Rows.Count <= 1) // 只剩新行
+                    {
+                        MessageBox.Show("Please add at least one item.");
+                        return;
+                    }
+
                     using (MySqlTransaction transaction = con.BeginTransaction())
                     {
                         try
                         {
-                            // 2. 寫入主檔 salesorder
+                            // 1. 插入 salesorder
                             using (MySqlCommand cmdOrder = new MySqlCommand(queryInsertOrder, con, transaction))
                             {
                                 cmdOrder.Parameters.AddWithValue("@OrderID", orderIDs);
@@ -105,62 +301,83 @@ namespace ITP4915M
                                 cmdOrder.ExecuteNonQuery();
                             }
 
-                            // 3. 寫入明細檔 orderitem (跑畫面的 DataTable 迴圈)
+                            // 2. 插入 orderitem + orderitem_product
+                            int baseItemNumber = GetCurrentMaxOrderItemNumber(con, transaction);
+                            int offset = 0;
+
                             using (MySqlCommand cmdItem = new MySqlCommand(queryInsertItem, con, transaction))
+                            using (MySqlCommand cmdItemProduct = new MySqlCommand(queryInsertItemProduct, con, transaction))
                             {
-                                // 預先建立參數（優化效能，避免在迴圈內重複 Add）
+                                // 準備 orderitem 參數
                                 cmdItem.Parameters.Add("@OrderItemID", MySqlDbType.VarChar);
                                 cmdItem.Parameters.Add("@OrderID", MySqlDbType.VarChar);
                                 cmdItem.Parameters.Add("@Quantity", MySqlDbType.Int32);
                                 cmdItem.Parameters.Add("@UnitPrice", MySqlDbType.Decimal);
                                 cmdItem.Parameters.Add("@Subtotal", MySqlDbType.Decimal);
 
-                                // 假設你的 orderItemsTable 是儲存畫面上多筆商品的 DataTable
-                                foreach (DataRow row in orderItemsTable.Rows)
+                                // 準備 orderitem_product 參數
+                                cmdItemProduct.Parameters.Add("@OrderItemID", MySqlDbType.VarChar);
+                                cmdItemProduct.Parameters.Add("@ProductID", MySqlDbType.VarChar);
+
+                                foreach (DataGridViewRow row in dgvOrderItems.Rows)
                                 {
-                                    // 自動生成每筆明細的唯一 OrderItemID (例如: 訂單號 + 隨機/流水號)
-                                    string itemID = GenerateOrderItemID();
+                                    if (row.IsNewRow) continue;
 
-                                    // 將資料表(DataTable)中的值賦予給 SQL 參數
-                                    cmdItem.Parameters["@OrderItemID"].Value = itemID;
+                                    // 產生 OrderItemID
+                                    int nextNumber = baseItemNumber + offset++;
+                                    string uniqueItemID = "OI" + nextNumber.ToString("D6");
+
+                                    string productID = row.Cells["ProductID"]?.Value?.ToString();
+
+                                    if (string.IsNullOrEmpty(productID))
+                                    {
+                                        throw new Exception("ProductID is missing for one of the items.");
+                                    }
+
+                                    // 插入 orderitem
+                                    cmdItem.Parameters["@OrderItemID"].Value = uniqueItemID;
                                     cmdItem.Parameters["@OrderID"].Value = orderIDs;
-                                    cmdItem.Parameters["@Quantity"].Value = Convert.ToInt32(row["Quantity"]);
-                                    cmdItem.Parameters["@UnitPrice"].Value = Convert.ToDecimal(row["Unit Price"]);
-                                    cmdItem.Parameters["@Subtotal"].Value = Convert.ToDecimal(row["Subtotal"]);
-
+                                    cmdItem.Parameters["@Quantity"].Value = Convert.ToInt32(row.Cells["Quantity"].Value);
+                                    cmdItem.Parameters["@UnitPrice"].Value = Convert.ToDecimal(row.Cells["Unit Price"].Value);
+                                    cmdItem.Parameters["@Subtotal"].Value = Convert.ToDecimal(row.Cells["Subtotal"].Value);
                                     cmdItem.ExecuteNonQuery();
+
+                                    // 插入 orderitem_product（確保 OrderItemID 一致）
+                                    cmdItemProduct.Parameters["@OrderItemID"].Value = uniqueItemID;
+                                    cmdItemProduct.Parameters["@ProductID"].Value = productID;
+                                    cmdItemProduct.ExecuteNonQuery();
                                 }
                             }
 
-                            // 提交交易（確定寫入資料庫）
                             transaction.Commit();
-
                             MessageBox.Show("Order saved successfully!");
-
-                            // 紀錄日誌與跳轉
                             CreateOrderAudit(orderIDs);
                             ReturnToFormOrder();
                         }
                         catch (Exception ex)
                         {
-                            // 發生任何錯誤，全部還原（Rollback）
                             transaction.Rollback();
-                            MessageBox.Show("Failed to save order details. Error: " + ex.Message);
+                            MessageBox.Show("Failed to save order: " + ex.Message);
                         }
                     }
                 }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show("Database error occurred: " + ex.Message);
-                }
-                catch (FormatException)
-                {
-                    MessageBox.Show("Please ensure Total Amount is a valid number.");
-                }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("An unexpected error occurred: " + ex.Message);
+                    MessageBox.Show("Database error: " + ex.Message);
                 }
+            }
+        }
+
+        private int GetCurrentMaxOrderItemNumber(MySqlConnection con, MySqlTransaction transaction)
+        {
+            string query = @"
+                SELECT COALESCE(MAX(CAST(SUBSTRING(OrderItemID, 3) AS UNSIGNED)), 0) 
+                FROM orderitem WHERE OrderItemID LIKE 'OI%'";
+
+            using (MySqlCommand cmd = new MySqlCommand(query, con, transaction))
+            {
+                object result = cmd.ExecuteScalar();
+                return Convert.ToInt32(result) + 1;
             }
         }
 
@@ -168,24 +385,16 @@ namespace ITP4915M
         {
             try
             {
-                CurrentUser.CreateOrder(CurrentUser.UserID,
-                    CurrentUser.Username, CurrentUser.Role,
-                    CurrentUser.Email);
+                CurrentUser.CreateOrder(CurrentUser.UserID, CurrentUser.Username,
+                                      CurrentUser.Role, CurrentUser.Email);
 
-                AuditHelper.Log(
-                    tableName: "salesorder",
-                    recordId: orderID,
-                    action: "Create Order",
-                    userId: CurrentUser.UserID
-                );
+                AuditHelper.Log("salesorder", orderID, "Create Order", CurrentUser.UserID);
             }
             catch (Exception ex)
             {
-                // 日誌記錄失敗不應阻擋用戶，僅做提示
                 Console.WriteLine("Audit Log failed: " + ex.Message);
             }
         }
-
 
         private void ReturnToFormOrder()
         {
@@ -196,184 +405,20 @@ namespace ITP4915M
         {
             ReturnToFormOrder();
         }
-        private DataTable orderItemsTable;
-        private void FormOrdelDetail_Load(object sender, EventArgs e)
-        {
-            orderItemsTable = new DataTable();
-            orderItemsTable.Columns.Add("Product ID/Name", typeof(string));
-            orderItemsTable.Columns.Add("Unit Price", typeof(decimal));
-            orderItemsTable.Columns.Add("Quantity", typeof(int));
-            orderItemsTable.Columns.Add("Subtotal", typeof(decimal));
-            dgvOrderItems.DataSource = orderItemsTable;
-            tbAddress.Enabled = false;
-            tbTotal.Enabled = false;
-            textBoxUnitPrice.Enabled = false;
-            GenerateSequenceOrderID();
-            string constring = "server=localhost;user id=root;password=;database=4915";
-
-            string query = "SELECT Name FROM product";
-            string query2 = "SELECT Name FROM customer";
-
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    try
-                    {
-                        con.Open();
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                if (reader["Name"] != DBNull.Value)
-                                {
-                                    comboBoxProductIDName.Items.Add(reader["Name"]);
-                                }
-                            }
-                        }
-                    }
-                    catch (MySqlException ex)
-                    {
-                        MessageBox.Show("SQL acess failed: " + ex.Message);
-                    }
-                }
-                using (MySqlCommand cmd2 = new MySqlCommand(query2, con))
-                {
-                    try
-                    {
-                        using (MySqlDataReader reader = cmd2.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                if (reader["Name"] != DBNull.Value)
-                                {
-                                    cmbCustName.Items.Add(reader["Name"]); ;
-                                }
-                            }
-                        }
-                    }
-                    catch (MySqlException ex)
-                    {
-                        MessageBox.Show("SQL acess failed: " + ex.Message);
-                    }
-                }
-            }
-        }
-
-        private void comboBoxProductIDName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string constring = "server=localhost;user id=root;password=;database=4915";
-
-            string query = "SELECT Name FROM product";
-
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    try
-                    {
-                        con.Open();
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                getPrice(comboBoxProductIDName.Text);
-                            }
-                        }
-                    }
-                    catch (MySqlException ex)
-                    {
-                        MessageBox.Show("SQL acess failed: " + ex.Message);
-                    }
-                }
-            }
-        }
-        private void getPrice(string name)
-        {
-            string constring = "server=localhost;user id=root;password=;database=4915";
-
-            // 1. 使用 @ProductName 作為參數佔位符
-            string query = "SELECT UnitPrice FROM product WHERE Name = @ProductName";
-
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    // 2. 安全地綁定參數值
-                    cmd.Parameters.AddWithValue("@ProductName", name);
-
-                    try
-                    {
-                        con.Open();
-                        object result = cmd.ExecuteScalar();
-
-                        if (result != null && result != DBNull.Value)
-                        {
-                            textBoxUnitPrice.Text = result.ToString();
-                        }
-                        else
-                        {
-                            textBoxUnitPrice.Text = "0"; // 或者清空：""
-                            MessageBox.Show("找不到該產品的價格。");
-                        }
-                    }
-                    catch (MySqlException ex)
-                    {
-                        MessageBox.Show("資料庫存取失敗: " + ex.Message);
-                    }
-                }
-            }
-        }
-
-        private void buttonAddItem_Click(object sender, EventArgs e)
-        {
-            // 1. 驗證使用者輸入
-            if (comboBoxProductIDName.SelectedItem == null)
-            {
-                MessageBox.Show("Please select a product first.");
-                return;
-            }
-            if (numericUpDownQuantity.Value <= 0) // 假設數量控制項是 NumericUpDown
-            {
-                MessageBox.Show("Quantity must be greater than 0.");
-                return;
-            }
-
-            // 2. 取得輸入值並計算小計
-            string productName = comboBoxProductIDName.SelectedItem.ToString();
-            decimal unitPrice = decimal.Parse(textBoxUnitPrice.Text);
-            int quantity = (int)numericUpDownQuantity.Value;
-            decimal subtotal = unitPrice * quantity;
-
-            // 3. 將資料列新增至 DataTable（畫面的 DataGridView 會自動同步更新）
-            orderItemsTable.Rows.Add(productName, unitPrice, quantity, subtotal);
-
-            // 4. 更新下方的 Total Amount
-            UpdateTotalAmount();
-        }
-
-        private void UpdateTotalAmount()
-        {
-            decimal total = 0;
-            foreach (DataRow row in orderItemsTable.Rows)
-            {
-                total += Convert.ToDecimal(row["Subtotal"]);
-            }
-            tbTotal.Text = total.ToString(); // 假設總金額 TextBox 叫 textBoxTotalAmount
-        }
 
         private void GenerateSequenceOrderID()
         {
             string constring = "server=localhost;user id=root;password=;database=4915";
-            string prefix = "ORD"; // ORD
+            string prefix = "ORD";
 
-            // 查詢今天最大的流水號
-            string query = "SELECT OrderID FROM salesorder";
+            // 修正：加上 WHERE 篩選前綴，並用 ORDER BY 排序加 LIMIT 1 取得最新（最大）的一筆
+            string query = "SELECT OrderID FROM salesorder WHERE OrderID LIKE @Prefix ORDER BY OrderID DESC LIMIT 1";
 
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
+                    // 修正：必須在 SQL 語法中有 @Prefix，此處綁定才有效
                     cmd.Parameters.AddWithValue("@Prefix", prefix + "%");
 
                     try
@@ -381,139 +426,33 @@ namespace ITP4915M
                         con.Open();
                         object result = cmd.ExecuteScalar();
 
-                        int nextNumber = 1; // 預設如果今天沒訂單，就是第一筆
+                        int nextNumber = 1;
 
                         if (result != null && result != DBNull.Value)
                         {
                             string lastOrderID = result.ToString();
-                            // 擷取最後 4 碼數字 (例如從 "ORD-20260529-0005" 切出 "0005")
-                            string lastNumberStr = lastOrderID.Substring(lastOrderID.Length - 6);
 
-                            if (int.TryParse(lastNumberStr, out int lastNumber))
+                            // 防呆：確保字串長度足夠切取後 6 碼
+                            if (lastOrderID.Length >= 6)
                             {
-                                nextNumber = lastNumber + 1; // 序號加 1
+                                string lastNumberStr = lastOrderID.Substring(lastOrderID.Length - 6);
+
+                                if (int.TryParse(lastNumberStr, out int lastNumber))
+                                {
+                                    nextNumber = lastNumber + 1;
+                                }
                             }
                         }
 
-                        // 將序號格式化為 4 位數，例如 1 變成 0001，12 變成 0012
+                        // 產生新單號 (例如：ORD000001)
                         tbOrderID.Text = prefix + nextNumber.ToString("D6");
                         tbOrderID.ReadOnly = true;
                     }
                     catch (Exception ex)
                     {
                         System.Diagnostics.Debug.WriteLine("無法取得資料庫流水號: " + ex.Message);
+                        MessageBox.Show("無法自動產生單號，請手動輸入或稍後再試。");
                         tbOrderID.ReadOnly = false;
-                    }
-                }
-            }
-        }
-
-        private string GenerateOrderItemID()
-        {
-            string constring = "server=localhost;user id=root;password=;database=4915";
-            string prefix = "OI"; 
-
-            // 查詢今天最大的流水號
-            string query = "SELECT OrderItemID FROM orderitem WHERE OrderItemID LIKE @Prefix ORDER BY OrderItemID DESC LIMIT 1";
-
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@Prefix", prefix + "%");
-
-                    try
-                    {
-                        con.Open();
-                        object result = cmd.ExecuteScalar();
-
-                        int nextNumber = 1; // 預設如果今天沒訂單，就是第一筆
-
-                        if (result != null && result != DBNull.Value)
-                        {
-                            string lastOrderItemID = result.ToString();
-                            // 擷取最後 4 碼數字 (例如從 "ORD-20260529-0005" 切出 "0005")
-                            string lastNumberStr = lastOrderItemID.Substring(lastOrderItemID.Length - 6);
-
-                            if (int.TryParse(lastNumberStr, out int lastNumber))
-                            {
-                                nextNumber = lastNumber + 1; // 序號加 1
-                            }
-                        }
-
-                        // 將序號格式化為 4 位數，例如 1 變成 0001，12 變成 0012
-                        OrderItemID = prefix + nextNumber.ToString("D6");
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Debug.WriteLine("無法取得資料庫流水號: " + ex.Message);
-                        tbOrderID.ReadOnly = false;
-                    }
-                }
-            }
-            return OrderItemID;
-        }
-
-        private void cmbCustName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string constring = "server=localhost;user id=root;password=;database=4915";
-
-            string query = "SELECT Name FROM customer";
-
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    try
-                    {
-                        con.Open();
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                getAddress(cmbCustName.Text);
-                            }
-                        }
-                    }
-                    catch (MySqlException ex)
-                    {
-                        MessageBox.Show("SQL acess failed: " + ex.Message);
-                    }
-                }
-            }
-        }
-        private void getAddress(string name)
-        {
-            string constring = "server=localhost;user id=root;password=;database=4915";
-
-            // 1. 使用 @ProductName 作為參數佔位符
-            string query = "SELECT Address FROM customer WHERE Name = @Name";
-
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    // 2. 安全地綁定參數值
-                    cmd.Parameters.AddWithValue("@Name", name);
-
-                    try
-                    {
-                        con.Open();
-                        object result = cmd.ExecuteScalar();
-
-                        if (result != null && result != DBNull.Value)
-                        {
-                            tbAddress.Text = result.ToString();
-                        }
-                        else
-                        {
-                            textBoxUnitPrice.Text = "0"; // 或者清空：""
-                            MessageBox.Show("找不到該產品的價格。");
-                        }
-                    }
-                    catch (MySqlException ex)
-                    {
-                        MessageBox.Show("資料庫存取失敗: " + ex.Message);
                     }
                 }
             }

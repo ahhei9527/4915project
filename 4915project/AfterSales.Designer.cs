@@ -80,6 +80,8 @@
             btSales = new Button();
             SubmitDesign = new Button();
             Inventory = new Button();
+            Logoutbt = new LinkLabel();
+            lblWelcome = new Label();
             tabAfterSales.SuspendLayout();
             tabPageShipConfirmation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
@@ -614,13 +616,35 @@
             Inventory.TabIndex = 2;
             Inventory.Text = "Inventory";
             Inventory.UseVisualStyleBackColor = true;
+            Inventory.Click += Inventory_Click;
+            // 
+            // Logoutbt
+            // 
+            Logoutbt.AutoSize = true;
+            Logoutbt.Location = new Point(773, 22);
+            Logoutbt.Name = "Logoutbt";
+            Logoutbt.Size = new Size(50, 15);
+            Logoutbt.TabIndex = 9;
+            Logoutbt.TabStop = true;
+            Logoutbt.Text = "LogOut";
+            Logoutbt.LinkClicked += Logoutbt_LinkClicked;
+            // 
+            // lblWelcome
+            // 
+            lblWelcome.Font = new Font("Microsoft JhengHei UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            lblWelcome.Location = new Point(595, 45);
+            lblWelcome.Name = "lblWelcome";
+            lblWelcome.Size = new Size(228, 39);
+            lblWelcome.TabIndex = 8;
             // 
             // AfterSales
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(872, 561);
+            Controls.Add(Logoutbt);
             Controls.Add(gbMenu);
+            Controls.Add(lblWelcome);
             Controls.Add(tabAfterSales);
             Controls.Add(label1SystemName);
             Margin = new Padding(2);
@@ -694,5 +718,7 @@
         private Button btSales;
         private DateTimePicker EDate;
         private DateTimePicker SDate;
+        private LinkLabel Logoutbt;
+        private Label lblWelcome;
     }
 }

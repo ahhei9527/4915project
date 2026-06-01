@@ -98,6 +98,12 @@ namespace _4915project
                                         salesForm.Show();
                                         this.Hide();
                                     }
+                                    else if(dbDepartment == "CustomerService")
+                                    {
+                                        AfterSales afterSales = new AfterSales();
+                                        afterSales.Show();
+                                        this.Hide();
+                                    }
                                     else
                                     {
                                         MessageBox.Show("Unknown role. Access denied.", "Error",

@@ -86,7 +86,6 @@
             labelOrderDetail.Size = new Size(101, 20);
             labelOrderDetail.TabIndex = 12;
             labelOrderDetail.Text = "Order Detail";
-            labelOrderDetail.Click += labelOrderDetail_Click;
             // 
             // plOrderDetail
             // 
@@ -162,7 +161,6 @@
             labelTotalAmount.Size = new Size(115, 15);
             labelTotalAmount.TabIndex = 8;
             labelTotalAmount.Text = "Total Amount: HKD";
-            labelTotalAmount.Click += labelTotalAmount_Click;
             // 
             // dgvOrderItems
             // 

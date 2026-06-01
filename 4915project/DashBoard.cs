@@ -452,7 +452,7 @@ namespace _4915project
                                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            this.Close();
+            Application.Exit();
         }
 
         private void SalesOrder_Click(object sender, EventArgs e)

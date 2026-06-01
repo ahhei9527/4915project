@@ -39,3 +39,4 @@ C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\ITP4915M.AfterSales.resources
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\ITP4915M.FormNewComplaint.resources
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\ITP4915M.ViewEditComplaint.resources
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\itextsharp.dll

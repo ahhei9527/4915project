@@ -1,4 +1,6 @@
 ﻿using _4915project;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using MySql.Data.MySqlClient;
 using Mysqlx.Crud;
 using System;
@@ -6,7 +8,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,6 +28,8 @@ namespace ITP4915M
         string EstimatedDeliveryDate = "";
         string Remark = "";
         string confirmationID = "";
+        int CustID;
+        int exists = 0;
         public FormLogistics()
         {
             InitializeComponent();
@@ -31,6 +37,9 @@ namespace ITP4915M
 
         private void FormLogistics_Load(object sender, EventArgs e)
         {
+            GenDeliveryNoteID();
+            GetDeliveryID();
+            //GetShipmentDetail();
             // 1. 初始化 UI 控制項狀態
             receviedDate.Enabled = false;
             cbremark.Items.AddRange(new string[] { "Good", "Bad", "Broken" });
@@ -116,14 +125,17 @@ namespace ITP4915M
                                 cbMethod.Text = firstRow["DeliveryMethod"] == DBNull.Value ? "Standard" : firstRow["DeliveryMethod"].ToString();
                             }
                         }
-                    }
-
-                    // ============ 步驟三：自動生成最新出貨單號 (ShipmentID) ============
-                    ShipmentID = tbShipID.Text; // 將生成的 ShipmentID 存到全域變數中，方便後續使用
-                    if (ShipmentID == null)
-                    {
-                        GenerateShipmentID();
-                        ShipmentID = tbShipID.Text;
+                        string shipQuery = "SELECT ShipmentID FROM shipment ORDER BY ShipmentID";
+                        using (MySqlCommand shipCmd = new MySqlCommand(shipQuery, con))
+                        {
+                            using (MySqlDataReader shipReader = shipCmd.ExecuteReader())
+                            {
+                                while (shipReader.Read())
+                                {
+                                    cmbShipID.Items.Add(shipReader["ShipmentID"].ToString());
+                                }
+                            }
+                        }
                     }
                 }
                 catch (MySqlException ex)
@@ -632,5 +644,817 @@ namespace ITP4915M
             afterSales.Show();
             this.Close();
         }
-    }
+
+        private void Logoutbt_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                string constring = "server=localhost;user id=root;password=;database=4915";
+
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+                    con.Open();
+
+                    // Optional: You can still verify user exists, but usually not necessary for logout
+                    string query = @"
+                SELECT userid, name FROM user 
+                WHERE userid = @UserId 
+                LIMIT 1";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", CurrentUser.UserID);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int userId = reader.GetInt32("userid");
+                                string username = reader["name"]?.ToString() ?? "Unknown";
+
+                                // Log the audit
+                                AuditHelper.Log(
+                                    tableName: "user",
+                                    recordId: userId.ToString(),
+                                    action: "LOGOUT",
+                                    userId: userId,
+                                    username: username,
+                                    description: $"User {username} logged out"
+                                );
+                            }
+                        }
+                    }
+                }
+
+                // Logout from application
+                CurrentUser.Logout();
+
+                MessageBox.Show("Logout successful!", "Success",
+                               MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Logout error: {ex.Message}", "Error",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            Application.Exit();
+        }
+
+        private void GenDeliveryNoteID()
+        {
+            string constring = "server=localhost;user id=root;password=;database=4915";
+
+            // 修正：統一使用相同的欄位名稱 DNNumber (避免欄位名稱不一致報錯)
+            string query = @"
+        SELECT deliveryID 
+        FROM deliverynote 
+        WHERE deliveryID LIKE @Prefix 
+        ORDER BY deliveryID DESC 
+        LIMIT 1";
+
+            string prefix = "DN";
+
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@Prefix", prefix + "%");
+
+                    try
+                    {
+                        con.Open();
+                        object result = cmd.ExecuteScalar();
+
+                        int nextNumber = 1; // 預設如果沒有任何送貨單，就是第一筆
+
+                        if (result != null && result != DBNull.Value)
+                        {
+                            string lastDeliveryID = result.ToString();
+
+                            // 防呆：確保字串總長度大於前綴長度，才進行切割
+                            if (lastDeliveryID.Length > prefix.Length)
+                            {
+                                // 直接切出前綴後面的所有數字部分 (例如從 "DN001" 切出 "001")
+                                string lastNumberStr = lastDeliveryID.Substring(prefix.Length);
+
+                                if (int.TryParse(lastNumberStr, out int lastNumber))
+                                {
+                                    nextNumber = lastNumber + 1; // 序號加 1
+                                }
+                            }
+                        }
+
+                        // 將序號格式化為 3 位數，例如 1 變成 001，12 變成 012
+                        tbDeliveryNoteID.Text = prefix + nextNumber.ToString("D3"); // 產生如: DN001
+                        tbDeliveryNoteID.ReadOnly = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine("無法取得送貨單流水號: " + ex.Message);
+                        MessageBox.Show("無法自動產生送貨單號，請檢查資料庫連線。");
+                        tbDeliveryNoteID.ReadOnly = false;
+                    }
+                }
+            }
+        }
+
+        private void cmbShipID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbShipID.SelectedItem == null) return;
+
+            string constring = "server=localhost;user id=root;password=;database=4915";
+            string shipmentID = cmbShipID.SelectedItem.ToString().Trim();
+
+            string queryOrderInfo = @"
+        SELECT 
+            so.OrderID, 
+            c.Name AS CustomerName,
+            c.Address,
+            c.CustomerID
+        FROM salesorder so
+        INNER JOIN customer c ON so.CustomerID = c.CustomerID
+        INNER JOIN shipment s ON so.OrderID = s.OrderID
+        WHERE s.ShipmentID = @ShipmentID
+        LIMIT 1";
+
+            string queryOrderItems = @"
+        SELECT 
+            o.OrderItemID,
+            p.Name AS ProductName,
+            p.ProductID,
+            o.Quantity,
+            o.UnitPrice,
+            o.Subtotal,
+            o.CustomNotes
+        FROM orderitem o
+        INNER JOIN orderitem_product op ON o.OrderItemID = op.OrderItemID
+        INNER JOIN product p ON op.ProductID = p.ProductID
+        WHERE o.OrderID = @OrderID
+        ORDER BY o.OrderItemID";
+
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                try
+                {
+                    con.Open();
+
+                    // 1. 取得訂單基本資訊
+                    using (MySqlCommand cmd = new MySqlCommand(queryOrderInfo, con))
+                    {
+                        cmd.Parameters.AddWithValue("@ShipmentID", shipmentID);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                CustID = Convert.ToInt32(reader["CustomerID"]);
+                                tbOrderID.Text = reader["OrderID"]?.ToString() ?? "";
+                                tbOrderID.ReadOnly = true;
+                                tbRecipient.Text = reader["CustomerName"]?.ToString() ?? "";
+                                tbRecipient.ReadOnly = true;
+                                tbAddress.Text = reader["Address"]?.ToString() ?? "";
+                                tbAddress.ReadOnly = true;
+                            }
+                            else
+                            {
+                                MessageBox.Show("找不到該出貨單對應的訂單資訊。");
+                                return;
+                            }
+                        }
+                    }
+
+                    // 2. 取得訂單明細（如果有 dataGridView1）
+                    string orderID = tbOrderID.Text.Trim();
+                    if (!string.IsNullOrEmpty(orderID))
+                    {
+                        using (MySqlCommand itemCmd = new MySqlCommand(queryOrderItems, con))
+                        {
+                            itemCmd.Parameters.AddWithValue("@OrderID", orderID);
+
+                            using (MySqlDataAdapter adapter = new MySqlDataAdapter(itemCmd))
+                            {
+                                DataTable itemTable = new DataTable();
+                                adapter.Fill(itemTable);
+                                dataGridView1.Columns.Clear();
+                                DataGridViewTextBoxColumn itemIdColumn = new DataGridViewTextBoxColumn();
+                                itemIdColumn.Name = "ItemID";
+                                itemIdColumn.HeaderText = "Item ID"; // Set your custom column title
+                                dataGridView1.Columns.Add(itemIdColumn);
+                                dataGridView1.DataSource = itemTable;
+                                if (dataGridView1.Columns.Contains("OrderItemID"))
+                                    dataGridView1.Columns["OrderItemID"].Visible = false;
+
+                                if (dataGridView1.Columns.Contains("ProductID"))
+                                    dataGridView1.Columns["ProductID"].Visible = false;
+
+                                // 4. Populate the first column with sequential line numbers (1, 2, 3...)
+                                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                                {
+                                    // If your grid allows adding new rows manually, skip the uncommitted new row
+                                    if (dataGridView1.Rows[i].IsNewRow) continue;
+
+                                    dataGridView1.Rows[i].Cells["ItemID"].Value = (i + 1).ToString();
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("載入出貨單資料失敗: " + ex.Message);
+                }
+            }
+        }
+
+        private void ExportToPDF()
+        {
+            // 1. 讓使用者選擇儲存路徑
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "PDF Files (*.pdf)|*.pdf";
+                sfd.FileName = $"DeliveryNote_{tbOrderID.Text.Trim() ?? "Document"}.pdf";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    // 使用完整的命名空間指定 iTextSharp 的 Document，避免與系統視窗衝突
+                    iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 30f, 30f, 30f, 30f);
+
+                    try
+                    {
+                        PdfWriter.GetInstance(document, new FileStream(sfd.FileName, FileMode.Create));
+                        document.Open();
+
+                        // 修正：明確指定 iTextSharp 的 Font 類別，並修正 GetFont 的參數類型（將字型大小改為 float 格式，如 18f、10f）
+                        iTextSharp.text.Font titleFont = FontFactory.GetFont("Arial", 18f, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+                        iTextSharp.text.Font headerFont = FontFactory.GetFont("Arial", 10f, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+                        iTextSharp.text.Font bodyFont = FontFactory.GetFont("Arial", 10f, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+
+                        // --- 標題標頭 ---
+                        Paragraph CompanyName = new Paragraph("Premium Living Furniture Co.Ltd\n\n", titleFont);
+                        Paragraph title = new Paragraph("DELIVERY NOTE\n\n", titleFont);
+                        title.Alignment = Element.ALIGN_CENTER;
+                        document.Add(CompanyName);
+                        document.Add(title);
+
+                        // --- 上方表頭基本資訊 (雙欄版面) ---
+                        PdfPTable metaTable = new PdfPTable(2);
+                        metaTable.WidthPercentage = 100;
+                        metaTable.SetWidths(new float[] { 1f, 1f });
+
+                        // 左欄與右欄資料
+                        metaTable.AddCell(new PdfPCell(new Phrase($"Delivery ID: DN001", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 8f });
+                        metaTable.AddCell(new PdfPCell(new Phrase($"Shipment ID: {cmbShipID.SelectedItem?.ToString()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 8f });
+
+                        metaTable.AddCell(new PdfPCell(new Phrase($"Order ID: {tbOrderID.Text}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 8f });
+                        metaTable.AddCell(new PdfPCell(new Phrase($"Recipient: {tbRecipient.Text}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 8f });
+
+                        document.Add(metaTable);
+
+                        // --- 地址區塊 ---
+                        Paragraph addressPara = new Paragraph($"Address:\n{tbAddress.Text}\n\n", bodyFont);
+                        document.Add(addressPara);
+
+                        // --- 主要資料表格 ---
+                        // 計算目前畫面上畫面上實際顯示的欄位數量
+                        int visibleColumnCount = 0;
+                        foreach (DataGridViewColumn col in dataGridView1.Columns)
+                        {
+                            if (col.Visible) visibleColumnCount++;
+                        }
+
+                        if (visibleColumnCount == 0)
+                        {
+                            MessageBox.Show("沒有可導出的資料。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            document.Close();
+                            return;
+                        }
+
+                        PdfPTable dataTable = new PdfPTable(visibleColumnCount);
+                        dataTable.WidthPercentage = 100;
+                        dataTable.HorizontalAlignment = Element.ALIGN_LEFT;
+
+                        // 動態建立 PDF 表頭
+                        foreach (DataGridViewColumn col in dataGridView1.Columns)
+                        {
+                            if (col.Visible)
+                            {
+                                PdfPCell cell = new PdfPCell(new Phrase(col.HeaderText, headerFont));
+                                cell.BackgroundColor = new BaseColor(240, 240, 240); // 淺灰色背景
+                                cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                                cell.Padding = 6f;
+                                dataTable.AddCell(cell);
+                            }
+                        }
+
+                        // 動態填入表格資料（會自動跳過被隱藏的 OrderItemID 和 ProductID）
+                        for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                        {
+                            if (dataGridView1.Rows[i].IsNewRow) continue;
+
+                            foreach (DataGridViewColumn col in dataGridView1.Columns)
+                            {
+                                if (col.Visible)
+                                {
+                                    string cellValue = dataGridView1.Rows[i].Cells[col.Index].Value?.ToString() ?? "";
+                                    PdfPCell cell = new PdfPCell(new Phrase(cellValue, bodyFont));
+                                    cell.Padding = 6f;
+
+                                    // 靠右對齊數值與金額欄位
+                                    if (col.Name.Contains("Price") || col.Name.Contains("Subtotal") || col.Name.Contains("Quantity"))
+                                    {
+                                        cell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                                    }
+                                    else
+                                    {
+                                        cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                                    }
+
+                                    dataTable.AddCell(cell);
+                                }
+                            }
+                        }
+
+                        document.Add(dataTable);
+                        MessageBox.Show("PDF 檔案已成功產生！", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("產生 PDF 時發生錯誤: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        document.Close();
+                    }
+                }
+            }
+        }
+
+        private void btGenNote_Click(object sender, EventArgs e)
+        {
+            ExportToPDF();
+            SaveToDatabase();
+            string constring = "server=localhost;user id=root;password=;database=4915";
+            string queryUpdateShipment = @"
+            UPDATE shipment s
+            INNER JOIN salesorder so ON s.OrderID = so.OrderID
+            SET s.STATUS = @Status, 
+                so.Status = @OStatus 
+            WHERE s.OrderID = @OrderID;";
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(queryUpdateShipment, con))
+                {
+                    cmd.Parameters.AddWithValue("@OrderID", tbOrderID.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Status", "Delivered");
+                    cmd.Parameters.AddWithValue("@OStatus", "Delivered");
+                }
+            }
+        }
+
+        private void SaveToDatabase()
+        {
+            string constring = "server =localhost;user id=root;password=;database=4915";
+            string queryDeliveryNote = @"INSERT INTO deliverynote (deliveryID, shipmentID, orderID, 
+            customerID, RecipientName, DeliveryAddress, CreateDate, Status) 
+                                        VALUES (@deliveryID, @shipmentID, @orderID, 
+            @customerID, @RecipientName, @DeliveryAddress, @CreateDate, @Status);";
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                try
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(queryDeliveryNote, con))
+                    {
+                        cmd.Parameters.AddWithValue("@deliveryID", tbDeliveryNoteID.Text.Trim());
+                        cmd.Parameters.AddWithValue("@shipmentID", cmbShipID.SelectedItem?.ToString() ?? "");
+                        cmd.Parameters.AddWithValue("@orderID", tbOrderID.Text.Trim());
+                        cmd.Parameters.AddWithValue("@customerID", CustID);
+                        cmd.Parameters.AddWithValue("@RecipientName", tbRecipient.Text.Trim());
+                        cmd.Parameters.AddWithValue("@DeliveryAddress", tbAddress.Text.Trim());
+                        cmd.Parameters.AddWithValue("@CreateDate", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@Status", "Created");
+                        cmd.ExecuteNonQuery();
+                        CreateDeliveryNoteAudit(tbDeliveryNoteID.Text);
+                        MessageBox.Show("Delivery note has been saved to database!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to save delivery note to database: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void GetDeliveryID()
+        {
+            string constring = "server=localhost;user id=root;password=;database=4915";
+            string query = @"SELECT deliveryID FROM deliverynote";
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                try
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                cmbDeliveryID.Items.Add(reader["deliveryID"].ToString());
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to retrieve delivery IDs: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void GenReplySlipID()
+        {
+            string constring = "server=localhost;user id=root;password=;database=4915";
+            string query = @"SELECT replySlipID FROM replyslip 
+            WHERE replySlipID LIKE @Prefix ORDER BY replySlipID DESC LIMIT 1";
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@Prefix", "RS" + "%");
+                    try
+                    {
+                        con.Open();
+                        object result = cmd.ExecuteScalar();
+                        int nextNumber = 1;
+                        if (result != null && result != DBNull.Value)
+                        {
+                            string lastID = result.ToString();
+                            if (lastID.Length > 2)
+                            {
+                                string lastNumberStr = lastID.Substring(2);
+                                if (int.TryParse(lastNumberStr, out int lastNumber))
+                                {
+                                    nextNumber = lastNumber + 1;
+                                }
+                            }
+                        }
+                        tbReplyID.Text = "RS" + nextNumber.ToString("D3");
+                        tbReplyID.ReadOnly = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Failed to generate Reply Slip ID: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        tbReplyID.ReadOnly = false;
+                    }
+                }
+            }
+        }
+
+        private void cmbDeliveryID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string constring = "server=localhost;user id=root;password=;database=4915";
+            string DNotequery = @"SELECT * FROM deliverynote";
+            string RSlipQuery = @"SELECT * FROM replyslip WHERE deliverynoteID = @deliverynoteID";
+            string checkExistQuery = "SELECT COUNT(*) FROM replyslip WHERE deliverynoteID = @DeliveryID";
+            string queryOrderItems = @"
+        SELECT 
+            o.OrderItemID,
+            p.Name AS ProductName,
+            p.ProductID,
+            o.Quantity,
+            o.UnitPrice,
+            o.Subtotal,
+            o.CustomNotes
+        FROM orderitem o
+        INNER JOIN orderitem_product op ON o.OrderItemID = op.OrderItemID
+        INNER JOIN product p ON op.ProductID = p.ProductID
+        WHERE o.OrderID = @OrderID
+        ORDER BY o.OrderItemID";
+            string deliveryID = cmbDeliveryID.SelectedItem?.ToString() ?? "";
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                try
+                {
+                    con.Open();
+                    using (MySqlCommand checkCmd = new MySqlCommand(checkExistQuery, con))
+                    {
+                        checkCmd.Parameters.AddWithValue("@DeliveryID", deliveryID);
+                        exists = Convert.ToInt32(checkCmd.ExecuteScalar());
+                        if (exists > 0)
+                        {
+                            using (MySqlCommand cmd = new MySqlCommand(RSlipQuery, con))
+                            {
+                                cmd.Parameters.AddWithValue("@deliverynoteID", deliveryID);
+                                using (MySqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    if (reader.Read())
+                                    {
+                                        tbReplyID.Text = reader["replySlipID"].ToString();
+                                        tbReplyID.ReadOnly = true;
+                                        tbReplyOrderID.Text = reader["orderID"].ToString();
+                                        tbReplyOrderID.ReadOnly = true;
+                                        tbReplyCustName.Text = reader["recipient"].ToString();
+                                        tbReplyCustName.ReadOnly = true;
+                                        dateDeliveryDate.Value = reader.GetDateTime("deliveryDate");
+                                        dateDeliveryDate.Enabled = false;
+                                        tbReplyAddress.Text = reader["deliveryAddress"].ToString();
+                                        tbReplyAddress.ReadOnly = true;
+                                    }
+                                }
+                                using (MySqlCommand itemCmd = new MySqlCommand(queryOrderItems, con))
+                                {
+                                    itemCmd.Parameters.AddWithValue("@OrderID", tbReplyOrderID.Text);
+
+                                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(itemCmd))
+                                    {
+                                        DataTable itemTable = new DataTable();
+                                        adapter.Fill(itemTable);
+                                        dataGridView3.Columns.Clear();
+                                        DataGridViewTextBoxColumn itemIdColumn = new DataGridViewTextBoxColumn();
+                                        itemIdColumn.Name = "ItemID";
+                                        itemIdColumn.HeaderText = "Item ID"; // Set your custom column title
+                                        dataGridView3.Columns.Add(itemIdColumn);
+                                        dataGridView3.DataSource = itemTable;
+                                        if (dataGridView3.Columns.Contains("OrderItemID"))
+                                            dataGridView3.Columns["OrderItemID"].Visible = false;
+
+                                        if (dataGridView3.Columns.Contains("ProductID"))
+                                            dataGridView3.Columns["ProductID"].Visible = false;
+
+                                        // 4. Populate the first column with sequential line numbers (1, 2, 3...)
+                                        for (int i = 0; i < dataGridView3.Rows.Count; i++)
+                                        {
+                                            // If your grid allows adding new rows manually, skip the uncommitted new row
+                                            if (dataGridView3.Rows[i].IsNewRow) continue;
+
+                                            dataGridView3.Rows[i].Cells["ItemID"].Value = (i + 1).ToString();
+                                        }
+                                    }
+                                }
+
+                            }
+                            return; // 終止流程
+                        }
+                        else
+                        {
+                            GenReplySlipID();
+                            using (MySqlCommand cmd = new MySqlCommand(DNotequery, con))
+                            {
+                                cmd.Parameters.AddWithValue("@deliveryID", deliveryID);
+                                using (MySqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    if (reader.Read())
+                                    {
+                                        tbReplyOrderID.Text = reader["orderID"].ToString();
+                                        tbReplyOrderID.ReadOnly = true;
+                                        tbReplyCustName.Text = reader["RecipientName"].ToString();
+                                        tbReplyCustName.ReadOnly = true;
+                                        dateDeliveryDate.Value = reader.GetDateTime("CreateDate");
+                                        dateDeliveryDate.Enabled = false;
+                                        tbReplyAddress.Text = reader["DeliveryAddress"].ToString();
+                                        tbReplyAddress.ReadOnly = true;
+                                    }
+                                }
+                            }
+                            using (MySqlCommand itemCmd = new MySqlCommand(queryOrderItems, con))
+                            {
+                                itemCmd.Parameters.AddWithValue("@OrderID", tbReplyOrderID.Text);
+
+                                using (MySqlDataAdapter adapter = new MySqlDataAdapter(itemCmd))
+                                {
+                                    DataTable itemTable = new DataTable();
+                                    adapter.Fill(itemTable);
+                                    dataGridView3.Columns.Clear();
+                                    DataGridViewTextBoxColumn itemIdColumn = new DataGridViewTextBoxColumn();
+                                    itemIdColumn.Name = "ItemID";
+                                    itemIdColumn.HeaderText = "Item ID"; // Set your custom column title
+                                    dataGridView3.Columns.Add(itemIdColumn);
+                                    dataGridView3.DataSource = itemTable;
+                                    if (dataGridView3.Columns.Contains("OrderItemID"))
+                                        dataGridView3.Columns["OrderItemID"].Visible = false;
+
+                                    if (dataGridView3.Columns.Contains("ProductID"))
+                                        dataGridView3.Columns["ProductID"].Visible = false;
+
+                                    // 4. Populate the first column with sequential line numbers (1, 2, 3...)
+                                    for (int i = 0; i < dataGridView3.Rows.Count; i++)
+                                    {
+                                        // If your grid allows adding new rows manually, skip the uncommitted new row
+                                        if (dataGridView3.Rows[i].IsNewRow) continue;
+
+                                        dataGridView3.Rows[i].Cells["ItemID"].Value = (i + 1).ToString();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to retrieve delivery IDs: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btGenSlip_Click(object sender, EventArgs e)
+        {
+            string constring = "server =localhost;user id=root;password=;database=4915";
+            string queryDeliveryNote = @"INSERT INTO deliverynote (replySlipID, OrderID, deliverynoteID,
+            recipient, DeliveryDate, Address) 
+            VALUES (@replySlipID,@OrderID, @deliverynoteID,
+            @recipient, @DeliveryDate, @Address);";
+            string checkExistQuery = "SELECT COUNT(*) FROM replyslip WHERE deliverynoteID = @DeliveryID";
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                try
+                {
+                    con.Open();
+                    using (MySqlCommand checkCmd = new MySqlCommand(checkExistQuery, con))
+                    {
+                        checkCmd.Parameters.AddWithValue("@replySlipID", tbReplyID.Text);
+                        exists = Convert.ToInt32(checkCmd.ExecuteScalar());
+                        if (exists > 0)
+                        {
+                            ExportReplySlipToPDF();
+                        }
+                        else
+                        {
+                            using (MySqlCommand cmd = new MySqlCommand(queryDeliveryNote, con))
+                            {
+                                cmd.Parameters.AddWithValue("@replySlipID", tbReplyID.Text.Trim());
+                                cmd.Parameters.AddWithValue("@OrderID", tbReplyOrderID.Text.Trim());
+                                cmd.Parameters.AddWithValue("@deliverynoteID", cmbDeliveryID.SelectedItem?.ToString().Trim());
+                                cmd.Parameters.AddWithValue("@recipient", tbReplyCustName.Text.Trim());
+                                cmd.Parameters.AddWithValue("@DeliveryDate", dateDeliveryDate.Value.ToString().Trim());
+                                cmd.Parameters.AddWithValue("@Address", tbReplyAddress.Text.Trim());
+                                cmd.ExecuteNonQuery();
+                                CreateReplySlipAudit(tbReplyID.Text);
+                                MessageBox.Show("Reply Slip has been saved to database!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to save Reply Slip to database: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void ExportReplySlipToPDF()
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "PDF Files (*.pdf)|*.pdf";
+                // Default filename uses Reply Slip ID if available, otherwise defaults to timestamp
+                string defaultFileName = !string.IsNullOrWhiteSpace(tbReplySlipID.Text) ? tbReplySlipID.Text.Trim() : DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                sfd.FileName = $"ReplySlip_{defaultFileName}.pdf";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    // Standard A4 initialization with 30pt clean margins
+                    Document document = new Document(PageSize.A4, 30f, 30f, 30f, 30f);
+
+                    try
+                    {
+                        PdfWriter.GetInstance(document, new FileStream(sfd.FileName, FileMode.Create));
+                        document.Open();
+
+                        // Define clean typography styles
+                        iTextSharp.text.Font titleFont = FontFactory.GetFont("Arial", 18f, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+                        iTextSharp.text.Font headerFont = FontFactory.GetFont("Arial", 10f, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+                        iTextSharp.text.Font bodyFont = FontFactory.GetFont("Arial", 10f, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+
+                        // --- Document Title ---
+                        Paragraph title = new Paragraph("REPLY SLIP\n\n", titleFont);
+                        title.Alignment = Element.ALIGN_CENTER;
+                        document.Add(title);
+
+                        // --- Form Metadata Grid (2 Columns Layout) ---
+                        PdfPTable metaTable = new PdfPTable(2);
+                        metaTable.WidthPercentage = 100;
+                        metaTable.SetWidths(new float[] { 1f, 1f }); // Equal column splitting
+
+                        // Row 1
+                        metaTable.AddCell(new PdfPCell(new Phrase($"Reply Slip ID: {tbReplySlipID.Text.Trim()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
+                        metaTable.AddCell(new PdfPCell(new Phrase($"Order ID: {tbOrderID.Text.Trim()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
+
+                        // Row 2
+                        metaTable.AddCell(new PdfPCell(new Phrase($"Delivery Note ID: {cmbDeliveryID.SelectedItem?.ToString()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
+                        metaTable.AddCell(new PdfPCell(new Phrase($"Delivery Status: Completed", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
+
+                        // Row 3
+                        metaTable.AddCell(new PdfPCell(new Phrase($"Recipient: {tbRecipient.Text.Trim()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
+                        metaTable.AddCell(new PdfPCell(new Phrase($"Delivery Date: {dtpDeliveryDate.Value.ToString("yyyy-MM-dd")}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
+
+                        document.Add(metaTable);
+
+                        // --- Full Width Address Section ---
+                        Paragraph addressHeader = new Paragraph("Delivery Address:", headerFont);
+                        addressHeader.SpacingBefore = 10f;
+                        document.Add(addressHeader);
+
+                        Paragraph addressContent = new Paragraph(tbAddress.Text.Trim(), bodyFont);
+                        addressContent.SpacingAfter = 20f;
+                        document.Add(addressContent);
+
+                        // --- Items Data Grid Table Layout ---
+                        int visibleColumnCount = 0;
+                        foreach (DataGridViewColumn col in dataGridView1.Columns)
+                        {
+                            if (col.Visible) visibleColumnCount++;
+                        }
+
+                        if (visibleColumnCount > 0)
+                        {
+                            PdfPTable dataTable = new PdfPTable(visibleColumnCount);
+                            dataTable.WidthPercentage = 100;
+
+                            // Build Data Headers 
+                            foreach (DataGridViewColumn col in dataGridView1.Columns)
+                            {
+                                if (col.Visible)
+                                {
+                                    PdfPCell cell = new PdfPCell(new Phrase(col.HeaderText, headerFont));
+                                    cell.BackgroundColor = new BaseColor(240, 240, 240); // Soft grey accent
+                                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                                    cell.Padding = 6f;
+                                    dataTable.AddCell(cell);
+                                }
+                            }
+
+                            // Populate Grid Elements
+                            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                            {
+                                if (dataGridView1.Rows[i].IsNewRow) continue;
+
+                                foreach (DataGridViewColumn col in dataGridView1.Columns)
+                                {
+                                    if (col.Visible)
+                                    {
+                                        string cellValue = dataGridView1.Rows[i].Cells[col.Index].Value?.ToString() ?? "";
+                                        PdfPCell cell = new PdfPCell(new Phrase(cellValue, bodyFont));
+                                        cell.Padding = 6f;
+
+                                        // Financial/Numeric text alignment rule
+                                        if (col.Name.Contains("Price") || col.Name.Contains("Subtotal") || col.Name.Contains("Quantity"))
+                                        {
+                                            cell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                                        }
+                                        else
+                                        {
+                                            cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                                        }
+                                        dataTable.AddCell(cell);
+                                    }
+                                }
+                            }
+                            document.Add(dataTable);
+                        }
+
+                        MessageBox.Show("Reply Slip PDF exported successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Failed to build PDF document: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        document.Close();
+                    }
+                }
+            }
+        }
+
+        private void CreateDeliveryNoteAudit(string deliverynoteID)
+        {
+            try
+            {
+                CurrentUser.CreateOrder(CurrentUser.UserID, CurrentUser.Username,
+                                      CurrentUser.Role, CurrentUser.Email);
+
+                AuditHelper.Log("deliverynote", deliverynoteID, "Create deliverynote", CurrentUser.UserID);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Audit Log failed: " + ex.Message);
+            }
+        }
+
+        private void CreateReplySlipAudit(string replySlipID)
+        {
+            try
+            {
+                CurrentUser.CreateOrder(CurrentUser.UserID, CurrentUser.Username,
+                                      CurrentUser.Role, CurrentUser.Email);
+                AuditHelper.Log("replyslip", replySlipID, "Create replyslip", CurrentUser.UserID);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Audit Log failed: " + ex.Message);
+            }
+        }
 }

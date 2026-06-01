@@ -51,6 +51,38 @@
             lblOrderStatus = new Label();
             label10 = new Label();
             lblShipID = new Label();
+            GenDoc = new TabPage();
+            tabControl2 = new TabControl();
+            DeliveryNote = new TabPage();
+            tbRecipient = new TextBox();
+            dataGridView1 = new DataGridView();
+            btGenNote = new Button();
+            lblAddress = new Label();
+            lblRecipient = new Label();
+            lblOrderID = new Label();
+            label9 = new Label();
+            tbOrderID = new TextBox();
+            tbAddress = new TextBox();
+            tbDeliveryNoteID = new TextBox();
+            cmbShipID = new ComboBox();
+            lblDeliveryID = new Label();
+            ReplySlip = new TabPage();
+            cmbDeliveryID = new ComboBox();
+            lblCompleted = new Label();
+            dateDeliveryDate = new DateTimePicker();
+            label2 = new Label();
+            label5 = new Label();
+            tbReplyID = new TextBox();
+            label13 = new Label();
+            tbReplyCustName = new TextBox();
+            dataGridView3 = new DataGridView();
+            label1 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            tbReplyOrderID = new TextBox();
+            tbReplyAddress = new TextBox();
+            label6 = new Label();
+            btGenSlip = new Button();
             gbMenu = new GroupBox();
             btSetting = new Button();
             AfterSales = new Button();
@@ -65,6 +97,12 @@
             tabPage2.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            GenDoc.SuspendLayout();
+            tabControl2.SuspendLayout();
+            DeliveryNote.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ReplySlip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             gbMenu.SuspendLayout();
             SuspendLayout();
             // 
@@ -82,6 +120,7 @@
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(GenDoc);
             tabControl1.Location = new Point(169, 63);
             tabControl1.Margin = new Padding(2);
             tabControl1.Name = "tabControl1";
@@ -303,6 +342,308 @@
             lblShipID.TabIndex = 0;
             lblShipID.Text = "Delivery ID:";
             // 
+            // GenDoc
+            // 
+            GenDoc.Controls.Add(tabControl2);
+            GenDoc.Location = new Point(4, 24);
+            GenDoc.Name = "GenDoc";
+            GenDoc.Size = new Size(651, 430);
+            GenDoc.TabIndex = 2;
+            GenDoc.Text = "Generate Document";
+            GenDoc.UseVisualStyleBackColor = true;
+            // 
+            // tabControl2
+            // 
+            tabControl2.Controls.Add(DeliveryNote);
+            tabControl2.Controls.Add(ReplySlip);
+            tabControl2.Location = new Point(3, 3);
+            tabControl2.Name = "tabControl2";
+            tabControl2.SelectedIndex = 0;
+            tabControl2.Size = new Size(643, 424);
+            tabControl2.TabIndex = 0;
+            // 
+            // DeliveryNote
+            // 
+            DeliveryNote.Controls.Add(tbRecipient);
+            DeliveryNote.Controls.Add(dataGridView1);
+            DeliveryNote.Controls.Add(btGenNote);
+            DeliveryNote.Controls.Add(lblAddress);
+            DeliveryNote.Controls.Add(lblRecipient);
+            DeliveryNote.Controls.Add(lblOrderID);
+            DeliveryNote.Controls.Add(label9);
+            DeliveryNote.Controls.Add(tbOrderID);
+            DeliveryNote.Controls.Add(tbAddress);
+            DeliveryNote.Controls.Add(tbDeliveryNoteID);
+            DeliveryNote.Controls.Add(cmbShipID);
+            DeliveryNote.Controls.Add(lblDeliveryID);
+            DeliveryNote.Location = new Point(4, 24);
+            DeliveryNote.Name = "DeliveryNote";
+            DeliveryNote.Padding = new Padding(3);
+            DeliveryNote.Size = new Size(635, 396);
+            DeliveryNote.TabIndex = 0;
+            DeliveryNote.Text = "Delivery Note";
+            DeliveryNote.UseVisualStyleBackColor = true;
+            // 
+            // tbRecipient
+            // 
+            tbRecipient.Location = new Point(447, 100);
+            tbRecipient.Name = "tbRecipient";
+            tbRecipient.Size = new Size(121, 23);
+            tbRecipient.TabIndex = 49;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(61, 201);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(523, 134);
+            dataGridView1.TabIndex = 48;
+            // 
+            // btGenNote
+            // 
+            btGenNote.Location = new Point(220, 341);
+            btGenNote.Name = "btGenNote";
+            btGenNote.Size = new Size(195, 23);
+            btGenNote.TabIndex = 47;
+            btGenNote.Text = "Generate Delivery Note";
+            btGenNote.UseVisualStyleBackColor = true;
+            btGenNote.Click += btGenNote_Click;
+            // 
+            // lblAddress
+            // 
+            lblAddress.AutoSize = true;
+            lblAddress.Location = new Point(61, 143);
+            lblAddress.Name = "lblAddress";
+            lblAddress.Size = new Size(58, 15);
+            lblAddress.TabIndex = 44;
+            lblAddress.Text = "Address: ";
+            // 
+            // lblRecipient
+            // 
+            lblRecipient.AutoSize = true;
+            lblRecipient.Location = new Point(362, 103);
+            lblRecipient.Name = "lblRecipient";
+            lblRecipient.Size = new Size(66, 15);
+            lblRecipient.TabIndex = 43;
+            lblRecipient.Text = "Recipient: ";
+            // 
+            // lblOrderID
+            // 
+            lblOrderID.AutoSize = true;
+            lblOrderID.Location = new Point(61, 103);
+            lblOrderID.Name = "lblOrderID";
+            lblOrderID.Size = new Size(61, 15);
+            lblOrderID.TabIndex = 41;
+            lblOrderID.Text = "Order ID: ";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(362, 36);
+            label9.Name = "label9";
+            label9.Size = new Size(79, 15);
+            label9.TabIndex = 38;
+            label9.Text = "ShipmentID: ";
+            // 
+            // tbOrderID
+            // 
+            tbOrderID.Location = new Point(166, 100);
+            tbOrderID.Name = "tbOrderID";
+            tbOrderID.Size = new Size(121, 23);
+            tbOrderID.TabIndex = 37;
+            // 
+            // tbAddress
+            // 
+            tbAddress.Location = new Point(61, 161);
+            tbAddress.Name = "tbAddress";
+            tbAddress.Size = new Size(517, 23);
+            tbAddress.TabIndex = 36;
+            // 
+            // tbDeliveryNoteID
+            // 
+            tbDeliveryNoteID.Location = new Point(166, 36);
+            tbDeliveryNoteID.Name = "tbDeliveryNoteID";
+            tbDeliveryNoteID.Size = new Size(115, 23);
+            tbDeliveryNoteID.TabIndex = 35;
+            // 
+            // cmbShipID
+            // 
+            cmbShipID.FormattingEnabled = true;
+            cmbShipID.Location = new Point(447, 36);
+            cmbShipID.Name = "cmbShipID";
+            cmbShipID.Size = new Size(121, 23);
+            cmbShipID.TabIndex = 34;
+            cmbShipID.SelectedIndexChanged += cmbShipID_SelectedIndexChanged;
+            // 
+            // lblDeliveryID
+            // 
+            lblDeliveryID.AutoSize = true;
+            lblDeliveryID.Location = new Point(36, 39);
+            lblDeliveryID.Name = "lblDeliveryID";
+            lblDeliveryID.Size = new Size(105, 15);
+            lblDeliveryID.TabIndex = 33;
+            lblDeliveryID.Text = "Delivery Note ID: ";
+            // 
+            // ReplySlip
+            // 
+            ReplySlip.Controls.Add(cmbDeliveryID);
+            ReplySlip.Controls.Add(lblCompleted);
+            ReplySlip.Controls.Add(dateDeliveryDate);
+            ReplySlip.Controls.Add(label2);
+            ReplySlip.Controls.Add(label5);
+            ReplySlip.Controls.Add(tbReplyID);
+            ReplySlip.Controls.Add(label13);
+            ReplySlip.Controls.Add(tbReplyCustName);
+            ReplySlip.Controls.Add(dataGridView3);
+            ReplySlip.Controls.Add(label1);
+            ReplySlip.Controls.Add(label3);
+            ReplySlip.Controls.Add(label4);
+            ReplySlip.Controls.Add(tbReplyOrderID);
+            ReplySlip.Controls.Add(tbReplyAddress);
+            ReplySlip.Controls.Add(label6);
+            ReplySlip.Controls.Add(btGenSlip);
+            ReplySlip.Location = new Point(4, 24);
+            ReplySlip.Name = "ReplySlip";
+            ReplySlip.Padding = new Padding(3);
+            ReplySlip.Size = new Size(635, 396);
+            ReplySlip.TabIndex = 1;
+            ReplySlip.Text = "Reply Slip";
+            ReplySlip.UseVisualStyleBackColor = true;
+            // 
+            // cmbDeliveryID
+            // 
+            cmbDeliveryID.FormattingEnabled = true;
+            cmbDeliveryID.Location = new Point(161, 60);
+            cmbDeliveryID.Name = "cmbDeliveryID";
+            cmbDeliveryID.Size = new Size(121, 23);
+            cmbDeliveryID.TabIndex = 69;
+            cmbDeliveryID.SelectedIndexChanged += cmbDeliveryID_SelectedIndexChanged;
+            // 
+            // lblCompleted
+            // 
+            lblCompleted.AutoSize = true;
+            lblCompleted.Location = new Point(457, 68);
+            lblCompleted.Name = "lblCompleted";
+            lblCompleted.Size = new Size(71, 15);
+            lblCompleted.TabIndex = 68;
+            lblCompleted.Text = "Completed";
+            // 
+            // dateDeliveryDate
+            // 
+            dateDeliveryDate.Location = new Point(435, 106);
+            dateDeliveryDate.Name = "dateDeliveryDate";
+            dateDeliveryDate.Size = new Size(118, 23);
+            dateDeliveryDate.TabIndex = 67;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(332, 111);
+            label2.Name = "label2";
+            label2.Size = new Size(88, 15);
+            label2.TabIndex = 66;
+            label2.Text = "Delivery Date: ";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(332, 69);
+            label5.Name = "label5";
+            label5.Size = new Size(95, 15);
+            label5.TabIndex = 64;
+            label5.Text = "Delivery Status: ";
+            // 
+            // tbReplyID
+            // 
+            tbReplyID.Location = new Point(161, 7);
+            tbReplyID.Name = "tbReplyID";
+            tbReplyID.Size = new Size(115, 23);
+            tbReplyID.TabIndex = 63;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(50, 15);
+            label13.Name = "label13";
+            label13.Size = new Size(84, 15);
+            label13.TabIndex = 62;
+            label13.Text = "Reply Slip ID: ";
+            // 
+            // tbReplyCustName
+            // 
+            tbReplyCustName.Location = new Point(153, 103);
+            tbReplyCustName.Name = "tbReplyCustName";
+            tbReplyCustName.Size = new Size(121, 23);
+            tbReplyCustName.TabIndex = 61;
+            // 
+            // dataGridView3
+            // 
+            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView3.Location = new Point(56, 199);
+            dataGridView3.Name = "dataGridView3";
+            dataGridView3.Size = new Size(523, 134);
+            dataGridView3.TabIndex = 60;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(68, 143);
+            label1.Name = "label1";
+            label1.Size = new Size(58, 15);
+            label1.TabIndex = 58;
+            label1.Text = "Address: ";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(68, 106);
+            label3.Name = "label3";
+            label3.Size = new Size(66, 15);
+            label3.TabIndex = 57;
+            label3.Text = "Recipient: ";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(338, 10);
+            label4.Name = "label4";
+            label4.Size = new Size(61, 15);
+            label4.TabIndex = 56;
+            label4.Text = "Order ID: ";
+            // 
+            // tbReplyOrderID
+            // 
+            tbReplyOrderID.Location = new Point(443, 7);
+            tbReplyOrderID.Name = "tbReplyOrderID";
+            tbReplyOrderID.Size = new Size(121, 23);
+            tbReplyOrderID.TabIndex = 54;
+            // 
+            // tbReplyAddress
+            // 
+            tbReplyAddress.Location = new Point(56, 170);
+            tbReplyAddress.Name = "tbReplyAddress";
+            tbReplyAddress.Size = new Size(523, 23);
+            tbReplyAddress.TabIndex = 53;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(50, 64);
+            label6.Name = "label6";
+            label6.Size = new Size(105, 15);
+            label6.TabIndex = 50;
+            label6.Text = "Delivery Note ID: ";
+            // 
+            // btGenSlip
+            // 
+            btGenSlip.Location = new Point(234, 350);
+            btGenSlip.Name = "btGenSlip";
+            btGenSlip.Size = new Size(165, 23);
+            btGenSlip.TabIndex = 47;
+            btGenSlip.Text = "Generate Reply Slip";
+            btGenSlip.UseVisualStyleBackColor = true;
+            btGenSlip.Click += btGenSlip_Click;
+            // 
             // gbMenu
             // 
             gbMenu.Controls.Add(btSetting);
@@ -396,6 +737,7 @@
             Logoutbt.TabIndex = 13;
             Logoutbt.TabStop = true;
             Logoutbt.Text = "LogOut";
+            Logoutbt.LinkClicked += Logoutbt_LinkClicked;
             // 
             // lblWelcome
             // 
@@ -424,13 +766,21 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            GenDoc.ResumeLayout(false);
+            tabControl2.ResumeLayout(false);
+            DeliveryNote.ResumeLayout(false);
+            DeliveryNote.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ReplySlip.ResumeLayout(false);
+            ReplySlip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             gbMenu.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
+        private Label lblAddress;
         private Label label1SystemName;
         private TabControl tabControl1;
         private TabPage tabPage2;
@@ -464,5 +814,36 @@
         private Label lblMethod;
         private TextBox tbShipID;
         private ComboBox cbOrderID;
+        private TabPage GenDoc;
+        private TabControl tabControl2;
+        private TabPage DeliveryNote;
+        private TabPage ReplySlip;
+        private Button btGenNote;
+        private TextBox tbRecipient;
+        private Label label2;
+        private Label lblRecipient;
+        private Label lblOrderID;
+        private Label label9;
+        private TextBox tbOrderID;
+        private TextBox tbAddress;
+        private TextBox tbDeliveryNoteID;
+        private ComboBox cmbShipID;
+        private Label lblDeliveryID;
+        private Button btGenSlip;
+        private DataGridView dataGridView1;
+        private Label label5;
+        private TextBox tbReplyID;
+        private Label label13;
+        private TextBox tbReplyCustName;
+        private DataGridView dataGridView3;
+        private Label label1;
+        private Label label3;
+        private Label label4;
+        private TextBox tbReplyOrderID;
+        private TextBox tbReplyAddress;
+        private Label label6;
+        private ComboBox cmbDeliveryID;
+        private Label lblCompleted;
+        private DateTimePicker dateDeliveryDate;
     }
 }

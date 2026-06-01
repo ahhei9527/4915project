@@ -21,8 +21,16 @@ namespace ITP4915M
             InitializeComponent();
         }
 
+        private void SetupWelcomeMessage()
+        {
+            string displayName = string.IsNullOrWhiteSpace(CurrentUser.Username) ? "User" : CurrentUser.Username;
+            string rolePart = string.IsNullOrWhiteSpace(CurrentUser.Role) ? "" : $" ({CurrentUser.Role})";
+            this.lblWelcome.Text = $"Welcome, {displayName}{rolePart}!";
+        }
+
         private void AfterSales_Load(object sender, EventArgs e)
         {
+            SetupWelcomeMessage();
             // 1. 初始化下拉選單的靜態選項（放最前面，避免重複疊加）
             tbShipID.ReadOnly = true; // ShipmentID 是自動生成的，使用者不應該修改
             cmbCondit.Items.Clear();
@@ -332,9 +340,9 @@ namespace ITP4915M
 
         private void btDashBoard_Click(object sender, EventArgs e)
         {
-            SalesOrder salesOrderForm = new SalesOrder();
-            salesOrderForm.Show();
-            this.Hide();
+            DashBoard dash = new DashBoard();
+            dash.Show();
+            this.Close();
         }
 
         private void btLog_Click(object sender, EventArgs e)
@@ -342,6 +350,69 @@ namespace ITP4915M
             FormLogistics formLogistics = new FormLogistics();
             formLogistics.Show();
             this.Close();
+        }
+
+        private void Inventory_Click(object sender, EventArgs e)
+        {
+            Inventory inventoryForm = new Inventory();
+            inventoryForm.Show();
+            this.Close();
+        }
+
+        private void Logoutbt_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                string constring = "server=localhost;user id=root;password=;database=4915";
+
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+                    con.Open();
+
+                    // Optional: You can still verify user exists, but usually not necessary for logout
+                    string query = @"
+                SELECT userid, name FROM user 
+                WHERE userid = @UserId 
+                LIMIT 1";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", CurrentUser.UserID);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int userId = reader.GetInt32("userid");
+                                string username = reader["name"]?.ToString() ?? "Unknown";
+
+                                // Log the audit
+                                AuditHelper.Log(
+                                    tableName: "user",
+                                    recordId: userId.ToString(),
+                                    action: "LOGOUT",
+                                    userId: userId,
+                                    username: username,
+                                    description: $"User {username} logged out"
+                                );
+                            }
+                        }
+                    }
+                }
+
+                // Logout from application
+                CurrentUser.Logout();
+
+                MessageBox.Show("Logout successful!", "Success",
+                               MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Logout error: {ex.Message}", "Error",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            Application.Exit();
         }
     }
 }

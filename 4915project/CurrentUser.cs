@@ -96,5 +96,12 @@
             Role = role ?? "User";
             Email = email ?? "";
         }
+        public static void UpdateComplaint(int userId, string username, string role, string email = "")
+        {
+            UserID = userId;
+            Username = username ?? "Unknown";
+            Role = role ?? "User";
+            Email = email ?? "";
+        }
     }
 }

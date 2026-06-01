@@ -24,10 +24,60 @@ namespace ITP4915M
             this.dgvOrderItems.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
 
-        public void Logoutbt_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void Logoutbt_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            CurrentUser.Logout();
-            this.Close();
+            try
+            {
+                string constring = "server=localhost;user id=root;password=;database=4915";
+
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+                    con.Open();
+
+                    // Optional: You can still verify user exists, but usually not necessary for logout
+                    string query = @"
+                SELECT userid, name FROM user 
+                WHERE userid = @UserId 
+                LIMIT 1";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", CurrentUser.UserID);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int userId = reader.GetInt32("userid");
+                                string username = reader["name"]?.ToString() ?? "Unknown";
+
+                                // Log the audit
+                                AuditHelper.Log(
+                                    tableName: "user",
+                                    recordId: userId.ToString(),
+                                    action: "LOGOUT",
+                                    userId: userId,
+                                    username: username,
+                                    description: $"User {username} logged out"
+                                );
+                            }
+                        }
+                    }
+                }
+
+                // Logout from application
+                CurrentUser.Logout();
+
+                MessageBox.Show("Logout successful!", "Success",
+                               MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Logout error: {ex.Message}", "Error",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            Application.Exit();
         }
 
         private void btDashBoard_Click(object sender, EventArgs e)

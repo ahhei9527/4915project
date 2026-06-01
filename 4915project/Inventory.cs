@@ -748,7 +748,7 @@ namespace ITP4915M
                                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            this.Close();
+            Application.Exit();
         }
 
         private void Logistics_Click(object sender, EventArgs e)
