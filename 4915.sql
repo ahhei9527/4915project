@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2026-05-31 11:47:45
+-- 產生時間： 2026-06-01 16:00:47
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -270,7 +270,83 @@ INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserI
 (221, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-31 17:18:06', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (222, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-31 17:19:40', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (223, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-31 17:20:43', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
-(224, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-31 17:24:51', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC');
+(224, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-31 17:24:51', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(225, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 16:55:28', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(226, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 17:01:14', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(227, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 17:03:14', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(228, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 17:03:17', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(229, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 17:07:30', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(230, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 17:09:51', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(231, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 17:09:54', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(232, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 17:10:07', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(233, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 17:11:02', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(234, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 17:14:56', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(235, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 17:15:05', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(236, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 17:15:17', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(237, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 17:15:20', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(238, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 17:15:28', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(239, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 17:15:30', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(240, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 17:15:38', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(241, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 17:15:43', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(242, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 17:32:59', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(243, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 17:36:56', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(244, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 17:39:26', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(245, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 17:47:55', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(246, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 17:52:47', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(247, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 17:53:38', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(248, 'salesorder', 'ORD000007', 'Create Order', 101, 'System', '2026-06-01 17:53:57', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(249, 'shipment', 'ORD000007', 'Create Shipment', 101, 'System', '2026-06-01 17:55:43', NULL, '\"SHIP005, In Transit, Standard\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(250, 'SalesOrder', 'ORD000007', 'Update SalesOrder', 101, 'System', '2026-06-01 17:55:43', NULL, '\"ORD000007, Paid, 2026/6/8 00:00:00\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(251, 'salesorder', 'CONF004', 'Update Order', 101, 'System', '2026-06-01 17:56:29', '\", \"', '\"2026-06-01, Good\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(252, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 18:33:08', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(253, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 18:34:08', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(254, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 18:35:04', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(255, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 18:35:23', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(256, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 18:36:44', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(257, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 18:37:49', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(258, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 18:38:31', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(259, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 18:39:01', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(260, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 19:13:29', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(261, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 19:14:00', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(262, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 19:21:17', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(263, 'salesorder', 'ORD000008', 'Create Order', 101, 'System', '2026-06-01 19:21:32', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(264, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 19:21:39', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(265, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 19:27:56', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(266, 'salesorder', 'ORD000009', 'Create Order', 101, 'System', '2026-06-01 19:28:16', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(267, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 19:28:23', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(268, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 19:29:51', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(269, 'shipment', 'ORD000009', 'Create Shipment', 101, 'System', '2026-06-01 19:30:10', NULL, '\"SHIP006, In Transit, Standard\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(270, 'SalesOrder', 'ORD000009', 'Update SalesOrder', 101, 'System', '2026-06-01 19:30:10', NULL, '\"ORD000009, Processing, 2026/6/8 00:00:00\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(271, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 19:30:32', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(272, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 19:36:16', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(273, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 19:37:21', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(274, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 19:37:58', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(275, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 19:40:18', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(276, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 19:44:02', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(277, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 19:44:13', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(278, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 19:50:34', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(279, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 19:51:34', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(280, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 19:53:39', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(281, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 19:54:15', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(282, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 19:54:42', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(283, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 19:55:02', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(284, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 20:18:47', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(285, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 20:19:03', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(286, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 20:19:46', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(287, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 20:20:31', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(288, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 20:20:59', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(289, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 20:21:34', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(290, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 20:23:01', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(291, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 20:25:18', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(292, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 20:53:03', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(293, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 20:53:10', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(294, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 21:00:13', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(295, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 21:00:30', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(296, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 21:01:59', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(297, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 21:30:48', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(298, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 21:32:20', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(299, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 21:33:22', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(300, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 21:33:41', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC');
 
 -- --------------------------------------------------------
 
@@ -387,7 +463,9 @@ CREATE TABLE `deliveryconfirmation` (
 INSERT INTO `deliveryconfirmation` (`ConfirmationID`, `ShipmentID`, `ReceivedDate`, `ReceiverName`, `ItemCondition`, `Notes`, `CustomerConfirmation`) VALUES
 ('CONF001', 'SHIP001', '2025-04-08', 'John Chan', 'Good', 'All items perfect', 'Yes'),
 ('CONF002', 'SHIP003', NULL, NULL, 'Good', NULL, NULL),
-('CONF003', 'SHIP004', '2025-04-08', '', 'Good', '', 'Yes');
+('CONF003', 'SHIP004', '2025-04-08', '', 'Good', '', 'Yes'),
+('CONF004', 'SHIP005', '2026-06-01', 'yee', 'Good', '', 'Yes'),
+('CONF005', 'SHIP006', NULL, NULL, 'Good', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -409,6 +487,30 @@ CREATE TABLE `deliveryitem` (
 INSERT INTO `deliveryitem` (`DeliveryItemID`, `ShipmentID`, `SerialNumber`, `Quantity`) VALUES
 ('DI001', 'SHIP001', 'SN00000003', 1),
 ('DI002', 'SHIP002', 'SN00000005', 3);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `deliverynote`
+--
+
+CREATE TABLE `deliverynote` (
+  `deliveryID` varchar(10) NOT NULL,
+  `shipmentID` varchar(10) NOT NULL,
+  `orderID` varchar(10) NOT NULL,
+  `customerID` int(100) NOT NULL,
+  `RecipientName` varchar(100) DEFAULT NULL,
+  `DeliveryAddress` varchar(255) NOT NULL,
+  `CreateDate` date DEFAULT NULL,
+  `Status` varchar(20) DEFAULT 'Pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `deliverynote`
+--
+
+INSERT INTO `deliverynote` (`deliveryID`, `shipmentID`, `orderID`, `customerID`, `RecipientName`, `DeliveryAddress`, `CreateDate`, `Status`) VALUES
+('DN001', 'SHIP006', 'ORD000009', 1, 'John Chan', 'Rm. 318 South China Cold Storage Bldg. 13-17 Wah Sing Street Kwai Chung N.T.', '2026-06-01', 'Created');
 
 -- --------------------------------------------------------
 
@@ -526,7 +628,14 @@ INSERT INTO `orderitem` (`OrderItemID`, `Quantity`, `UnitPrice`, `Subtotal`, `Cu
 ('OI000001', 1, 2850.00, 2850.00, NULL, NULL),
 ('OI000002', 1, 4250.00, 4250.00, NULL, NULL),
 ('OI000003', 3, 1250.00, 3750.00, 'Black color', NULL),
-('OI000004', 5, 4250.00, 21250.00, NULL, 'ORD000006');
+('OI000004', 5, 4250.00, 21250.00, NULL, 'ORD000006'),
+('OI000005', 5, 2850.00, 14250.00, NULL, 'ORD000007'),
+('OI000006', 5, 4250.00, 21250.00, NULL, 'ORD000007'),
+('OI000007', 5, 1250.00, 6250.00, NULL, 'ORD000007'),
+('OI000010', 5, 2850.00, 14250.00, NULL, 'ORD000008'),
+('OI000011', 5, 4250.00, 21250.00, NULL, 'ORD000008'),
+('OI000012', 5, 2850.00, 14250.00, NULL, 'ORD000009'),
+('OI000013', 5, 4250.00, 21250.00, NULL, 'ORD000009');
 
 -- --------------------------------------------------------
 
@@ -546,7 +655,11 @@ CREATE TABLE `orderitem_product` (
 INSERT INTO `orderitem_product` (`ProductID`, `OrderItemID`) VALUES
 ('PROD001', 'OI000001'),
 ('PROD002', 'OI000002'),
-('PROD003', 'OI000003');
+('PROD003', 'OI000003'),
+('PROD001', 'OI000008'),
+('PROD002', 'OI000009'),
+('PROD001', 'OI000012'),
+('PROD002', 'OI000013');
 
 -- --------------------------------------------------------
 
@@ -701,6 +814,21 @@ INSERT INTO `rawmaterial` (`MaterialID`, `Name`, `Type`, `Unit`, `UnitCost`, `Re
 -- --------------------------------------------------------
 
 --
+-- 資料表結構 `replyslip`
+--
+
+CREATE TABLE `replyslip` (
+  `replySlipID` varchar(10) NOT NULL,
+  `OrderID` varchar(10) DEFAULT NULL,
+  `deliverynoteID` varchar(10) DEFAULT NULL,
+  `recipient` varchar(100) DEFAULT NULL,
+  `DeliveryDate` date DEFAULT NULL,
+  `Address` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- 資料表結構 `salesorder`
 --
 
@@ -725,7 +853,10 @@ INSERT INTO `salesorder` (`OrderID`, `CustomerID`, `OrderDate`, `TotalAmount`, `
 ('ORD000003', 3, '2025-05-01', 1250.00, '2025-05-25', 'Confirmed', '2025-05-22', NULL),
 ('ORD000004', 1, '2026-05-29', 6600.00, '2026-05-29', 'Confirmed', '2026-06-05', NULL),
 ('ORD000005', 2, '2026-05-30', 42500.00, '2026-05-30', 'Paid', '2026-06-06', NULL),
-('ORD000006', 3, '2026-05-30', 21250.00, '2026-05-30', 'Paid', '2026-06-06', NULL);
+('ORD000006', 3, '2026-05-30', 21250.00, '2026-05-30', 'Paid', '2026-06-06', NULL),
+('ORD000007', 1, '2026-06-01', 41750.00, '2026-06-01', 'Paid', '2026-06-08', NULL),
+('ORD000008', 1, '2026-06-01', 35500.00, '2026-06-01', 'Paid', '2026-06-08', NULL),
+('ORD000009', 1, '2026-06-01', 35500.00, '2026-06-01', 'Processing', '2026-06-08', NULL);
 
 -- --------------------------------------------------------
 
@@ -750,7 +881,9 @@ INSERT INTO `shipment` (`ShipmentID`, `OrderID`, `UserID`, `DeliveryMethod`, `Tr
 ('SHIP001', 'ORD000001', 105, 'Express Delivery', 'TRK987654321', 'Delivered'),
 ('SHIP002', 'ORD000002', 105, 'Standard', 'TRK112233445', 'In Transit'),
 ('SHIP003', 'ORD000003', 101, 'Standard', NULL, 'Pending'),
-('SHIP004', 'ORD000004', 101, 'Standard', NULL, 'In Transit');
+('SHIP004', 'ORD000004', 101, 'Standard', NULL, 'In Transit'),
+('SHIP005', 'ORD000007', 101, 'Standard', NULL, 'In Transit'),
+('SHIP006', 'ORD000009', 101, 'Standard', NULL, 'In Transit');
 
 -- --------------------------------------------------------
 
@@ -874,6 +1007,15 @@ ALTER TABLE `deliveryitem`
   ADD KEY `SerialNumber` (`SerialNumber`);
 
 --
+-- 資料表索引 `deliverynote`
+--
+ALTER TABLE `deliverynote`
+  ADD PRIMARY KEY (`deliveryID`),
+  ADD KEY `shipmentID` (`shipmentID`),
+  ADD KEY `orderID` (`orderID`),
+  ADD KEY `customerID` (`customerID`);
+
+--
 -- 資料表索引 `employee_salesorder`
 --
 ALTER TABLE `employee_salesorder`
@@ -962,6 +1104,14 @@ ALTER TABLE `rawmaterial`
   ADD PRIMARY KEY (`MaterialID`);
 
 --
+-- 資料表索引 `replyslip`
+--
+ALTER TABLE `replyslip`
+  ADD PRIMARY KEY (`replySlipID`),
+  ADD KEY `OrderID` (`OrderID`),
+  ADD KEY `deliverynoteID` (`deliverynoteID`);
+
+--
 -- 資料表索引 `salesorder`
 --
 ALTER TABLE `salesorder`
@@ -1006,11 +1156,19 @@ ALTER TABLE `user_productionbatch`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `audit_log`
 --
 ALTER TABLE `audit_log`
-  MODIFY `AuditLogId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
+  MODIFY `AuditLogId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
 
 --
 -- 已傾印資料表的限制式
 --
+
+--
+-- 資料表的限制式 `deliverynote`
+--
+ALTER TABLE `deliverynote`
+  ADD CONSTRAINT `deliverynote_ibfk_1` FOREIGN KEY (`shipmentID`) REFERENCES `shipment` (`ShipmentID`),
+  ADD CONSTRAINT `deliverynote_ibfk_2` FOREIGN KEY (`orderID`) REFERENCES `salesorder` (`OrderID`),
+  ADD CONSTRAINT `deliverynote_ibfk_3` FOREIGN KEY (`customerID`) REFERENCES `salesorder` (`CustomerID`);
 
 --
 -- 資料表的限制式 `materialrequest`
@@ -1038,6 +1196,13 @@ ALTER TABLE `quotation`
 ALTER TABLE `quotation_salesorder`
   ADD CONSTRAINT `quotation_salesorder_ibfk_1` FOREIGN KEY (`QuotationID`) REFERENCES `quotation` (`QuotationID`),
   ADD CONSTRAINT `quotation_salesorder_ibfk_2` FOREIGN KEY (`OrderID`) REFERENCES `salesorder` (`OrderID`);
+
+--
+-- 資料表的限制式 `replyslip`
+--
+ALTER TABLE `replyslip`
+  ADD CONSTRAINT `replyslip_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `salesorder` (`OrderID`),
+  ADD CONSTRAINT `replyslip_ibfk_2` FOREIGN KEY (`deliverynoteID`) REFERENCES `deliverynote` (`deliveryID`);
 
 --
 -- 資料表的限制式 `salesorder`
