@@ -1116,9 +1116,12 @@ namespace ITP4915M
         private void cmbDeliveryID_SelectedIndexChanged(object sender, EventArgs e)
         {
             string constring = "server=localhost;user id=root;password=;database=4915";
-            string DNotequery = @"SELECT * FROM deliverynote";
+
+            // 【已修正】補上 WHERE 條件，避免撈出整張表
+            string DNotequery = @"SELECT * FROM deliverynote WHERE deliverynoteID = @deliveryID";
             string RSlipQuery = @"SELECT * FROM replyslip WHERE deliverynoteID = @deliverynoteID";
             string checkExistQuery = "SELECT COUNT(*) FROM replyslip WHERE deliverynoteID = @DeliveryID";
+
             string queryOrderItems = @"
         SELECT 
             o.OrderItemID,
@@ -1133,128 +1136,127 @@ namespace ITP4915M
         INNER JOIN product p ON op.ProductID = p.ProductID
         WHERE o.OrderID = @OrderID
         ORDER BY o.OrderItemID";
+
             string deliveryID = cmbDeliveryID.SelectedItem?.ToString() ?? "";
+            if (string.IsNullOrEmpty(deliveryID)) return; // 防呆：未選取則不執行
+
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 try
                 {
                     con.Open();
+                    int exists = 0; // 確保變數有適當宣告
+
                     using (MySqlCommand checkCmd = new MySqlCommand(checkExistQuery, con))
                     {
                         checkCmd.Parameters.AddWithValue("@DeliveryID", deliveryID);
                         exists = Convert.ToInt32(checkCmd.ExecuteScalar());
-                        if (exists > 0)
+                    }
+
+                    if (exists > 0)
+                    {
+                        // 1. 已有回條：從 replyslip 撈資料
+                        using (MySqlCommand cmd = new MySqlCommand(RSlipQuery, con))
                         {
-                            using (MySqlCommand cmd = new MySqlCommand(RSlipQuery, con))
+                            cmd.Parameters.AddWithValue("@deliverynoteID", deliveryID);
+
+                            // 【已修正】獨立 reader 的範圍，讓它讀完立刻關閉，釋放連線
+                            using (MySqlDataReader reader = cmd.ExecuteReader())
                             {
-                                cmd.Parameters.AddWithValue("@deliverynoteID", deliveryID);
-                                using (MySqlDataReader reader = cmd.ExecuteReader())
+                                if (reader.Read())
                                 {
-                                    if (reader.Read())
-                                    {
-                                        tbReplyID.Text = reader["replySlipID"].ToString();
-                                        tbReplyID.ReadOnly = true;
-                                        tbReplyOrderID.Text = reader["orderID"].ToString();
-                                        tbReplyOrderID.ReadOnly = true;
-                                        tbReplyCustName.Text = reader["recipient"].ToString();
-                                        tbReplyCustName.ReadOnly = true;
-                                        dateDeliveryDate.Value = reader.GetDateTime("deliveryDate");
-                                        dateDeliveryDate.Enabled = false;
-                                        tbReplyAddress.Text = reader["deliveryAddress"].ToString();
-                                        tbReplyAddress.ReadOnly = true;
-                                    }
+                                    tbReplyID.Text = reader["replySlipID"].ToString();
+                                    tbReplyID.ReadOnly = true;
+                                    tbReplyOrderID.Text = reader["orderID"].ToString();
+                                    tbReplyOrderID.ReadOnly = true;
+                                    tbReplyCustName.Text = reader["recipient"].ToString();
+                                    tbReplyCustName.ReadOnly = true;
+                                    dateDeliveryDate.Value = reader.GetDateTime("deliveryDate");
+                                    dateDeliveryDate.Enabled = false;
+                                    tbReplyAddress.Text = reader["Address"].ToString();
+                                    tbReplyAddress.ReadOnly = true;
                                 }
-                                using (MySqlCommand itemCmd = new MySqlCommand(queryOrderItems, con))
-                                {
-                                    itemCmd.Parameters.AddWithValue("@OrderID", tbReplyOrderID.Text);
-
-                                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(itemCmd))
-                                    {
-                                        DataTable itemTable = new DataTable();
-                                        adapter.Fill(itemTable);
-                                        dataGridView3.Columns.Clear();
-                                        DataGridViewTextBoxColumn itemIdColumn = new DataGridViewTextBoxColumn();
-                                        itemIdColumn.Name = "ItemID";
-                                        itemIdColumn.HeaderText = "Item ID"; // Set your custom column title
-                                        dataGridView3.Columns.Add(itemIdColumn);
-                                        dataGridView3.DataSource = itemTable;
-                                        if (dataGridView3.Columns.Contains("OrderItemID"))
-                                            dataGridView3.Columns["OrderItemID"].Visible = false;
-
-                                        if (dataGridView3.Columns.Contains("ProductID"))
-                                            dataGridView3.Columns["ProductID"].Visible = false;
-
-                                        // 4. Populate the first column with sequential line numbers (1, 2, 3...)
-                                        for (int i = 0; i < dataGridView3.Rows.Count; i++)
-                                        {
-                                            // If your grid allows adding new rows manually, skip the uncommitted new row
-                                            if (dataGridView3.Rows[i].IsNewRow) continue;
-
-                                            dataGridView3.Rows[i].Cells["ItemID"].Value = (i + 1).ToString();
-                                        }
-                                    }
-                                }
-
-                            }
-                            return; // 終止流程
+                            } // reader 在這裡確實被 Close/Dispose 了
                         }
-                        else
+
+                        // 載入訂單明細
+                        LoadOrderItems(queryOrderItems, tbReplyOrderID.Text, con);
+                    }
+                    else
+                    {
+                        // 2. 尚未有回條：從 deliverynote 撈預設資料
+                        GenReplySlipID(); // 產生新的 ReplySlip ID
+
+                        using (MySqlCommand cmd = new MySqlCommand(DNotequery, con))
                         {
-                            GenReplySlipID();
-                            using (MySqlCommand cmd = new MySqlCommand(DNotequery, con))
+                            cmd.Parameters.AddWithValue("@deliveryID", deliveryID);
+
+                            // 【已修正】獨立 reader 範圍
+                            using (MySqlDataReader reader = cmd.ExecuteReader())
                             {
-                                cmd.Parameters.AddWithValue("@deliveryID", deliveryID);
-                                using (MySqlDataReader reader = cmd.ExecuteReader())
+                                if (reader.Read())
                                 {
-                                    if (reader.Read())
-                                    {
-                                        tbReplyOrderID.Text = reader["orderID"].ToString();
-                                        tbReplyOrderID.ReadOnly = true;
-                                        tbReplyCustName.Text = reader["RecipientName"].ToString();
-                                        tbReplyCustName.ReadOnly = true;
-                                        dateDeliveryDate.Value = reader.GetDateTime("CreateDate");
-                                        dateDeliveryDate.Enabled = false;
-                                        tbReplyAddress.Text = reader["DeliveryAddress"].ToString();
-                                        tbReplyAddress.ReadOnly = true;
-                                    }
-                                }
-                            }
-                            using (MySqlCommand itemCmd = new MySqlCommand(queryOrderItems, con))
-                            {
-                                itemCmd.Parameters.AddWithValue("@OrderID", tbReplyOrderID.Text);
-
-                                using (MySqlDataAdapter adapter = new MySqlDataAdapter(itemCmd))
-                                {
-                                    DataTable itemTable = new DataTable();
-                                    adapter.Fill(itemTable);
-                                    dataGridView3.Columns.Clear();
-                                    DataGridViewTextBoxColumn itemIdColumn = new DataGridViewTextBoxColumn();
-                                    itemIdColumn.Name = "ItemID";
-                                    itemIdColumn.HeaderText = "Item ID"; // Set your custom column title
-                                    dataGridView3.Columns.Add(itemIdColumn);
-                                    dataGridView3.DataSource = itemTable;
-                                    if (dataGridView3.Columns.Contains("OrderItemID"))
-                                        dataGridView3.Columns["OrderItemID"].Visible = false;
-
-                                    if (dataGridView3.Columns.Contains("ProductID"))
-                                        dataGridView3.Columns["ProductID"].Visible = false;
-
-                                    // 4. Populate the first column with sequential line numbers (1, 2, 3...)
-                                    for (int i = 0; i < dataGridView3.Rows.Count; i++)
-                                    {
-                                        // If your grid allows adding new rows manually, skip the uncommitted new row
-                                        if (dataGridView3.Rows[i].IsNewRow) continue;
-
-                                        dataGridView3.Rows[i].Cells["ItemID"].Value = (i + 1).ToString();
-                                    }
+                                    tbReplyOrderID.Text = reader["orderID"].ToString();
+                                    tbReplyOrderID.ReadOnly = true;
+                                    tbReplyCustName.Text = reader["RecipientName"].ToString();
+                                    tbReplyCustName.ReadOnly = true;
+                                    dateDeliveryDate.Value = reader.GetDateTime("CreateDate");
+                                    dateDeliveryDate.Enabled = false;
+                                    tbReplyAddress.Text = reader["DeliveryAddress"].ToString();
+                                    tbReplyAddress.ReadOnly = true;
                                 }
                             }
                         }
+
+                        // 載入訂單明細
+                        LoadOrderItems(queryOrderItems, tbReplyOrderID.Text, con);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Failed to retrieve delivery IDs: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Failed to retrieve delivery data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        // 【優化】抽離出來的 DataGridView 填表邏輯，避免重複程式碼
+        private void LoadOrderItems(string query, string orderID, MySqlConnection con)
+        {
+            using (MySqlCommand itemCmd = new MySqlCommand(query, con))
+            {
+                itemCmd.Parameters.AddWithValue("@OrderID", orderID);
+
+                using (MySqlDataAdapter adapter = new MySqlDataAdapter(itemCmd))
+                {
+                    DataTable itemTable = new DataTable();
+                    adapter.Fill(itemTable);
+
+                    // 清空並重新設定 DataGridView 欄位
+                    dataGridView3.DataSource = null;
+                    dataGridView3.Columns.Clear();
+
+                    // 新增自訂的序號欄位 (ItemID)
+                    DataGridViewTextBoxColumn itemIdColumn = new DataGridViewTextBoxColumn();
+                    itemIdColumn.Name = "ItemID";
+                    itemIdColumn.HeaderText = "Item ID";
+                    dataGridView3.Columns.Add(itemIdColumn);
+
+                    // 綁定主資料
+                    dataGridView3.DataSource = itemTable;
+
+                    // 隱藏不需要顯現的 ID 欄位
+                    if (dataGridView3.Columns.Contains("OrderItemID"))
+                        dataGridView3.Columns["OrderItemID"].Visible = false;
+
+                    if (dataGridView3.Columns.Contains("ProductID"))
+                        dataGridView3.Columns["ProductID"].Visible = false;
+
+                    // 填寫 1, 2, 3... 流水號
+                    for (int i = 0; i < dataGridView3.Rows.Count; i++)
+                    {
+                        if (dataGridView3.Rows[i].IsNewRow) continue;
+                        dataGridView3.Rows[i].Cells["ItemID"].Value = (i + 1).ToString();
+                    }
                 }
             }
         }
@@ -1262,7 +1264,7 @@ namespace ITP4915M
         private void btGenSlip_Click(object sender, EventArgs e)
         {
             string constring = "server =localhost;user id=root;password=;database=4915";
-            string queryDeliveryNote = @"INSERT INTO deliverynote (replySlipID, OrderID, deliverynoteID,
+            string queryDeliveryNote = @"INSERT INTO replyslip (replySlipID, OrderID, deliverynoteID,
             recipient, DeliveryDate, Address) 
             VALUES (@replySlipID,@OrderID, @deliverynoteID,
             @recipient, @DeliveryDate, @Address);";
@@ -1274,7 +1276,7 @@ namespace ITP4915M
                     con.Open();
                     using (MySqlCommand checkCmd = new MySqlCommand(checkExistQuery, con))
                     {
-                        checkCmd.Parameters.AddWithValue("@replySlipID", tbReplyID.Text);
+                        checkCmd.Parameters.AddWithValue("@DeliveryID", cmbDeliveryID.SelectedItem?.ToString());
                         exists = Convert.ToInt32(checkCmd.ExecuteScalar());
                         if (exists > 0)
                         {
@@ -1293,6 +1295,7 @@ namespace ITP4915M
                                 cmd.ExecuteNonQuery();
                                 CreateReplySlipAudit(tbReplyID.Text);
                                 MessageBox.Show("Reply Slip has been saved to database!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                ExportReplySlipToPDF();
                             }
                         }
                     }
@@ -1309,34 +1312,35 @@ namespace ITP4915M
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
                 sfd.Filter = "PDF Files (*.pdf)|*.pdf";
-                // Default filename uses Reply Slip ID if available, otherwise defaults to timestamp
                 string defaultFileName = !string.IsNullOrWhiteSpace(tbReplyID.Text) ? tbReplyID.Text.Trim() : DateTime.Now.ToString("yyyyMMdd_HHmmss");
                 sfd.FileName = $"ReplySlip_{defaultFileName}.pdf";
 
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    // Standard A4 initialization with 30pt clean margins
+                    // 標準 A4，上下左右 30pt 邊距
                     Document document = new Document(PageSize.A4, 30f, 30f, 30f, 30f);
+                    FileStream fs = null;
 
                     try
                     {
-                        PdfWriter.GetInstance(document, new FileStream(sfd.FileName, FileMode.Create));
+                        fs = new FileStream(sfd.FileName, FileMode.Create);
+                        PdfWriter.GetInstance(document, fs);
                         document.Open();
 
-                        // Define clean typography styles
+                        // 字型設定
                         iTextSharp.text.Font titleFont = FontFactory.GetFont("Arial", 18f, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
                         iTextSharp.text.Font headerFont = FontFactory.GetFont("Arial", 10f, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
                         iTextSharp.text.Font bodyFont = FontFactory.GetFont("Arial", 10f, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
 
-                        // --- Document Title ---
+                        // --- 1. 文件標題 ---
                         Paragraph title = new Paragraph("REPLY SLIP\n\n", titleFont);
                         title.Alignment = Element.ALIGN_CENTER;
                         document.Add(title);
 
-                        // --- Form Metadata Grid (2 Columns Layout) ---
+                        // --- 2. 表單基本資訊 (2 欄佈局) ---
                         PdfPTable metaTable = new PdfPTable(2);
                         metaTable.WidthPercentage = 100;
-                        metaTable.SetWidths(new float[] { 1f, 1f }); // Equal column splitting
+                        metaTable.SetWidths(new float[] { 1f, 1f });
 
                         // Row 1
                         metaTable.AddCell(new PdfPCell(new Phrase($"Reply Slip ID: {tbReplyID.Text.Trim()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
@@ -1349,21 +1353,25 @@ namespace ITP4915M
                         // Row 3
                         metaTable.AddCell(new PdfPCell(new Phrase($"Recipient: {tbReplyCustName.Text.Trim()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
                         metaTable.AddCell(new PdfPCell(new Phrase($"Delivery Date: {dateDeliveryDate.Value.ToString("yyyy-MM-dd")}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
-                        metaTable.AddCell(new PdfPCell(new Phrase($"Delivery Date: {tbReplyAddress.Text.Trim()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 10f });
+
+                        // 【已修正】將原本多餘且打錯標題的第 7 個 Cell 移除，改放到下方的全幅地址欄位
+
                         document.Add(metaTable);
 
-                        // --- Full Width Address Section ---
+                        // --- 3. 全幅地址區塊 ---
                         Paragraph addressHeader = new Paragraph("Delivery Address:", headerFont);
                         addressHeader.SpacingBefore = 10f;
                         document.Add(addressHeader);
 
-                        Paragraph addressContent = new Paragraph(tbAddress.Text.Trim(), bodyFont);
+                        // 【已修正】控制項名稱由 tbAddress 改為 tbReplyAddress
+                        Paragraph addressContent = new Paragraph(tbReplyAddress.Text.Trim(), bodyFont);
                         addressContent.SpacingAfter = 20f;
                         document.Add(addressContent);
 
-                        // --- Items Data Grid Table Layout ---
+                        // --- 4. 訂單項目表格明細 ---
+                        // 【已修正】將所有的 dataGridView1 修正為實際綁定資料的 dataGridView3
                         int visibleColumnCount = 0;
-                        foreach (DataGridViewColumn col in dataGridView1.Columns)
+                        foreach (DataGridViewColumn col in dataGridView3.Columns)
                         {
                             if (col.Visible) visibleColumnCount++;
                         }
@@ -1373,34 +1381,34 @@ namespace ITP4915M
                             PdfPTable dataTable = new PdfPTable(visibleColumnCount);
                             dataTable.WidthPercentage = 100;
 
-                            // Build Data Headers 
-                            foreach (DataGridViewColumn col in dataGridView1.Columns)
+                            // 建立表頭
+                            foreach (DataGridViewColumn col in dataGridView3.Columns)
                             {
                                 if (col.Visible)
                                 {
                                     PdfPCell cell = new PdfPCell(new Phrase(col.HeaderText, headerFont));
-                                    cell.BackgroundColor = new BaseColor(240, 240, 240); // Soft grey accent
+                                    cell.BackgroundColor = new BaseColor(240, 240, 240); // 淺灰色背景
                                     cell.HorizontalAlignment = Element.ALIGN_CENTER;
                                     cell.Padding = 6f;
                                     dataTable.AddCell(cell);
                                 }
                             }
 
-                            // Populate Grid Elements
-                            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                            // 填入表格資料
+                            for (int i = 0; i < dataGridView3.Rows.Count; i++)
                             {
-                                if (dataGridView1.Rows[i].IsNewRow) continue;
+                                if (dataGridView3.Rows[i].IsNewRow) continue;
 
-                                foreach (DataGridViewColumn col in dataGridView1.Columns)
+                                foreach (DataGridViewColumn col in dataGridView3.Columns)
                                 {
                                     if (col.Visible)
                                     {
-                                        string cellValue = dataGridView1.Rows[i].Cells[col.Index].Value?.ToString() ?? "";
+                                        string cellValue = dataGridView3.Rows[i].Cells[col.Index].Value?.ToString() ?? "";
                                         PdfPCell cell = new PdfPCell(new Phrase(cellValue, bodyFont));
                                         cell.Padding = 6f;
 
-                                        // Financial/Numeric text alignment rule
-                                        if (col.Name.Contains("Price") || col.Name.Contains("Subtotal") || col.Name.Contains("Quantity"))
+                                        // 靠右對齊金流與數字欄位
+                                        if (col.Name.Contains("Price") || col.Name.Contains("Subtotal") || col.Name.Contains("Quantity") || col.Name.Contains("ItemID"))
                                         {
                                             cell.HorizontalAlignment = Element.ALIGN_RIGHT;
                                         }
@@ -1423,7 +1431,15 @@ namespace ITP4915M
                     }
                     finally
                     {
-                        document.Close();
+                        // 【已優化】更安全地關閉與釋放檔案資源
+                        if (document.IsOpen())
+                        {
+                            document.Close();
+                        }
+                        if (fs != null)
+                        {
+                            fs.Dispose();
+                        }
                     }
                 }
             }
