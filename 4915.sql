@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2026-06-01 16:00:47
+-- 產生時間： 2026-06-01 18:22:33
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -346,7 +346,54 @@ INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserI
 (297, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 21:30:48', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (298, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 21:32:20', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (299, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 21:33:22', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
-(300, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 21:33:41', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC');
+(300, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 21:33:41', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(301, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 22:26:04', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(302, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 22:28:58', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(303, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 22:31:28', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(304, 'replyslip', 'RS001', 'Create replyslip', 101, 'System', '2026-06-01 22:31:35', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(305, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 22:34:32', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(306, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 22:35:02', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(307, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 22:36:33', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC');
+INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserID`, `Username`, `ChangedDate`, `OldValues`, `NewValues`, `Description`, `IpAddress`, `MachineName`) VALUES
+(308, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 22:36:46', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(309, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 22:38:11', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(310, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 22:38:58', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(311, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 22:42:09', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(312, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 22:42:56', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(313, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 23:22:19', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(314, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 23:22:43', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(315, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-02 00:00:48', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(316, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-02 00:01:05', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(317, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-02 00:10:59', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(318, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-02 00:15:30', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(319, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-02 00:19:03', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(320, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-02 00:19:40', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(321, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-02 00:20:53', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(322, 'company', 'ABC Trading Ltd', 'Update  company', 101, 'System', '2026-06-02 00:21:05', NULL, '{\"Language\":\"Chinese\",\"Warehouse\":\"WH-A-12-04\",\"Currency\":\"HKD\",\"CompanyName\":\"ABC Trading Ltd\"}', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(323, 'company', 'Lee Manufacturing', 'Update  company', 101, 'System', '2026-06-02 00:21:35', NULL, '{\"Language\":\"English\",\"Warehouse\":\"WH-B-05-01\",\"Currency\":\"USD\",\"CompanyName\":\"Lee Manufacturing\"}', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(324, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-02 00:21:46', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `company`
+--
+
+CREATE TABLE `company` (
+  `CompanyName` varchar(50) NOT NULL,
+  `warehouse` varchar(100) DEFAULT NULL,
+  `launage` varchar(50) DEFAULT NULL,
+  `currency` varchar(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `company`
+--
+
+INSERT INTO `company` (`CompanyName`, `warehouse`, `launage`, `currency`) VALUES
+('ABC Trading Ltd', 'WH-A-12-04', 'Chinese', 'HKD'),
+('Lee Manufacturing', 'WH-B-05-01', 'English', 'USD'),
+('Premium Furnishings', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -826,6 +873,13 @@ CREATE TABLE `replyslip` (
   `Address` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- 傾印資料表的資料 `replyslip`
+--
+
+INSERT INTO `replyslip` (`replySlipID`, `OrderID`, `deliverynoteID`, `recipient`, `DeliveryDate`, `Address`) VALUES
+('RS001', 'ORD000009', 'DN001', 'John Chan', '2026-06-01', 'Rm. 318 South China Cold Storage Bldg. 13-17 Wah Sing Street Kwai Chung N.T.');
+
 -- --------------------------------------------------------
 
 --
@@ -961,6 +1015,12 @@ ALTER TABLE `audit_log`
   ADD KEY `idx_audit_date` (`ChangedDate`);
 
 --
+-- 資料表索引 `company`
+--
+ALTER TABLE `company`
+  ADD PRIMARY KEY (`CompanyName`);
+
+--
 -- 資料表索引 `complaint`
 --
 ALTER TABLE `complaint`
@@ -989,7 +1049,8 @@ ALTER TABLE `customdesign_orderitem`
 -- 資料表索引 `customer`
 --
 ALTER TABLE `customer`
-  ADD PRIMARY KEY (`CustomerID`);
+  ADD PRIMARY KEY (`CustomerID`),
+  ADD KEY `fk_customer_company` (`Company`);
 
 --
 -- 資料表索引 `deliveryconfirmation`
@@ -1156,11 +1217,17 @@ ALTER TABLE `user_productionbatch`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `audit_log`
 --
 ALTER TABLE `audit_log`
-  MODIFY `AuditLogId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
+  MODIFY `AuditLogId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=325;
 
 --
 -- 已傾印資料表的限制式
 --
+
+--
+-- 資料表的限制式 `customer`
+--
+ALTER TABLE `customer`
+  ADD CONSTRAINT `fk_customer_company` FOREIGN KEY (`Company`) REFERENCES `company` (`CompanyName`);
 
 --
 -- 資料表的限制式 `deliverynote`
