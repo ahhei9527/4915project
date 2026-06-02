@@ -4,6 +4,9 @@
     <Compile Update="addCompany.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="AddCust.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="AfterSales.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -14,6 +17,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="editOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AddEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="FormSetting.cs">

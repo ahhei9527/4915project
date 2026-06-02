@@ -26,7 +26,7 @@ namespace ITP4915M
         {
             LoadCompany();
             LoadUser();
-            //LoadCustomer();
+            LoadCustomer();
             cmbComLan.Items.AddRange(new string[] { "Chinese", "English" });
             cmbComWH.Items.AddRange(new string[] { "WH-A-12-03", "WH-A-12-04", "WH-B-05-01", "WH-C-08-02" });
             cmbComCurr.Items.AddRange(new string[] { "HKD", "USD", "CNY" });
@@ -36,6 +36,7 @@ namespace ITP4915M
             cmbRole.Enabled = false;
             cmbDepartment.Enabled = false;
             tbPosit.Enabled = false;
+
         }
 
         private void LoadCompany()
@@ -341,31 +342,176 @@ namespace ITP4915M
             }
         }
 
+        private void btAddUser_Click(object sender, EventArgs e)
+        {
+            AddEmployee addEmployee = new AddEmployee();
+            addEmployee.Show();
+        }
 
 
-        //private void LoadCustomer()
-        //{
-        //    // Code to load customer data into the form
-        //    string query = "SELECT Companyname FROM company";
-        //    using (MySqlConnection con = new MySqlConnection(constring))
-        //    {
-        //        using (MySqlCommand cmd = new MySqlCommand(query, con))
-        //        {
-        //            try
-        //            {
-        //                con.Open();
-        //                MySqlDataReader reader = cmd.ExecuteReader();
-        //                while (reader.Read())
-        //                {
-        //                    cmbCompanyName.Items.Add(reader["CompanyName"].ToString());
-        //                }
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                MessageBox.Show("Error loading company data: " + ex.Message);
-        //            }
-        //        }
-        //    }
-        //}
+
+        private void LoadCustomer()
+        {
+            // Code to load customer data into the form
+            string query = "SELECT Name FROM customer";
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    try
+                    {
+                        con.Open();
+                        MySqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            cmbCustName.Items.Add(reader["Name"].ToString());
+                        }
+                        con.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error loading company data: " + ex.Message);
+                    }
+                }
+            }
+            string compquery = "SELECT CompanyName FROM company";
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(compquery, con))
+                {
+                    try
+                    {
+                        con.Open();
+                        MySqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            cmbCustCompany.Items.Add(reader["CompanyName"].ToString());
+                        }
+                        con.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error loading company data: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void cmbCustName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadCustomerData();
+        }
+
+        private void LoadCustomerData()
+        {
+            // Code to load default customer data into the form
+            string customerQuery = "SELECT * FROM customer WHERE Name = @Name";
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(customerQuery, con))
+                {
+                    cmd.Parameters.AddWithValue("@Name", cmbCustName.SelectedItem?.ToString());
+                    try
+                    {
+                        con.Open();
+                        MySqlDataReader reader = cmd.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            cmbCustCompany.SelectedItem = reader["Company"].ToString();
+                            tbCustEmail.Text = reader["Email"].ToString();
+                            tbCustPhone.Text = reader["Phone"].ToString();
+                            tbCustAddress.Text = reader["Address"].ToString();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error loading customer details: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void btCustReset_Click(object sender, EventArgs e)
+        {
+            LoadCustomerData();
+        }
+
+        private void btCustCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btCustSave_Click(object sender, EventArgs e)
+        {
+            string custQuery = "UPDATE customer SET " +
+                "Company = @Company, " +
+                "Email = @Email, " +
+                "Phone = @Phone, " +
+                "Address = @Address " +
+                "WHERE Name = @Name";
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(custQuery, con))
+                {
+                    cmd.Parameters.AddWithValue("@Company", cmbCustCompany.SelectedItem?.ToString());
+                    cmd.Parameters.AddWithValue("@Email", tbCustEmail.Text);
+                    cmd.Parameters.AddWithValue("@Phone", tbCustPhone.Text);
+                    cmd.Parameters.AddWithValue("@Address", tbCustAddress.Text);
+                    cmd.Parameters.AddWithValue("@Name", cmbCustName.SelectedItem?.ToString());
+                    try
+                    {
+                        con.Open();
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Customer settings updated successfully.");
+                            UpdateCustomerSettingsAudit();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No changes were made to the customer settings.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error saving customer settings: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void UpdateCustomerSettingsAudit()
+        {
+            try
+            {
+                CurrentUser.AddInward(CurrentUser.UserID,
+                    CurrentUser.Username, CurrentUser.Role,
+                    CurrentUser.Email);
+                AuditHelper.Log(
+                    tableName: "customer",
+                    recordId: cmbCustName.SelectedItem?.ToString(),
+                    action: "Update customer",
+                    userId: CurrentUser.UserID,
+                    newValues: new
+                    {
+                        Company = cmbCustCompany.SelectedItem?.ToString(),
+                        Email = tbCustEmail.Text,
+                        Phone = tbCustPhone.Text,
+                        Address = tbCustAddress.Text
+                    }
+                    );
+            }
+            catch (Exception ex)
+            {
+                // 日誌記錄失敗不應阻擋用戶，僅做提示
+                Console.WriteLine("Audit Log failed: " + ex.Message);
+            }
+        }
+
+        private void btAddCust_Click(object sender, EventArgs e)
+        {
+            AddCust addCust = new AddCust();
+            addCust.Show();
+        }
     }
 }

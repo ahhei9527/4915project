@@ -30,7 +30,7 @@
         {
             label1SystemName = new Label();
             settingTab = new TabControl();
-            General = new TabPage();
+            Company = new TabPage();
             panel2 = new Panel();
             btAddCom = new Button();
             cmbCompanyName = new ComboBox();
@@ -44,7 +44,7 @@
             labelDefaultCurrency = new Label();
             cmbComWH = new ComboBox();
             cmbComLan = new ComboBox();
-            Security = new TabPage();
+            Employee = new TabPage();
             panel4 = new Panel();
             tbPosit = new TextBox();
             checkBox2 = new CheckBox();
@@ -63,11 +63,27 @@
             cmbRole = new ComboBox();
             label2 = new Label();
             label8 = new Label();
+            Customer = new TabPage();
+            tbCustPhone = new TextBox();
+            tbCustAddress = new TextBox();
+            tbCustEmail = new TextBox();
+            cmbCustCompany = new ComboBox();
+            cmbCustName = new ComboBox();
+            btAddCust = new Button();
+            btCustCancel = new Button();
+            btCustSave = new Button();
+            btCustReset = new Button();
+            label11 = new Label();
+            label10 = new Label();
+            label7 = new Label();
+            label6 = new Label();
+            label5 = new Label();
             settingTab.SuspendLayout();
-            General.SuspendLayout();
+            Company.SuspendLayout();
             panel2.SuspendLayout();
-            Security.SuspendLayout();
+            Employee.SuspendLayout();
             panel4.SuspendLayout();
+            Customer.SuspendLayout();
             SuspendLayout();
             // 
             // label1SystemName
@@ -83,24 +99,25 @@
             // 
             // settingTab
             // 
-            settingTab.Controls.Add(General);
-            settingTab.Controls.Add(Security);
+            settingTab.Controls.Add(Company);
+            settingTab.Controls.Add(Employee);
+            settingTab.Controls.Add(Customer);
             settingTab.Location = new Point(12, 45);
             settingTab.Name = "settingTab";
             settingTab.SelectedIndex = 0;
             settingTab.Size = new Size(536, 258);
             settingTab.TabIndex = 25;
             // 
-            // General
+            // Company
             // 
-            General.Controls.Add(panel2);
-            General.Location = new Point(4, 24);
-            General.Name = "General";
-            General.Padding = new Padding(3);
-            General.Size = new Size(528, 230);
-            General.TabIndex = 0;
-            General.Text = "General";
-            General.UseVisualStyleBackColor = true;
+            Company.Controls.Add(panel2);
+            Company.Location = new Point(4, 24);
+            Company.Name = "Company";
+            Company.Padding = new Padding(3);
+            Company.Size = new Size(528, 230);
+            Company.TabIndex = 0;
+            Company.Text = "Company Setting";
+            Company.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -250,16 +267,16 @@
             cmbComLan.Size = new Size(102, 23);
             cmbComLan.TabIndex = 6;
             // 
-            // Security
+            // Employee
             // 
-            Security.Controls.Add(panel4);
-            Security.Location = new Point(4, 24);
-            Security.Name = "Security";
-            Security.Padding = new Padding(3);
-            Security.Size = new Size(528, 230);
-            Security.TabIndex = 1;
-            Security.Text = "Security";
-            Security.UseVisualStyleBackColor = true;
+            Employee.Controls.Add(panel4);
+            Employee.Location = new Point(4, 24);
+            Employee.Name = "Employee";
+            Employee.Padding = new Padding(3);
+            Employee.Size = new Size(528, 230);
+            Employee.TabIndex = 1;
+            Employee.Text = "Employee Setting";
+            Employee.UseVisualStyleBackColor = true;
             // 
             // panel4
             // 
@@ -340,6 +357,7 @@
             btAddUser.TabIndex = 26;
             btAddUser.Text = "Add Employee";
             btAddUser.UseVisualStyleBackColor = true;
+            btAddUser.Click += btAddUser_Click;
             // 
             // label3
             // 
@@ -451,6 +469,156 @@
             label8.TabIndex = 4;
             label8.Text = "Role Permission";
             // 
+            // Customer
+            // 
+            Customer.Controls.Add(tbCustPhone);
+            Customer.Controls.Add(tbCustAddress);
+            Customer.Controls.Add(tbCustEmail);
+            Customer.Controls.Add(cmbCustCompany);
+            Customer.Controls.Add(cmbCustName);
+            Customer.Controls.Add(btAddCust);
+            Customer.Controls.Add(btCustCancel);
+            Customer.Controls.Add(btCustSave);
+            Customer.Controls.Add(btCustReset);
+            Customer.Controls.Add(label11);
+            Customer.Controls.Add(label10);
+            Customer.Controls.Add(label7);
+            Customer.Controls.Add(label6);
+            Customer.Controls.Add(label5);
+            Customer.Location = new Point(4, 24);
+            Customer.Name = "Customer";
+            Customer.Size = new Size(528, 230);
+            Customer.TabIndex = 2;
+            Customer.Text = "Customer Setting";
+            Customer.UseVisualStyleBackColor = true;
+            // 
+            // tbCustPhone
+            // 
+            tbCustPhone.Location = new Point(296, 80);
+            tbCustPhone.Name = "tbCustPhone";
+            tbCustPhone.Size = new Size(121, 23);
+            tbCustPhone.TabIndex = 35;
+            // 
+            // tbCustAddress
+            // 
+            tbCustAddress.Location = new Point(19, 142);
+            tbCustAddress.Name = "tbCustAddress";
+            tbCustAddress.Size = new Size(398, 23);
+            tbCustAddress.TabIndex = 34;
+            // 
+            // tbCustEmail
+            // 
+            tbCustEmail.Location = new Point(76, 77);
+            tbCustEmail.Name = "tbCustEmail";
+            tbCustEmail.Size = new Size(121, 23);
+            tbCustEmail.TabIndex = 33;
+            // 
+            // cmbCustCompany
+            // 
+            cmbCustCompany.FormattingEnabled = true;
+            cmbCustCompany.Location = new Point(296, 12);
+            cmbCustCompany.Name = "cmbCustCompany";
+            cmbCustCompany.Size = new Size(121, 23);
+            cmbCustCompany.TabIndex = 32;
+            // 
+            // cmbCustName
+            // 
+            cmbCustName.FormattingEnabled = true;
+            cmbCustName.Location = new Point(76, 9);
+            cmbCustName.Name = "cmbCustName";
+            cmbCustName.Size = new Size(121, 23);
+            cmbCustName.TabIndex = 31;
+            cmbCustName.SelectedIndexChanged += cmbCustName_SelectedIndexChanged;
+            // 
+            // btAddCust
+            // 
+            btAddCust.Location = new Point(19, 181);
+            btAddCust.Name = "btAddCust";
+            btAddCust.Size = new Size(110, 23);
+            btAddCust.TabIndex = 30;
+            btAddCust.Text = "Add Customer";
+            btAddCust.UseVisualStyleBackColor = true;
+            btAddCust.Click += btAddCust_Click;
+            // 
+            // btCustCancel
+            // 
+            btCustCancel.Location = new Point(414, 181);
+            btCustCancel.Margin = new Padding(2);
+            btCustCancel.Name = "btCustCancel";
+            btCustCancel.Size = new Size(71, 22);
+            btCustCancel.TabIndex = 29;
+            btCustCancel.Text = "Cancel";
+            btCustCancel.UseVisualStyleBackColor = true;
+            btCustCancel.Click += btCustCancel_Click;
+            // 
+            // btCustSave
+            // 
+            btCustSave.Location = new Point(296, 181);
+            btCustSave.Margin = new Padding(2);
+            btCustSave.Name = "btCustSave";
+            btCustSave.Size = new Size(71, 22);
+            btCustSave.TabIndex = 28;
+            btCustSave.Text = "Save";
+            btCustSave.UseVisualStyleBackColor = true;
+            btCustSave.Click += btCustSave_Click;
+            // 
+            // btCustReset
+            // 
+            btCustReset.Location = new Point(164, 181);
+            btCustReset.Margin = new Padding(2);
+            btCustReset.Name = "btCustReset";
+            btCustReset.Size = new Size(93, 22);
+            btCustReset.TabIndex = 27;
+            btCustReset.TabStop = false;
+            btCustReset.Text = "Reset Default";
+            btCustReset.UseVisualStyleBackColor = true;
+            btCustReset.Click += btCustReset_Click;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(224, 12);
+            label11.Name = "label11";
+            label11.Size = new Size(68, 15);
+            label11.TabIndex = 4;
+            label11.Text = "Company: ";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(19, 77);
+            label10.Name = "label10";
+            label10.Size = new Size(44, 15);
+            label10.TabIndex = 3;
+            label10.Text = "Email: ";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(235, 85);
+            label7.Name = "label7";
+            label7.Size = new Size(46, 15);
+            label7.TabIndex = 2;
+            label7.Text = "Phone:";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(19, 124);
+            label6.Name = "label6";
+            label6.Size = new Size(58, 15);
+            label6.TabIndex = 1;
+            label6.Text = "Address: ";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(19, 12);
+            label5.Name = "label5";
+            label5.Size = new Size(48, 15);
+            label5.TabIndex = 0;
+            label5.Text = "Name: ";
+            // 
             // FormSetting
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -463,12 +631,14 @@
             Text = "Settings";
             Load += FormSetting_Load;
             settingTab.ResumeLayout(false);
-            General.ResumeLayout(false);
+            Company.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            Security.ResumeLayout(false);
+            Employee.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
+            Customer.ResumeLayout(false);
+            Customer.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -477,8 +647,8 @@
 
         private Label label1SystemName;
         private TabControl settingTab;
-        private TabPage General;
-        private TabPage Security;
+        private TabPage Company;
+        private TabPage Employee;
         private Panel panel2;
         private Button buttonCancel;
         private Button buttonSave;
@@ -510,5 +680,20 @@
         private Button btAddUser;
         private Label label3;
         private TextBox tbPosit;
+        private TabPage Customer;
+        private Button btAddCust;
+        private Button btCustCancel;
+        private Button btCustSave;
+        private Button btCustReset;
+        private Label label11;
+        private Label label10;
+        private Label label7;
+        private Label label6;
+        private Label label5;
+        private TextBox tbCustPhone;
+        private TextBox tbCustAddress;
+        private TextBox tbCustEmail;
+        private ComboBox cmbCustCompany;
+        private ComboBox cmbCustName;
     }
 }
