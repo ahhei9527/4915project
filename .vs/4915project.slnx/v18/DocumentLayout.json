@@ -3,28 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\formsetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\formsetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\addcust.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\addcust.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\formsetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\formsetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\addemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\addemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\logistics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\logistics.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\createorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\createorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\addemployee.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\addemployee.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\addemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\addemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,78 +42,65 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CreateOrder.cs",
-              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\CreateOrder.cs",
-              "RelativeDocumentMoniker": "4915project\\CreateOrder.cs",
-              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\CreateOrder.cs",
-              "RelativeToolTip": "4915project\\CreateOrder.cs",
-              "ViewState": "AgIAAHcBAAAAAAAAAADwv4sBAAANAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "AddCust.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\AddCust.cs",
+              "RelativeDocumentMoniker": "4915project\\AddCust.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\AddCust.cs",
+              "RelativeToolTip": "4915project\\AddCust.cs",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAowH4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T09:43:39.756Z",
+              "WhenOpened": "2026-06-03T13:24:47.768Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Logistics.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Logistics.cs",
+              "RelativeDocumentMoniker": "4915project\\Logistics.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\Logistics.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "4915project\\Logistics.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-03T13:23:46.292Z",
+              "EditorCaption": " [\u8A2D\u8A08]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FormSetting.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\FormSetting.cs",
+              "RelativeDocumentMoniker": "4915project\\FormSetting.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\FormSetting.cs",
+              "RelativeToolTip": "4915project\\FormSetting.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABAAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-03T13:23:13.269Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginPage.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\LoginPage.cs",
+              "RelativeDocumentMoniker": "4915project\\LoginPage.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\LoginPage.cs",
+              "RelativeToolTip": "4915project\\LoginPage.cs",
+              "ViewState": "AgIAAF4AAAAAAAAAAAA3wG4AAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-03T13:20:27.472Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "AddEmployee.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\AddEmployee.Designer.cs",
-              "RelativeDocumentMoniker": "4915project\\AddEmployee.Designer.cs",
-              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\AddEmployee.Designer.cs",
-              "RelativeToolTip": "4915project\\AddEmployee.Designer.cs",
-              "ViewState": "AgIAALAAAAAAAAAAAIA4wNQAAAAnAAAAAAAAAA==",
+              "Title": "LoginPage.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\LoginPage.cs",
+              "RelativeDocumentMoniker": "4915project\\LoginPage.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\LoginPage.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "4915project\\LoginPage.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T09:35:57.518Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AddEmployee.cs",
-              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\AddEmployee.cs",
-              "RelativeDocumentMoniker": "4915project\\AddEmployee.cs",
-              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\AddEmployee.cs",
-              "RelativeToolTip": "4915project\\AddEmployee.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAA3wHsAAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T09:34:59.221Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AddEmployee.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\AddEmployee.cs",
-              "RelativeDocumentMoniker": "4915project\\AddEmployee.cs",
-              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\AddEmployee.cs [\u8A2D\u8A08]",
-              "RelativeToolTip": "4915project\\AddEmployee.cs [\u8A2D\u8A08]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T09:30:51.633Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FormSetting.cs",
-              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\FormSetting.cs",
-              "RelativeDocumentMoniker": "4915project\\FormSetting.cs",
-              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\FormSetting.cs*",
-              "RelativeToolTip": "4915project\\FormSetting.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T09:30:40.255Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FormSetting.cs [\u8A2D\u8A08]",
-              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\FormSetting.cs",
-              "RelativeDocumentMoniker": "4915project\\FormSetting.cs",
-              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\FormSetting.cs [\u8A2D\u8A08]*",
-              "RelativeToolTip": "4915project\\FormSetting.cs [\u8A2D\u8A08]*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-02T09:29:39.463Z",
+              "WhenOpened": "2026-06-03T13:20:18.831Z",
               "EditorCaption": " [\u8A2D\u8A08]"
             }
           ]

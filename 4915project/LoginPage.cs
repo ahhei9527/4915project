@@ -104,6 +104,34 @@ namespace _4915project
                                         afterSales.Show();
                                         this.Hide();
                                     }
+                                    else if (dbDepartment == "Warehouse")
+                                    {
+                                        FormLogistics logistics = new FormLogistics();
+                                        logistics.Show();
+                                        this.Hide();
+                                    }
+                                    else if (dbDepartment == "Production")
+                                    {
+                                        //Production production = new Production();
+                                        //production.Show();
+                                        //this.Hide();
+                                        MessageBox.Show("Production department access is not implemented yet.", "Info",
+                                                      MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
+                                    else if (dbDepartment == "Logistics")
+                                    {
+                                        FormLogistics logistics = new FormLogistics();
+                                        logistics.Show();
+                                        this.Hide();
+                                    }
+                                    else if (dbDepartment == "Design")
+                                    {
+                                        //SubmitDesign submitDesign = new SubmitDesign();
+                                        //submitDesign.Show();
+                                        //this.Hide();
+                                        MessageBox.Show("Design department access is not implemented yet.", "Info",
+                                                      MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
                                     else
                                     {
                                         MessageBox.Show("Unknown role. Access denied.", "Error",

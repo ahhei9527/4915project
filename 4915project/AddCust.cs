@@ -123,4 +123,5 @@ namespace _4915project
                 Console.WriteLine("Audit Log failed: " + ex.Message);
             }
         }
+    }
 }

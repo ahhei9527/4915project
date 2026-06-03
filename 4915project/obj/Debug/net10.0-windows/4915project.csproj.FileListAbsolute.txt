@@ -42,3 +42,4 @@ C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\bin\Debug\net10.0-windows\itextsharp.dll
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\_4915project.addCompany.resources
 C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\_4915project.AddEmployee.resources
+C:\Users\hoche\source\repos\ahhei9527\4915project\4915project\obj\Debug\net10.0-windows\_4915project.AddCust.resources
