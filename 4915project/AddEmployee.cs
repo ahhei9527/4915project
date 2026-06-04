@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 
@@ -22,7 +23,7 @@ namespace _4915project
 
         private void AddEmployee_Load(object sender, EventArgs e)
         {
-            cmbRole.Items.AddRange(new string[] { "Admin", "Staff" });
+            cmbRole.Items.AddRange(new string[] { "ADMIN", "STAFF" });
             cmbDepartment.Items.AddRange(new string[] { "Sales", "Production", "Warehouse", "Design", "After Sales", "Logistics" });
             GenUserID();
         }
@@ -75,6 +76,7 @@ namespace _4915project
 
         private void Save_Click(object sender, EventArgs e)
         {
+            string hash = ComputeSha256Hash(tbPassword.Text);
             try
             {
                 using (MySqlConnection con = new MySqlConnection(constring))
@@ -92,7 +94,7 @@ namespace _4915project
                         cmd.Parameters.AddWithValue("@Depart", cmbDepartment.Text);
                         cmd.Parameters.AddWithValue("@Email", tbEmail.Text + Email.ToString());
                         cmd.Parameters.AddWithValue("@Phone", tbPhone.Text);
-                        cmd.Parameters.AddWithValue("@Pwd", tbPassword.Text);
+                        cmd.Parameters.AddWithValue("@Pwd", hash);
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
@@ -111,6 +113,24 @@ namespace _4915project
             catch (Exception ex)
             {
                 MessageBox.Show("Error saving employee: " + ex.Message);
+            }
+        }
+
+        private string ComputeSha256Hash(string rawData)
+        {
+            // Create a SHA256 instance
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // Convert the input string to a byte array
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a readable hex string
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
             }
         }
 
