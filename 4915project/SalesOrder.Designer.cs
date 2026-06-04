@@ -356,7 +356,7 @@
             btDashBoard.TabIndex = 1;
             btDashBoard.Text = "DashBoard";
             btDashBoard.UseVisualStyleBackColor = true;
-            btDashBoard.Click += SalesOrder_Click;
+            btDashBoard.Click += btDashBoard_Click;
             // 
             // Logistics
             // 

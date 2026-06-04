@@ -27,7 +27,7 @@ namespace ITP4915M
             GetUserID();
             tbCustName.ReadOnly = true;
             tbSN.ReadOnly = true;
-            cbType.Items.AddRange(new string[] { "Quality", "Serve", "Other" });
+            cbType.Items.AddRange(new string[] { "Damage", "Missing", "Return", "Refund", "Quality", "Serve", "Other" });
             string constring = "server=localhost;user id=root;password=;database=4915";
             string query = "SELECT OrderID FROM salesorder;";
             using (MySqlConnection con = new MySqlConnection(constring))
@@ -210,10 +210,10 @@ namespace ITP4915M
             string constring = "server=localhost;user id=root;password=;database=4915";
             string CusID = @"SELECT CustomerID FROM customer WHERE Name = @Name";
             string query = @"INSERT INTO complaint (ComplaintID, CustomerID, OrderID, 
-                                SerialNumber, UserID, IssueDate,, Description, TYPE, 
+                                SerialNumber, UserID, IssueDate, Description, TYPE, 
                                 Resolution, ResolutionDate) 
                              VALUES (@ComplaintID, @CustomerID, @OrderID, 
-                                @SerialNumber, @UserID, @IssueDate,, @Description, @Type, 
+                                @SerialNumber, @UserID, @IssueDate, @Description, @Type, 
                                 @Resolution, @ResolutionDate);";
             string queryUser = @"SELECT UserID FROM user WHERE Name = @Name";
             int customerId;

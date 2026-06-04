@@ -30,6 +30,7 @@ namespace ITP4915M
         string confirmationID = "";
         int CustID;
         int exists = 0;
+        string constring = "server=localhost;user id=root;password=;database=4915";
         public FormLogistics()
         {
             InitializeComponent();
@@ -47,7 +48,7 @@ namespace ITP4915M
             cbshipStat.Items.AddRange(new string[] { "In Transit", "Delivered", "Delayed" });
             cbMethod.Items.AddRange(new string[] { "Standard", "Express Delivery" });
 
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
 
             using (MySqlConnection con = new MySqlConnection(constring))
             {
@@ -158,7 +159,7 @@ namespace ITP4915M
             }
 
             string selectedOrderID = cbOrderID.SelectedItem.ToString();
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
 
             // 使用 LEFT JOIN 確保即使是剛建立、還沒有出貨單(shipment)的新訂單，也能查出訂單狀態
             string query = @"
@@ -256,7 +257,7 @@ namespace ITP4915M
 
         private void GenerateShipmentID()
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             string query2 = @"
                 SELECT ShipmentID 
                 FROM shipment 
@@ -317,7 +318,7 @@ namespace ITP4915M
                 return;
             }
 
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
 
             // 狀態標記變數
             bool isShipmentExisting = false;
@@ -648,7 +649,7 @@ namespace ITP4915M
         {
             try
             {
-                string constring = "server=localhost;user id=root;password=;database=4915";
+                
 
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -702,7 +703,7 @@ namespace ITP4915M
 
         private void GenDeliveryNoteID()
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
 
             // 修正：統一使用相同的欄位名稱 DNNumber (避免欄位名稱不一致報錯)
             string query = @"
@@ -762,7 +763,7 @@ namespace ITP4915M
         {
             if (cmbShipID.SelectedItem == null) return;
 
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             string shipmentID = cmbShipID.SelectedItem.ToString().Trim();
 
             string queryOrderInfo = @"
@@ -993,7 +994,7 @@ namespace ITP4915M
         {
             ExportToPDF();
             SaveToDatabase();
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             string queryUpdateShipment = @"
             UPDATE shipment s
             INNER JOIN salesorder so ON s.OrderID = so.OrderID
@@ -1048,7 +1049,7 @@ namespace ITP4915M
 
         private void GetDeliveryID()
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             string query = @"SELECT deliveryID FROM deliverynote";
             using (MySqlConnection con = new MySqlConnection(constring))
             {
@@ -1075,7 +1076,7 @@ namespace ITP4915M
 
         private void GenReplySlipID()
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             string query = @"SELECT replySlipID FROM replyslip 
             WHERE replySlipID LIKE @Prefix ORDER BY replySlipID DESC LIMIT 1";
             using (MySqlConnection con = new MySqlConnection(constring))
@@ -1114,10 +1115,10 @@ namespace ITP4915M
 
         private void cmbDeliveryID_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
 
             // 【已修正】補上 WHERE 條件，避免撈出整張表
-            string DNotequery = @"SELECT * FROM deliverynote WHERE deliverynoteID = @deliveryID";
+            string DNotequery = @"SELECT * FROM deliverynote WHERE deliveryID = @deliveryID";
             string RSlipQuery = @"SELECT * FROM replyslip WHERE deliverynoteID = @deliverynoteID";
             string checkExistQuery = "SELECT COUNT(*) FROM replyslip WHERE deliverynoteID = @DeliveryID";
 

@@ -51,6 +51,8 @@
             lblComID = new Label();
             tabPageComplaint = new TabPage();
             panel3 = new Panel();
+            cmbOrderID = new ComboBox();
+            cmbCust = new ComboBox();
             EDate = new DateTimePicker();
             SDate = new DateTimePicker();
             btRefreshComplaint = new Button();
@@ -65,11 +67,8 @@
             label19 = new Label();
             cmbType = new ComboBox();
             label18 = new Label();
-            tbCustomer = new TextBox();
             label17 = new Label();
-            tbOrderID = new TextBox();
             label16 = new Label();
-            tbComplainID = new TextBox();
             label15 = new Label();
             lblSearch = new Label();
             gbMenu = new GroupBox();
@@ -309,6 +308,8 @@
             // 
             panel3.BackColor = Color.Gainsboro;
             panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.Controls.Add(cmbOrderID);
+            panel3.Controls.Add(cmbCust);
             panel3.Controls.Add(EDate);
             panel3.Controls.Add(SDate);
             panel3.Controls.Add(btRefreshComplaint);
@@ -323,11 +324,8 @@
             panel3.Controls.Add(label19);
             panel3.Controls.Add(cmbType);
             panel3.Controls.Add(label18);
-            panel3.Controls.Add(tbCustomer);
             panel3.Controls.Add(label17);
-            panel3.Controls.Add(tbOrderID);
             panel3.Controls.Add(label16);
-            panel3.Controls.Add(tbComplainID);
             panel3.Controls.Add(label15);
             panel3.Controls.Add(lblSearch);
             panel3.Location = new Point(5, 2);
@@ -335,6 +333,22 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(626, 440);
             panel3.TabIndex = 1;
+            // 
+            // cmbOrderID
+            // 
+            cmbOrderID.FormattingEnabled = true;
+            cmbOrderID.Location = new Point(92, 43);
+            cmbOrderID.Name = "cmbOrderID";
+            cmbOrderID.Size = new Size(121, 23);
+            cmbOrderID.TabIndex = 25;
+            // 
+            // cmbCust
+            // 
+            cmbCust.FormattingEnabled = true;
+            cmbCust.Location = new Point(288, 45);
+            cmbCust.Name = "cmbCust";
+            cmbCust.Size = new Size(121, 23);
+            cmbCust.TabIndex = 24;
             // 
             // EDate
             // 
@@ -359,6 +373,7 @@
             btRefreshComplaint.TabIndex = 20;
             btRefreshComplaint.Text = "Refresh";
             btRefreshComplaint.UseVisualStyleBackColor = true;
+            btRefreshComplaint.Click += btRefreshComplaint_Click;
             // 
             // btViewComplaint
             // 
@@ -401,6 +416,7 @@
             btCLears.TabIndex = 7;
             btCLears.Text = "Clear";
             btCLears.UseVisualStyleBackColor = true;
+            btCLears.Click += btCLears_Click;
             // 
             // btSearch
             // 
@@ -411,6 +427,7 @@
             btSearch.TabIndex = 8;
             btSearch.Text = "Search";
             btSearch.UseVisualStyleBackColor = true;
+            btSearch.Click += btSearch_Click;
             // 
             // label21
             // 
@@ -470,49 +487,25 @@
             label18.TabIndex = 9;
             label18.Text = "Type: ";
             // 
-            // tbCustomer
-            // 
-            tbCustomer.Location = new Point(484, 42);
-            tbCustomer.Margin = new Padding(2);
-            tbCustomer.Name = "tbCustomer";
-            tbCustomer.Size = new Size(122, 23);
-            tbCustomer.TabIndex = 8;
-            // 
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new Point(420, 46);
+            label17.Location = new Point(218, 46);
             label17.Margin = new Padding(2, 0, 2, 0);
             label17.Name = "label17";
             label17.Size = new Size(67, 15);
             label17.TabIndex = 7;
             label17.Text = "Customer: ";
             // 
-            // tbOrderID
-            // 
-            tbOrderID.Location = new Point(288, 43);
-            tbOrderID.Margin = new Padding(2);
-            tbOrderID.Name = "tbOrderID";
-            tbOrderID.Size = new Size(128, 23);
-            tbOrderID.TabIndex = 6;
-            // 
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new Point(228, 45);
+            label16.Location = new Point(18, 46);
             label16.Margin = new Padding(2, 0, 2, 0);
             label16.Name = "label16";
             label16.Size = new Size(58, 15);
             label16.TabIndex = 5;
             label16.Text = "Order ID:";
-            // 
-            // tbComplainID
-            // 
-            tbComplainID.Location = new Point(92, 43);
-            tbComplainID.Margin = new Padding(2);
-            tbComplainID.Name = "tbComplainID";
-            tbComplainID.Size = new Size(128, 23);
-            tbComplainID.TabIndex = 4;
             // 
             // label15
             // 
@@ -520,9 +513,8 @@
             label15.Location = new Point(7, 45);
             label15.Margin = new Padding(2, 0, 2, 0);
             label15.Name = "label15";
-            label15.Size = new Size(84, 15);
+            label15.Size = new Size(0, 15);
             label15.TabIndex = 3;
-            label15.Text = "Complaint ID:";
             // 
             // lblSearch
             // 
@@ -683,11 +675,8 @@
         private Label label19;
         private ComboBox cmbType;
         private Label label18;
-        private TextBox tbCustomer;
         private Label label17;
-        private TextBox tbOrderID;
         private Label label16;
-        private TextBox tbComplainID;
         private Label label15;
         private Label lblSearch;
         private TabPage tabPageShipConfirmation;
@@ -721,5 +710,7 @@
         private DateTimePicker SDate;
         private LinkLabel Logoutbt;
         private Label lblWelcome;
+        private ComboBox cmbOrderID;
+        private ComboBox cmbCust;
     }
 }

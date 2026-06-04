@@ -16,6 +16,7 @@ namespace ITP4915M
 {
     public partial class AfterSales : Form
     {
+        string constring = "server=localhost;user id=root;password=;database=4915";
         public AfterSales()
         {
             InitializeComponent();
@@ -41,7 +42,7 @@ namespace ITP4915M
 
 
 
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 try
@@ -98,7 +99,46 @@ namespace ITP4915M
                     // 執行你原本的其他初始化方法
                     LoadReport();
                     LoadComplaint();
+
+                    string loadComplaintSearch = @"SELECT Name From user";
+                    using (MySqlCommand cmd = new MySqlCommand(loadComplaintSearch, con))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string name = reader["Name"]?.ToString() ?? "";
+                                cmbUser.Items.Add(name);
+                            }
+                        }
+                    }
+                    cmbType.Items.AddRange(new string[] { "Damage", "Missing", "Return", "Refund", "Quality", "Serve", "Other" });
+                    string loadorder = @"SELECT OrderID From salesorder";
+                    using (MySqlCommand cmd = new MySqlCommand(loadorder, con))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string orderID = reader["OrderID"]?.ToString() ?? "";
+                                cmbOrderID.Items.Add(orderID);
+                            }
+                        }
+                    }
+                    string loadcust = @"SELECT Name From customer";
+                    using (MySqlCommand cmd = new MySqlCommand(loadcust, con))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string custName = reader["Name"]?.ToString() ?? "";
+                                cmbCust.Items.Add(custName);
+                            }
+                        }
+                    }
                 }
+
                 catch (MySqlException ex)
                 {
                     MessageBox.Show("Database error: " + ex.Message);
@@ -125,7 +165,7 @@ namespace ITP4915M
             }
 
             string selectedConID = cmbConID.SelectedItem.ToString();
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
 
             string queryDetails = @"
         SELECT 
@@ -185,7 +225,7 @@ namespace ITP4915M
 
         private void LoadReport()
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 con.Open();
@@ -202,7 +242,7 @@ namespace ITP4915M
 
         private void LoadComplaint()
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 con.Open();
@@ -238,7 +278,7 @@ namespace ITP4915M
 
         private void btSave_Click(object sender, EventArgs e)
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             string updateQuery = @"UPDATE deliveryconfirmation
             SET ShipmentID = @ShipmentID, 
             ReceiverName = @ReceiverName, 
@@ -363,7 +403,7 @@ namespace ITP4915M
         {
             try
             {
-                string constring = "server=localhost;user id=root;password=;database=4915";
+                
 
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -419,6 +459,83 @@ namespace ITP4915M
         {
             FormSetting settingsForm = new FormSetting();
             settingsForm.Show();
+        }
+
+        private void btRefreshComplaint_Click(object sender, EventArgs e)
+        {
+            LoadComplaint();
+        }
+
+        private void btCLears_Click(object sender, EventArgs e)
+        {
+            cmbOrderID.Text = "";
+            cmbCust.Text = "";
+            cmbUser.Text = "";
+            cmbType.Text = "";
+        }
+
+        private void btSearch_Click(object sender, EventArgs e)
+        {
+            // 1. 先定義基礎的 SQL 語句，並加上必填的日期條件
+            System.Text.StringBuilder queryBuilder = new System.Text.StringBuilder(@"
+        SELECT * FROM complaint 
+        WHERE IssueDate >= @SDate
+        AND ResolutionDate <= @EDate");
+
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                try
+                {
+                    con.Open();
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+                        // 2. 優先綁定必填的日期參數
+                        cmd.Parameters.AddWithValue("@SDate", SDate.Value);
+                        cmd.Parameters.AddWithValue("@EDate", EDate.Value);
+
+                        // 3. 動態檢查各控制項：若有選取值，才將 SQL 片段拼接到 StringBuilder，並安全綁定變數
+                        if (!string.IsNullOrEmpty(cmbCust.Text) && cmbCust.SelectedItem != null)
+                        {
+                            queryBuilder.Append(" AND CustomerID = @CustID");
+                            cmd.Parameters.AddWithValue("@CustID", cmbCust.SelectedItem.ToString());
+                        }
+
+                        if (!string.IsNullOrEmpty(cmbOrderID.Text) && cmbOrderID.SelectedItem != null)
+                        {
+                            queryBuilder.Append(" AND OrderID = @OrderID");
+                            cmd.Parameters.AddWithValue("@OrderID", cmbOrderID.SelectedItem.ToString());
+                        }
+
+                        if (!string.IsNullOrEmpty(cmbUser.Text) && cmbUser.SelectedItem != null)
+                        {
+                            queryBuilder.Append(" AND UserID = @UserID");
+                            cmd.Parameters.AddWithValue("@UserID", cmbUser.SelectedItem.ToString());
+                        }
+
+                        if (!string.IsNullOrEmpty(cmbType.Text))
+                        {
+                            queryBuilder.Append(" AND TYPE = @Type");
+                            cmd.Parameters.AddWithValue("@Type", cmbType.Text);
+                        }
+
+                        // 4. 將動態組裝完成的完整 SQL 字串指派給 CommandText
+                        cmd.CommandText = queryBuilder.ToString();
+                        cmd.Connection = con;
+
+                        // 5. 執行查詢並填充資料
+                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            dataGridView1.DataSource = dt;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Search error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

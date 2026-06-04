@@ -219,7 +219,6 @@
             // cbType
             // 
             cbType.FormattingEnabled = true;
-            cbType.Items.AddRange(new object[] { "Damage", "Missing", "Return", "Refund" });
             cbType.Location = new Point(106, 90);
             cbType.Margin = new Padding(2);
             cbType.Name = "cbType";

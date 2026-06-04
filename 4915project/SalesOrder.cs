@@ -16,6 +16,7 @@ namespace ITP4915M
 {
     public partial class SalesOrder : Form
     {
+        string constring = "server=localhost;user id=root;password=;database=4915";
         public SalesOrder()
         {
             InitializeComponent();
@@ -28,7 +29,7 @@ namespace ITP4915M
         {
             try
             {
-                string constring = "server=localhost;user id=root;password=;database=4915";
+                
 
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -95,7 +96,7 @@ namespace ITP4915M
 
         private void FormOrder_Load(object sender, EventArgs e)
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 con.Open();
@@ -138,7 +139,7 @@ namespace ITP4915M
 
         private void LoadReport()
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 con.Open();
@@ -157,7 +158,7 @@ namespace ITP4915M
         {
             string OrderIDSearch = textOrderID.Text;
             string CustSearch = textCust.Text;
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             string startDate = dateTimePickerStart.Value.ToString("yyyy-MM-dd");
             string endDate = dateTimePickerEnd.Value.ToString("yyyy-MM-dd");
             using (MySqlConnection con = new MySqlConnection(constring))
@@ -277,13 +278,6 @@ namespace ITP4915M
         {
             editOrder editOrderForm = new editOrder();
             editOrderForm.Show();
-        }
-
-        private void SalesOrder_Click(object sender, EventArgs e)
-        {
-            DashBoard dashboard = new DashBoard();
-            dashboard.Show();
-            this.Close();
         }
 
         private void btSetting_Click(object sender, EventArgs e)
