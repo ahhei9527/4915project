@@ -635,7 +635,6 @@ namespace ITP4915M
         {
             FormSetting setting = new FormSetting();
             setting.Show();
-            this.Close();
         }
 
         private void AfterSales_Click(object sender, EventArgs e)

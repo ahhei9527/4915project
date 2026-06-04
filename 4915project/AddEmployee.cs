@@ -35,7 +35,7 @@ namespace _4915project
                 {
                     con.Open();
                     // Since it's an INT, we can just grab the maximum value directly
-                    string query = "SELECT MAX(UserID) FROM employee";
+                    string query = "SELECT MAX(UserID) FROM user";
 
                     MySqlCommand cmd = new MySqlCommand(query, con);
                     object result = cmd.ExecuteScalar();

@@ -414,5 +414,11 @@ namespace ITP4915M
 
             Application.Exit();
         }
+
+        private void btSetting_Click(object sender, EventArgs e)
+        {
+            FormSetting settingsForm = new FormSetting();
+            settingsForm.Show();
+        }
     }
 }

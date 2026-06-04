@@ -559,6 +559,7 @@
             btSetting.TabIndex = 7;
             btSetting.Text = "Setting";
             btSetting.UseVisualStyleBackColor = true;
+            btSetting.Click += btSetting_Click;
             // 
             // btLog
             // 
