@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2026-06-01 18:22:33
+-- 產生時間： 2026-06-04 18:13:05
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- 資料庫： `4915`
 --
+CREATE DATABASE IF NOT EXISTS `4915` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `4915`;
 
 -- --------------------------------------------------------
 
@@ -27,6 +29,7 @@ SET time_zone = "+00:00";
 -- 資料表結構 `audit_log`
 --
 
+DROP TABLE IF EXISTS `audit_log`;
 CREATE TABLE `audit_log` (
   `AuditLogId` bigint(20) NOT NULL,
   `TableName` varchar(100) NOT NULL,
@@ -371,7 +374,58 @@ INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserI
 (321, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-02 00:20:53', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (322, 'company', 'ABC Trading Ltd', 'Update  company', 101, 'System', '2026-06-02 00:21:05', NULL, '{\"Language\":\"Chinese\",\"Warehouse\":\"WH-A-12-04\",\"Currency\":\"HKD\",\"CompanyName\":\"ABC Trading Ltd\"}', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (323, 'company', 'Lee Manufacturing', 'Update  company', 101, 'System', '2026-06-02 00:21:35', NULL, '{\"Language\":\"English\",\"Warehouse\":\"WH-B-05-01\",\"Currency\":\"USD\",\"CompanyName\":\"Lee Manufacturing\"}', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
-(324, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-02 00:21:46', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC');
+(324, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-02 00:21:46', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(325, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-02 18:10:09', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(326, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-02 18:10:32', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(327, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 20:47:12', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(328, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 20:48:57', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(329, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 20:51:29', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(330, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 20:52:16', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(331, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 20:54:39', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(332, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 20:57:12', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(333, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 20:57:42', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(334, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 20:58:35', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(335, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 21:01:39', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(336, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 21:03:09', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(337, 'salesorder', 'ORD000010', 'Create Order', 101, 'System', '2026-06-04 21:03:36', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(338, 'salesorder', 'ORD000010', 'Update Order', 101, 'System', '2026-06-04 21:03:51', '\"2026/6/4 00:00:00, Quoted\"', '\"2026/6/4 21:03:37, Paid\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(339, 'shipment', 'ORD000010', 'Create Shipment', 101, 'System', '2026-06-04 21:04:22', NULL, '\"SHIP007, In Transit, Standard\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(340, 'SalesOrder', 'ORD000010', 'Update SalesOrder', 101, 'System', '2026-06-04 21:04:22', NULL, '\"ORD000010, Processing, 2026/6/11 00:00:00\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(341, 'shipment', 'SHIP007', 'Update Shipment Stat', 101, 'System', '2026-06-04 21:05:03', '\"Pending, Standard\"', '\"In Transit, Standard\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(342, 'SalesOrder', 'ORD000010', 'Update SalesOrder', 101, 'System', '2026-06-04 21:05:03', NULL, '\"ORD000010, Processing, 2026/6/11 00:00:00\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(343, 'shipment', 'SHIP007', 'Update Shipment Stat', 101, 'System', '2026-06-04 21:05:14', '\"In Transit, Standard\"', '\"In Transit, Standard\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(344, 'SalesOrder', 'ORD000010', 'Update SalesOrder', 101, 'System', '2026-06-04 21:05:14', NULL, '\"ORD000010, Processing, 2026/6/11 00:00:00\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(345, 'deliverynote', 'DN002', 'Create deliverynote', 101, 'System', '2026-06-04 21:06:02', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(346, 'salesorder', 'CONF006', 'Update Order', 101, 'System', '2026-06-04 21:06:42', '\", \"', '\"2026-06-04, Good\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(347, 'shipment', 'SHIP007', 'Update Shipment Stat', 101, 'System', '2026-06-04 21:07:55', '\"In Transit, Standard\"', '\"Delivered, Standard\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(348, 'SalesOrder', 'ORD000010', 'Update SalesOrder', 101, 'System', '2026-06-04 21:07:55', NULL, '\"ORD000010, Delivered, 2026/6/11 00:00:00\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(349, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 21:09:52', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(350, 'replyslip', 'RS002', 'Create replyslip', 101, 'System', '2026-06-04 21:10:03', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(351, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-04 21:11:00', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(352, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 21:12:49', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(353, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 21:14:58', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(354, 'complaint', 'COMP002', 'Add complaint', 101, 'System', '2026-06-04 21:15:10', NULL, '\"COMP002\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(355, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-04 21:15:34', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(356, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 21:16:11', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(357, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 21:20:32', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(358, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-04 21:20:56', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(359, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 21:22:53', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(360, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 21:27:58', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(361, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 21:29:15', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(362, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-04 21:29:30', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(363, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 21:40:41', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(364, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 21:42:11', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(365, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-04 21:42:33', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(366, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-05 00:00:55', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(367, 'user', '104', 'LOGIN', 104, 'Daniel Ng', '2026-06-05 00:05:39', NULL, NULL, 'User Daniel Ng logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(368, 'user', '104', 'LOGOUT', 104, 'Daniel Ng', '2026-06-05 00:05:43', NULL, NULL, 'User Daniel Ng logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(369, 'user', '104', 'LOGIN', 104, 'Daniel Ng', '2026-06-05 00:06:58', NULL, NULL, 'User Daniel Ng logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(370, 'user', '104', 'LOGOUT', 104, 'Daniel Ng', '2026-06-05 00:07:01', NULL, NULL, 'User Daniel Ng logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(371, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-05 00:09:33', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(372, 'user', '106', 'Add User', 101, 'System', '2026-06-05 00:10:35', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(373, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-05 00:10:59', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(374, 'user', '106', 'LOGIN', 106, 'yee man', '2026-06-05 00:11:20', NULL, NULL, 'User yee man logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(375, 'user', '106', 'LOGOUT', 106, 'yee man', '2026-06-05 00:11:39', NULL, NULL, 'User yee man logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC');
 
 -- --------------------------------------------------------
 
@@ -379,6 +433,7 @@ INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserI
 -- 資料表結構 `company`
 --
 
+DROP TABLE IF EXISTS `company`;
 CREATE TABLE `company` (
   `CompanyName` varchar(50) NOT NULL,
   `warehouse` varchar(100) DEFAULT NULL,
@@ -401,6 +456,7 @@ INSERT INTO `company` (`CompanyName`, `warehouse`, `launage`, `currency`) VALUES
 -- 資料表結構 `complaint`
 --
 
+DROP TABLE IF EXISTS `complaint`;
 CREATE TABLE `complaint` (
   `ComplaintID` varchar(10) NOT NULL,
   `CustomerID` int(100) NOT NULL,
@@ -419,7 +475,8 @@ CREATE TABLE `complaint` (
 --
 
 INSERT INTO `complaint` (`ComplaintID`, `CustomerID`, `OrderID`, `SerialNumber`, `UserID`, `IssueDate`, `Description`, `TYPE`, `Resolution`, `ResolutionDate`) VALUES
-('COMP001', 2, 'ORD000002', 'SN00000005', 101, '2025-05-12', 'Minor scratch on leg', 'Quality', 'Repaired on site', '2025-05-15');
+('COMP001', 2, 'ORD000002', 'SN00000005', 101, '2025-05-12', 'Minor scratch on leg', 'Quality', 'Repaired on site', '2025-05-15'),
+('COMP002', 2, 'ORD000010', 'No Serial ', 101, '2026-06-04', '', 'Other', '', '2026-06-04');
 
 -- --------------------------------------------------------
 
@@ -427,6 +484,7 @@ INSERT INTO `complaint` (`ComplaintID`, `CustomerID`, `OrderID`, `SerialNumber`,
 -- 資料表結構 `customdesign`
 --
 
+DROP TABLE IF EXISTS `customdesign`;
 CREATE TABLE `customdesign` (
   `DesignID` varchar(10) NOT NULL,
   `CustomerID` int(100) NOT NULL,
@@ -450,6 +508,7 @@ INSERT INTO `customdesign` (`DesignID`, `CustomerID`, `UserID`, `SketchDetail`, 
 -- 資料表結構 `customdesign_orderitem`
 --
 
+DROP TABLE IF EXISTS `customdesign_orderitem`;
 CREATE TABLE `customdesign_orderitem` (
   `DesignID` varchar(10) NOT NULL,
   `OrderItemID` varchar(10) NOT NULL
@@ -468,6 +527,7 @@ INSERT INTO `customdesign_orderitem` (`DesignID`, `OrderItemID`) VALUES
 -- 資料表結構 `customer`
 --
 
+DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `CustomerID` int(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -493,6 +553,7 @@ INSERT INTO `customer` (`CustomerID`, `Name`, `Company`, `Email`, `Phone`, `Addr
 -- 資料表結構 `deliveryconfirmation`
 --
 
+DROP TABLE IF EXISTS `deliveryconfirmation`;
 CREATE TABLE `deliveryconfirmation` (
   `ConfirmationID` varchar(10) NOT NULL,
   `ShipmentID` varchar(10) NOT NULL,
@@ -512,7 +573,8 @@ INSERT INTO `deliveryconfirmation` (`ConfirmationID`, `ShipmentID`, `ReceivedDat
 ('CONF002', 'SHIP003', NULL, NULL, 'Good', NULL, NULL),
 ('CONF003', 'SHIP004', '2025-04-08', '', 'Good', '', 'Yes'),
 ('CONF004', 'SHIP005', '2026-06-01', 'yee', 'Good', '', 'Yes'),
-('CONF005', 'SHIP006', NULL, NULL, 'Good', NULL, NULL);
+('CONF005', 'SHIP006', NULL, NULL, 'Good', NULL, NULL),
+('CONF006', 'SHIP007', '2026-06-04', 'yee', 'Good', '', 'Yes');
 
 -- --------------------------------------------------------
 
@@ -520,6 +582,7 @@ INSERT INTO `deliveryconfirmation` (`ConfirmationID`, `ShipmentID`, `ReceivedDat
 -- 資料表結構 `deliveryitem`
 --
 
+DROP TABLE IF EXISTS `deliveryitem`;
 CREATE TABLE `deliveryitem` (
   `DeliveryItemID` varchar(10) NOT NULL,
   `ShipmentID` varchar(10) NOT NULL,
@@ -541,6 +604,7 @@ INSERT INTO `deliveryitem` (`DeliveryItemID`, `ShipmentID`, `SerialNumber`, `Qua
 -- 資料表結構 `deliverynote`
 --
 
+DROP TABLE IF EXISTS `deliverynote`;
 CREATE TABLE `deliverynote` (
   `deliveryID` varchar(10) NOT NULL,
   `shipmentID` varchar(10) NOT NULL,
@@ -557,7 +621,8 @@ CREATE TABLE `deliverynote` (
 --
 
 INSERT INTO `deliverynote` (`deliveryID`, `shipmentID`, `orderID`, `customerID`, `RecipientName`, `DeliveryAddress`, `CreateDate`, `Status`) VALUES
-('DN001', 'SHIP006', 'ORD000009', 1, 'John Chan', 'Rm. 318 South China Cold Storage Bldg. 13-17 Wah Sing Street Kwai Chung N.T.', '2026-06-01', 'Created');
+('DN001', 'SHIP006', 'ORD000009', 1, 'John Chan', 'Rm. 318 South China Cold Storage Bldg. 13-17 Wah Sing Street Kwai Chung N.T.', '2026-06-01', 'Created'),
+('DN002', 'SHIP007', 'ORD000010', 2, 'Mary Wong', '', '2026-06-04', 'Created');
 
 -- --------------------------------------------------------
 
@@ -565,6 +630,7 @@ INSERT INTO `deliverynote` (`deliveryID`, `shipmentID`, `orderID`, `customerID`,
 -- 資料表結構 `employee_salesorder`
 --
 
+DROP TABLE IF EXISTS `employee_salesorder`;
 CREATE TABLE `employee_salesorder` (
   `UserID` int(100) NOT NULL,
   `OrderID` varchar(10) NOT NULL
@@ -585,6 +651,7 @@ INSERT INTO `employee_salesorder` (`UserID`, `OrderID`) VALUES
 -- 資料表結構 `inventory`
 --
 
+DROP TABLE IF EXISTS `inventory`;
 CREATE TABLE `inventory` (
   `InventoryID` varchar(10) NOT NULL,
   `MaterialID` varchar(10) NOT NULL,
@@ -613,6 +680,7 @@ INSERT INTO `inventory` (`InventoryID`, `MaterialID`, `ProductID`, `SerialNumber
 -- 資料表結構 `materialrequest`
 --
 
+DROP TABLE IF EXISTS `materialrequest`;
 CREATE TABLE `materialrequest` (
   `RequestID` varchar(10) NOT NULL,
   `UserID` int(100) NOT NULL,
@@ -636,6 +704,7 @@ INSERT INTO `materialrequest` (`RequestID`, `UserID`, `BatchID`, `RequestDate`, 
 -- 資料表結構 `materialrequestitem`
 --
 
+DROP TABLE IF EXISTS `materialrequestitem`;
 CREATE TABLE `materialrequestitem` (
   `RequestItemID` varchar(10) NOT NULL,
   `RequestID` varchar(10) NOT NULL,
@@ -658,6 +727,7 @@ INSERT INTO `materialrequestitem` (`RequestItemID`, `RequestID`, `MaterialID`, `
 -- 資料表結構 `orderitem`
 --
 
+DROP TABLE IF EXISTS `orderitem`;
 CREATE TABLE `orderitem` (
   `OrderItemID` varchar(10) NOT NULL,
   `Quantity` int(10) NOT NULL,
@@ -682,7 +752,9 @@ INSERT INTO `orderitem` (`OrderItemID`, `Quantity`, `UnitPrice`, `Subtotal`, `Cu
 ('OI000010', 5, 2850.00, 14250.00, NULL, 'ORD000008'),
 ('OI000011', 5, 4250.00, 21250.00, NULL, 'ORD000008'),
 ('OI000012', 5, 2850.00, 14250.00, NULL, 'ORD000009'),
-('OI000013', 5, 4250.00, 21250.00, NULL, 'ORD000009');
+('OI000013', 5, 4250.00, 21250.00, NULL, 'ORD000009'),
+('OI000014', 1, 2850.00, 2850.00, NULL, 'ORD000010'),
+('OI000015', 1, 4250.00, 4250.00, NULL, 'ORD000010');
 
 -- --------------------------------------------------------
 
@@ -690,6 +762,7 @@ INSERT INTO `orderitem` (`OrderItemID`, `Quantity`, `UnitPrice`, `Subtotal`, `Cu
 -- 資料表結構 `orderitem_product`
 --
 
+DROP TABLE IF EXISTS `orderitem_product`;
 CREATE TABLE `orderitem_product` (
   `ProductID` varchar(10) NOT NULL,
   `OrderItemID` varchar(10) NOT NULL
@@ -706,7 +779,9 @@ INSERT INTO `orderitem_product` (`ProductID`, `OrderItemID`) VALUES
 ('PROD001', 'OI000008'),
 ('PROD002', 'OI000009'),
 ('PROD001', 'OI000012'),
-('PROD002', 'OI000013');
+('PROD002', 'OI000013'),
+('PROD001', 'OI000014'),
+('PROD002', 'OI000015');
 
 -- --------------------------------------------------------
 
@@ -714,6 +789,7 @@ INSERT INTO `orderitem_product` (`ProductID`, `OrderItemID`) VALUES
 -- 資料表結構 `product`
 --
 
+DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `ProductID` varchar(10) NOT NULL,
   `UserID` int(100) NOT NULL,
@@ -743,6 +819,7 @@ INSERT INTO `product` (`ProductID`, `UserID`, `Name`, `Description`, `Category`,
 -- 資料表結構 `productinstance`
 --
 
+DROP TABLE IF EXISTS `productinstance`;
 CREATE TABLE `productinstance` (
   `SerialNumber` varchar(10) NOT NULL,
   `ProductID` varchar(10) NOT NULL,
@@ -770,6 +847,7 @@ INSERT INTO `productinstance` (`SerialNumber`, `ProductID`, `BatchID`, `Producti
 -- 資料表結構 `productionbatch`
 --
 
+DROP TABLE IF EXISTS `productionbatch`;
 CREATE TABLE `productionbatch` (
   `BatchID` varchar(10) NOT NULL,
   `StartDate` date NOT NULL,
@@ -793,6 +871,7 @@ INSERT INTO `productionbatch` (`BatchID`, `StartDate`, `EndDate`, `Status`) VALU
 -- 資料表結構 `quotation`
 --
 
+DROP TABLE IF EXISTS `quotation`;
 CREATE TABLE `quotation` (
   `QuotationID` varchar(10) NOT NULL,
   `CustomerID` int(100) NOT NULL,
@@ -818,6 +897,7 @@ INSERT INTO `quotation` (`QuotationID`, `CustomerID`, `EmployeeID`, `QuotationDa
 -- 資料表結構 `quotation_salesorder`
 --
 
+DROP TABLE IF EXISTS `quotation_salesorder`;
 CREATE TABLE `quotation_salesorder` (
   `QuotationID` varchar(10) NOT NULL,
   `OrderID` varchar(10) NOT NULL
@@ -837,6 +917,7 @@ INSERT INTO `quotation_salesorder` (`QuotationID`, `OrderID`) VALUES
 -- 資料表結構 `rawmaterial`
 --
 
+DROP TABLE IF EXISTS `rawmaterial`;
 CREATE TABLE `rawmaterial` (
   `MaterialID` varchar(10) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -864,6 +945,7 @@ INSERT INTO `rawmaterial` (`MaterialID`, `Name`, `Type`, `Unit`, `UnitCost`, `Re
 -- 資料表結構 `replyslip`
 --
 
+DROP TABLE IF EXISTS `replyslip`;
 CREATE TABLE `replyslip` (
   `replySlipID` varchar(10) NOT NULL,
   `OrderID` varchar(10) DEFAULT NULL,
@@ -878,7 +960,8 @@ CREATE TABLE `replyslip` (
 --
 
 INSERT INTO `replyslip` (`replySlipID`, `OrderID`, `deliverynoteID`, `recipient`, `DeliveryDate`, `Address`) VALUES
-('RS001', 'ORD000009', 'DN001', 'John Chan', '2026-06-01', 'Rm. 318 South China Cold Storage Bldg. 13-17 Wah Sing Street Kwai Chung N.T.');
+('RS001', 'ORD000009', 'DN001', 'John Chan', '2026-06-01', 'Rm. 318 South China Cold Storage Bldg. 13-17 Wah Sing Street Kwai Chung N.T.'),
+('RS002', 'ORD000010', 'DN002', 'Mary Wong', '2026-06-04', '');
 
 -- --------------------------------------------------------
 
@@ -886,6 +969,7 @@ INSERT INTO `replyslip` (`replySlipID`, `OrderID`, `deliverynoteID`, `recipient`
 -- 資料表結構 `salesorder`
 --
 
+DROP TABLE IF EXISTS `salesorder`;
 CREATE TABLE `salesorder` (
   `OrderID` varchar(10) NOT NULL,
   `CustomerID` int(100) NOT NULL,
@@ -910,7 +994,8 @@ INSERT INTO `salesorder` (`OrderID`, `CustomerID`, `OrderDate`, `TotalAmount`, `
 ('ORD000006', 3, '2026-05-30', 21250.00, '2026-05-30', 'Paid', '2026-06-06', NULL),
 ('ORD000007', 1, '2026-06-01', 41750.00, '2026-06-01', 'Paid', '2026-06-08', NULL),
 ('ORD000008', 1, '2026-06-01', 35500.00, '2026-06-01', 'Paid', '2026-06-08', NULL),
-('ORD000009', 1, '2026-06-01', 35500.00, '2026-06-01', 'Processing', '2026-06-08', NULL);
+('ORD000009', 1, '2026-06-01', 35500.00, '2026-06-01', 'Processing', '2026-06-08', NULL),
+('ORD000010', 2, '2026-06-04', 7100.00, '2026-06-04', 'Processing', '2026-06-11', NULL);
 
 -- --------------------------------------------------------
 
@@ -918,6 +1003,7 @@ INSERT INTO `salesorder` (`OrderID`, `CustomerID`, `OrderDate`, `TotalAmount`, `
 -- 資料表結構 `shipment`
 --
 
+DROP TABLE IF EXISTS `shipment`;
 CREATE TABLE `shipment` (
   `ShipmentID` varchar(10) NOT NULL,
   `OrderID` varchar(10) NOT NULL,
@@ -937,7 +1023,8 @@ INSERT INTO `shipment` (`ShipmentID`, `OrderID`, `UserID`, `DeliveryMethod`, `Tr
 ('SHIP003', 'ORD000003', 101, 'Standard', NULL, 'Pending'),
 ('SHIP004', 'ORD000004', 101, 'Standard', NULL, 'In Transit'),
 ('SHIP005', 'ORD000007', 101, 'Standard', NULL, 'In Transit'),
-('SHIP006', 'ORD000009', 101, 'Standard', NULL, 'In Transit');
+('SHIP006', 'ORD000009', 101, 'Standard', NULL, 'In Transit'),
+('SHIP007', 'ORD000010', 101, 'Standard', NULL, 'In Transit');
 
 -- --------------------------------------------------------
 
@@ -945,6 +1032,7 @@ INSERT INTO `shipment` (`ShipmentID`, `OrderID`, `UserID`, `DeliveryMethod`, `Tr
 -- 資料表結構 `transfer`
 --
 
+DROP TABLE IF EXISTS `transfer`;
 CREATE TABLE `transfer` (
   `TransferID` varchar(10) NOT NULL,
   `RequestID` varchar(10) NOT NULL,
@@ -969,6 +1057,7 @@ INSERT INTO `transfer` (`TransferID`, `RequestID`, `BatchID`, `ApprovedBy`, `Tra
 -- 資料表結構 `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `UserID` int(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -985,11 +1074,12 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`UserID`, `Name`, `position`, `Role`, `Department`, `Email`, `Phone`, `password`) VALUES
-(101, 'Alice Cheung', 'Manager', 'ADMIN', 'Sales', 'alice.cheung@company.com', '852-55501234', '12345678'),
+(101, 'Alice Cheung', 'Manager', 'ADMIN', 'Sales', 'alice.cheung@company.com', '852-55501234', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f'),
 (102, 'Bob Tam', 'Designer', 'STAFF', 'Design', 'bob.tam@company.com', '852-55501235', ''),
 (103, 'Carol Ho', 'Supervisor', 'STAFF', 'Production', 'carol.ho@company.com', '852-55501236', ''),
-(104, 'Daniel Ng', 'Sales Rep', 'STAFF', 'Sales', 'daniel.ng@company.com', '852-55501237', '11111111'),
-(105, 'Emma Lau', 'Manager', 'STAFF', 'Warehouse', 'emma.lau@company.com', '852-55501238', '');
+(104, 'Daniel Ng', 'Sales Rep', 'STAFF', 'Sales', 'daniel.ng@company.com', '852-55501237', 'ee79976c9380d5e337fc1c095ece8c8f22f91f306ceeb161fa51fecede2c4ba1'),
+(105, 'Emma Lau', 'Manager', 'STAFF', 'Warehouse', 'emma.lau@company.com', '852-55501238', ''),
+(106, 'yee man', 'Manager', 'ADMIN', 'Logistics', 'yee.man@company.com', '88888888', '615ed7fb1504b0c724a296d7a69e6c7b2f9ea2c57c1d8206c5afdf392ebdfd25');
 
 -- --------------------------------------------------------
 
@@ -997,6 +1087,7 @@ INSERT INTO `user` (`UserID`, `Name`, `position`, `Role`, `Department`, `Email`,
 -- 資料表結構 `user_productionbatch`
 --
 
+DROP TABLE IF EXISTS `user_productionbatch`;
 CREATE TABLE `user_productionbatch` (
   `BatchID` varchar(10) NOT NULL,
   `UserID` int(100) NOT NULL
@@ -1217,7 +1308,7 @@ ALTER TABLE `user_productionbatch`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `audit_log`
 --
 ALTER TABLE `audit_log`
-  MODIFY `AuditLogId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=325;
+  MODIFY `AuditLogId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=376;
 
 --
 -- 已傾印資料表的限制式
