@@ -23,6 +23,7 @@ namespace _4915project
         string dbRole;
         string dbEmail;
         string dbDepartment;
+        bool isAlreadyHashed = false;
 
         public LoginPage()
         {
@@ -76,7 +77,9 @@ namespace _4915project
                                 dbRole = reader["role"]?.ToString() ?? "User";
                                 dbEmail = reader["email"]?.ToString() ?? "";
                                 dbDepartment = reader["department"].ToString() ?? "";
-                            }else
+                                isAlreadyHashed = (dbPassword.Length == 64 && textBoxPwd.Text != dbPassword);
+                            }
+                            else
                             {
                                 MessageBox.Show("Email not found.", "Login Failed",
                                               MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -84,8 +87,7 @@ namespace _4915project
                         }
                         // 1. 檢查資料庫裡的密碼是「新雜湊」還是「舊明文」
                         // 如果長度是 64 且不等於輸入的明文，代表它已經是 SHA-256 雜湊值了
-                        bool isAlreadyHashed = (dbPassword.Length == 64 && textBoxPwd.Text != dbPassword);
-
+                        
                         if (isAlreadyHashed)
                         {
                             // 如果資料庫已經是雜湊，直接進驗證方法

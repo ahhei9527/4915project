@@ -30,7 +30,7 @@ namespace ITP4915M
             cmbComLan.Items.AddRange(new string[] { "Chinese", "English" });
             cmbComWH.Items.AddRange(new string[] { "WH-A-12-03", "WH-A-12-04", "WH-B-05-01", "WH-C-08-02" });
             cmbComCurr.Items.AddRange(new string[] { "HKD", "USD", "CNY" });
-            cmbRole.Items.AddRange(new string[] { "Admin", "Staff" });
+            cmbRole.Items.AddRange(new string[] { "ADMIN", "STAFF" });
             cmbDepartment.Items.AddRange(new string[] { "Sales", "Production", "Warehouse", "Design", "After Sales", "Logistics" });
             tbPassword.Enabled = false;
             cmbRole.Enabled = false;
@@ -224,7 +224,6 @@ namespace ITP4915M
                         MySqlDataReader reader = cmd.ExecuteReader();
                         if (reader.Read())
                         {
-                            tbPassword.Text = reader["password"].ToString();
                             cmbRole.SelectedItem = reader["Role"].ToString();
                             cmbDepartment.SelectedItem = reader["Department"].ToString();
                             tbPosit.Text = reader["position"].ToString();
@@ -278,40 +277,97 @@ namespace ITP4915M
 
         private void button9_Click(object sender, EventArgs e)
         {
-            string userQuery = "UPDATE user SET " +
-                "password = @password, " +
+            if (checkBox1.Checked == false)
+            {
+                string userQuery = "UPDATE user SET " +
                 "Role = @Role, " +
                 "position = @position, " +
                 "Department = Department " +
                 "WHERE Name = @Name";
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand(userQuery, con))
+                using (MySqlConnection con = new MySqlConnection(constring))
                 {
-                    cmd.Parameters.AddWithValue("@password", tbPassword.Text);
-                    cmd.Parameters.AddWithValue("@Role", cmbRole.SelectedItem?.ToString());
-                    cmd.Parameters.AddWithValue("@position", tbPosit.Text.ToString());
-                    cmd.Parameters.AddWithValue("@Department", cmbDepartment.SelectedItem?.ToString());
-                    cmd.Parameters.AddWithValue("@Name", cmbUserName.SelectedItem?.ToString());
-                    try
+                    using (MySqlCommand cmd = new MySqlCommand(userQuery, con))
                     {
-                        con.Open();
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        if (rowsAffected > 0)
+                        cmd.Parameters.AddWithValue("@Role", cmbRole.SelectedItem?.ToString());
+                        cmd.Parameters.AddWithValue("@position", tbPosit.Text.ToString());
+                        cmd.Parameters.AddWithValue("@Department", cmbDepartment.SelectedItem?.ToString());
+                        cmd.Parameters.AddWithValue("@Name", cmbUserName.SelectedItem?.ToString());
+                        try
                         {
-                            MessageBox.Show("Company settings updated successfully.");
-                            UpdateUserSettingsAudit();
+                            con.Open();
+                            int rowsAffected = cmd.ExecuteNonQuery();
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("Employee data updated successfully.");
+                                UpdateUserSettingsAudit();
+                            }
+                            else
+                            {
+                                MessageBox.Show("No changes were made to the employee settings.");
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("No changes were made to the company settings.");
+                            MessageBox.Show("Error saving employee settings: " + ex.Message);
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error saving company settings: " + ex.Message);
                     }
                 }
+            }
+            else
+            {
+                string userQuery = "UPDATE user SET " +
+                "Password = @Password, " +
+                "Role = @Role, " +
+                "position = @position, " +
+                "Department = Department " +
+                "WHERE Name = @Name";
+                string hashedPassword = ComputeSha256Hash(tbPassword.Text);
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(userQuery, con))
+                    {
+                        cmd.Parameters.AddWithValue("@Password", hashedPassword);
+                        cmd.Parameters.AddWithValue("@Role", cmbRole.SelectedItem?.ToString());
+                        cmd.Parameters.AddWithValue("@position", tbPosit.Text.ToString());
+                        cmd.Parameters.AddWithValue("@Department", cmbDepartment.SelectedItem?.ToString());
+                        cmd.Parameters.AddWithValue("@Name", cmbUserName.SelectedItem?.ToString());
+                        try
+                        {
+                            con.Open();
+                            int rowsAffected = cmd.ExecuteNonQuery();
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("Company settings updated successfully.");
+                                UpdateUserSettingsAudit();
+                            }
+                            else
+                            {
+                                MessageBox.Show("No changes were made to the company settings.");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error saving company settings: " + ex.Message);
+                        }
+                    }
+                }
+            }
+        }
+
+        private string ComputeSha256Hash(string rawData)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // Convert the input string to a byte array
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a readable hex string
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
             }
         }
 
