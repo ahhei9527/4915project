@@ -10,6 +10,7 @@ namespace _4915project
 {
     public partial class DashBoard : Form
     {
+        string constring = "server=localhost;user id=root;password=;database=4915";
         public DashBoard()
         {
             InitializeComponent();
@@ -33,58 +34,81 @@ namespace _4915project
         // ====================== TAB 1: Audit Logs ======================
         private void SetupAuditTab()
         {
-            cmbTableFilter.Items.Clear();
-            cmbTableFilter.Items.Add("All");
-            cmbTableFilter.Items.Add("user");
-            cmbTableFilter.Items.Add("complaint");
-            cmbTableFilter.Items.Add("customdesign");
-            cmbTableFilter.SelectedIndex = 0;
+            string query = "SELECT TableName From audit_log";
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        HashSet<string> tables = new HashSet<string>();
+                        while (reader.Read())
+                        {
+                            string tableName = reader["TableName"]?.ToString() ?? "Unknown";
+                            tables.Add(tableName);
+                        }
+                        cmbTableFilter.Items.Clear();
+                        cmbTableFilter.Items.Add("All");
+                        cmbTableFilter.Items.AddRange(tables.ToArray());
+                        cmbTableFilter.SelectedIndex = 0; // Default to "All"
+                    }
+                }
+            }
 
             LoadAuditLogs();
         }
 
-        private void LoadAuditLogs(string filterTable = "All")
+        private void LoadAuditLogs()
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
+
+            // 修正 1：改用 .Text 獲取下拉選單目前選中的文字，若為空則預設為 "All"
+            string filterTable = string.IsNullOrEmpty(cmbTableFilter.Text) ? "All" : cmbTableFilter.Text;
+
+            System.Text.StringBuilder queryBuilder = new System.Text.StringBuilder(@"
+        SELECT 
+            AuditLogId AS ID,
+            ChangedDate AS Date,
+            TableName AS `Table`,
+            RecordId AS RecordID,
+            Action AS Action,
+            Username AS User,
+            Description AS Description
+        FROM audit_log");
+
+            if (filterTable != "All")
+            {
+                queryBuilder.Append(" WHERE TableName = @TableName");
+            }
+
+            queryBuilder.Append(" ORDER BY ChangedDate DESC LIMIT 500");
 
             try
             {
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
                     con.Open();
-
-                    string query = @"
-                        SELECT 
-                            AuditLogId as 'ID',
-                            ChangedDate as 'Date',
-                            TableName as 'Table',
-                            RecordId as 'Record ID',
-                            Action as 'Action',
-                            Username as 'User',
-                            Description as 'Description'
-                        FROM audit_log";
-
-                    if (filterTable != "All")
-                        query += " WHERE TableName = @TableName";
-
-                    query += " ORDER BY ChangedDate DESC LIMIT 500";
-
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    using (MySqlCommand cmd = new MySqlCommand(queryBuilder.ToString(), con))
                     {
+                        // 修正 2：補上遺漏的 SQL 參數
                         if (filterTable != "All")
-                            cmd.Parameters.AddWithValue("@TableName", filterTable);
+                        {
+                            cmd.Parameters.Add("@TableName", MySqlDbType.VarChar).Value = filterTable;
+                        }
 
-                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-
-                        dgvAuditLogs.DataSource = dt;
+                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            dgvAuditLogs.DataSource = dt;
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading audit logs: " + ex.Message);
+                MessageBox.Show($"Error loading audit logs: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -216,7 +240,7 @@ namespace _4915project
         }
 
         // ==================== STOCK REPORT ====================
-        private void LoadStockReport()
+        public void LoadStockReport()
         {
             string query = @"
         SELECT 
@@ -255,7 +279,7 @@ namespace _4915project
         }
         private void LoadReportToGrid(string query, string reportTitle)
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
 
             try
             {
@@ -285,7 +309,7 @@ namespace _4915project
 
         private void cmbTableFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadReport();
+            LoadAuditLogs();
         }
 
         private void cmbReportType_SelectedIndexChanged(object sender, EventArgs e)
@@ -302,7 +326,7 @@ namespace _4915project
 
         private int GetPendingOrdersCount()
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             // Use COUNT(*) and join the tables on a matching ID (e.g., MaterialID)
             string penOrder = @"
         SELECT COUNT(*) 
@@ -335,7 +359,7 @@ namespace _4915project
 
         private int GetLowStockCount()
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             // Use COUNT(*) and join the tables on a matching ID (e.g., MaterialID)
             string lowStock = @"
         SELECT COUNT(*) 
@@ -369,7 +393,7 @@ namespace _4915project
 
         private int GetOpenComplaintsCount()
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             // Use COUNT(*) and join the tables on a matching ID (e.g., MaterialID)
             string complaint = @"
         SELECT COUNT(*) 
@@ -403,7 +427,7 @@ namespace _4915project
         {
             try
             {
-                string constring = "server=localhost;user id=root;password=;database=4915";
+                
 
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -452,14 +476,41 @@ namespace _4915project
                                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            this.Close();
+            Application.Exit();
         }
 
         private void SalesOrder_Click(object sender, EventArgs e)
         {
-            FormOrder formOrder = new FormOrder();
+            SalesOrder formOrder = new SalesOrder();
             formOrder.Show();
             this.Hide();
+        }
+
+        private void Inventory_Click(object sender, EventArgs e)
+        {
+            Inventory inventory = new Inventory();
+            inventory.Show();
+            this.Close();
+        }
+
+        private void btSetting_Click(object sender, EventArgs e)
+        {
+            FormSetting setting = new FormSetting();
+            setting.Show();
+        }
+
+        private void Logistics_Click(object sender, EventArgs e)
+        {
+            FormLogistics logistics = new FormLogistics();
+            logistics.Show();
+            this.Close();
+        }
+
+        private void AfterSales_Click(object sender, EventArgs e)
+        {
+            AfterSales afterSales = new AfterSales();
+            afterSales.Show();
+            this.Close();
         }
     }
 }

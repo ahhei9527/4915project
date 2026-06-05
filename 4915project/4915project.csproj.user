@@ -1,28 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Compile Update="addCompany.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AddCust.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AfterSales.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="DashBoard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CreateOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="editOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="AddEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Inventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Logistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="NewComplaint.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="SalesOrder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Form4.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Form5.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Form6.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Form7.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Form8.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="LoginPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ViewEditComplaint.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

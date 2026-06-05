@@ -13,12 +13,8 @@
         "packagesPath": "C:\\Users\\hoche\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
           "C:\\Users\\hoche\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,6 +51,10 @@
             "MySql.Data": {
               "target": "Package",
               "version": "[9.7.0, )"
+            },
+            "iTextSharp": {
+              "target": "Package",
+              "version": "[5.5.13.5, )"
             }
           },
           "imports": [
