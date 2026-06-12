@@ -178,7 +178,7 @@ namespace ITP4915M
         {
             LoadComplaint();
             string connectionString = "server=localhost;user id=root;password=;database=4915";
-            string query = @"SELECT ComplaintID FROM complaint";
+            string query = @"SELECT c.ComplaintID, u.UserID FROM complaint c, user.u";
             using (MySqlConnection con = new MySqlConnection(connectionString))
             {
                 using (MySqlCommand cmd = new MySqlCommand(query, con))

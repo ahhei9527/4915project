@@ -231,8 +231,8 @@ namespace ITP4915M
                     string query = @"SELECT s.*, c.name AS custName
                      FROM salesorder s
                      INNER JOIN customer c ON s.CustomerID = c.CustomerID
-                     WHERE s.OrderDate > @StartDate 
-                       AND s.OrderDate < @EndDate
+                     WHERE s.OrderDate >= @StartDate 
+                       AND s.OrderDate <= @EndDate
                        AND s.Status = @Status;";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
