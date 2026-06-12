@@ -344,10 +344,12 @@ namespace ITP4915M
                     {
                         checkConfCmd.Parameters.AddWithValue("@ShipmentID", newShipmentID);
                         object confResult = checkConfCmd.ExecuteScalar();
+
+                        // 🎯 修正：只有當真的撈到資料（不為 null）時，才算存在
                         if (confResult != null && confResult != DBNull.Value)
                         {
                             isConfirmationExisting = true;
-                            confirmationID = confResult.ToString(); // 👈 成功同時取得現有的 ID！
+                            confirmationID = confResult.ToString();
                         }
                         else
                         {
@@ -409,17 +411,19 @@ namespace ITP4915M
                             // 2. 同步更新銷售訂單 salesorder 的狀態與交期
                             // ============================================================
                             string updateOrder = @"
-                        UPDATE salesorder 
-                        SET Status = @OrderStatus, 
-                            EstimatedDeliveryDate = @EstimatedDeliveryDate
-                        WHERE OrderID = @OrderID;";
+                            UPDATE salesorder 
+                            SET Status = @OrderStatus, 
+                                EstimatedDeliveryDate = @EstimatedDeliveryDate
+                            WHERE OrderID = @OrderID;";
                             using (MySqlCommand cmd = new MySqlCommand(updateOrder, con, transaction))
                             {
                                 cmd.Parameters.AddWithValue("@OrderStatus", newOrderStatus);
                                 cmd.Parameters.AddWithValue("@EstimatedDeliveryDate", newEstimatedDate);
-                                cmd.Parameters.AddWithValue("@OrderID", OrderID);
+                                cmd.Parameters.AddWithValue("@OrderID", newOrderID); // 🎯 已修正：改用畫面上取得的 newOrderID
                                 cmd.ExecuteNonQuery();
-                                UpdateSalesOrderAudit(newOrderStatus, newEstimatedDate, OrderID);
+
+                                // 審計記錄同步修正變數名稱
+                                UpdateSalesOrderAudit(newOrderStatus, newEstimatedDate, newOrderID);
                             }
 
                             // ============================================================
@@ -429,12 +433,13 @@ namespace ITP4915M
                             {
                                 // 情況 A：已有關聯資料，直接更新備註條件
                                 string updateDelivery = @"
-                            UPDATE deliveryconfirmation 
-                            SET ItemCondition = @Remark 
-                            WHERE ShipmentID = @ShipmentID;";
+        UPDATE deliveryconfirmation 
+        SET ItemCondition = @Remark 
+        WHERE ShipmentID = @ShipmentID;";
                                 using (MySqlCommand cmd = new MySqlCommand(updateDelivery, con, transaction))
                                 {
                                     cmd.Parameters.AddWithValue("@Remark", newRemark);
+                                    cmd.Parameters.AddWithValue("@ShipmentID", newShipmentID); // 補上遺漏的參數
                                     cmd.ExecuteNonQuery();
                                     UpdateDeliveryconfirmationAudit(newRemark, confirmationID, Remark);
                                 }
@@ -461,26 +466,29 @@ namespace ITP4915M
                                             string lastNumberStr = lastID.Substring(lastID.Length - 3);
                                             if (int.TryParse(lastNumberStr, out int lastNumber))
                                             {
-                                                nextNumber = lastNumber + 1; // 序號加 1
+                                                nextNumber = lastNumber + 1; // 數字加 1
                                             }
                                         }
                                     }
                                 }
 
-                                // 格式化為 3 位數，例如 1 變 CONF001，12 變 CONF012
-                                string generatedConfirmID = prefix + nextNumber.ToString("D3");
+                                // 格式化為新 ID（例如 CONF006）
+                                string newConfirmationID = prefix + nextNumber.ToString("D3");
 
-                                // 執行 INSERT
+                                // 執行將新生成的 ID 寫入資料庫的 INSERT 語句
                                 string insertDelivery = @"
-                            INSERT INTO deliveryconfirmation (ConfirmationID, ShipmentID, ItemCondition) 
-                            VALUES (@ConfirmationID, @ShipmentID, @Remark);";
+                                    INSERT INTO deliveryconfirmation (ConfirmationID, ShipmentID, ItemCondition) 
+                                    VALUES (@ConfirmationID, @ShipmentID, @Remark);";
+
                                 using (MySqlCommand cmd = new MySqlCommand(insertDelivery, con, transaction))
                                 {
-                                    cmd.Parameters.AddWithValue("@ConfirmationID", generatedConfirmID);
+                                    cmd.Parameters.AddWithValue("@ConfirmationID", newConfirmationID);
                                     cmd.Parameters.AddWithValue("@ShipmentID", newShipmentID);
                                     cmd.Parameters.AddWithValue("@Remark", newRemark);
                                     cmd.ExecuteNonQuery();
-                                    CreateConfirmationAudit(generatedConfirmID, newShipmentID, newRemark);
+
+                                    // 如果有審計函數，傳入新生成的 ID
+                                    AddDeliveryconfirmationAudit(newConfirmationID, newShipmentID, newRemark);
                                 }
                             }
 
@@ -903,7 +911,7 @@ namespace ITP4915M
                         metaTable.SetWidths(new float[] { 1f, 1f });
 
                         // 左欄與右欄資料
-                        metaTable.AddCell(new PdfPCell(new Phrase($"Delivery ID: DN001", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 8f });
+                        metaTable.AddCell(new PdfPCell(new Phrase($"Delivery ID: {cmbDeliveryID.SelectedItem?.ToString()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 8f });
                         metaTable.AddCell(new PdfPCell(new Phrase($"Shipment ID: {cmbShipID.SelectedItem?.ToString()}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 8f });
 
                         metaTable.AddCell(new PdfPCell(new Phrase($"Order ID: {tbOrderID.Text}", bodyFont)) { Border = PdfPCell.NO_BORDER, PaddingBottom = 8f });
