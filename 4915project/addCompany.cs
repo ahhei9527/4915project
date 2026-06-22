@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,14 +11,14 @@ using MySql.Data.MySqlClient;
 
 namespace _4915project
 {
-    public partial class addCompany : Form
+    public partial class AddCompany : Form
     {
-        public addCompany()
+        public AddCompany()
         {
             InitializeComponent();
         }
 
-        private void addCompany_Load(object sender, EventArgs e)
+        private void AddCompany_Load(object sender, EventArgs e)
         {
             cmbComLan.Items.AddRange(new string[] { "Chinese", "English" });
             cmbComWH.Items.AddRange(new string[] { "WH-A-12-03", "WH-A-12-04", "WH-B-05-01", "WH-C-08-02" });

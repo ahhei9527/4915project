@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
 using Mysqlx.Crud;
 using System;
 using System.Collections.Generic;
@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace _4915project
 {
-    public partial class editOrder : Form
+    public partial class EditOrder : Form
     {
-        public editOrder()
+        public EditOrder()
         {
             InitializeComponent();
         }
@@ -57,11 +57,11 @@ namespace _4915project
                         }
                     }
                 }
-            } 
+            }
             this.Close();
         }
 
-        private void UpdateOrderAudit(string newDate, string newStatus,string orderID, string oldDate, string oldStatus)
+        private void UpdateOrderAudit(string newDate, string newStatus, string orderID, string oldDate, string oldStatus)
         {
             try
             {
@@ -75,8 +75,8 @@ namespace _4915project
                     recordId: orderID,
                     action: "Update Order",
                     userId: CurrentUser.UserID,
-                    oldValues:oldDate + ", "+ oldStatus, // 這裡可以擴充為實際的舊值物件
-                    newValues:newDate + ", " + newStatus // 這裡可以擴充為實際的新值物件
+                    oldValues: oldDate + ", " + oldStatus, // 這裡可以擴充為實際的舊值物件
+                    newValues: newDate + ", " + newStatus // 這裡可以擴充為實際的新值物件
                 );
             }
             catch (Exception ex)

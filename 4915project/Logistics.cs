@@ -1,4 +1,5 @@
 ﻿using _4915project;
+using Google.Protobuf.WellKnownTypes;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using MySql.Data.MySqlClient;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace ITP4915M
+namespace _4915project
 {
     public partial class FormLogistics : Form
     {
@@ -48,7 +49,7 @@ namespace ITP4915M
             cbshipStat.Items.AddRange(new string[] { "In Transit", "Delivered", "Delayed" });
             cbMethod.Items.AddRange(new string[] { "Standard", "Express Delivery" });
 
-            
+
 
             using (MySqlConnection con = new MySqlConnection(constring))
             {
@@ -159,7 +160,7 @@ namespace ITP4915M
             }
 
             string selectedOrderID = cbOrderID.SelectedItem.ToString();
-            
+
 
             // 使用 LEFT JOIN 確保即使是剛建立、還沒有出貨單(shipment)的新訂單，也能查出訂單狀態
             string query = @"
@@ -257,7 +258,7 @@ namespace ITP4915M
 
         private void GenerateShipmentID()
         {
-            
+
             string query2 = @"
                 SELECT ShipmentID 
                 FROM shipment 
@@ -318,7 +319,7 @@ namespace ITP4915M
                 return;
             }
 
-            
+
 
             // 狀態標記變數
             bool isShipmentExisting = false;
@@ -488,7 +489,7 @@ namespace ITP4915M
                                     cmd.ExecuteNonQuery();
 
                                     // 如果有審計函數，傳入新生成的 ID
-                                    AddDeliveryconfirmationAudit(newConfirmationID, newShipmentID, newRemark);
+                                    //AddDeliveryconfirmationAudit(newConfirmationID, newShipmentID, newRemark);
                                 }
                             }
 
@@ -657,7 +658,7 @@ namespace ITP4915M
         {
             try
             {
-                
+
 
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -711,7 +712,7 @@ namespace ITP4915M
 
         private void GenDeliveryNoteID()
         {
-            
+
 
             // 修正：統一使用相同的欄位名稱 DNNumber (避免欄位名稱不一致報錯)
             string query = @"
@@ -771,7 +772,7 @@ namespace ITP4915M
         {
             if (cmbShipID.SelectedItem == null) return;
 
-            
+
             string shipmentID = cmbShipID.SelectedItem.ToString().Trim();
 
             string queryOrderInfo = @"
@@ -1002,7 +1003,7 @@ namespace ITP4915M
         {
             ExportToPDF();
             SaveToDatabase();
-            
+
             string queryUpdateShipment = @"
             UPDATE shipment s
             INNER JOIN salesorder so ON s.OrderID = so.OrderID
@@ -1057,7 +1058,7 @@ namespace ITP4915M
 
         private void GetDeliveryID()
         {
-            
+
             string query = @"SELECT deliveryID FROM deliverynote";
             using (MySqlConnection con = new MySqlConnection(constring))
             {
@@ -1084,7 +1085,7 @@ namespace ITP4915M
 
         private void GenReplySlipID()
         {
-            
+
             string query = @"SELECT replySlipID FROM replyslip 
             WHERE replySlipID LIKE @Prefix ORDER BY replySlipID DESC LIMIT 1";
             using (MySqlConnection con = new MySqlConnection(constring))
@@ -1123,7 +1124,7 @@ namespace ITP4915M
 
         private void cmbDeliveryID_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
 
             // 【已修正】補上 WHERE 條件，避免撈出整張表
             string DNotequery = @"SELECT * FROM deliverynote WHERE deliveryID = @deliveryID";

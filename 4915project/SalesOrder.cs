@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
-namespace ITP4915M
+namespace _4915project
 {
     public partial class SalesOrder : Form
     {
@@ -29,7 +29,7 @@ namespace ITP4915M
         {
             try
             {
-                
+
 
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -90,13 +90,13 @@ namespace ITP4915M
 
         private void buttonCreateOrder_Click(object sender, EventArgs e)
         {
-            FormOrdelDetail CreateOrder = new FormOrdelDetail();
+            FormOrderDetail CreateOrder = new FormOrderDetail();
             CreateOrder.Show();
         }
 
         private void FormOrder_Load(object sender, EventArgs e)
         {
-            
+
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 con.Open();
@@ -139,7 +139,7 @@ namespace ITP4915M
 
         private void LoadReport()
         {
-            
+
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 con.Open();
@@ -158,7 +158,7 @@ namespace ITP4915M
         {
             string OrderIDSearch = textOrderID.Text;
             string CustSearch = textCust.Text;
-            
+
             string startDate = dateTimePickerStart.Value.ToString("yyyy-MM-dd");
             string endDate = dateTimePickerEnd.Value.ToString("yyyy-MM-dd");
             using (MySqlConnection con = new MySqlConnection(constring))
@@ -276,7 +276,7 @@ namespace ITP4915M
 
         private void buttonEditOrder_Click(object sender, EventArgs e)
         {
-            editOrder editOrderForm = new editOrder();
+            EditOrder editOrderForm = new EditOrder();
             editOrderForm.Show();
         }
 

@@ -1,6 +1,6 @@
-﻿namespace ITP4915M
+﻿namespace _4915project
 {
-    partial class FormOrdelDetail
+    partial class FormOrderDetail
     {
         /// <summary>
         /// Required designer variable.
@@ -68,10 +68,9 @@
             // 
             labelTitle.AutoSize = true;
             labelTitle.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            labelTitle.Location = new Point(18, 12);
-            labelTitle.Margin = new Padding(2, 0, 2, 0);
+            labelTitle.Location = new Point(28, 18);
             labelTitle.Name = "labelTitle";
-            labelTitle.Size = new Size(509, 30);
+            labelTitle.Size = new Size(760, 46);
             labelTitle.TabIndex = 1;
             labelTitle.Text = "Premium Living Centralized Manage System";
             // 
@@ -80,10 +79,9 @@
             labelOrderDetail.AutoSize = true;
             labelOrderDetail.FlatStyle = FlatStyle.Flat;
             labelOrderDetail.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            labelOrderDetail.Location = new Point(28, 48);
-            labelOrderDetail.Margin = new Padding(2, 0, 2, 0);
+            labelOrderDetail.Location = new Point(44, 74);
             labelOrderDetail.Name = "labelOrderDetail";
-            labelOrderDetail.Size = new Size(101, 20);
+            labelOrderDetail.Size = new Size(152, 30);
             labelOrderDetail.TabIndex = 12;
             labelOrderDetail.Text = "Order Detail";
             // 
@@ -92,10 +90,9 @@
             plOrderDetail.BorderStyle = BorderStyle.FixedSingle;
             plOrderDetail.Controls.Add(gbItem);
             plOrderDetail.Controls.Add(gbInformation);
-            plOrderDetail.Location = new Point(18, 61);
-            plOrderDetail.Margin = new Padding(2);
+            plOrderDetail.Location = new Point(28, 94);
             plOrderDetail.Name = "plOrderDetail";
-            plOrderDetail.Size = new Size(689, 470);
+            plOrderDetail.Size = new Size(1309, 720);
             plOrderDetail.TabIndex = 13;
             // 
             // gbItem
@@ -112,21 +109,18 @@
             gbItem.Controls.Add(label3UnitPrice);
             gbItem.Controls.Add(comboBoxProductIDName);
             gbItem.Controls.Add(labelProductIDName);
-            gbItem.Location = new Point(11, 135);
-            gbItem.Margin = new Padding(2);
+            gbItem.Location = new Point(17, 207);
             gbItem.Name = "gbItem";
-            gbItem.Padding = new Padding(2);
-            gbItem.Size = new Size(664, 310);
+            gbItem.Size = new Size(1273, 475);
             gbItem.TabIndex = 1;
             gbItem.TabStop = false;
             gbItem.Text = "Order Items - Order Item Details";
             // 
             // buttonCancel
             // 
-            buttonCancel.Location = new Point(585, 272);
-            buttonCancel.Margin = new Padding(2);
+            buttonCancel.Location = new Point(1144, 419);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(71, 22);
+            buttonCancel.Size = new Size(112, 34);
             buttonCancel.TabIndex = 11;
             buttonCancel.Text = "Cancel";
             buttonCancel.UseVisualStyleBackColor = true;
@@ -134,10 +128,9 @@
             // 
             // buttonSaveOrder
             // 
-            buttonSaveOrder.Location = new Point(480, 272);
-            buttonSaveOrder.Margin = new Padding(2);
+            buttonSaveOrder.Location = new Point(1002, 419);
             buttonSaveOrder.Name = "buttonSaveOrder";
-            buttonSaveOrder.Size = new Size(71, 22);
+            buttonSaveOrder.Size = new Size(112, 34);
             buttonSaveOrder.TabIndex = 10;
             buttonSaveOrder.Text = "Save Order";
             buttonSaveOrder.UseVisualStyleBackColor = true;
@@ -145,39 +138,35 @@
             // 
             // tbTotal
             // 
-            tbTotal.Location = new Point(567, 243);
-            tbTotal.Margin = new Padding(2);
+            tbTotal.Location = new Point(1115, 375);
             tbTotal.Name = "tbTotal";
             tbTotal.ReadOnly = true;
-            tbTotal.Size = new Size(91, 23);
+            tbTotal.Size = new Size(141, 30);
             tbTotal.TabIndex = 9;
             // 
             // labelTotalAmount
             // 
             labelTotalAmount.AutoSize = true;
-            labelTotalAmount.Location = new Point(448, 246);
-            labelTotalAmount.Margin = new Padding(2, 0, 2, 0);
+            labelTotalAmount.Location = new Point(928, 379);
             labelTotalAmount.Name = "labelTotalAmount";
-            labelTotalAmount.Size = new Size(115, 15);
+            labelTotalAmount.Size = new Size(175, 23);
             labelTotalAmount.TabIndex = 8;
             labelTotalAmount.Text = "Total Amount: HKD";
             // 
             // dgvOrderItems
             // 
             dgvOrderItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvOrderItems.Location = new Point(10, 72);
-            dgvOrderItems.Margin = new Padding(2);
+            dgvOrderItems.Location = new Point(16, 110);
             dgvOrderItems.Name = "dgvOrderItems";
             dgvOrderItems.RowHeadersWidth = 62;
-            dgvOrderItems.Size = new Size(646, 157);
+            dgvOrderItems.Size = new Size(1240, 241);
             dgvOrderItems.TabIndex = 7;
             // 
             // buttonAddItem
             // 
-            buttonAddItem.Location = new Point(585, 46);
-            buttonAddItem.Margin = new Padding(2);
+            buttonAddItem.Location = new Point(1144, 70);
             buttonAddItem.Name = "buttonAddItem";
-            buttonAddItem.Size = new Size(71, 22);
+            buttonAddItem.Size = new Size(112, 34);
             buttonAddItem.TabIndex = 6;
             buttonAddItem.Text = "Add Item";
             buttonAddItem.UseVisualStyleBackColor = true;
@@ -185,58 +174,52 @@
             // 
             // numericUpDownQuantity
             // 
-            numericUpDownQuantity.Location = new Point(542, 15);
-            numericUpDownQuantity.Margin = new Padding(2);
+            numericUpDownQuantity.Location = new Point(1075, 26);
             numericUpDownQuantity.Name = "numericUpDownQuantity";
-            numericUpDownQuantity.Size = new Size(115, 23);
+            numericUpDownQuantity.Size = new Size(181, 30);
             numericUpDownQuantity.TabIndex = 5;
             // 
             // labelQuantity
             // 
             labelQuantity.AutoSize = true;
-            labelQuantity.Location = new Point(482, 17);
-            labelQuantity.Margin = new Padding(2, 0, 2, 0);
+            labelQuantity.Location = new Point(980, 29);
             labelQuantity.Name = "labelQuantity";
-            labelQuantity.Size = new Size(58, 15);
+            labelQuantity.Size = new Size(89, 23);
             labelQuantity.TabIndex = 4;
             labelQuantity.Text = "Quantity:";
             // 
             // textBoxUnitPrice
             // 
-            textBoxUnitPrice.Location = new Point(373, 12);
-            textBoxUnitPrice.Margin = new Padding(2);
+            textBoxUnitPrice.Location = new Point(654, 26);
             textBoxUnitPrice.Name = "textBoxUnitPrice";
             textBoxUnitPrice.ReadOnly = true;
-            textBoxUnitPrice.Size = new Size(97, 23);
+            textBoxUnitPrice.Size = new Size(150, 30);
             textBoxUnitPrice.TabIndex = 3;
             // 
             // label3UnitPrice
             // 
             label3UnitPrice.AutoSize = true;
-            label3UnitPrice.Location = new Point(278, 15);
-            label3UnitPrice.Margin = new Padding(2, 0, 2, 0);
+            label3UnitPrice.Location = new Point(505, 31);
             label3UnitPrice.Name = "label3UnitPrice";
-            label3UnitPrice.Size = new Size(91, 15);
+            label3UnitPrice.Size = new Size(141, 23);
             label3UnitPrice.TabIndex = 2;
             label3UnitPrice.Text = "Unit Price: HKD";
             // 
             // comboBoxProductIDName
             // 
             comboBoxProductIDName.FormattingEnabled = true;
-            comboBoxProductIDName.Location = new Point(126, 15);
-            comboBoxProductIDName.Margin = new Padding(2);
+            comboBoxProductIDName.Location = new Point(245, 26);
             comboBoxProductIDName.Name = "comboBoxProductIDName";
-            comboBoxProductIDName.Size = new Size(117, 23);
+            comboBoxProductIDName.Size = new Size(182, 31);
             comboBoxProductIDName.TabIndex = 1;
             comboBoxProductIDName.SelectedIndexChanged += comboBoxProductIDName_SelectedIndexChanged;
             // 
             // labelProductIDName
             // 
             labelProductIDName.AutoSize = true;
-            labelProductIDName.Location = new Point(11, 17);
-            labelProductIDName.Margin = new Padding(2, 0, 2, 0);
+            labelProductIDName.Location = new Point(64, 29);
             labelProductIDName.Name = "labelProductIDName";
-            labelProductIDName.Size = new Size(115, 15);
+            labelProductIDName.Size = new Size(175, 23);
             labelProductIDName.TabIndex = 0;
             labelProductIDName.Text = "Product ID / Name:";
             // 
@@ -254,11 +237,9 @@
             gbInformation.Controls.Add(labelDate);
             gbInformation.Controls.Add(labelOrderID);
             gbInformation.Controls.Add(tbOrderID);
-            gbInformation.Location = new Point(11, 8);
-            gbInformation.Margin = new Padding(2);
+            gbInformation.Location = new Point(17, 12);
             gbInformation.Name = "gbInformation";
-            gbInformation.Padding = new Padding(2);
-            gbInformation.Size = new Size(664, 123);
+            gbInformation.Size = new Size(1273, 189);
             gbInformation.TabIndex = 0;
             gbInformation.TabStop = false;
             gbInformation.Text = "Order Header - Basic Order Information";
@@ -266,9 +247,10 @@
             // cmbCustName
             // 
             cmbCustName.FormattingEnabled = true;
-            cmbCustName.Location = new Point(118, 49);
+            cmbCustName.Location = new Point(255, 71);
+            cmbCustName.Margin = new Padding(5);
             cmbCustName.Name = "cmbCustName";
-            cmbCustName.Size = new Size(160, 23);
+            cmbCustName.Size = new Size(329, 31);
             cmbCustName.TabIndex = 12;
             cmbCustName.SelectedIndexChanged += cmbCustName_SelectedIndexChanged;
             // 
@@ -276,117 +258,105 @@
             // 
             cbStatus.FormattingEnabled = true;
             cbStatus.Items.AddRange(new object[] { "Quoted", "Paid" });
-            cbStatus.Location = new Point(455, 76);
-            cbStatus.Margin = new Padding(2);
+            cbStatus.Location = new Point(917, 120);
             cbStatus.Name = "cbStatus";
-            cbStatus.Size = new Size(96, 23);
+            cbStatus.Size = new Size(197, 31);
             cbStatus.TabIndex = 11;
             // 
             // lblstatus
             // 
             lblstatus.AutoSize = true;
-            lblstatus.Location = new Point(410, 78);
-            lblstatus.Margin = new Padding(2, 0, 2, 0);
+            lblstatus.Location = new Point(846, 123);
             lblstatus.Name = "lblstatus";
-            lblstatus.Size = new Size(44, 15);
+            lblstatus.Size = new Size(67, 23);
             lblstatus.TabIndex = 10;
             lblstatus.Text = "Status:";
             // 
             // tbAddress
             // 
-            tbAddress.Location = new Point(113, 82);
-            tbAddress.Margin = new Padding(2);
+            tbAddress.Location = new Point(255, 120);
             tbAddress.Multiline = true;
             tbAddress.Name = "tbAddress";
-            tbAddress.Size = new Size(166, 31);
+            tbAddress.Size = new Size(329, 45);
             tbAddress.TabIndex = 9;
             // 
             // labelDeliveryAddress
             // 
             labelDeliveryAddress.AutoSize = true;
-            labelDeliveryAddress.Location = new Point(11, 83);
-            labelDeliveryAddress.Margin = new Padding(2, 0, 2, 0);
+            labelDeliveryAddress.Location = new Point(92, 123);
             labelDeliveryAddress.Name = "labelDeliveryAddress";
-            labelDeliveryAddress.Size = new Size(103, 15);
+            labelDeliveryAddress.Size = new Size(155, 23);
             labelDeliveryAddress.TabIndex = 8;
             labelDeliveryAddress.Text = "Delivery Address:";
             // 
             // deliveryDate
             // 
-            deliveryDate.Location = new Point(456, 45);
-            deliveryDate.Margin = new Padding(2);
+            deliveryDate.Location = new Point(919, 72);
             deliveryDate.Name = "deliveryDate";
-            deliveryDate.Size = new Size(126, 23);
+            deliveryDate.Size = new Size(196, 30);
             deliveryDate.TabIndex = 7;
             // 
             // lblRequestDeliveryDate
             // 
             lblRequestDeliveryDate.AutoSize = true;
-            lblRequestDeliveryDate.Location = new Point(318, 47);
-            lblRequestDeliveryDate.Margin = new Padding(2, 0, 2, 0);
+            lblRequestDeliveryDate.Location = new Point(708, 75);
             lblRequestDeliveryDate.Name = "lblRequestDeliveryDate";
-            lblRequestDeliveryDate.Size = new Size(134, 15);
+            lblRequestDeliveryDate.Size = new Size(203, 23);
             lblRequestDeliveryDate.TabIndex = 6;
             lblRequestDeliveryDate.Text = "Request Delivery Date:";
             // 
             // labelCustomerID
             // 
             labelCustomerID.AutoSize = true;
-            labelCustomerID.Location = new Point(11, 49);
-            labelCustomerID.Margin = new Padding(2, 0, 2, 0);
+            labelCustomerID.Location = new Point(93, 75);
             labelCustomerID.Name = "labelCustomerID";
-            labelCustomerID.Size = new Size(102, 15);
+            labelCustomerID.Size = new Size(154, 23);
             labelCustomerID.TabIndex = 4;
             labelCustomerID.Text = "Customer Name:";
             // 
             // OrderDate
             // 
-            OrderDate.Location = new Point(455, 17);
-            OrderDate.Margin = new Padding(2);
+            OrderDate.Location = new Point(917, 29);
             OrderDate.Name = "OrderDate";
-            OrderDate.Size = new Size(127, 23);
+            OrderDate.Size = new Size(197, 30);
             OrderDate.TabIndex = 3;
             // 
             // labelDate
             // 
             labelDate.AutoSize = true;
-            labelDate.Location = new Point(381, 19);
-            labelDate.Margin = new Padding(2, 0, 2, 0);
+            labelDate.Location = new Point(801, 32);
             labelDate.Name = "labelDate";
-            labelDate.Size = new Size(73, 15);
+            labelDate.Size = new Size(110, 23);
             labelDate.TabIndex = 2;
             labelDate.Text = "Order Date:";
             // 
             // labelOrderID
             // 
             labelOrderID.AutoSize = true;
-            labelOrderID.Location = new Point(11, 21);
-            labelOrderID.Margin = new Padding(2, 0, 2, 0);
+            labelOrderID.Location = new Point(166, 32);
             labelOrderID.Name = "labelOrderID";
-            labelOrderID.Size = new Size(55, 15);
+            labelOrderID.Size = new Size(83, 23);
             labelOrderID.TabIndex = 1;
             labelOrderID.Text = "OrderID:";
             // 
             // tbOrderID
             // 
-            tbOrderID.Location = new Point(67, 19);
-            tbOrderID.Margin = new Padding(2);
+            tbOrderID.Location = new Point(255, 29);
             tbOrderID.Name = "tbOrderID";
-            tbOrderID.Size = new Size(211, 23);
+            tbOrderID.Size = new Size(329, 30);
             tbOrderID.TabIndex = 0;
             // 
-            // FormOrdelDetail
+            // FormOrderDetail
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(11F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(725, 554);
+            ClientSize = new Size(1370, 860);
             Controls.Add(labelOrderDetail);
             Controls.Add(plOrderDetail);
             Controls.Add(labelTitle);
-            Margin = new Padding(2);
-            Name = "FormOrdelDetail";
+            Name = "FormOrderDetail";
             Text = "Order";
-            Load += FormOrdelDetail_Load;
+            Load += FormOrderDetail_Load;
             plOrderDetail.ResumeLayout(false);
             gbItem.ResumeLayout(false);
             gbItem.PerformLayout();

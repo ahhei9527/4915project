@@ -1,4 +1,4 @@
-﻿using _4915project;
+using _4915project;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Tsp;
 using System;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace ITP4915M
+namespace _4915project
 {
     public partial class ViewEditComplaint : Form
     {
@@ -198,8 +198,8 @@ namespace ITP4915M
                 }
             }
         }
-        private void UpdateComplintAudit(string ComplaintID, string cmbUserID, 
-            string cbType, string resolutionDate, 
+        private void UpdateComplintAudit(string ComplaintID, string cmbUserID,
+            string cbType, string resolutionDate,
             string tbResolution, string tbDescription)
         {
             // 這裡可以撰寫新增投訴紀錄到審計表的程式碼

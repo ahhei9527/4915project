@@ -2,6 +2,7 @@
 using Google.Protobuf.Collections;
 using MySql.Data.MySqlClient;
 using Mysqlx.Crud;
+using Org.BouncyCastle.Asn1.Cmp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,8 +17,9 @@ using System.Windows.Forms;
 using static Mysqlx.Datatypes.Scalar.Types;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace ITP4915M
+namespace _4915project
 {
     public partial class Inventory : Form
     {
@@ -44,7 +46,7 @@ namespace ITP4915M
         private void Inventory_Load(object sender, EventArgs e)
         {
             cmbStatus.Items.AddRange(new string[] { "In Progress", "Completed" });
-            
+
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 con.Open();
@@ -108,7 +110,7 @@ namespace ITP4915M
 
         private void LoadPID()
         {
-            
+
             string query = "SELECT ProductID FROM product";
             using (MySqlConnection con = new MySqlConnection(constring))
             {
@@ -135,7 +137,7 @@ namespace ITP4915M
 
         private void GenSN()
         {
-            
+
             string prefix = "SN"; // 2 碼文字
 
             // 💡 修正點 1：預設的流水號格式要對齊 SN + 8位數 = SN00000001 (總長10碼)
@@ -202,7 +204,7 @@ namespace ITP4915M
 
         private void LoadInward()
         {
-            
+
             string query = @"
         SELECT 
             i.InventoryID, 
@@ -272,7 +274,7 @@ namespace ITP4915M
 
         private string GenerateBatchID()
         {
-            
+
             string prefix = "BATCH"; // 5 碼文字
             string BATCHID = prefix + "001"; // 預設如果資料庫沒資料，就是第一筆 BATCH001
 
@@ -324,7 +326,7 @@ namespace ITP4915M
 
         private void LoadStock()
         {
-            
+
             string query = @"
             SELECT 
             r.Name as 'Material Name',
@@ -363,7 +365,7 @@ namespace ITP4915M
 
         private void btSubmit_Click(object sender, EventArgs e)
         {
-            
+
 
             // 1. 定義所有的 SQL 語句
             string queryGetMaterialInfo = "SELECT MaterialID, ReorderLevel FROM rawmaterial WHERE Name = @MaterialName LIMIT 1";
@@ -440,9 +442,9 @@ namespace ITP4915M
                         cmdInsert.Parameters.AddWithValue("@ReorderLevel", reorderLevel);
 
                         cmdInsert.ExecuteNonQuery();
-                        InwardAddAudit(tbInventoryID.Text.ToString(), materialID.ToString(), 
-                            cbWearhouse.SelectedItem.ToString(), numQuantity.Value.ToString(), 
-                            date.Value.ToString(), reorderLevel.ToString(), 
+                        InwardAddAudit(tbInventoryID.Text.ToString(), materialID.ToString(),
+                            cbWearhouse.SelectedItem.ToString(), numQuantity.Value.ToString(),
+                            date.Value.ToString(), reorderLevel.ToString(),
                             cmbPID.SelectedItem?.ToString(), tbSN.Text.ToString());
                     }
                     using (MySqlCommand cmdBatch = new MySqlCommand(queryInsertBatch, con))
@@ -452,13 +454,13 @@ namespace ITP4915M
                         cmdBatch.Parameters.AddWithValue("@EndDate", date.Value.AddDays(7).ToString()); // 假設生產批次一週內完成
                         cmdBatch.Parameters.AddWithValue("@Status", cmbStatus.SelectedItem?.ToString());
                         cmdBatch.ExecuteNonQuery();
-                        AddBatchAudit(cmbBatch.SelectedItem?.ToString(), date.Value.ToString(), 
+                        AddBatchAudit(cmbBatch.SelectedItem?.ToString(), date.Value.ToString(),
                             date.Value.AddDays(7).ToString(), cmbStatus.SelectedItem?.ToString());
 
                     }
 
                     using (MySqlCommand cmdInstance = new MySqlCommand(queryInsertInstance, con))
-                    {   
+                    {
                         cmdInstance.Parameters.AddWithValue("@SerialNumber", tbSN.Text.ToString());
                         cmdInstance.Parameters.AddWithValue("@ProductID", cmbPID.SelectedItem?.ToString());
                         cmdInstance.Parameters.AddWithValue("@BatchID", cmbBatch.SelectedItem?.ToString());
@@ -544,7 +546,7 @@ namespace ITP4915M
             }
         }
 
-        private void AddProductInstance(string SN, string PID, string BID, 
+        private void AddProductInstance(string SN, string PID, string BID,
             string PDate, string CStatus, string WarrantyEndDate)
         {
             try
@@ -578,7 +580,7 @@ namespace ITP4915M
 
         private void GenerateInventoryID()
         {
-            
+
             string prefix = "INV"; // ORD
 
             // 查詢今天最大的流水號
@@ -622,7 +624,7 @@ namespace ITP4915M
         }
         private void btSearch_Click(object sender, EventArgs e)
         {
-            
+
 
             // 1. 先寫好基礎的 SQL 語句（必定會執行的部分）
             string query = @"SELECT
@@ -700,7 +702,7 @@ namespace ITP4915M
         {
             try
             {
-                
+
 
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {

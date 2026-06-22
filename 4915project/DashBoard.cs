@@ -1,7 +1,4 @@
-﻿using ITP4915M;
-using Microsoft.VisualBasic.ApplicationServices;
-using MySql.Data.MySqlClient;
-using Mysqlx.Crud;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -34,81 +31,58 @@ namespace _4915project
         // ====================== TAB 1: Audit Logs ======================
         private void SetupAuditTab()
         {
-            string query = "SELECT TableName From audit_log";
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        HashSet<string> tables = new HashSet<string>();
-                        while (reader.Read())
-                        {
-                            string tableName = reader["TableName"]?.ToString() ?? "Unknown";
-                            tables.Add(tableName);
-                        }
-                        cmbTableFilter.Items.Clear();
-                        cmbTableFilter.Items.Add("All");
-                        cmbTableFilter.Items.AddRange(tables.ToArray());
-                        cmbTableFilter.SelectedIndex = 0; // Default to "All"
-                    }
-                }
-            }
+            cmbTableFilter.Items.Clear();
+            cmbTableFilter.Items.Add("All");
+            cmbTableFilter.Items.Add("user");
+            cmbTableFilter.Items.Add("complaint");
+            cmbTableFilter.Items.Add("customdesign");
+            cmbTableFilter.SelectedIndex = 0;
 
             LoadAuditLogs();
         }
 
-        private void LoadAuditLogs()
+        private void LoadAuditLogs(string filterTable = "All")
         {
             
-
-            // 修正 1：改用 .Text 獲取下拉選單目前選中的文字，若為空則預設為 "All"
-            string filterTable = string.IsNullOrEmpty(cmbTableFilter.Text) ? "All" : cmbTableFilter.Text;
-
-            System.Text.StringBuilder queryBuilder = new System.Text.StringBuilder(@"
-        SELECT 
-            AuditLogId AS ID,
-            ChangedDate AS Date,
-            TableName AS `Table`,
-            RecordId AS RecordID,
-            Action AS Action,
-            Username AS User,
-            Description AS Description
-        FROM audit_log");
-
-            if (filterTable != "All")
-            {
-                queryBuilder.Append(" WHERE TableName = @TableName");
-            }
-
-            queryBuilder.Append(" ORDER BY ChangedDate DESC LIMIT 500");
 
             try
             {
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
                     con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(queryBuilder.ToString(), con))
-                    {
-                        // 修正 2：補上遺漏的 SQL 參數
-                        if (filterTable != "All")
-                        {
-                            cmd.Parameters.Add("@TableName", MySqlDbType.VarChar).Value = filterTable;
-                        }
 
-                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
-                        {
-                            DataTable dt = new DataTable();
-                            da.Fill(dt);
-                            dgvAuditLogs.DataSource = dt;
-                        }
+                    string query = @"
+                        SELECT 
+                            AuditLogId as 'ID',
+                            ChangedDate as 'Date',
+                            TableName as 'Table',
+                            RecordId as 'Record ID',
+                            Action as 'Action',
+                            Username as 'User',
+                            Description as 'Description'
+                        FROM audit_log";
+
+                    if (filterTable != "All")
+                        query += " WHERE TableName = @TableName";
+
+                    query += " ORDER BY ChangedDate DESC LIMIT 500";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        if (filterTable != "All")
+                            cmd.Parameters.AddWithValue("@TableName", filterTable);
+
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        dgvAuditLogs.DataSource = dt;
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading audit logs: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error loading audit logs: " + ex.Message);
             }
         }
 
@@ -309,7 +283,22 @@ namespace _4915project
 
         private void cmbTableFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadAuditLogs();
+            string selected = cmbTableFilter.SelectedItem?.ToString() ?? "All";
+            if (selected == "(All)")
+            {
+                selected = "All";
+            }
+            LoadAuditLogs(selected);
+        }
+
+        private void btnRefreshAudit_Click(object sender, EventArgs e)
+        {
+            string selected = cmbTableFilter.SelectedItem?.ToString() ?? "All";
+            if (selected == "(All)")
+            {
+                selected = "All";
+            }
+            LoadAuditLogs(selected);
         }
 
         private void cmbReportType_SelectedIndexChanged(object sender, EventArgs e)
@@ -511,6 +500,30 @@ namespace _4915project
             AfterSales afterSales = new AfterSales();
             afterSales.Show();
             this.Close();
+        }
+
+        private void Menu_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void Production_Click(object sender, EventArgs e)
+        {
+            Production production = new Production();
+            production.Show();
+            this.Close();
+        }
+
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

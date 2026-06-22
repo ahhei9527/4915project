@@ -38,7 +38,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(200, 405);
+            button1.Location = new Point(612, 481);
             button1.Name = "button1";
             button1.Size = new Size(112, 34);
             button1.TabIndex = 0;
@@ -48,18 +48,18 @@
             // 
             // textBoxEmail
             // 
-            textBoxEmail.Location = new Point(200, 192);
+            textBoxEmail.Location = new Point(526, 332);
             textBoxEmail.Name = "textBoxEmail";
-            textBoxEmail.Size = new Size(150, 30);
+            textBoxEmail.Size = new Size(308, 30);
             textBoxEmail.TabIndex = 1;
             // 
             // textBoxPwd
             // 
             textBoxPwd.AcceptsReturn = true;
-            textBoxPwd.Location = new Point(200, 327);
+            textBoxPwd.Location = new Point(526, 390);
             textBoxPwd.Name = "textBoxPwd";
             textBoxPwd.PasswordChar = '*';
-            textBoxPwd.Size = new Size(150, 30);
+            textBoxPwd.Size = new Size(308, 30);
             textBoxPwd.TabIndex = 2;
             textBoxPwd.UseSystemPasswordChar = true;
             textBoxPwd.KeyDown += textBoxPwd_KeyDown;
@@ -67,7 +67,7 @@
             // Email
             // 
             Email.AutoSize = true;
-            Email.Location = new Point(107, 195);
+            Email.Location = new Point(463, 339);
             Email.Name = "Email";
             Email.Size = new Size(57, 23);
             Email.TabIndex = 3;
@@ -76,7 +76,7 @@
             // Pwd
             // 
             Pwd.AutoSize = true;
-            Pwd.Location = new Point(107, 327);
+            Pwd.Location = new Point(430, 393);
             Pwd.Name = "Pwd";
             Pwd.Size = new Size(90, 23);
             Pwd.TabIndex = 4;
@@ -86,7 +86,7 @@
             // 
             LTitle.AutoSize = true;
             LTitle.Font = new Font("Microsoft JhengHei UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            LTitle.Location = new Point(55, 35);
+            LTitle.Location = new Point(463, 217);
             LTitle.Margin = new Padding(5, 0, 5, 0);
             LTitle.Name = "LTitle";
             LTitle.Size = new Size(381, 72);
@@ -98,7 +98,7 @@
             // 
             AutoScaleDimensions = new SizeF(11F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(506, 549);
+            ClientSize = new Size(1370, 860);
             Controls.Add(LTitle);
             Controls.Add(Pwd);
             Controls.Add(Email);

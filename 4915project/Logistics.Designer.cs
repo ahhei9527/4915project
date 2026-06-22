@@ -1,4 +1,4 @@
-﻿namespace ITP4915M
+﻿namespace _4915project
 {
     partial class FormLogistics
     {
@@ -87,7 +87,6 @@
             btSetting = new Button();
             AfterSales = new Button();
             Production = new Button();
-            SubmitDesign = new Button();
             Inventory = new Button();
             btDashBoard = new Button();
             btSales = new Button();
@@ -108,36 +107,36 @@
             // 
             // label1SystemName
             // 
-            label1SystemName.AutoSize = true;
-            label1SystemName.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            label1SystemName.Location = new Point(18, 12);
-            label1SystemName.Margin = new Padding(2, 0, 2, 0);
+            label1SystemName.Font = new Font("Microsoft JhengHei UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            label1SystemName.Location = new Point(26, 14);
             label1SystemName.Name = "label1SystemName";
-            label1SystemName.Size = new Size(509, 30);
+            label1SystemName.Size = new Size(377, 23);
             label1SystemName.TabIndex = 2;
             label1SystemName.Text = "Premium Living Centralized Manage System";
+            label1SystemName.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(GenDoc);
             tabControl1.Location = new Point(169, 63);
-            tabControl1.Margin = new Padding(2);
+            tabControl1.Margin = new Padding(2, 2, 2, 2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(659, 458);
+            tabControl1.Size = new Size(676, 430);
             tabControl1.TabIndex = 5;
             // 
             // tabPage2
             // 
             tabPage2.BackColor = Color.DarkGray;
+            tabPage2.BorderStyle = BorderStyle.FixedSingle;
             tabPage2.Controls.Add(groupBox1);
             tabPage2.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
             tabPage2.Location = new Point(4, 24);
-            tabPage2.Margin = new Padding(2);
+            tabPage2.Margin = new Padding(2, 2, 2, 2);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(2);
-            tabPage2.Size = new Size(651, 430);
+            tabPage2.Padding = new Padding(2, 2, 2, 2);
+            tabPage2.Size = new Size(668, 402);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Status & Goods Received";
             // 
@@ -164,10 +163,10 @@
             groupBox1.Controls.Add(label10);
             groupBox1.Controls.Add(lblShipID);
             groupBox1.Location = new Point(6, 8);
-            groupBox1.Margin = new Padding(2);
+            groupBox1.Margin = new Padding(2, 2, 2, 2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(2);
-            groupBox1.Size = new Size(641, 418);
+            groupBox1.Padding = new Padding(2, 2, 2, 2);
+            groupBox1.Size = new Size(660, 394);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             groupBox1.Text = "Ongoing Deliveries";
@@ -175,15 +174,15 @@
             // cbOrderID
             // 
             cbOrderID.FormattingEnabled = true;
-            cbOrderID.Location = new Point(467, 12);
+            cbOrderID.Location = new Point(461, 22);
             cbOrderID.Name = "cbOrderID";
-            cbOrderID.Size = new Size(121, 23);
+            cbOrderID.Size = new Size(127, 23);
             cbOrderID.TabIndex = 28;
             cbOrderID.SelectedIndexChanged += cbOrderID_SelectedIndexChanged;
             // 
             // tbShipID
             // 
-            tbShipID.Location = new Point(109, 20);
+            tbShipID.Location = new Point(109, 23);
             tbShipID.Name = "tbShipID";
             tbShipID.Size = new Size(121, 23);
             tbShipID.TabIndex = 27;
@@ -208,15 +207,15 @@
             // cbremark
             // 
             cbremark.FormattingEnabled = true;
-            cbremark.Location = new Point(459, 114);
+            cbremark.Location = new Point(461, 114);
             cbremark.Name = "cbremark";
-            cbremark.Size = new Size(129, 23);
+            cbremark.Size = new Size(127, 23);
             cbremark.TabIndex = 24;
             // 
             // cbshipStat
             // 
             cbshipStat.FormattingEnabled = true;
-            cbshipStat.Location = new Point(109, 75);
+            cbshipStat.Location = new Point(109, 82);
             cbshipStat.Name = "cbshipStat";
             cbshipStat.Size = new Size(121, 23);
             cbshipStat.TabIndex = 23;
@@ -224,22 +223,22 @@
             // lblShipStatus
             // 
             lblShipStatus.AutoSize = true;
-            lblShipStatus.Location = new Point(5, 81);
+            lblShipStatus.Location = new Point(5, 88);
             lblShipStatus.Name = "lblShipStatus";
-            lblShipStatus.Size = new Size(98, 15);
+            lblShipStatus.Size = new Size(101, 15);
             lblShipStatus.TabIndex = 22;
-            lblShipStatus.Text = "Shipment Status";
+            lblShipStatus.Text = "Shipment Status:";
             // 
             // receviedDate
             // 
-            receviedDate.Location = new Point(471, 46);
+            receviedDate.Location = new Point(461, 53);
             receviedDate.Name = "receviedDate";
-            receviedDate.Size = new Size(117, 23);
+            receviedDate.Size = new Size(127, 23);
             receviedDate.TabIndex = 21;
             // 
             // DelivDate
             // 
-            DelivDate.Location = new Point(461, 81);
+            DelivDate.Location = new Point(461, 82);
             DelivDate.Name = "DelivDate";
             DelivDate.Size = new Size(127, 23);
             DelivDate.TabIndex = 20;
@@ -247,24 +246,24 @@
             // lblActualDDate
             // 
             lblActualDDate.AutoSize = true;
-            lblActualDDate.Location = new Point(329, 81);
+            lblActualDDate.Location = new Point(331, 84);
             lblActualDDate.Name = "lblActualDDate";
-            lblActualDDate.Size = new Size(126, 15);
+            lblActualDDate.Size = new Size(123, 15);
             lblActualDDate.TabIndex = 19;
-            lblActualDDate.Text = "Actual Delivery Date: ";
+            lblActualDDate.Text = "Actual Delivery Date:";
             // 
             // cbOrderstat
             // 
             cbOrderstat.FormattingEnabled = true;
-            cbOrderstat.Location = new Point(109, 45);
+            cbOrderstat.Location = new Point(109, 52);
             cbOrderstat.Name = "cbOrderstat";
             cbOrderstat.Size = new Size(121, 23);
             cbOrderstat.TabIndex = 17;
             // 
             // btUpdateCreate
             // 
-            btUpdateCreate.Location = new Point(204, 392);
-            btUpdateCreate.Margin = new Padding(2);
+            btUpdateCreate.Location = new Point(205, 361);
+            btUpdateCreate.Margin = new Padding(2, 2, 2, 2);
             btUpdateCreate.Name = "btUpdateCreate";
             btUpdateCreate.Size = new Size(225, 22);
             btUpdateCreate.TabIndex = 16;
@@ -275,7 +274,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(398, 15);
+            label12.Location = new Point(395, 25);
             label12.Margin = new Padding(2, 0, 2, 0);
             label12.Name = "label12";
             label12.Size = new Size(58, 15);
@@ -285,7 +284,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(0, 162);
+            label7.Location = new Point(6, 151);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
             label7.Size = new Size(218, 15);
@@ -295,17 +294,17 @@
             // dataGridView2
             // 
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(4, 194);
-            dataGridView2.Margin = new Padding(2);
+            dataGridView2.Location = new Point(6, 193);
+            dataGridView2.Margin = new Padding(2, 2, 2, 2);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowHeadersWidth = 62;
-            dataGridView2.Size = new Size(620, 186);
+            dataGridView2.Size = new Size(633, 158);
             dataGridView2.TabIndex = 0;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(274, 117);
+            label8.Location = new Point(280, 117);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
             label8.Size = new Size(181, 15);
@@ -315,7 +314,7 @@
             // lblOrderStatus
             // 
             lblOrderStatus.AutoSize = true;
-            lblOrderStatus.Location = new Point(4, 48);
+            lblOrderStatus.Location = new Point(25, 53);
             lblOrderStatus.Margin = new Padding(2, 0, 2, 0);
             lblOrderStatus.Name = "lblOrderStatus";
             lblOrderStatus.Size = new Size(80, 15);
@@ -325,7 +324,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(364, 48);
+            label10.Location = new Point(364, 55);
             label10.Margin = new Padding(2, 0, 2, 0);
             label10.Name = "label10";
             label10.Size = new Size(92, 15);
@@ -335,7 +334,7 @@
             // lblShipID
             // 
             lblShipID.AutoSize = true;
-            lblShipID.Location = new Point(20, 23);
+            lblShipID.Location = new Point(35, 25);
             lblShipID.Margin = new Padding(2, 0, 2, 0);
             lblShipID.Name = "lblShipID";
             lblShipID.Size = new Size(70, 15);
@@ -344,13 +343,13 @@
             // 
             // GenDoc
             // 
+            GenDoc.BackColor = Color.DarkGray;
             GenDoc.Controls.Add(tabControl2);
             GenDoc.Location = new Point(4, 24);
             GenDoc.Name = "GenDoc";
-            GenDoc.Size = new Size(651, 430);
+            GenDoc.Size = new Size(668, 402);
             GenDoc.TabIndex = 2;
             GenDoc.Text = "Generate Document";
-            GenDoc.UseVisualStyleBackColor = true;
             // 
             // tabControl2
             // 
@@ -359,11 +358,13 @@
             tabControl2.Location = new Point(3, 3);
             tabControl2.Name = "tabControl2";
             tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new Size(643, 424);
+            tabControl2.Size = new Size(659, 400);
             tabControl2.TabIndex = 0;
             // 
             // DeliveryNote
             // 
+            DeliveryNote.BackColor = Color.Gainsboro;
+            DeliveryNote.BorderStyle = BorderStyle.FixedSingle;
             DeliveryNote.Controls.Add(tbRecipient);
             DeliveryNote.Controls.Add(dataGridView1);
             DeliveryNote.Controls.Add(btGenNote);
@@ -378,15 +379,14 @@
             DeliveryNote.Controls.Add(lblDeliveryID);
             DeliveryNote.Location = new Point(4, 24);
             DeliveryNote.Name = "DeliveryNote";
-            DeliveryNote.Padding = new Padding(3);
-            DeliveryNote.Size = new Size(635, 396);
+            DeliveryNote.Padding = new Padding(3, 3, 3, 3);
+            DeliveryNote.Size = new Size(651, 372);
             DeliveryNote.TabIndex = 0;
             DeliveryNote.Text = "Delivery Note";
-            DeliveryNote.UseVisualStyleBackColor = true;
             // 
             // tbRecipient
             // 
-            tbRecipient.Location = new Point(447, 100);
+            tbRecipient.Location = new Point(365, 82);
             tbRecipient.Name = "tbRecipient";
             tbRecipient.Size = new Size(121, 23);
             tbRecipient.TabIndex = 49;
@@ -394,14 +394,15 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(61, 201);
+            dataGridView1.Location = new Point(3, 172);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(523, 134);
+            dataGridView1.RowHeadersWidth = 62;
+            dataGridView1.Size = new Size(633, 145);
             dataGridView1.TabIndex = 48;
             // 
             // btGenNote
             // 
-            btGenNote.Location = new Point(220, 341);
+            btGenNote.Location = new Point(218, 335);
             btGenNote.Name = "btGenNote";
             btGenNote.Size = new Size(195, 23);
             btGenNote.TabIndex = 47;
@@ -421,7 +422,7 @@
             // lblRecipient
             // 
             lblRecipient.AutoSize = true;
-            lblRecipient.Location = new Point(362, 103);
+            lblRecipient.Location = new Point(307, 83);
             lblRecipient.Name = "lblRecipient";
             lblRecipient.Size = new Size(66, 15);
             lblRecipient.TabIndex = 43;
@@ -430,7 +431,7 @@
             // lblOrderID
             // 
             lblOrderID.AutoSize = true;
-            lblOrderID.Location = new Point(61, 103);
+            lblOrderID.Location = new Point(79, 83);
             lblOrderID.Name = "lblOrderID";
             lblOrderID.Size = new Size(61, 15);
             lblOrderID.TabIndex = 41;
@@ -439,37 +440,37 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(362, 36);
+            label9.Location = new Point(293, 39);
             label9.Name = "label9";
-            label9.Size = new Size(79, 15);
+            label9.Size = new Size(76, 15);
             label9.TabIndex = 38;
-            label9.Text = "ShipmentID: ";
+            label9.Text = "ShipmentID:";
             // 
             // tbOrderID
             // 
-            tbOrderID.Location = new Point(166, 100);
+            tbOrderID.Location = new Point(137, 82);
             tbOrderID.Name = "tbOrderID";
             tbOrderID.Size = new Size(121, 23);
             tbOrderID.TabIndex = 37;
             // 
             // tbAddress
             // 
-            tbAddress.Location = new Point(61, 161);
+            tbAddress.Location = new Point(116, 141);
             tbAddress.Name = "tbAddress";
-            tbAddress.Size = new Size(517, 23);
+            tbAddress.Size = new Size(469, 23);
             tbAddress.TabIndex = 36;
             // 
             // tbDeliveryNoteID
             // 
-            tbDeliveryNoteID.Location = new Point(166, 36);
+            tbDeliveryNoteID.Location = new Point(137, 36);
             tbDeliveryNoteID.Name = "tbDeliveryNoteID";
-            tbDeliveryNoteID.Size = new Size(115, 23);
+            tbDeliveryNoteID.Size = new Size(121, 23);
             tbDeliveryNoteID.TabIndex = 35;
             // 
             // cmbShipID
             // 
             cmbShipID.FormattingEnabled = true;
-            cmbShipID.Location = new Point(447, 36);
+            cmbShipID.Location = new Point(365, 36);
             cmbShipID.Name = "cmbShipID";
             cmbShipID.Size = new Size(121, 23);
             cmbShipID.TabIndex = 34;
@@ -486,6 +487,7 @@
             // 
             // ReplySlip
             // 
+            ReplySlip.BackColor = Color.Gainsboro;
             ReplySlip.Controls.Add(cmbDeliveryID);
             ReplySlip.Controls.Add(lblCompleted);
             ReplySlip.Controls.Add(dateDeliveryDate);
@@ -504,16 +506,15 @@
             ReplySlip.Controls.Add(btGenSlip);
             ReplySlip.Location = new Point(4, 24);
             ReplySlip.Name = "ReplySlip";
-            ReplySlip.Padding = new Padding(3);
-            ReplySlip.Size = new Size(635, 396);
+            ReplySlip.Padding = new Padding(3, 3, 3, 3);
+            ReplySlip.Size = new Size(651, 372);
             ReplySlip.TabIndex = 1;
             ReplySlip.Text = "Reply Slip";
-            ReplySlip.UseVisualStyleBackColor = true;
             // 
             // cmbDeliveryID
             // 
             cmbDeliveryID.FormattingEnabled = true;
-            cmbDeliveryID.Location = new Point(161, 60);
+            cmbDeliveryID.Location = new Point(112, 60);
             cmbDeliveryID.Name = "cmbDeliveryID";
             cmbDeliveryID.Size = new Size(121, 23);
             cmbDeliveryID.TabIndex = 69;
@@ -522,7 +523,7 @@
             // lblCompleted
             // 
             lblCompleted.AutoSize = true;
-            lblCompleted.Location = new Point(457, 68);
+            lblCompleted.Location = new Point(447, 61);
             lblCompleted.Name = "lblCompleted";
             lblCompleted.Size = new Size(71, 15);
             lblCompleted.TabIndex = 68;
@@ -530,7 +531,7 @@
             // 
             // dateDeliveryDate
             // 
-            dateDeliveryDate.Location = new Point(435, 106);
+            dateDeliveryDate.Location = new Point(447, 102);
             dateDeliveryDate.Name = "dateDeliveryDate";
             dateDeliveryDate.Size = new Size(118, 23);
             dateDeliveryDate.TabIndex = 67;
@@ -538,7 +539,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(332, 111);
+            label2.Location = new Point(365, 102);
             label2.Name = "label2";
             label2.Size = new Size(88, 15);
             label2.TabIndex = 66;
@@ -547,7 +548,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(332, 69);
+            label5.Location = new Point(358, 61);
             label5.Name = "label5";
             label5.Size = new Size(95, 15);
             label5.TabIndex = 64;
@@ -555,15 +556,15 @@
             // 
             // tbReplyID
             // 
-            tbReplyID.Location = new Point(161, 7);
+            tbReplyID.Location = new Point(112, 16);
             tbReplyID.Name = "tbReplyID";
-            tbReplyID.Size = new Size(115, 23);
+            tbReplyID.Size = new Size(121, 23);
             tbReplyID.TabIndex = 63;
             // 
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(50, 15);
+            label13.Location = new Point(19, 21);
             label13.Name = "label13";
             label13.Size = new Size(84, 15);
             label13.TabIndex = 62;
@@ -571,7 +572,7 @@
             // 
             // tbReplyCustName
             // 
-            tbReplyCustName.Location = new Point(153, 103);
+            tbReplyCustName.Location = new Point(112, 106);
             tbReplyCustName.Name = "tbReplyCustName";
             tbReplyCustName.Size = new Size(121, 23);
             tbReplyCustName.TabIndex = 61;
@@ -579,15 +580,16 @@
             // dataGridView3
             // 
             dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView3.Location = new Point(56, 199);
+            dataGridView3.Location = new Point(6, 177);
             dataGridView3.Name = "dataGridView3";
-            dataGridView3.Size = new Size(523, 134);
+            dataGridView3.RowHeadersWidth = 62;
+            dataGridView3.Size = new Size(633, 158);
             dataGridView3.TabIndex = 60;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(68, 143);
+            label1.Location = new Point(26, 141);
             label1.Name = "label1";
             label1.Size = new Size(58, 15);
             label1.TabIndex = 58;
@@ -596,7 +598,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(68, 106);
+            label3.Location = new Point(36, 106);
             label3.Name = "label3";
             label3.Size = new Size(66, 15);
             label3.TabIndex = 57;
@@ -605,7 +607,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(338, 10);
+            label4.Location = new Point(391, 21);
             label4.Name = "label4";
             label4.Size = new Size(61, 15);
             label4.TabIndex = 56;
@@ -613,22 +615,22 @@
             // 
             // tbReplyOrderID
             // 
-            tbReplyOrderID.Location = new Point(443, 7);
+            tbReplyOrderID.Location = new Point(447, 19);
             tbReplyOrderID.Name = "tbReplyOrderID";
             tbReplyOrderID.Size = new Size(121, 23);
             tbReplyOrderID.TabIndex = 54;
             // 
             // tbReplyAddress
             // 
-            tbReplyAddress.Location = new Point(56, 170);
+            tbReplyAddress.Location = new Point(85, 141);
             tbReplyAddress.Name = "tbReplyAddress";
-            tbReplyAddress.Size = new Size(523, 23);
+            tbReplyAddress.Size = new Size(535, 23);
             tbReplyAddress.TabIndex = 53;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(50, 64);
+            label6.Location = new Point(1, 64);
             label6.Name = "label6";
             label6.Size = new Size(105, 15);
             label6.TabIndex = 50;
@@ -636,7 +638,7 @@
             // 
             // btGenSlip
             // 
-            btGenSlip.Location = new Point(234, 350);
+            btGenSlip.Location = new Point(239, 342);
             btGenSlip.Name = "btGenSlip";
             btGenSlip.Size = new Size(165, 23);
             btGenSlip.TabIndex = 47;
@@ -649,22 +651,23 @@
             gbMenu.Controls.Add(btSetting);
             gbMenu.Controls.Add(AfterSales);
             gbMenu.Controls.Add(Production);
-            gbMenu.Controls.Add(SubmitDesign);
             gbMenu.Controls.Add(Inventory);
             gbMenu.Controls.Add(btDashBoard);
             gbMenu.Controls.Add(btSales);
-            gbMenu.Location = new Point(12, 50);
+            gbMenu.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            gbMenu.Location = new Point(13, 61);
             gbMenu.Name = "gbMenu";
-            gbMenu.Size = new Size(145, 499);
+            gbMenu.Size = new Size(145, 337);
             gbMenu.TabIndex = 13;
             gbMenu.TabStop = false;
-            gbMenu.Text = "Menu";
+            gbMenu.Text = "Logistics/Delivery";
             // 
             // btSetting
             // 
-            btSetting.Location = new Point(20, 448);
+            btSetting.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            btSetting.Location = new Point(15, 280);
             btSetting.Name = "btSetting";
-            btSetting.Size = new Size(103, 45);
+            btSetting.Size = new Size(117, 31);
             btSetting.TabIndex = 7;
             btSetting.Text = "Setting";
             btSetting.UseVisualStyleBackColor = true;
@@ -672,9 +675,10 @@
             // 
             // AfterSales
             // 
-            AfterSales.Location = new Point(22, 385);
+            AfterSales.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            AfterSales.Location = new Point(15, 226);
             AfterSales.Name = "AfterSales";
-            AfterSales.Size = new Size(103, 52);
+            AfterSales.Size = new Size(117, 31);
             AfterSales.TabIndex = 5;
             AfterSales.Text = "AfterSales";
             AfterSales.UseVisualStyleBackColor = true;
@@ -682,27 +686,20 @@
             // 
             // Production
             // 
-            Production.Location = new Point(22, 239);
+            Production.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            Production.Location = new Point(15, 174);
             Production.Name = "Production";
-            Production.Size = new Size(103, 52);
+            Production.Size = new Size(117, 31);
             Production.TabIndex = 4;
             Production.Text = "Production";
             Production.UseVisualStyleBackColor = true;
             // 
-            // SubmitDesign
-            // 
-            SubmitDesign.Location = new Point(22, 309);
-            SubmitDesign.Name = "SubmitDesign";
-            SubmitDesign.Size = new Size(103, 52);
-            SubmitDesign.TabIndex = 3;
-            SubmitDesign.Text = "SubmitDesign";
-            SubmitDesign.UseVisualStyleBackColor = true;
-            // 
             // Inventory
             // 
-            Inventory.Location = new Point(20, 170);
+            Inventory.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            Inventory.Location = new Point(15, 123);
             Inventory.Name = "Inventory";
-            Inventory.Size = new Size(103, 52);
+            Inventory.Size = new Size(117, 31);
             Inventory.TabIndex = 2;
             Inventory.Text = "Inventory";
             Inventory.UseVisualStyleBackColor = true;
@@ -710,9 +707,10 @@
             // 
             // btDashBoard
             // 
-            btDashBoard.Location = new Point(22, 31);
+            btDashBoard.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            btDashBoard.Location = new Point(15, 30);
             btDashBoard.Name = "btDashBoard";
-            btDashBoard.Size = new Size(103, 52);
+            btDashBoard.Size = new Size(117, 31);
             btDashBoard.TabIndex = 1;
             btDashBoard.Text = "DashBoard";
             btDashBoard.UseVisualStyleBackColor = true;
@@ -720,9 +718,10 @@
             // 
             // btSales
             // 
-            btSales.Location = new Point(20, 100);
+            btSales.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            btSales.Location = new Point(15, 74);
             btSales.Name = "btSales";
-            btSales.Size = new Size(103, 60);
+            btSales.Size = new Size(117, 31);
             btSales.TabIndex = 0;
             btSales.Text = "Sales/Order";
             btSales.UseVisualStyleBackColor = true;
@@ -742,7 +741,7 @@
             // lblWelcome
             // 
             lblWelcome.Font = new Font("Microsoft JhengHei UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            lblWelcome.Location = new Point(592, 32);
+            lblWelcome.Location = new Point(514, 6);
             lblWelcome.Name = "lblWelcome";
             lblWelcome.Size = new Size(228, 39);
             lblWelcome.TabIndex = 12;
@@ -757,7 +756,7 @@
             Controls.Add(lblWelcome);
             Controls.Add(tabControl1);
             Controls.Add(label1SystemName);
-            Margin = new Padding(2);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "FormLogistics";
             Text = "Logistics";
             Load += FormLogistics_Load;
@@ -797,7 +796,6 @@
         private Button btSetting;
         private Button AfterSales;
         private Button Production;
-        private Button SubmitDesign;
         private Button Inventory;
         private Button btDashBoard;
         private Button btSales;

@@ -1,32 +1,27 @@
-﻿using _4915project;
-using Microsoft.VisualBasic.ApplicationServices;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Common;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Transactions;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
-namespace ITP4915M
+namespace _4915project
 {
-    public partial class FormOrdelDetail : Form
+    public partial class FormOrderDetail : Form
     {
+        string constring = "server=localhost;user id=root;password=;database=4915";
         private DataTable orderItemsTable;
 
-        public FormOrdelDetail()
+        public FormOrderDetail()
         {
             InitializeComponent();
         }
 
-        private void FormOrdelDetail_Load(object sender, EventArgs e)
+        private void FormOrderDetail_Load(object sender, EventArgs e)
         {
             orderItemsTable = new DataTable();
             orderItemsTable.Columns.Add("ProductID", typeof(string));
@@ -51,7 +46,7 @@ namespace ITP4915M
 
         private void LoadProducts()
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             string query = "SELECT ProductID, Name FROM product";
 
             using (MySqlConnection con = new MySqlConnection(constring))
@@ -79,7 +74,7 @@ namespace ITP4915M
 
         private void LoadCustomers()
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             string query = "SELECT Name FROM customer";
 
             using (MySqlConnection con = new MySqlConnection(constring))
@@ -117,7 +112,7 @@ namespace ITP4915M
 
         private void getPrice(string name)
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             string query = "SELECT UnitPrice FROM product WHERE Name = @ProductName";
 
             using (MySqlConnection con = new MySqlConnection(constring))
@@ -140,7 +135,7 @@ namespace ITP4915M
 
         private void getAddress(string name)
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             string query = "SELECT Address FROM customer WHERE Name = @Name";
 
             using (MySqlConnection con = new MySqlConnection(constring))
@@ -188,7 +183,7 @@ namespace ITP4915M
 
         private string GetProductIDByName(string productName)
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             string query = "SELECT ProductID FROM product WHERE Name = @Name";
 
             using (MySqlConnection con = new MySqlConnection(constring))
@@ -230,7 +225,7 @@ namespace ITP4915M
                 return;
             }
 
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
 
             string queryGetCustomerID = "SELECT CustomerID FROM customer WHERE Name = @CustomerName LIMIT 1";
             string queryInsertOrder = @"
@@ -408,7 +403,7 @@ namespace ITP4915M
 
         private void GenerateSequenceOrderID()
         {
-            string constring = "server=localhost;user id=root;password=;database=4915";
+            
             string prefix = "ORD";
 
             // 修正：加上 WHERE 篩選前綴，並用 ORDER BY 排序加 LIMIT 1 取得最新（最大）的一筆

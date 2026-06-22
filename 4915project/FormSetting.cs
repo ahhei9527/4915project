@@ -1,4 +1,4 @@
-ï»¿using _4915project;
+using _4915project;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -11,8 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
-namespace ITP4915M
+namespace _4915project
 {
     public partial class FormSetting : Form
     {
@@ -53,7 +54,7 @@ namespace ITP4915M
                         MySqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            cmbCompanyName.Items.Add(reader["CompanyName"].ToString());
+                            //cmbCompanyName.Items.Add(reader["CompanyName"].ToString());
                         }
                     }
                     catch (Exception ex)
@@ -96,7 +97,7 @@ namespace ITP4915M
 
         private void btAddCom_Click(object sender, EventArgs e)
         {
-            addCompany addCompany = new addCompany();
+            AddCompany addCompany = new AddCompany();
             addCompany.Show();
         }
 
@@ -199,7 +200,7 @@ namespace ITP4915M
             }
             catch (Exception ex)
             {
-                // æ—¥èªŒè¨˜éŒ„å¤±æ•—ä¸æ‡‰é˜»æ“‹ç”¨æˆ¶ï¼Œåƒ…åšæç¤º
+                // ¤é»x°O¿ı¥¢±Ñ¤£À³ªı¾×¥Î¤á¡A¶È°µ´£¥Ü
                 Console.WriteLine("Audit Log failed: " + ex.Message);
             }
         }
@@ -249,7 +250,7 @@ namespace ITP4915M
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
+            if (cbPwd.Checked)
             {
                 tbPassword.Enabled = true;
             }
@@ -261,7 +262,7 @@ namespace ITP4915M
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox2.Checked)
+            if (cbRole.Checked)
             {
                 cmbRole.Enabled = true;
                 cmbDepartment.Enabled = true;
@@ -277,7 +278,7 @@ namespace ITP4915M
 
         private void button9_Click(object sender, EventArgs e)
         {
-            if (checkBox1.Checked == false)
+            if (cbRole.Checked == false)
             {
                 string userQuery = "UPDATE user SET " +
                 "Role = @Role, " +
@@ -393,7 +394,7 @@ namespace ITP4915M
             }
             catch (Exception ex)
             {
-                // æ—¥èªŒè¨˜éŒ„å¤±æ•—ä¸æ‡‰é˜»æ“‹ç”¨æˆ¶ï¼Œåƒ…åšæç¤º
+                // ¤é»x°O¿ı¥¢±Ñ¤£À³ªı¾×¥Î¤á¡A¶È°µ´£¥Ü
                 Console.WriteLine("Audit Log failed: " + ex.Message);
             }
         }
@@ -559,7 +560,7 @@ namespace ITP4915M
             }
             catch (Exception ex)
             {
-                // æ—¥èªŒè¨˜éŒ„å¤±æ•—ä¸æ‡‰é˜»æ“‹ç”¨æˆ¶ï¼Œåƒ…åšæç¤º
+                // ¤é»x°O¿ı¥¢±Ñ¤£À³ªı¾×¥Î¤á¡A¶È°µ´£¥Ü
                 Console.WriteLine("Audit Log failed: " + ex.Message);
             }
         }

@@ -1,4 +1,4 @@
-﻿namespace ITP4915M
+﻿namespace _4915project 
 {
     partial class SalesOrder
     {
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
             panel1 = new Panel();
             dgvOrderItems = new DataGridView();
             buttonRefresh = new Button();
@@ -53,25 +52,14 @@
             btSetting = new Button();
             AfterSales = new Button();
             Production = new Button();
-            SubmitDesign = new Button();
             Inventory = new Button();
             btDashBoard = new Button();
             Logistics = new Button();
+            LTitle = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvOrderItems).BeginInit();
             gbMenu.SuspendLayout();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            label1.Location = new Point(18, 12);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(509, 30);
-            label1.TabIndex = 0;
-            label1.Text = "Premium Living Centralized Manage System";
             // 
             // panel1
             // 
@@ -92,24 +80,25 @@
             panel1.Controls.Add(labelCustomer);
             panel1.Controls.Add(textOrderID);
             panel1.Controls.Add(labelOrderID);
-            panel1.Location = new Point(169, 91);
-            panel1.Margin = new Padding(2);
+            panel1.Location = new Point(163, 74);
+            panel1.Margin = new Padding(2, 2, 2, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(666, 342);
+            panel1.Size = new Size(671, 398);
             panel1.TabIndex = 1;
             // 
             // dgvOrderItems
             // 
             dgvOrderItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvOrderItems.Location = new Point(15, 67);
+            dgvOrderItems.Location = new Point(15, 123);
             dgvOrderItems.Name = "dgvOrderItems";
+            dgvOrderItems.RowHeadersWidth = 62;
             dgvOrderItems.Size = new Size(634, 225);
             dgvOrderItems.TabIndex = 16;
             // 
             // buttonRefresh
             // 
-            buttonRefresh.Location = new Point(24, 297);
-            buttonRefresh.Margin = new Padding(2);
+            buttonRefresh.Location = new Point(15, 360);
+            buttonRefresh.Margin = new Padding(2, 2, 2, 2);
             buttonRefresh.Name = "buttonRefresh";
             buttonRefresh.Size = new Size(71, 22);
             buttonRefresh.TabIndex = 15;
@@ -119,8 +108,8 @@
             // 
             // buttonEditOrder
             // 
-            buttonEditOrder.Location = new Point(565, 297);
-            buttonEditOrder.Margin = new Padding(2);
+            buttonEditOrder.Location = new Point(565, 360);
+            buttonEditOrder.Margin = new Padding(2, 2, 2, 2);
             buttonEditOrder.Name = "buttonEditOrder";
             buttonEditOrder.Size = new Size(84, 22);
             buttonEditOrder.TabIndex = 14;
@@ -130,8 +119,8 @@
             // 
             // buttonCreateOrder
             // 
-            buttonCreateOrder.Location = new Point(471, 297);
-            buttonCreateOrder.Margin = new Padding(2);
+            buttonCreateOrder.Location = new Point(461, 360);
+            buttonCreateOrder.Margin = new Padding(2, 2, 2, 2);
             buttonCreateOrder.Name = "buttonCreateOrder";
             buttonCreateOrder.Size = new Size(83, 22);
             buttonCreateOrder.TabIndex = 13;
@@ -141,8 +130,8 @@
             // 
             // buttonClear
             // 
-            buttonClear.Location = new Point(588, 44);
-            buttonClear.Margin = new Padding(2);
+            buttonClear.Location = new Point(587, 82);
+            buttonClear.Margin = new Padding(2, 2, 2, 2);
             buttonClear.Name = "buttonClear";
             buttonClear.Size = new Size(62, 23);
             buttonClear.TabIndex = 11;
@@ -152,8 +141,8 @@
             // 
             // buttonSearch
             // 
-            buttonSearch.Location = new Point(515, 44);
-            buttonSearch.Margin = new Padding(2);
+            buttonSearch.Location = new Point(514, 82);
+            buttonSearch.Margin = new Padding(2, 2, 2, 2);
             buttonSearch.Name = "buttonSearch";
             buttonSearch.Size = new Size(62, 23);
             buttonSearch.TabIndex = 10;
@@ -164,7 +153,7 @@
             // labelDateTo
             // 
             labelDateTo.AutoSize = true;
-            labelDateTo.Location = new Point(227, 48);
+            labelDateTo.Location = new Point(267, 85);
             labelDateTo.Margin = new Padding(2, 0, 2, 0);
             labelDateTo.Name = "labelDateTo";
             labelDateTo.Size = new Size(55, 15);
@@ -173,24 +162,24 @@
             // 
             // dateTimePickerEnd
             // 
-            dateTimePickerEnd.Location = new Point(282, 45);
-            dateTimePickerEnd.Margin = new Padding(2);
+            dateTimePickerEnd.Location = new Point(323, 84);
+            dateTimePickerEnd.Margin = new Padding(2, 2, 2, 2);
             dateTimePickerEnd.Name = "dateTimePickerEnd";
-            dateTimePickerEnd.Size = new Size(126, 23);
+            dateTimePickerEnd.Size = new Size(138, 23);
             dateTimePickerEnd.TabIndex = 8;
             // 
             // dateTimePickerStart
             // 
-            dateTimePickerStart.Location = new Point(85, 45);
-            dateTimePickerStart.Margin = new Padding(2);
+            dateTimePickerStart.Location = new Point(87, 85);
+            dateTimePickerStart.Margin = new Padding(2, 2, 2, 2);
             dateTimePickerStart.Name = "dateTimePickerStart";
-            dateTimePickerStart.Size = new Size(124, 23);
+            dateTimePickerStart.Size = new Size(168, 23);
             dateTimePickerStart.TabIndex = 7;
             // 
             // labelDateForm
             // 
             labelDateForm.AutoSize = true;
-            labelDateForm.Location = new Point(15, 49);
+            labelDateForm.Location = new Point(17, 89);
             labelDateForm.Margin = new Padding(2, 0, 2, 0);
             labelDateForm.Name = "labelDateForm";
             labelDateForm.Size = new Size(69, 15);
@@ -201,8 +190,8 @@
             // 
             comboBoxStatus.FormattingEnabled = true;
             comboBoxStatus.Items.AddRange(new object[] { "Quoted", "Paid", "InProduction", "Ready for shipment", "Delivered" });
-            comboBoxStatus.Location = new Point(517, 17);
-            comboBoxStatus.Margin = new Padding(2);
+            comboBoxStatus.Location = new Point(517, 47);
+            comboBoxStatus.Margin = new Padding(2, 2, 2, 2);
             comboBoxStatus.Name = "comboBoxStatus";
             comboBoxStatus.Size = new Size(134, 23);
             comboBoxStatus.TabIndex = 5;
@@ -210,7 +199,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(471, 20);
+            label2.Location = new Point(471, 50);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
             label2.Size = new Size(44, 15);
@@ -219,8 +208,8 @@
             // 
             // textCust
             // 
-            textCust.Location = new Point(323, 18);
-            textCust.Margin = new Padding(2);
+            textCust.Location = new Point(323, 48);
+            textCust.Margin = new Padding(2, 2, 2, 2);
             textCust.Name = "textCust";
             textCust.Size = new Size(138, 23);
             textCust.TabIndex = 3;
@@ -228,7 +217,7 @@
             // labelCustomer
             // 
             labelCustomer.AutoSize = true;
-            labelCustomer.Location = new Point(257, 20);
+            labelCustomer.Location = new Point(257, 50);
             labelCustomer.Margin = new Padding(2, 0, 2, 0);
             labelCustomer.Name = "labelCustomer";
             labelCustomer.Size = new Size(64, 15);
@@ -237,16 +226,16 @@
             // 
             // textOrderID
             // 
-            textOrderID.Location = new Point(72, 18);
-            textOrderID.Margin = new Padding(2);
+            textOrderID.Location = new Point(87, 48);
+            textOrderID.Margin = new Padding(2, 2, 2, 2);
             textOrderID.Name = "textOrderID";
-            textOrderID.Size = new Size(183, 23);
+            textOrderID.Size = new Size(168, 23);
             textOrderID.TabIndex = 1;
             // 
             // labelOrderID
             // 
             labelOrderID.AutoSize = true;
-            labelOrderID.Location = new Point(15, 20);
+            labelOrderID.Location = new Point(30, 52);
             labelOrderID.Margin = new Padding(2, 0, 2, 0);
             labelOrderID.Name = "labelOrderID";
             labelOrderID.Size = new Size(55, 15);
@@ -258,17 +247,17 @@
             label2Order.AutoSize = true;
             label2Order.FlatStyle = FlatStyle.Flat;
             label2Order.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            label2Order.Location = new Point(179, 78);
+            label2Order.Location = new Point(172, 61);
             label2Order.Margin = new Padding(2, 0, 2, 0);
             label2Order.Name = "label2Order";
             label2Order.Size = new Size(159, 20);
-            label2Order.TabIndex = 7;
+            label2Order.TabIndex = 18;
             label2Order.Text = "Order Management";
             // 
             // Logoutbt
             // 
             Logoutbt.AutoSize = true;
-            Logoutbt.Location = new Point(783, 7);
+            Logoutbt.Location = new Point(748, 14);
             Logoutbt.Name = "Logoutbt";
             Logoutbt.Size = new Size(50, 15);
             Logoutbt.TabIndex = 11;
@@ -279,7 +268,7 @@
             // lblWelcome
             // 
             lblWelcome.Font = new Font("Microsoft JhengHei UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            lblWelcome.Location = new Point(606, 30);
+            lblWelcome.Location = new Point(514, 6);
             lblWelcome.Name = "lblWelcome";
             lblWelcome.Size = new Size(228, 39);
             lblWelcome.TabIndex = 10;
@@ -289,22 +278,23 @@
             gbMenu.Controls.Add(btSetting);
             gbMenu.Controls.Add(AfterSales);
             gbMenu.Controls.Add(Production);
-            gbMenu.Controls.Add(SubmitDesign);
             gbMenu.Controls.Add(Inventory);
             gbMenu.Controls.Add(btDashBoard);
             gbMenu.Controls.Add(Logistics);
-            gbMenu.Location = new Point(12, 50);
+            gbMenu.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            gbMenu.Location = new Point(13, 61);
             gbMenu.Name = "gbMenu";
-            gbMenu.Size = new Size(145, 499);
+            gbMenu.Size = new Size(145, 337);
             gbMenu.TabIndex = 12;
             gbMenu.TabStop = false;
-            gbMenu.Text = "Menu";
+            gbMenu.Text = "Order";
             // 
             // btSetting
             // 
-            btSetting.Location = new Point(20, 448);
+            btSetting.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            btSetting.Location = new Point(15, 280);
             btSetting.Name = "btSetting";
-            btSetting.Size = new Size(103, 45);
+            btSetting.Size = new Size(116, 31);
             btSetting.TabIndex = 7;
             btSetting.Text = "Setting";
             btSetting.UseVisualStyleBackColor = true;
@@ -312,9 +302,10 @@
             // 
             // AfterSales
             // 
-            AfterSales.Location = new Point(22, 385);
+            AfterSales.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            AfterSales.Location = new Point(15, 226);
             AfterSales.Name = "AfterSales";
-            AfterSales.Size = new Size(103, 52);
+            AfterSales.Size = new Size(116, 31);
             AfterSales.TabIndex = 5;
             AfterSales.Text = "AfterSales";
             AfterSales.UseVisualStyleBackColor = true;
@@ -322,27 +313,20 @@
             // 
             // Production
             // 
-            Production.Location = new Point(22, 239);
+            Production.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            Production.Location = new Point(15, 174);
             Production.Name = "Production";
-            Production.Size = new Size(103, 52);
+            Production.Size = new Size(116, 31);
             Production.TabIndex = 4;
             Production.Text = "Production";
             Production.UseVisualStyleBackColor = true;
             // 
-            // SubmitDesign
-            // 
-            SubmitDesign.Location = new Point(22, 309);
-            SubmitDesign.Name = "SubmitDesign";
-            SubmitDesign.Size = new Size(103, 52);
-            SubmitDesign.TabIndex = 3;
-            SubmitDesign.Text = "SubmitDesign";
-            SubmitDesign.UseVisualStyleBackColor = true;
-            // 
             // Inventory
             // 
-            Inventory.Location = new Point(20, 170);
+            Inventory.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            Inventory.Location = new Point(15, 123);
             Inventory.Name = "Inventory";
-            Inventory.Size = new Size(103, 52);
+            Inventory.Size = new Size(116, 31);
             Inventory.TabIndex = 2;
             Inventory.Text = "Inventory";
             Inventory.UseVisualStyleBackColor = true;
@@ -350,9 +334,10 @@
             // 
             // btDashBoard
             // 
-            btDashBoard.Location = new Point(22, 31);
+            btDashBoard.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            btDashBoard.Location = new Point(15, 30);
             btDashBoard.Name = "btDashBoard";
-            btDashBoard.Size = new Size(103, 52);
+            btDashBoard.Size = new Size(116, 31);
             btDashBoard.TabIndex = 1;
             btDashBoard.Text = "DashBoard";
             btDashBoard.UseVisualStyleBackColor = true;
@@ -360,26 +345,37 @@
             // 
             // Logistics
             // 
-            Logistics.Location = new Point(8, 96);
+            Logistics.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            Logistics.Location = new Point(15, 74);
             Logistics.Name = "Logistics";
-            Logistics.Size = new Size(117, 68);
+            Logistics.Size = new Size(116, 31);
             Logistics.TabIndex = 0;
             Logistics.Text = "Logistics/Delivery";
             Logistics.UseVisualStyleBackColor = true;
             Logistics.Click += Logistics_Click;
+            // 
+            // LTitle
+            // 
+            LTitle.Font = new Font("Microsoft JhengHei UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            LTitle.Location = new Point(26, 14);
+            LTitle.Name = "LTitle";
+            LTitle.Size = new Size(377, 23);
+            LTitle.TabIndex = 13;
+            LTitle.Text = "Premium Living Centralized Manage System";
+            LTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // SalesOrder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(872, 561);
+            Controls.Add(label2Order);
+            Controls.Add(LTitle);
             Controls.Add(gbMenu);
             Controls.Add(Logoutbt);
             Controls.Add(lblWelcome);
-            Controls.Add(label2Order);
             Controls.Add(panel1);
-            Controls.Add(label1);
-            Margin = new Padding(2);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "SalesOrder";
             Text = "SalesOrder";
             Load += FormOrder_Load;
@@ -395,7 +391,6 @@
 
         private Label label1;
         private Panel panel1;
-        private Label label2Order;
         private Label labelOrderID;
         private TextBox textCust;
         private Label labelCustomer;
@@ -417,10 +412,11 @@
         private GroupBox gbMenu;
         private Button AfterSales;
         private Button Production;
-        private Button SubmitDesign;
         private Button Inventory;
         private Button btDashBoard;
         private Button Logistics;
         private Button btSetting;
+        private Label LTitle;
+        private Label label2Order;
     }
 }

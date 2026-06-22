@@ -47,39 +47,43 @@
             // 
             // tbCustPhone
             // 
-            tbCustPhone.Location = new Point(311, 91);
+            tbCustPhone.Location = new Point(493, 321);
+            tbCustPhone.Margin = new Padding(5, 5, 5, 5);
             tbCustPhone.Name = "tbCustPhone";
-            tbCustPhone.Size = new Size(121, 23);
+            tbCustPhone.Size = new Size(355, 30);
             tbCustPhone.TabIndex = 48;
             // 
             // tbCustAddress
             // 
-            tbCustAddress.Location = new Point(34, 153);
+            tbCustAddress.Location = new Point(493, 447);
+            tbCustAddress.Margin = new Padding(5, 5, 5, 5);
+            tbCustAddress.Multiline = true;
             tbCustAddress.Name = "tbCustAddress";
-            tbCustAddress.Size = new Size(398, 23);
+            tbCustAddress.Size = new Size(355, 50);
             tbCustAddress.TabIndex = 47;
             // 
             // tbCustEmail
             // 
-            tbCustEmail.Location = new Point(91, 88);
+            tbCustEmail.Location = new Point(493, 380);
+            tbCustEmail.Margin = new Padding(5, 5, 5, 5);
             tbCustEmail.Name = "tbCustEmail";
-            tbCustEmail.Size = new Size(121, 23);
+            tbCustEmail.Size = new Size(355, 30);
             tbCustEmail.TabIndex = 46;
             // 
             // cmbCustCompany
             // 
             cmbCustCompany.FormattingEnabled = true;
-            cmbCustCompany.Location = new Point(311, 23);
+            cmbCustCompany.Location = new Point(493, 269);
+            cmbCustCompany.Margin = new Padding(5, 5, 5, 5);
             cmbCustCompany.Name = "cmbCustCompany";
-            cmbCustCompany.Size = new Size(121, 23);
+            cmbCustCompany.Size = new Size(355, 31);
             cmbCustCompany.TabIndex = 45;
             // 
             // btCustCancel
             // 
-            btCustCancel.Location = new Point(429, 192);
-            btCustCancel.Margin = new Padding(2);
+            btCustCancel.Location = new Point(792, 545);
             btCustCancel.Name = "btCustCancel";
-            btCustCancel.Size = new Size(71, 22);
+            btCustCancel.Size = new Size(112, 34);
             btCustCancel.TabIndex = 43;
             btCustCancel.Text = "Cancel";
             btCustCancel.UseVisualStyleBackColor = true;
@@ -87,10 +91,9 @@
             // 
             // btCustSave
             // 
-            btCustSave.Location = new Point(311, 192);
-            btCustSave.Margin = new Padding(2);
+            btCustSave.Location = new Point(604, 545);
             btCustSave.Name = "btCustSave";
-            btCustSave.Size = new Size(71, 22);
+            btCustSave.Size = new Size(112, 34);
             btCustSave.TabIndex = 42;
             btCustSave.Text = "Save";
             btCustSave.UseVisualStyleBackColor = true;
@@ -98,10 +101,9 @@
             // 
             // btCustReset
             // 
-            btCustReset.Location = new Point(179, 192);
-            btCustReset.Margin = new Padding(2);
+            btCustReset.Location = new Point(376, 545);
             btCustReset.Name = "btCustReset";
-            btCustReset.Size = new Size(93, 22);
+            btCustReset.Size = new Size(146, 34);
             btCustReset.TabIndex = 41;
             btCustReset.TabStop = false;
             btCustReset.Text = "Reset Default";
@@ -111,45 +113,50 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(239, 23);
+            label11.Location = new Point(394, 272);
+            label11.Margin = new Padding(5, 0, 5, 0);
             label11.Name = "label11";
-            label11.Size = new Size(68, 15);
+            label11.Size = new Size(95, 23);
             label11.TabIndex = 40;
-            label11.Text = "Company: ";
+            label11.Text = "Company:";
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(34, 88);
+            label10.Location = new Point(426, 383);
+            label10.Margin = new Padding(5, 0, 5, 0);
             label10.Name = "label10";
-            label10.Size = new Size(44, 15);
+            label10.Size = new Size(66, 23);
             label10.TabIndex = 39;
             label10.Text = "Email: ";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(250, 96);
+            label7.Location = new Point(421, 321);
+            label7.Margin = new Padding(5, 0, 5, 0);
             label7.Name = "label7";
-            label7.Size = new Size(46, 15);
+            label7.Size = new Size(68, 23);
             label7.TabIndex = 38;
             label7.Text = "Phone:";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(34, 135);
+            label6.Location = new Point(406, 447);
+            label6.Margin = new Padding(5, 0, 5, 0);
             label6.Name = "label6";
-            label6.Size = new Size(58, 15);
+            label6.Size = new Size(86, 23);
             label6.TabIndex = 37;
             label6.Text = "Address: ";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(34, 23);
+            label5.Location = new Point(421, 214);
+            label5.Margin = new Padding(5, 0, 5, 0);
             label5.Name = "label5";
-            label5.Size = new Size(48, 15);
+            label5.Size = new Size(71, 23);
             label5.TabIndex = 36;
             label5.Text = "Name: ";
             // 
@@ -169,25 +176,26 @@
             panel4.Controls.Add(btCustReset);
             panel4.Controls.Add(btCustCancel);
             panel4.Controls.Add(btCustSave);
-            panel4.Location = new Point(11, 11);
-            panel4.Margin = new Padding(2);
+            panel4.Location = new Point(17, 17);
             panel4.Name = "panel4";
-            panel4.Size = new Size(529, 250);
+            panel4.Size = new Size(1320, 817);
             panel4.TabIndex = 49;
             // 
             // tbCustName
             // 
-            tbCustName.Location = new Point(88, 20);
+            tbCustName.Location = new Point(493, 211);
+            tbCustName.Margin = new Padding(5, 5, 5, 5);
             tbCustName.Name = "tbCustName";
-            tbCustName.Size = new Size(124, 23);
+            tbCustName.Size = new Size(355, 30);
             tbCustName.TabIndex = 49;
             // 
             // AddCust
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(11F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(555, 275);
+            ClientSize = new Size(1370, 860);
             Controls.Add(panel4);
+            Margin = new Padding(5, 5, 5, 5);
             Name = "AddCust";
             Text = "AddCust";
             Load += AddCust_Load;

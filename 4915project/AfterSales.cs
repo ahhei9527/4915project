@@ -1,6 +1,4 @@
-﻿using _4915project;
-using Microsoft.VisualBasic.ApplicationServices;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,9 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
-namespace ITP4915M
+namespace _4915project
 {
     public partial class AfterSales : Form
     {
@@ -32,6 +29,7 @@ namespace ITP4915M
         private void AfterSales_Load(object sender, EventArgs e)
         {
             SetupWelcomeMessage();
+            PopulateComplaintFilters();
             // 1. 初始化下拉選單的靜態選項（放最前面，避免重複疊加）
             tbShipID.ReadOnly = true; // ShipmentID 是自動生成的，使用者不應該修改
             cmbCondit.Items.Clear();
@@ -99,46 +97,7 @@ namespace ITP4915M
                     // 執行你原本的其他初始化方法
                     LoadReport();
                     LoadComplaint();
-
-                    string loadComplaintSearch = @"SELECT Name From user";
-                    using (MySqlCommand cmd = new MySqlCommand(loadComplaintSearch, con))
-                    {
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                string name = reader["Name"]?.ToString() ?? "";
-                                cmbUser.Items.Add(name);
-                            }
-                        }
-                    }
-                    cmbType.Items.AddRange(new string[] { "Damage", "Missing", "Return", "Refund", "Quality", "Serve", "Other" });
-                    string loadorder = @"SELECT OrderID From salesorder";
-                    using (MySqlCommand cmd = new MySqlCommand(loadorder, con))
-                    {
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                string orderID = reader["OrderID"]?.ToString() ?? "";
-                                cmbOrderID.Items.Add(orderID);
-                            }
-                        }
-                    }
-                    string loadcust = @"SELECT Name From customer";
-                    using (MySqlCommand cmd = new MySqlCommand(loadcust, con))
-                    {
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                string custName = reader["Name"]?.ToString() ?? "";
-                                cmbCust.Items.Add(custName);
-                            }
-                        }
-                    }
                 }
-
                 catch (MySqlException ex)
                 {
                     MessageBox.Show("Database error: " + ex.Message);
@@ -271,6 +230,48 @@ namespace ITP4915M
             }
         }
 
+
+        private void PopulateComplaintFilters()
+        {
+            cmbType.Items.Clear();
+            cmbUser.Items.Clear();
+            cmbType.Items.Add("All");
+            cmbUser.Items.Add("All");
+
+            
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                try
+                {
+                    con.Open();
+
+                    using (MySqlCommand typeCmd = new MySqlCommand("SELECT DISTINCT TYPE FROM complaint WHERE TYPE IS NOT NULL AND TYPE <> '' ORDER BY TYPE", con))
+                    using (MySqlDataReader typeReader = typeCmd.ExecuteReader())
+                    {
+                        while (typeReader.Read())
+                        {
+                            cmbType.Items.Add(typeReader["TYPE"].ToString());
+                        }
+                    }
+
+                    using (MySqlCommand userCmd = new MySqlCommand("SELECT DISTINCT Name FROM user WHERE Name IS NOT NULL AND Name <> '' ORDER BY Name", con))
+                    using (MySqlDataReader userReader = userCmd.ExecuteReader())
+                    {
+                        while (userReader.Read())
+                        {
+                            cmbUser.Items.Add(userReader["Name"].ToString());
+                        }
+                    }
+                }
+                catch
+                {
+                }
+            }
+
+            if (cmbType.Items.Count > 0) cmbType.SelectedIndex = 0;
+            if (cmbUser.Items.Count > 0) cmbUser.SelectedIndex = 0;
+        }
+
         private void btRefresh_Click(object sender, EventArgs e)
         {
             LoadReport();
@@ -371,6 +372,78 @@ namespace ITP4915M
             tbNote.Clear();
         }
 
+
+        private void btRefreshComplaint_Click(object sender, EventArgs e)
+        {
+            LoadComplaint();
+        }
+
+        private void btCLears_Click(object sender, EventArgs e)
+        {
+            tbComplainID.Clear();
+            tbOrderID.Clear();
+            tbCustomer.Clear();
+            cmbType.SelectedIndex = cmbType.Items.Count > 0 ? 0 : -1;
+            cmbUser.SelectedIndex = cmbUser.Items.Count > 0 ? 0 : -1;
+            SDate.Value = DateTime.Today;
+            EDate.Value = DateTime.Today;
+            LoadComplaint();
+        }
+
+        private void btSearch_Click(object sender, EventArgs e)
+        {
+            
+            string query = @"
+                SELECT 
+                    c.ComplaintID,
+                    cu.Name AS CustomerName,
+                    c.OrderID,
+                    c.SerialNumber,
+                    u.Name AS Employee,
+                    c.IssueDate,
+                    c.Description,
+                    c.TYPE,
+                    c.Resolution,
+                    c.ResolutionDate
+                FROM complaint c
+                INNER JOIN customer cu ON c.CustomerID = cu.CustomerID
+                INNER JOIN user u ON c.UserID = u.UserID
+                WHERE (@ComplaintID = '' OR c.ComplaintID LIKE CONCAT('%', @ComplaintID, '%'))
+                  AND (@OrderID = '' OR c.OrderID LIKE CONCAT('%', @OrderID, '%'))
+                  AND (@CustomerName = '' OR cu.Name LIKE CONCAT('%', @CustomerName, '%'))
+                  AND (@TypeFilter = 'All' OR c.TYPE = @TypeFilter)
+                  AND (@UserFilter = 'All' OR u.Name = @UserFilter)
+                  AND c.IssueDate BETWEEN @StartDate AND @EndDate
+                ORDER BY c.IssueDate DESC;";
+
+            using (MySqlConnection con = new MySqlConnection(constring))
+            using (MySqlCommand cmd = new MySqlCommand(query, con))
+            {
+                cmd.Parameters.AddWithValue("@ComplaintID", tbComplainID.Text.Trim());
+                cmd.Parameters.AddWithValue("@OrderID", tbOrderID.Text.Trim());
+                cmd.Parameters.AddWithValue("@CustomerName", tbCustomer.Text.Trim());
+                cmd.Parameters.AddWithValue("@TypeFilter", cmbType.SelectedItem?.ToString() ?? "All");
+                cmd.Parameters.AddWithValue("@UserFilter", cmbUser.SelectedItem?.ToString() ?? "All");
+                cmd.Parameters.AddWithValue("@StartDate", SDate.Value.Date);
+                cmd.Parameters.AddWithValue("@EndDate", EDate.Value.Date.AddDays(1).AddSeconds(-1));
+
+                try
+                {
+                    con.Open();
+                    DataTable dt = new DataTable();
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                    dataGridView1.DataSource = dt;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to search complaints: " + ex.Message, "Search Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
         private void btSales_Click(object sender, EventArgs e)
         {
             SalesOrder salesOrderForm = new SalesOrder();
@@ -396,6 +469,21 @@ namespace ITP4915M
         {
             Inventory inventoryForm = new Inventory();
             inventoryForm.Show();
+            this.Close();
+        }
+
+
+        private void btSetting_Click(object sender, EventArgs e)
+        {
+            FormSetting setting = new FormSetting();
+            setting.Show();
+            this.Close();
+        }
+
+        private void Production_Click(object sender, EventArgs e)
+        {
+            Production production = new Production();
+            production.Show();
             this.Close();
         }
 
@@ -453,89 +541,6 @@ namespace ITP4915M
             }
 
             Application.Exit();
-        }
-
-        private void btSetting_Click(object sender, EventArgs e)
-        {
-            FormSetting settingsForm = new FormSetting();
-            settingsForm.Show();
-        }
-
-        private void btRefreshComplaint_Click(object sender, EventArgs e)
-        {
-            LoadComplaint();
-        }
-
-        private void btCLears_Click(object sender, EventArgs e)
-        {
-            cmbOrderID.Text = "";
-            cmbCust.Text = "";
-            cmbUser.Text = "";
-            cmbType.Text = "";
-        }
-
-        private void btSearch_Click(object sender, EventArgs e)
-        {
-            // 1. 先定義基礎的 SQL 語句，並加上必填的日期條件
-            System.Text.StringBuilder queryBuilder = new System.Text.StringBuilder(@"
-        SELECT * FROM complaint 
-        WHERE IssueDate >= @SDate
-        AND ResolutionDate <= @EDate");
-
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                try
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = new MySqlCommand())
-                    {
-                        // 2. 優先綁定必填的日期參數
-                        cmd.Parameters.AddWithValue("@SDate", SDate.Value);
-                        cmd.Parameters.AddWithValue("@EDate", EDate.Value);
-
-                        // 3. 動態檢查各控制項：若有選取值，才將 SQL 片段拼接到 StringBuilder，並安全綁定變數
-                        if (!string.IsNullOrEmpty(cmbCust.Text) && cmbCust.SelectedItem != null)
-                        {
-                            queryBuilder.Append(" AND CustomerID = @CustID");
-                            cmd.Parameters.AddWithValue("@CustID", cmbCust.SelectedItem.ToString());
-                        }
-
-                        if (!string.IsNullOrEmpty(cmbOrderID.Text) && cmbOrderID.SelectedItem != null)
-                        {
-                            queryBuilder.Append(" AND OrderID = @OrderID");
-                            cmd.Parameters.AddWithValue("@OrderID", cmbOrderID.SelectedItem.ToString());
-                        }
-
-                        if (!string.IsNullOrEmpty(cmbUser.Text) && cmbUser.SelectedItem != null)
-                        {
-                            queryBuilder.Append(" AND UserID = @UserID");
-                            cmd.Parameters.AddWithValue("@UserID", cmbUser.SelectedItem.ToString());
-                        }
-
-                        if (!string.IsNullOrEmpty(cmbType.Text))
-                        {
-                            queryBuilder.Append(" AND TYPE = @Type");
-                            cmd.Parameters.AddWithValue("@Type", cmbType.Text);
-                        }
-
-                        // 4. 將動態組裝完成的完整 SQL 字串指派給 CommandText
-                        cmd.CommandText = queryBuilder.ToString();
-                        cmd.Connection = con;
-
-                        // 5. 執行查詢並填充資料
-                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
-                        {
-                            DataTable dt = new DataTable();
-                            da.Fill(dt);
-                            dataGridView1.DataSource = dt;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Search error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
         }
     }
 }
