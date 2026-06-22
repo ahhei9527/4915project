@@ -17,23 +17,38 @@ namespace _4915project
         private void Production_Load(object sender, EventArgs e)
         {
             getSN();
+            SetupWelcomeMessage();
+            getRequestID();
+            genRequestID();
+            getBatchID();
+            getUser();
+            genRequestItemID();
+            getMaterialName();
+            cmbUrgency.Items.AddRange(new string[] { "Low", "High" });
+            cmbRequestStatus.Items.AddRange(new string[] { "In Progress", "Completed" });
+        }
+        private void SetupWelcomeMessage()
+        {
+            string displayName = string.IsNullOrWhiteSpace(CurrentUser.Username) ? "User" : CurrentUser.Username;
+            string rolePart = string.IsNullOrWhiteSpace(CurrentUser.Role) ? "" : $" ({CurrentUser.Role})";
+            this.lblWelcome.Text = $"Welcome, {displayName}{rolePart}!";
         }
 
         private void getSN()
         {
             // 💡 修正 1：移除 so.Status 後方多餘的逗號
             string query = @"
-    SELECT 
-        so.OrderID,
-        c.Name AS CustomerName,
-        so.Status,
-        so.RequestDeliveryDate
-    FROM salesorder so
-    LEFT JOIN customer c ON so.CustomerID = c.CustomerID
-    LEFT JOIN shipment s ON s.OrderID = so.OrderID
-    LEFT JOIN deliveryitem d ON d.ShipmentID = s.ShipmentID
-    WHERE d.SerialNumber IS NULL
-    ORDER BY so.OrderID ASC;";
+            SELECT 
+                so.OrderID,
+                c.Name AS CustomerName,
+                so.Status,
+                so.RequestDeliveryDate
+            FROM salesorder so
+            LEFT JOIN customer c ON so.CustomerID = c.CustomerID
+            LEFT JOIN shipment s ON s.OrderID = so.OrderID
+            LEFT JOIN deliveryitem d ON d.ShipmentID = s.ShipmentID
+            WHERE d.SerialNumber IS NULL
+            ORDER BY so.OrderID ASC;";
 
             using (MySqlConnection con = new MySqlConnection(constring))
             {
@@ -117,10 +132,10 @@ namespace _4915project
             this.Close();
         }
 
-        private void btProduction_Click(object sender, EventArgs e)
+        private void btAfterSales_Click(object sender, EventArgs e)
         {
-            Production production = new Production();
-            production.Show();
+            AfterSales afterSales = new AfterSales();
+            afterSales.Show();
             this.Close();
         }
 
@@ -213,6 +228,543 @@ namespace _4915project
                 catch (Exception ex)
                 {
                     MessageBox.Show("查詢失敗: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btLinkSN_Click(object sender, EventArgs e)
+        {
+            LinkSNtoOrder linkSNtoOrder = new LinkSNtoOrder();
+            linkSNtoOrder.Show();
+        }
+
+        private void Logoutbt_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+
+
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+                    con.Open();
+
+                    // Optional: You can still verify user exists, but usually not necessary for logout
+                    string query = @"
+                SELECT userid, name FROM user 
+                WHERE userid = @UserId 
+                LIMIT 1";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", CurrentUser.UserID);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int userId = reader.GetInt32("userid");
+                                string username = reader["name"]?.ToString() ?? "Unknown";
+
+                                // Log the audit
+                                AuditHelper.Log(
+                                    tableName: "user",
+                                    recordId: userId.ToString(),
+                                    action: "LOGOUT",
+                                    userId: userId,
+                                    username: username,
+                                    description: $"User {username} logged out"
+                                );
+                            }
+                        }
+                    }
+                }
+
+                // Logout from application
+                CurrentUser.Logout();
+
+                MessageBox.Show("Logout successful!", "Success",
+                               MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Logout error: {ex.Message}", "Error",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            Application.Exit();
+        }
+        private void getRequestID()
+        {
+            string query = @"Select RequestID from materialrequest order by RequestID ASC";
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    try
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                cmbRequestID.Items.Add(reader["RequestID"].ToString());
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("系統錯誤: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+        private void genRequestID()
+        {
+            // 💡 修正 1：SQL 補上 LIKE @Prefix 篩選，並將 LIMIT BY 1 改為正確的 LIMIT 1
+            string query = @"
+        SELECT RequestID 
+        FROM materialrequest 
+        WHERE RequestID LIKE @Prefix 
+        ORDER BY RequestID DESC 
+        LIMIT 1;";
+
+            string prefix = "REQ";
+
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    // 💡 修正 2：現在 SQL 內有 @Prefix 了，這裡的參數綁定才會生效
+                    cmd.Parameters.AddWithValue("@Prefix", prefix + "%");
+
+                    try
+                    {
+                        con.Open();
+                        object result = cmd.ExecuteScalar();
+
+                        int nextNumber = 1;
+
+                        if (result != null && result != DBNull.Value)
+                        {
+                            string lastOrderID = result.ToString();
+
+                            // 防呆：確保字串長度大於前置詞（3碼），才去切取後方的流水號
+                            if (lastOrderID.Length > prefix.Length)
+                            {
+                                // 💡 優化：直接從前置詞長度之後開始切到尾，避免硬編碼數字導致算錯
+                                string lastNumberStr = lastOrderID.Substring(prefix.Length);
+
+                                if (int.TryParse(lastNumberStr, out int lastNumber))
+                                {
+                                    nextNumber = lastNumber + 1;
+                                }
+                            }
+                        }
+
+                        string newRequestID = prefix + nextNumber.ToString("D3");
+
+                        // 將新單號帶入控制項
+                        cmbRequestID.Text = newRequestID;
+
+                        // 避免重複加入
+                        if (!cmbRequestID.Items.Contains(newRequestID))
+                        {
+                            cmbRequestID.Items.Add(newRequestID);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine("無法取得資料庫流水號: " + ex.Message);
+                        MessageBox.Show("無法自動產生單號，請手動輸入或稍後再試。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+        }
+        private void getBatchID()
+        {
+            string query = @"Select BatchID from productionbatch order by BatchID ASC";
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    try
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                cmbBatchID.Items.Add(reader["BatchID"].ToString());
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("系統錯誤: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+        private void getUser()
+        {
+            string query = @"SELECT Name From User;";
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    try
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                cmbRequestBy.Items.Add(reader["Name"].ToString());
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("系統錯誤: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void cmbRequestID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbRequestID.SelectedIndex == -1) return;
+
+            string query = @"
+    SELECT 
+        m.BatchID, 
+        u.Name AS UserName, 
+        m.RequestDate, 
+        m.Urgency, 
+        m.Status, 
+        m.RequestByDate
+    FROM materialrequest m
+    INNER JOIN User u ON m.UserID = u.UserID
+    WHERE m.RequestID = @RequestID;";
+
+            string query2 = @"SELECT * FROM materialrequestitem WHERE RequestID = @RequestID;";
+
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                try
+                {
+                    con.Open();
+
+                    // ==================== 1. 讀取主檔資料 (使用 DataReader) ====================
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@RequestID", cmbRequestID.SelectedItem?.ToString());
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                cmbBatchID.Text = reader["BatchID"].ToString();
+                                RequestDate.Text = reader["RequestDate"].ToString();
+                                cmbUrgency.Text = reader["Urgency"].ToString();
+                                cmbRequestStatus.Text = reader["Status"].ToString();
+                                RequestByDate.Text = reader["RequestByDate"].ToString();
+                                cmbRequestBy.Text = reader["UserName"].ToString();
+                            }
+                        } // 👈 這裡的 using 結束，第一個 reader 會被徹底關閉並釋放連線
+                    }
+
+                    // ==================== 2. 讀取明細資料 (直接用 DataAdapter，不開 Reader) ====================
+                    DataTable dt = new DataTable();
+                    using (MySqlCommand cmd2 = new MySqlCommand(query2, con))
+                    {
+                        cmd2.Parameters.AddWithValue("@RequestID", cmbRequestID.SelectedItem?.ToString());
+
+                        // 💡 關鍵優化：直接交給 DataAdapter 處理，它會內部自己管好連線，不會有任何衝突
+                        using (MySqlDataAdapter da2 = new MySqlDataAdapter(cmd2))
+                        {
+                            da2.Fill(dt);
+                        }
+                    }
+
+                    // ==================== 3. 根據明細有無，控制介面 UI 狀態 ====================
+                    if (dt.Rows.Count > 0)
+                    {
+                        // 💡 有明細資料：將明細表格綁定，並鎖定輸入控制項（唯讀模式）
+                        dataGridView2.DataSource = dt;
+
+                        tbRequestItemID.Enabled = false;
+                        QuantityRequested.Enabled = false;
+                        cmbMaterialName.Enabled = false;
+                        btAdd.Enabled = false;
+                        QuantityApproved.Enabled = false;
+                        QuantityIssued.Enabled = false;
+                    }
+                    else
+                    {
+                        // 💡 沒有明細資料：清空 DataGridView 並解除鎖定，允許使用者新增品項
+                        dataGridView2.DataSource = null;
+                        tbRequestItemID.Enabled = true;
+
+                        // 如果需要，其他控制項也可以在這裡設為 true 恢復編輯
+                        QuantityRequested.Enabled = true;
+                        cmbMaterialName.Enabled = true;
+                        btAdd.Enabled = true;
+                        QuantityApproved.Enabled = true;
+                        QuantityIssued.Enabled = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("讀取申請單失敗: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        } // 💡 修正 3：補齊方法的大括號
+        private void genRequestItemID()
+        {
+            string query = @"
+            SELECT RequestItemID FROM materialrequestitem 
+            WHERE RequestItemID LIKE @Prefix 
+            ORDER BY RequestItemID DESC 
+            LIMIT 1;";
+
+            string prefix = "RITEM";
+
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@Prefix", prefix + "%");
+
+                    try
+                    {
+                        con.Open();
+                        object result = cmd.ExecuteScalar();
+
+                        int nextNumber = 1;
+
+                        if (result != null && result != DBNull.Value)
+                        {
+                            string lastItemID = result.ToString();
+
+                            if (lastItemID.Length > prefix.Length)
+                            {
+                                string lastNumberStr = lastItemID.Substring(prefix.Length);
+
+                                if (int.TryParse(lastNumberStr, out int lastNumber))
+                                {
+                                    nextNumber = lastNumber + 1;
+                                }
+                            }
+                        }
+
+                        string newRequestItemID = prefix + nextNumber.ToString("D3");
+
+                        // 💡 修正 2：將明細單號塞入正確的明細控制項（此處以 tbRequestItemID 為例）
+                        tbRequestItemID.Text = newRequestItemID;
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine("無法取得物料明細流水號: " + ex.Message);
+                        MessageBox.Show("無法自動產生明細單號，請手動輸入或稍後再試。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+        }
+        private void getMaterialName()
+        {
+            string query = @"select Name from rawmaterial order by Name ASC";
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            cmbMaterialName.Items.Add(reader["Name"]);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void btAdd_Click(object sender, EventArgs e)
+        {
+            // 💡 防呆機制：確保必填欄位都有輸入
+            if (string.IsNullOrEmpty(tbRequestItemID.Text) || string.IsNullOrEmpty(cmbRequestID.Text))
+            {
+                MessageBox.Show("請確認單號與明細編號已生成！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string insertQuery = @"
+        INSERT INTO materialrequestitem 
+        (RequestItemID, RequestID, MaterialID, QuantityRequested, QuantityApproved, QuantityIssued) 
+        VALUES 
+        (@RequestItemID, @RequestID, @MaterialID, @QuantityRequested, @QuantityApproved, @QuantityIssued);";
+
+            string MaterialIDQuery = "SELECT MaterialID FROM rawmaterial WHERE Name = @Name;";
+            string query2 = "SELECT * FROM materialrequestitem WHERE RequestID = @RequestID;";
+
+            string MaterialID = "MAT0"; // 預設值
+
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                try
+                {
+                    con.Open();
+
+                    // 1. 根據物料名稱查詢物料 ID
+                    using (MySqlCommand cmd2 = new MySqlCommand(MaterialIDQuery, con))
+                    {
+                        cmd2.Parameters.AddWithValue("@Name", cmbMaterialName.Text);
+                        using (MySqlDataReader reader = cmd2.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                MaterialID = reader["MaterialID"].ToString();
+                            }
+                        }
+                    } // 💡 第一個 Reader 在這裡結束並正確關閉，避免後續衝突
+
+                    // 2. 執行資料寫入 (INSERT)
+                    using (MySqlCommand cmd = new MySqlCommand(insertQuery, con))
+                    {
+                        cmd.Parameters.AddWithValue("@RequestItemID", tbRequestItemID.Text);
+                        cmd.Parameters.AddWithValue("@RequestID", cmbRequestID.Text);
+                        cmd.Parameters.AddWithValue("@MaterialID", MaterialID);
+
+                        // 💡 安全機制：將字串轉換為數字型態，若轉換失敗則代入 0，防止資料庫崩潰
+                        int.TryParse(QuantityRequested.Text, out int reqQty);
+                        int.TryParse(QuantityApproved.Text, out int appQty);
+                        int.TryParse(QuantityIssued.Text, out int issQty);
+
+                        cmd.Parameters.AddWithValue("@QuantityRequested", reqQty);
+                        cmd.Parameters.AddWithValue("@QuantityApproved", appQty);
+                        cmd.Parameters.AddWithValue("@QuantityIssued", issQty);
+
+                        // 💡 修正 1：必須呼叫 ExecuteNonQuery 才會真正把資料寫進資料庫
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    MessageBox.Show("物料明細新增成功！", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // 3. 重新讀取資料庫，將最新明細刷回 DataGridView
+                    DataTable dt = new DataTable();
+                    using (MySqlCommand cmd3 = new MySqlCommand(query2, con))
+                    {
+                        cmd3.Parameters.AddWithValue("@RequestID", cmbRequestID.Text);
+                        using (MySqlDataAdapter da2 = new MySqlDataAdapter(cmd3))
+                        {
+                            da2.Fill(dt);
+                        }
+                    }
+
+                    // 💡 修正 3：務必將資料來源指派給 DataGridView，畫面才會同步更新
+                    dataGridView2.DataSource = dt;
+
+                    // 4. 清空輸入框（保留單號），並自動生成下一個明細序號
+                    QuantityRequested.Value = 0;
+                    QuantityApproved.Value = 0;
+                    QuantityIssued.Value = 0;
+
+                    genRequestItemID(); // 自動幫使用者準備好下一個 RITEM 號碼
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("新增明細失敗: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            cmbUrgency.SelectedIndex = -1;
+            cmbRequestBy.SelectedIndex = -1;
+            cmbBatchID.SelectedIndex = -1;
+            cmbRequestStatus.SelectedIndex = -1;
+            RequestByDate.Value = DateTime.Now;
+            RequestDate.Value = DateTime.Now;
+            tbRequestItemID.Clear();
+            cmbMaterialName.SelectedIndex = -1;
+            QuantityRequested.Value = 0;
+            QuantityApproved.Value = 0;
+            QuantityIssued.Value = 0;
+            dataGridView2.DataSource = null;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            // 💡 安全防呆：確保主要必填欄位沒有留白
+            if (string.IsNullOrEmpty(cmbRequestID.Text) || string.IsNullOrEmpty(cmbRequestBy.Text))
+            {
+                MessageBox.Show("請確認「申請單號」與「申請人」皆已填寫！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string insertQuery = @"
+    INSERT INTO materialrequest
+    (RequestID, UserID, BatchID, RequestDate, RequestByDate, Urgency, Status) 
+    VALUES 
+    (@RequestID, @UserID, @BatchID, @RequestDate, @RequestByDate, @Urgency, @Status);";
+
+            string UserIDQuery = "SELECT UserID FROM user WHERE Name = @Name;";
+            int userID = 0;
+
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                try
+                {
+                    // 💡 修正 1：務必先打開資料庫連線！
+                    con.Open();
+
+                    // 1. 根據申請人名稱查詢 UserID
+                    using (MySqlCommand cmd = new MySqlCommand(UserIDQuery, con))
+                    {
+                        cmd.Parameters.AddWithValue("@Name", cmbRequestBy.Text);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            // 💡 修正 2：必須呼叫 .Read() 成功後才能讀取欄位，並加上找不到人的防呆
+                            if (reader.Read())
+                            {
+                                userID = reader.GetInt32(0);
+                            }
+                            else
+                            {
+                                MessageBox.Show($"找不到名為「{cmbRequestBy.Text}」的使用者，請確認輸入是否正確。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return; // 中止後續的新增動作
+                            }
+                        } // 這裡第一個 Reader 會被自動關閉
+                    }
+
+                    // 2. 執行主檔寫入 (INSERT)
+                    using (MySqlCommand cmd2 = new MySqlCommand(insertQuery, con))
+                    {
+                        cmd2.Parameters.AddWithValue("@RequestID", cmbRequestID.Text);
+                        cmd2.Parameters.AddWithValue("@UserID", userID);
+                        cmd2.Parameters.AddWithValue("@BatchID", cmbBatchID.Text);
+
+                        // 💡 提示：此處使用 .Value.Date 只保留日期部分，抹除時間，更符合資料庫的 DATE 型態
+                        cmd2.Parameters.AddWithValue("@RequestDate", RequestDate.Value.Date);
+                        cmd2.Parameters.AddWithValue("@RequestByDate", RequestByDate.Value.Date);
+
+                        cmd2.Parameters.AddWithValue("@Urgency", cmbUrgency.Text);
+                        cmd2.Parameters.AddWithValue("@Status", cmbRequestStatus.Text);
+
+                        // 💡 修正 3：必須呼叫此行，資料才會真正進資料庫！
+                        cmd2.ExecuteNonQuery();
+                    }
+
+                    MessageBox.Show("物料申請主檔新增成功！", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // 💡 建議擴充：主檔新增成功後，通常會解鎖明細新增按鈕（btAdd.Enabled = true）
+                    // 或者觸發你的 genRequestItemID() 讓使用者接著輸入明細
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("儲存申請主檔失敗: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

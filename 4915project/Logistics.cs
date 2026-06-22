@@ -1482,5 +1482,12 @@ namespace _4915project
                 Console.WriteLine("Audit Log failed: " + ex.Message);
             }
         }
+
+        private void Production_Click(object sender, EventArgs e)
+        {
+            Production production = new Production();
+            production.Show();
+            this.Close();
+        }
     }
 }

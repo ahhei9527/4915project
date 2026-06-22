@@ -120,7 +120,7 @@
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(GenDoc);
             tabControl1.Location = new Point(169, 63);
-            tabControl1.Margin = new Padding(2, 2, 2, 2);
+            tabControl1.Margin = new Padding(2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(676, 430);
@@ -133,9 +133,9 @@
             tabPage2.Controls.Add(groupBox1);
             tabPage2.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
             tabPage2.Location = new Point(4, 24);
-            tabPage2.Margin = new Padding(2, 2, 2, 2);
+            tabPage2.Margin = new Padding(2);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(2, 2, 2, 2);
+            tabPage2.Padding = new Padding(2);
             tabPage2.Size = new Size(668, 402);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Status & Goods Received";
@@ -163,9 +163,9 @@
             groupBox1.Controls.Add(label10);
             groupBox1.Controls.Add(lblShipID);
             groupBox1.Location = new Point(6, 8);
-            groupBox1.Margin = new Padding(2, 2, 2, 2);
+            groupBox1.Margin = new Padding(2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(2, 2, 2, 2);
+            groupBox1.Padding = new Padding(2);
             groupBox1.Size = new Size(660, 394);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
@@ -263,7 +263,7 @@
             // btUpdateCreate
             // 
             btUpdateCreate.Location = new Point(205, 361);
-            btUpdateCreate.Margin = new Padding(2, 2, 2, 2);
+            btUpdateCreate.Margin = new Padding(2);
             btUpdateCreate.Name = "btUpdateCreate";
             btUpdateCreate.Size = new Size(225, 22);
             btUpdateCreate.TabIndex = 16;
@@ -295,7 +295,7 @@
             // 
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.Location = new Point(6, 193);
-            dataGridView2.Margin = new Padding(2, 2, 2, 2);
+            dataGridView2.Margin = new Padding(2);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowHeadersWidth = 62;
             dataGridView2.Size = new Size(633, 158);
@@ -379,7 +379,7 @@
             DeliveryNote.Controls.Add(lblDeliveryID);
             DeliveryNote.Location = new Point(4, 24);
             DeliveryNote.Name = "DeliveryNote";
-            DeliveryNote.Padding = new Padding(3, 3, 3, 3);
+            DeliveryNote.Padding = new Padding(3);
             DeliveryNote.Size = new Size(651, 372);
             DeliveryNote.TabIndex = 0;
             DeliveryNote.Text = "Delivery Note";
@@ -506,7 +506,7 @@
             ReplySlip.Controls.Add(btGenSlip);
             ReplySlip.Location = new Point(4, 24);
             ReplySlip.Name = "ReplySlip";
-            ReplySlip.Padding = new Padding(3, 3, 3, 3);
+            ReplySlip.Padding = new Padding(3);
             ReplySlip.Size = new Size(651, 372);
             ReplySlip.TabIndex = 1;
             ReplySlip.Text = "Reply Slip";
@@ -693,6 +693,7 @@
             Production.TabIndex = 4;
             Production.Text = "Production";
             Production.UseVisualStyleBackColor = true;
+            Production.Click += Production_Click;
             // 
             // Inventory
             // 
@@ -756,7 +757,7 @@
             Controls.Add(lblWelcome);
             Controls.Add(tabControl1);
             Controls.Add(label1SystemName);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "FormLogistics";
             Text = "Logistics";
             Load += FormLogistics_Load;

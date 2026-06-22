@@ -81,7 +81,7 @@
             panel1.Controls.Add(textOrderID);
             panel1.Controls.Add(labelOrderID);
             panel1.Location = new Point(163, 74);
-            panel1.Margin = new Padding(2, 2, 2, 2);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
             panel1.Size = new Size(671, 398);
             panel1.TabIndex = 1;
@@ -98,7 +98,7 @@
             // buttonRefresh
             // 
             buttonRefresh.Location = new Point(15, 360);
-            buttonRefresh.Margin = new Padding(2, 2, 2, 2);
+            buttonRefresh.Margin = new Padding(2);
             buttonRefresh.Name = "buttonRefresh";
             buttonRefresh.Size = new Size(71, 22);
             buttonRefresh.TabIndex = 15;
@@ -109,7 +109,7 @@
             // buttonEditOrder
             // 
             buttonEditOrder.Location = new Point(565, 360);
-            buttonEditOrder.Margin = new Padding(2, 2, 2, 2);
+            buttonEditOrder.Margin = new Padding(2);
             buttonEditOrder.Name = "buttonEditOrder";
             buttonEditOrder.Size = new Size(84, 22);
             buttonEditOrder.TabIndex = 14;
@@ -120,7 +120,7 @@
             // buttonCreateOrder
             // 
             buttonCreateOrder.Location = new Point(461, 360);
-            buttonCreateOrder.Margin = new Padding(2, 2, 2, 2);
+            buttonCreateOrder.Margin = new Padding(2);
             buttonCreateOrder.Name = "buttonCreateOrder";
             buttonCreateOrder.Size = new Size(83, 22);
             buttonCreateOrder.TabIndex = 13;
@@ -131,7 +131,7 @@
             // buttonClear
             // 
             buttonClear.Location = new Point(587, 82);
-            buttonClear.Margin = new Padding(2, 2, 2, 2);
+            buttonClear.Margin = new Padding(2);
             buttonClear.Name = "buttonClear";
             buttonClear.Size = new Size(62, 23);
             buttonClear.TabIndex = 11;
@@ -142,7 +142,7 @@
             // buttonSearch
             // 
             buttonSearch.Location = new Point(514, 82);
-            buttonSearch.Margin = new Padding(2, 2, 2, 2);
+            buttonSearch.Margin = new Padding(2);
             buttonSearch.Name = "buttonSearch";
             buttonSearch.Size = new Size(62, 23);
             buttonSearch.TabIndex = 10;
@@ -163,7 +163,7 @@
             // dateTimePickerEnd
             // 
             dateTimePickerEnd.Location = new Point(323, 84);
-            dateTimePickerEnd.Margin = new Padding(2, 2, 2, 2);
+            dateTimePickerEnd.Margin = new Padding(2);
             dateTimePickerEnd.Name = "dateTimePickerEnd";
             dateTimePickerEnd.Size = new Size(138, 23);
             dateTimePickerEnd.TabIndex = 8;
@@ -171,7 +171,7 @@
             // dateTimePickerStart
             // 
             dateTimePickerStart.Location = new Point(87, 85);
-            dateTimePickerStart.Margin = new Padding(2, 2, 2, 2);
+            dateTimePickerStart.Margin = new Padding(2);
             dateTimePickerStart.Name = "dateTimePickerStart";
             dateTimePickerStart.Size = new Size(168, 23);
             dateTimePickerStart.TabIndex = 7;
@@ -191,7 +191,7 @@
             comboBoxStatus.FormattingEnabled = true;
             comboBoxStatus.Items.AddRange(new object[] { "Quoted", "Paid", "InProduction", "Ready for shipment", "Delivered" });
             comboBoxStatus.Location = new Point(517, 47);
-            comboBoxStatus.Margin = new Padding(2, 2, 2, 2);
+            comboBoxStatus.Margin = new Padding(2);
             comboBoxStatus.Name = "comboBoxStatus";
             comboBoxStatus.Size = new Size(134, 23);
             comboBoxStatus.TabIndex = 5;
@@ -209,7 +209,7 @@
             // textCust
             // 
             textCust.Location = new Point(323, 48);
-            textCust.Margin = new Padding(2, 2, 2, 2);
+            textCust.Margin = new Padding(2);
             textCust.Name = "textCust";
             textCust.Size = new Size(138, 23);
             textCust.TabIndex = 3;
@@ -227,7 +227,7 @@
             // textOrderID
             // 
             textOrderID.Location = new Point(87, 48);
-            textOrderID.Margin = new Padding(2, 2, 2, 2);
+            textOrderID.Margin = new Padding(2);
             textOrderID.Name = "textOrderID";
             textOrderID.Size = new Size(168, 23);
             textOrderID.TabIndex = 1;
@@ -320,6 +320,7 @@
             Production.TabIndex = 4;
             Production.Text = "Production";
             Production.UseVisualStyleBackColor = true;
+            Production.Click += Production_Click;
             // 
             // Inventory
             // 
@@ -375,7 +376,7 @@
             Controls.Add(Logoutbt);
             Controls.Add(lblWelcome);
             Controls.Add(panel1);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "SalesOrder";
             Text = "SalesOrder";
             Load += FormOrder_Load;

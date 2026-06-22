@@ -23,7 +23,6 @@ namespace _4915project
             if (e.KeyCode == Keys.Enter) Login();
         }
 
-        // SHA256 Hash 輔助函數
         private string ComputeSha256Hash(string rawData)
         {
             using (SHA256 sha256Hash = SHA256.Create())
@@ -44,6 +43,14 @@ namespace _4915project
                 return;
             }
 
+            // 用於跨區塊傳遞資料的暫存變數
+            bool isAuthenticated = false;
+            bool needUpdateHash = false;
+            string loggedInUserId = "";
+            string loggedInName = "";
+            string loggedInRole = "";
+            string hashedInput = ComputeSha256Hash(textBoxPwd.Text);
+
             try
             {
                 using (MySqlConnection con = new MySqlConnection(constring))
@@ -60,60 +67,84 @@ namespace _4915project
                             {
                                 string dbPassword = reader["password"].ToString();
                                 string inputPassword = textBoxPwd.Text;
-                                string hashedInput = ComputeSha256Hash(inputPassword);
 
-                                // 判斷資料庫密碼是否已是 Hash (以 64 位元長度判斷)
                                 bool isDbHashed = (dbPassword.Length == 64);
-                                bool isAuthenticated = false;
 
                                 if (isDbHashed)
                                 {
-                                    // 直接對比
                                     isAuthenticated = (dbPassword == hashedInput);
                                 }
                                 else
                                 {
-                                    // 未 Hash，比對明文並順便更新
                                     if (dbPassword == inputPassword)
                                     {
                                         isAuthenticated = true;
-                                        // 更新資料庫為 Hash
-                                        UpdatePasswordToHash(reader["userid"].ToString(), hashedInput);
+                                        // 💡 優化 1：先標記需要更新，暫時不在此處調用數據庫更新，避免死鎖
+                                        needUpdateHash = true;
                                     }
                                 }
 
                                 if (isAuthenticated)
                                 {
-                                    // 成功登入邏輯...
-                                    MessageBox.Show("登入成功！");
-                                    // 這裡接續你原本的頁面導向邏輯
-                                    if (reader["role"].ToString() == "ADMIN")
-                                    {
-                                        DashBoard dashBoard = new DashBoard();
-                                        dashBoard.Show();
-                                        this.Hide();
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("登入成功，但目前僅提供管理員使用。", "登入成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    }
-                                }
-                                else
-                                {
-                                    MessageBox.Show("密碼錯誤。", "登入失敗", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    // 暫存查出來的用戶資訊
+                                    loggedInUserId = reader["userid"].ToString();
+                                    loggedInName = reader["name"].ToString();
+                                    loggedInRole = reader["role"].ToString();
                                 }
                             }
                             else
                             {
                                 MessageBox.Show("帳號不存在。", "登入失敗", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
                             }
-                        }
+                        } // 💡 關鍵：第一個 reader 在這裡被完全釋放、關閉連線佔用！
                     }
+                } // 外部 con 連線關閉
+
+                // ==================== 驗證後的邏輯處理 (此處連線已完全乾淨) ====================
+                if (isAuthenticated)
+                {
+                    // 💡 修正 2：異步/延後更新密碼雜湊值，此時完全不會引發 DataReader 死鎖
+                    if (needUpdateHash)
+                    {
+                        UpdatePasswordToHash(loggedInUserId, hashedInput);
+                    }
+
+                    // 💡 正確作法：利用 int.Parse 轉換 ID，並直接呼叫內建方法傳遞參數
+                    if (int.TryParse(loggedInUserId, out int parsedUserId))
+                    {
+                        // 呼叫你的 Login 封裝方法，完美符合私有 set 的規範！
+                        CurrentUser.Login(parsedUserId, loggedInName, loggedInRole);
+                    }
+                    else
+                    {
+                        // 預防萬一 ID 轉換失敗時的替代處理
+                        CurrentUser.Login(0, loggedInName, loggedInRole);
+                    }
+
+                    MessageBox.Show("登入成功！", "系統提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // 頁面導向邏輯
+                    if (loggedInRole == "ADMIN")
+                    {
+                        DashBoard dashBoard = new DashBoard();
+                        dashBoard.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        // 如果未來一般用戶也要放行，直接在這裡 new 一般用戶的表單即可
+                        MessageBox.Show("登入成功，但目前僅提供管理員使用。", "權限不足", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("密碼錯誤。", "登入失敗", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("系統錯誤: " + ex.Message);
+                MessageBox.Show("系統錯誤: " + ex.Message, "系統錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

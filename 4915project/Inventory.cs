@@ -773,5 +773,12 @@ namespace _4915project
             FormSetting setting = new FormSetting();
             setting.Show();
         }
+
+        private void Production_Click(object sender, EventArgs e)
+        {
+            Production production = new Production();
+            production.Show();
+            this.Close();
+        }
     }
 }
