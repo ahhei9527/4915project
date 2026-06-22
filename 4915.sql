@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2026-06-04 18:13:05
+-- 產生時間： 2026-06-22 17:52:59
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- 資料庫： `4915`
 --
-CREATE DATABASE IF NOT EXISTS `4915` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `4915`;
 
 -- --------------------------------------------------------
 
@@ -29,7 +27,6 @@ USE `4915`;
 -- 資料表結構 `audit_log`
 --
 
-DROP TABLE IF EXISTS `audit_log`;
 CREATE TABLE `audit_log` (
   `AuditLogId` bigint(20) NOT NULL,
   `TableName` varchar(100) NOT NULL,
@@ -425,7 +422,13 @@ INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserI
 (372, 'user', '106', 'Add User', 101, 'System', '2026-06-05 00:10:35', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (373, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-05 00:10:59', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (374, 'user', '106', 'LOGIN', 106, 'yee man', '2026-06-05 00:11:20', NULL, NULL, 'User yee man logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
-(375, 'user', '106', 'LOGOUT', 106, 'yee man', '2026-06-05 00:11:39', NULL, NULL, 'User yee man logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC');
+(375, 'user', '106', 'LOGOUT', 106, 'yee man', '2026-06-05 00:11:39', NULL, NULL, 'User yee man logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(376, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-22 17:00:26', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(377, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-22 17:01:38', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(378, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-22 17:09:00', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(379, 'salesorder', 'ORD000011', 'Create Order', 0, 'System', '2026-06-22 18:54:43', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(380, 'salesorder', 'ORD000011', 'Update Order', 0, 'System', '2026-06-22 18:55:00', '\"2026/6/22 00:00:00, Quoted\"', '\"2026/6/22 18:54:48, Paid\"', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(381, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-22 23:49:48', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC');
 
 -- --------------------------------------------------------
 
@@ -433,7 +436,6 @@ INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserI
 -- 資料表結構 `company`
 --
 
-DROP TABLE IF EXISTS `company`;
 CREATE TABLE `company` (
   `CompanyName` varchar(50) NOT NULL,
   `warehouse` varchar(100) DEFAULT NULL,
@@ -456,7 +458,6 @@ INSERT INTO `company` (`CompanyName`, `warehouse`, `launage`, `currency`) VALUES
 -- 資料表結構 `complaint`
 --
 
-DROP TABLE IF EXISTS `complaint`;
 CREATE TABLE `complaint` (
   `ComplaintID` varchar(10) NOT NULL,
   `CustomerID` int(100) NOT NULL,
@@ -484,7 +485,6 @@ INSERT INTO `complaint` (`ComplaintID`, `CustomerID`, `OrderID`, `SerialNumber`,
 -- 資料表結構 `customdesign`
 --
 
-DROP TABLE IF EXISTS `customdesign`;
 CREATE TABLE `customdesign` (
   `DesignID` varchar(10) NOT NULL,
   `CustomerID` int(100) NOT NULL,
@@ -508,7 +508,6 @@ INSERT INTO `customdesign` (`DesignID`, `CustomerID`, `UserID`, `SketchDetail`, 
 -- 資料表結構 `customdesign_orderitem`
 --
 
-DROP TABLE IF EXISTS `customdesign_orderitem`;
 CREATE TABLE `customdesign_orderitem` (
   `DesignID` varchar(10) NOT NULL,
   `OrderItemID` varchar(10) NOT NULL
@@ -527,7 +526,6 @@ INSERT INTO `customdesign_orderitem` (`DesignID`, `OrderItemID`) VALUES
 -- 資料表結構 `customer`
 --
 
-DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `CustomerID` int(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -553,7 +551,6 @@ INSERT INTO `customer` (`CustomerID`, `Name`, `Company`, `Email`, `Phone`, `Addr
 -- 資料表結構 `deliveryconfirmation`
 --
 
-DROP TABLE IF EXISTS `deliveryconfirmation`;
 CREATE TABLE `deliveryconfirmation` (
   `ConfirmationID` varchar(10) NOT NULL,
   `ShipmentID` varchar(10) NOT NULL,
@@ -582,7 +579,6 @@ INSERT INTO `deliveryconfirmation` (`ConfirmationID`, `ShipmentID`, `ReceivedDat
 -- 資料表結構 `deliveryitem`
 --
 
-DROP TABLE IF EXISTS `deliveryitem`;
 CREATE TABLE `deliveryitem` (
   `DeliveryItemID` varchar(10) NOT NULL,
   `ShipmentID` varchar(10) NOT NULL,
@@ -596,7 +592,8 @@ CREATE TABLE `deliveryitem` (
 
 INSERT INTO `deliveryitem` (`DeliveryItemID`, `ShipmentID`, `SerialNumber`, `Quantity`) VALUES
 ('DI001', 'SHIP001', 'SN00000003', 1),
-('DI002', 'SHIP002', 'SN00000005', 3);
+('DI002', 'SHIP002', 'SN00000005', 3),
+('DI003', 'SHIP005', 'SN00000004', 1);
 
 -- --------------------------------------------------------
 
@@ -604,7 +601,6 @@ INSERT INTO `deliveryitem` (`DeliveryItemID`, `ShipmentID`, `SerialNumber`, `Qua
 -- 資料表結構 `deliverynote`
 --
 
-DROP TABLE IF EXISTS `deliverynote`;
 CREATE TABLE `deliverynote` (
   `deliveryID` varchar(10) NOT NULL,
   `shipmentID` varchar(10) NOT NULL,
@@ -630,7 +626,6 @@ INSERT INTO `deliverynote` (`deliveryID`, `shipmentID`, `orderID`, `customerID`,
 -- 資料表結構 `employee_salesorder`
 --
 
-DROP TABLE IF EXISTS `employee_salesorder`;
 CREATE TABLE `employee_salesorder` (
   `UserID` int(100) NOT NULL,
   `OrderID` varchar(10) NOT NULL
@@ -651,7 +646,6 @@ INSERT INTO `employee_salesorder` (`UserID`, `OrderID`) VALUES
 -- 資料表結構 `inventory`
 --
 
-DROP TABLE IF EXISTS `inventory`;
 CREATE TABLE `inventory` (
   `InventoryID` varchar(10) NOT NULL,
   `MaterialID` varchar(10) NOT NULL,
@@ -680,7 +674,6 @@ INSERT INTO `inventory` (`InventoryID`, `MaterialID`, `ProductID`, `SerialNumber
 -- 資料表結構 `materialrequest`
 --
 
-DROP TABLE IF EXISTS `materialrequest`;
 CREATE TABLE `materialrequest` (
   `RequestID` varchar(10) NOT NULL,
   `UserID` int(100) NOT NULL,
@@ -696,7 +689,8 @@ CREATE TABLE `materialrequest` (
 --
 
 INSERT INTO `materialrequest` (`RequestID`, `UserID`, `BatchID`, `RequestDate`, `RequestByDate`, `Urgency`, `Status`) VALUES
-('REQ001', 103, 'BATCH003', '2025-05-01', '2025-05-10', 'High', 'Approved');
+('REQ001', 103, 'BATCH003', '2025-05-01', '2025-05-10', 'High', 'Approved'),
+('REQ002', 101, 'BATCH001', '2026-06-22', '2026-06-22', 'Low', 'In Progress');
 
 -- --------------------------------------------------------
 
@@ -704,7 +698,6 @@ INSERT INTO `materialrequest` (`RequestID`, `UserID`, `BatchID`, `RequestDate`, 
 -- 資料表結構 `materialrequestitem`
 --
 
-DROP TABLE IF EXISTS `materialrequestitem`;
 CREATE TABLE `materialrequestitem` (
   `RequestItemID` varchar(10) NOT NULL,
   `RequestID` varchar(10) NOT NULL,
@@ -719,7 +712,8 @@ CREATE TABLE `materialrequestitem` (
 --
 
 INSERT INTO `materialrequestitem` (`RequestItemID`, `RequestID`, `MaterialID`, `QuantityRequested`, `QuantityApproved`, `QuantityIssued`) VALUES
-('RITEM001', 'REQ001', 'MAT001', 80, 80, '75');
+('RITEM001', 'REQ001', 'MAT001', 80, 80, '75'),
+('RITEM002', 'REQ002', 'MAT003', 80, 80, '40');
 
 -- --------------------------------------------------------
 
@@ -727,7 +721,6 @@ INSERT INTO `materialrequestitem` (`RequestItemID`, `RequestID`, `MaterialID`, `
 -- 資料表結構 `orderitem`
 --
 
-DROP TABLE IF EXISTS `orderitem`;
 CREATE TABLE `orderitem` (
   `OrderItemID` varchar(10) NOT NULL,
   `Quantity` int(10) NOT NULL,
@@ -754,7 +747,8 @@ INSERT INTO `orderitem` (`OrderItemID`, `Quantity`, `UnitPrice`, `Subtotal`, `Cu
 ('OI000012', 5, 2850.00, 14250.00, NULL, 'ORD000009'),
 ('OI000013', 5, 4250.00, 21250.00, NULL, 'ORD000009'),
 ('OI000014', 1, 2850.00, 2850.00, NULL, 'ORD000010'),
-('OI000015', 1, 4250.00, 4250.00, NULL, 'ORD000010');
+('OI000015', 1, 4250.00, 4250.00, NULL, 'ORD000010'),
+('OI000016', 4, 980.00, 3920.00, NULL, 'ORD000011');
 
 -- --------------------------------------------------------
 
@@ -762,7 +756,6 @@ INSERT INTO `orderitem` (`OrderItemID`, `Quantity`, `UnitPrice`, `Subtotal`, `Cu
 -- 資料表結構 `orderitem_product`
 --
 
-DROP TABLE IF EXISTS `orderitem_product`;
 CREATE TABLE `orderitem_product` (
   `ProductID` varchar(10) NOT NULL,
   `OrderItemID` varchar(10) NOT NULL
@@ -781,7 +774,8 @@ INSERT INTO `orderitem_product` (`ProductID`, `OrderItemID`) VALUES
 ('PROD001', 'OI000012'),
 ('PROD002', 'OI000013'),
 ('PROD001', 'OI000014'),
-('PROD002', 'OI000015');
+('PROD002', 'OI000015'),
+('PROD004', 'OI000016');
 
 -- --------------------------------------------------------
 
@@ -789,7 +783,6 @@ INSERT INTO `orderitem_product` (`ProductID`, `OrderItemID`) VALUES
 -- 資料表結構 `product`
 --
 
-DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `ProductID` varchar(10) NOT NULL,
   `UserID` int(100) NOT NULL,
@@ -819,7 +812,6 @@ INSERT INTO `product` (`ProductID`, `UserID`, `Name`, `Description`, `Category`,
 -- 資料表結構 `productinstance`
 --
 
-DROP TABLE IF EXISTS `productinstance`;
 CREATE TABLE `productinstance` (
   `SerialNumber` varchar(10) NOT NULL,
   `ProductID` varchar(10) NOT NULL,
@@ -847,7 +839,6 @@ INSERT INTO `productinstance` (`SerialNumber`, `ProductID`, `BatchID`, `Producti
 -- 資料表結構 `productionbatch`
 --
 
-DROP TABLE IF EXISTS `productionbatch`;
 CREATE TABLE `productionbatch` (
   `BatchID` varchar(10) NOT NULL,
   `StartDate` date NOT NULL,
@@ -871,7 +862,6 @@ INSERT INTO `productionbatch` (`BatchID`, `StartDate`, `EndDate`, `Status`) VALU
 -- 資料表結構 `quotation`
 --
 
-DROP TABLE IF EXISTS `quotation`;
 CREATE TABLE `quotation` (
   `QuotationID` varchar(10) NOT NULL,
   `CustomerID` int(100) NOT NULL,
@@ -897,7 +887,6 @@ INSERT INTO `quotation` (`QuotationID`, `CustomerID`, `EmployeeID`, `QuotationDa
 -- 資料表結構 `quotation_salesorder`
 --
 
-DROP TABLE IF EXISTS `quotation_salesorder`;
 CREATE TABLE `quotation_salesorder` (
   `QuotationID` varchar(10) NOT NULL,
   `OrderID` varchar(10) NOT NULL
@@ -917,7 +906,6 @@ INSERT INTO `quotation_salesorder` (`QuotationID`, `OrderID`) VALUES
 -- 資料表結構 `rawmaterial`
 --
 
-DROP TABLE IF EXISTS `rawmaterial`;
 CREATE TABLE `rawmaterial` (
   `MaterialID` varchar(10) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -945,7 +933,6 @@ INSERT INTO `rawmaterial` (`MaterialID`, `Name`, `Type`, `Unit`, `UnitCost`, `Re
 -- 資料表結構 `replyslip`
 --
 
-DROP TABLE IF EXISTS `replyslip`;
 CREATE TABLE `replyslip` (
   `replySlipID` varchar(10) NOT NULL,
   `OrderID` varchar(10) DEFAULT NULL,
@@ -969,7 +956,6 @@ INSERT INTO `replyslip` (`replySlipID`, `OrderID`, `deliverynoteID`, `recipient`
 -- 資料表結構 `salesorder`
 --
 
-DROP TABLE IF EXISTS `salesorder`;
 CREATE TABLE `salesorder` (
   `OrderID` varchar(10) NOT NULL,
   `CustomerID` int(100) NOT NULL,
@@ -995,7 +981,8 @@ INSERT INTO `salesorder` (`OrderID`, `CustomerID`, `OrderDate`, `TotalAmount`, `
 ('ORD000007', 1, '2026-06-01', 41750.00, '2026-06-01', 'Paid', '2026-06-08', NULL),
 ('ORD000008', 1, '2026-06-01', 35500.00, '2026-06-01', 'Paid', '2026-06-08', NULL),
 ('ORD000009', 1, '2026-06-01', 35500.00, '2026-06-01', 'Processing', '2026-06-08', NULL),
-('ORD000010', 2, '2026-06-04', 7100.00, '2026-06-04', 'Processing', '2026-06-11', NULL);
+('ORD000010', 2, '2026-06-04', 7100.00, '2026-06-04', 'Processing', '2026-06-11', NULL),
+('ORD000011', 1, '2026-06-22', 3920.00, '2026-06-22', 'Paid', '2026-06-29', NULL);
 
 -- --------------------------------------------------------
 
@@ -1003,7 +990,6 @@ INSERT INTO `salesorder` (`OrderID`, `CustomerID`, `OrderDate`, `TotalAmount`, `
 -- 資料表結構 `shipment`
 --
 
-DROP TABLE IF EXISTS `shipment`;
 CREATE TABLE `shipment` (
   `ShipmentID` varchar(10) NOT NULL,
   `OrderID` varchar(10) NOT NULL,
@@ -1032,7 +1018,6 @@ INSERT INTO `shipment` (`ShipmentID`, `OrderID`, `UserID`, `DeliveryMethod`, `Tr
 -- 資料表結構 `transfer`
 --
 
-DROP TABLE IF EXISTS `transfer`;
 CREATE TABLE `transfer` (
   `TransferID` varchar(10) NOT NULL,
   `RequestID` varchar(10) NOT NULL,
@@ -1057,7 +1042,6 @@ INSERT INTO `transfer` (`TransferID`, `RequestID`, `BatchID`, `ApprovedBy`, `Tra
 -- 資料表結構 `user`
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `UserID` int(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -1087,7 +1071,6 @@ INSERT INTO `user` (`UserID`, `Name`, `position`, `Role`, `Department`, `Email`,
 -- 資料表結構 `user_productionbatch`
 --
 
-DROP TABLE IF EXISTS `user_productionbatch`;
 CREATE TABLE `user_productionbatch` (
   `BatchID` varchar(10) NOT NULL,
   `UserID` int(100) NOT NULL
@@ -1308,7 +1291,7 @@ ALTER TABLE `user_productionbatch`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `audit_log`
 --
 ALTER TABLE `audit_log`
-  MODIFY `AuditLogId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=376;
+  MODIFY `AuditLogId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=382;
 
 --
 -- 已傾印資料表的限制式
