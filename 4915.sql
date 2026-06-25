@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2026-06-22 17:52:59
+-- 產生時間： 2026-06-25 17:22:03
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -428,7 +428,35 @@ INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserI
 (378, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-22 17:09:00', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
 (379, 'salesorder', 'ORD000011', 'Create Order', 0, 'System', '2026-06-22 18:54:43', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
 (380, 'salesorder', 'ORD000011', 'Update Order', 0, 'System', '2026-06-22 18:55:00', '\"2026/6/22 00:00:00, Quoted\"', '\"2026/6/22 18:54:48, Paid\"', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
-(381, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-22 23:49:48', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC');
+(381, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-22 23:49:48', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(382, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 21:08:48', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(383, 'Inventory', 'INV006', 'Add Inward', 101, 'System', '2026-06-25 21:39:19', NULL, '{\"InventoryID\":\"INV006\",\"MaterialID\":\"MAT001\",\"ProductID\":\"PROD001\",\"SerialNumber\":\"SN00000007\",\"WarehouseLocation\":\"WH-A-12-03\",\"QuantityOnHand\":\"1\",\"LastUpdated\":\"2026/6/25 21:38:48\",\"ReorderLevel\":\"50\"}', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(384, 'productionbatch', 'BATCH005', 'Add Production Batch', 101, 'System', '2026-06-25 21:39:19', NULL, '{\"BatchID\":\"BATCH005\",\"StartDate\":\"2026/6/25 21:38:48\",\"EndDate\":\"2026/7/2 21:38:48\",\"Status\":\"In Progress\"}', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(385, 'productinstance', 'SN00000007', 'Add Product Instance', 101, 'System', '2026-06-25 21:39:19', NULL, '{\"SerialNumber\":\"SN00000007\",\"ProductID\":\"PROD001\",\"BatchID\":\"BATCH005\",\"ProductionDate\":\"2026/6/25 21:38:48\",\"CurrentStatus\":\"In Stock\",\"WarrantyEndDate\":\"2029/6/25 21:38:48\"}', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(386, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 21:40:01', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(387, 'Inventory', 'INV007', 'Add Inward', 101, 'System', '2026-06-25 21:44:16', NULL, '{\"InventoryID\":\"INV007\",\"MaterialID\":\"MAT001\",\"ProductID\":\"PROD001\",\"SerialNumber\":\"SN00000008\",\"WarehouseLocation\":\"WH-A-12-03\",\"QuantityOnHand\":\"0\",\"LastUpdated\":\"2026/6/25 21:44:04\",\"ReorderLevel\":\"50\"}', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(388, 'productionbatch', 'Select Batch ID', 'Add Production Batch', 101, 'System', '2026-06-25 21:44:16', NULL, '{\"BatchID\":\"Select Batch ID\",\"StartDate\":\"2026/6/25 21:44:04\",\"EndDate\":\"2026/7/2 21:44:04\",\"Status\":\"Completed\"}', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(389, 'productinstance', 'SN00000008', 'Add Product Instance', 101, 'System', '2026-06-25 21:44:16', NULL, '{\"SerialNumber\":\"SN00000008\",\"ProductID\":\"PROD001\",\"BatchID\":\"Select Batch ID\",\"ProductionDate\":\"2026/6/25 21:44:04\",\"CurrentStatus\":\"In Stock\",\"WarrantyEndDate\":\"2029/6/25 21:44:04\"}', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(390, 'Inventory', 'INV008', 'Add Inward', 101, 'System', '2026-06-25 21:44:31', NULL, '{\"InventoryID\":\"INV008\",\"MaterialID\":\"MAT001\",\"ProductID\":\"PROD001\",\"SerialNumber\":\"SN00000009\",\"WarehouseLocation\":\"WH-A-12-03\",\"QuantityOnHand\":\"0\",\"LastUpdated\":\"2026/6/25 21:44:04\",\"ReorderLevel\":\"50\"}', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(391, 'Inventory', 'INV009', 'Add Inward', 101, 'System', '2026-06-25 21:44:35', NULL, '{\"InventoryID\":\"INV009\",\"MaterialID\":\"MAT001\",\"ProductID\":\"PROD001\",\"SerialNumber\":\"SN00000009\",\"WarehouseLocation\":\"WH-A-12-03\",\"QuantityOnHand\":\"0\",\"LastUpdated\":\"2026/6/25 21:44:04\",\"ReorderLevel\":\"50\"}', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(392, 'Inventory', 'INV010', 'Add Inward', 101, 'System', '2026-06-25 21:45:01', NULL, '{\"InventoryID\":\"INV010\",\"MaterialID\":\"MAT001\",\"ProductID\":\"PROD001\",\"SerialNumber\":\"SN00000009\",\"WarehouseLocation\":\"WH-A-12-03\",\"QuantityOnHand\":\"1\",\"LastUpdated\":\"2026/6/25 21:44:04\",\"ReorderLevel\":\"50\"}', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(393, 'productionbatch', 'BATCH006', 'Add Production Batch', 101, 'System', '2026-06-25 21:45:01', NULL, '{\"BatchID\":\"BATCH006\",\"StartDate\":\"2026/6/25 21:44:04\",\"EndDate\":\"2026/7/2 21:44:04\",\"Status\":\"Completed\"}', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(394, 'productinstance', 'SN00000009', 'Add Product Instance', 101, 'System', '2026-06-25 21:45:01', NULL, '{\"SerialNumber\":\"SN00000009\",\"ProductID\":\"PROD001\",\"BatchID\":\"BATCH006\",\"ProductionDate\":\"2026/6/25 21:44:04\",\"CurrentStatus\":\"In Stock\",\"WarrantyEndDate\":\"2029/6/25 21:44:04\"}', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(395, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 21:45:19', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(396, 'Inventory', 'INV011', 'Add Inward', 101, 'System', '2026-06-25 22:03:04', NULL, '{\"InventoryID\":\"INV011\",\"MaterialID\":\"MAT001\",\"ProductID\":\"PROD001\",\"SerialNumber\":\"SN00000010\",\"WarehouseLocation\":\"WH-A-12-03\",\"QuantityOnHand\":\"3\",\"LastUpdated\":\"2026/6/25 22:02:56\",\"ReorderLevel\":\"50\"}', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(397, 'productionbatch', 'BATCH003', 'Add Production Batch', 101, 'System', '2026-06-25 22:03:04', NULL, '{\"BatchID\":\"BATCH003\",\"StartDate\":\"2026/6/25 22:02:56\",\"EndDate\":\"2026/7/2 22:02:56\",\"Status\":\"In Progress\"}', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(398, 'productinstance', 'SN00000010', 'Add Product Instance', 101, 'System', '2026-06-25 22:03:04', NULL, '{\"SerialNumber\":\"SN00000010\",\"ProductID\":\"PROD001\",\"BatchID\":\"BATCH003\",\"ProductionDate\":\"2026/6/25 22:02:56\",\"CurrentStatus\":\"In Stock\",\"WarrantyEndDate\":\"2029/6/25 22:02:56\"}', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(399, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 22:03:19', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(400, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 22:19:18', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(401, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 22:23:16', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(402, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 22:29:50', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(403, 'deliverynote', 'DN003', 'Create deliverynote', 101, 'System', '2026-06-25 22:44:51', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(404, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 22:51:59', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(405, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 22:59:32', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(406, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 23:01:13', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(407, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 23:07:52', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(408, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 23:11:21', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(409, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 23:13:10', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC');
 
 -- --------------------------------------------------------
 
@@ -618,7 +646,8 @@ CREATE TABLE `deliverynote` (
 
 INSERT INTO `deliverynote` (`deliveryID`, `shipmentID`, `orderID`, `customerID`, `RecipientName`, `DeliveryAddress`, `CreateDate`, `Status`) VALUES
 ('DN001', 'SHIP006', 'ORD000009', 1, 'John Chan', 'Rm. 318 South China Cold Storage Bldg. 13-17 Wah Sing Street Kwai Chung N.T.', '2026-06-01', 'Created'),
-('DN002', 'SHIP007', 'ORD000010', 2, 'Mary Wong', '', '2026-06-04', 'Created');
+('DN002', 'SHIP007', 'ORD000010', 2, 'Mary Wong', '', '2026-06-04', 'Created'),
+('DN003', 'SHIP006', 'ORD000009', 1, 'John Chan', 'Rm. 318 South China Cold Storage Bldg. 13-17 Wah Sing Street Kwai Chung N.T.', '2026-06-25', 'Created');
 
 -- --------------------------------------------------------
 
@@ -664,9 +693,7 @@ CREATE TABLE `inventory` (
 INSERT INTO `inventory` (`InventoryID`, `MaterialID`, `ProductID`, `SerialNumber`, `WarehouseLocation`, `QuantityOnHand`, `LastUpdated`, `ReorderLevel`) VALUES
 ('INV001', 'MAT001', 'PROD001', 'SN00000001', 'WH-A-12-03', 60, '2025-05-01', '50'),
 ('INV002', 'MAT002', 'PROD002', 'SN00000003', 'WH-B-05-01', 120, '2025-05-10', '200'),
-('INV003', 'MAT003', 'PROD003', 'SN00000004', 'WH-C-08-02', 60, '2025-05-15', '50'),
-('INV004', 'MAT001', 'PROD001', 'SN00000002', 'WH-A-12-04', 25, '2025-05-16', '50'),
-('INV005', 'MAT001', 'PROD002', 'SN00000006', 'WH-A-12-03', 0, '2026-05-31', '50');
+('INV003', 'MAT003', 'PROD003', 'SN00000004', 'WH-C-08-02', 60, '2025-05-15', '50');
 
 -- --------------------------------------------------------
 
@@ -690,7 +717,8 @@ CREATE TABLE `materialrequest` (
 
 INSERT INTO `materialrequest` (`RequestID`, `UserID`, `BatchID`, `RequestDate`, `RequestByDate`, `Urgency`, `Status`) VALUES
 ('REQ001', 103, 'BATCH003', '2025-05-01', '2025-05-10', 'High', 'Approved'),
-('REQ002', 101, 'BATCH001', '2026-06-22', '2026-06-22', 'Low', 'In Progress');
+('REQ002', 101, 'BATCH001', '2026-06-22', '2026-06-22', 'Low', 'In Progress'),
+('REQ003', 102, 'BATCH002', '2026-06-25', '2026-06-25', 'High', 'Completed');
 
 -- --------------------------------------------------------
 
@@ -713,7 +741,8 @@ CREATE TABLE `materialrequestitem` (
 
 INSERT INTO `materialrequestitem` (`RequestItemID`, `RequestID`, `MaterialID`, `QuantityRequested`, `QuantityApproved`, `QuantityIssued`) VALUES
 ('RITEM001', 'REQ001', 'MAT001', 80, 80, '75'),
-('RITEM002', 'REQ002', 'MAT003', 80, 80, '40');
+('RITEM002', 'REQ002', 'MAT003', 80, 80, '40'),
+('RITEM003', 'REQ003', 'MAT005', 0, 3, '3');
 
 -- --------------------------------------------------------
 
@@ -831,7 +860,16 @@ INSERT INTO `productinstance` (`SerialNumber`, `ProductID`, `BatchID`, `Producti
 ('SN00000003', 'PROD002', 'BATCH001', '2025-03-12', 'Delivered', '2028-03-12'),
 ('SN00000004', 'PROD003', 'BATCH002', '2025-04-10', 'In Stock', '2028-04-10'),
 ('SN00000005', 'PROD003', 'BATCH002', '2025-04-10', 'Delivered', '2028-04-10'),
-('SN00000006', 'PROD002', 'BATCH004', '2026-05-31', 'In Stock', '2029-05-31');
+('SN00000006', 'PROD002', 'BATCH004', '2026-05-31', 'In Stock', '2029-05-31'),
+('SN00000007', 'PROD001', 'BATCH005', '2026-06-25', 'In Stock', '2029-06-25'),
+('SN00000008', 'PROD001', 'Select Bat', '2026-06-25', 'In Stock', '2029-06-25'),
+('SN00000009', 'PROD001', 'BATCH006', '2026-06-25', 'In Stock', '2029-06-25'),
+('SN00000010', 'PROD001', 'BATCH003', '2026-06-25', 'In Stock', '2029-06-25'),
+('SN00000011', 'PROD001', 'BATCH006', '2026-06-25', 'In Stock', '2029-06-25'),
+('SN00000012', '', 'BATCH007', '2026-06-25', 'In Stock', '2029-06-25'),
+('SN00000013', '', 'BATCH008', '2026-06-25', 'In Stock', '2029-06-25'),
+('SN00000014', 'PROD001', 'BATCH008', '2026-06-25', 'In Stock', '2029-06-25'),
+('SN00000015', 'PROD001', 'BATCH008', '2026-06-25', 'In Stock', '2029-06-25');
 
 -- --------------------------------------------------------
 
@@ -854,7 +892,11 @@ INSERT INTO `productionbatch` (`BatchID`, `StartDate`, `EndDate`, `Status`) VALU
 ('BATCH001', '2025-03-01', '2025-03-15', 'Completed'),
 ('BATCH002', '2025-04-01', '2025-04-20', 'Completed'),
 ('BATCH003', '2025-05-01', '2025-05-18', 'In Progress'),
-('BATCH004', '2026-05-31', '2026-06-07', 'In Progress');
+('BATCH004', '2026-05-31', '2026-06-07', 'In Progress'),
+('BATCH005', '2026-06-25', '2026-07-02', 'In Progress'),
+('BATCH006', '2026-06-25', '2026-07-02', 'Completed'),
+('BATCH007', '2026-06-25', '2026-07-02', 'Pending'),
+('BATCH008', '2026-06-25', '2026-07-02', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -1291,7 +1333,7 @@ ALTER TABLE `user_productionbatch`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `audit_log`
 --
 ALTER TABLE `audit_log`
-  MODIFY `AuditLogId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=382;
+  MODIFY `AuditLogId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=410;
 
 --
 -- 已傾印資料表的限制式
