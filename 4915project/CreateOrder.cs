@@ -127,7 +127,7 @@ namespace _4915project
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("資料庫存取失敗: " + ex.Message);
+                    MessageBox.Show("Database retrieval failed: " + ex.Message);
                     textBoxUnitPrice.Text = "0";
                 }
             }
@@ -150,7 +150,7 @@ namespace _4915project
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("資料庫存取失敗: " + ex.Message);
+                    MessageBox.Show("Database retrieval failed: " + ex.Message);
                     tbAddress.Text = "";
                 }
             }
@@ -445,8 +445,8 @@ namespace _4915project
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.WriteLine("無法取得資料庫流水號: " + ex.Message);
-                        MessageBox.Show("無法自動產生單號，請手動輸入或稍後再試。");
+                        System.Diagnostics.Debug.WriteLine("Unable to retrieve database serial number: " + ex.Message);
+                        MessageBox.Show("Order number cannot be generated automatically. Please enter it manually or try again later.");
                         tbOrderID.ReadOnly = false;
                     }
                 }

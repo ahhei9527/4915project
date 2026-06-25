@@ -48,7 +48,7 @@ namespace _4915project
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("無法載入訂單資料: " + ex.Message);
+                        MessageBox.Show("Unable to load order information: " + ex.Message);
                     }
                 }
                 string queryUser = @"SELECT Name From user";
@@ -66,7 +66,7 @@ namespace _4915project
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("無法載入訂單資料: " + ex.Message);
+                        MessageBox.Show("Unable to load order information: " + ex.Message);
                     }
                 }
             }
@@ -184,7 +184,7 @@ namespace _4915project
                         }
                         else
                         {
-                            MessageBox.Show("找不到此訂單編號，請重新確認。");
+                            MessageBox.Show("Order number not found. Please confirm again.");
                         }
                     }
                 }
@@ -233,7 +233,7 @@ namespace _4915project
                     }
                     else
                     {
-                        MessageBox.Show("找不到對應的客戶ID，請確認客戶名稱是否正確。");
+                        MessageBox.Show("The corresponding customer ID could not be found. Please confirm that the customer name is correct.");
                         return; // 停止後續操作，避免存入錯誤資料
                     }
                 }
@@ -248,7 +248,7 @@ namespace _4915project
                     }
                     else
                     {
-                        MessageBox.Show("找不到對應的使用者ID，請確認使用者名稱是否正確。");
+                        MessageBox.Show("The corresponding user ID could not be found. Please check if the username is correct.");
                         return; // 停止後續操作，避免存入錯誤資料
                     }
                 }
@@ -267,13 +267,13 @@ namespace _4915project
                     try
                     {
                         cmd2.ExecuteNonQuery();
-                        MessageBox.Show("投訴已成功儲存！");
+                        MessageBox.Show("The complaint has been successfully saved!");
                         AddComplaintAudit(tbComplaintID.Text);
                         this.Close(); // 儲存成功後關閉表單
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("儲存投訴時發生錯誤: " + ex.Message);
+                        MessageBox.Show("An error occurred while storing the complaint: " + ex.Message);
                     }
                 }
             }

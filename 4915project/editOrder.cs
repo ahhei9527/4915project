@@ -181,11 +181,11 @@ namespace _4915project
                 }
                 catch (MySqlException ex)
                 {
-                    MessageBox.Show("查詢訂單明細時發生資料庫錯誤: " + ex.Message);
+                    MessageBox.Show("A database error occurred while querying order details: " + ex.Message);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("發生未預期的錯誤: " + ex.Message);
+                    MessageBox.Show("An unexpected error occurred: " + ex.Message);
                 }
             }
         }
@@ -199,7 +199,7 @@ namespace _4915project
             // 這裡可以加入一些邏輯，例如檢查交貨日期是否合理
             if (deliveryDate.Value < DateTime.Now)
             {
-                MessageBox.Show("交貨日期不能早於今天！");
+                MessageBox.Show("Delivery date cannot be earlier than today!");
                 deliveryDate.Value = DateTime.Now; // 重置為今天
             }
         }

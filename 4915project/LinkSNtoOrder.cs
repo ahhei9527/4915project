@@ -53,7 +53,7 @@ namespace _4915project
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("載入 Order ID 失敗: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Failed to load Order ID: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -80,7 +80,7 @@ namespace _4915project
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("載入 Serial Number 失敗: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Failed to load Serial Number: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -120,7 +120,7 @@ namespace _4915project
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("載入產品資訊失敗: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Product information loading failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -129,7 +129,7 @@ namespace _4915project
         {
             if (cmbOrderID.SelectedIndex == -1)
             {
-                MessageBox.Show("請先選擇 Order ID", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select Order ID.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -138,7 +138,7 @@ namespace _4915project
 
             if (string.IsNullOrEmpty(serialNumber))
             {
-                MessageBox.Show("請選擇 Serial Number (SN)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select Serial Number (SN)", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -196,8 +196,8 @@ namespace _4915project
 
                         if (affected > 0)
                         {
-                            MessageBox.Show($"✅ SN {serialNumber} 已成功連結到 Order {orderID}\nDeliveryItemID: {newDeliveryItemID}",
-                                          "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show($"✅ SN {serialNumber} Successfully connected to Order {orderID}\nDeliveryItemID: {newDeliveryItemID}",
+                                          "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             LoadOrders();           // Refresh orders without SN
                             cmbSN.SelectedIndex = -1;
@@ -206,14 +206,14 @@ namespace _4915project
                         }
                         else
                         {
-                            MessageBox.Show("無法找到對應的 Shipment，或此 SN 已連結。\n請確認 Order 已建立 Shipment。",
-                                          "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("Unable to find the corresponding Shipment, Or this SN is already linked.。\nPlease confirm that the order has been created and a shipment has been made.",
+                                          "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("連結失敗: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Link failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

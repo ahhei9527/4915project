@@ -13,7 +13,7 @@ namespace _4915project
     public partial class AddCust : Form
     {
         string constring = "server=localhost;user id=root;password=;database=4915";
-        string custID;
+        int custID = 0;
         public AddCust()
         {
             InitializeComponent();
@@ -41,25 +41,27 @@ namespace _4915project
 
         private void GenCustID()
         {
+            string query = "SELECT COALESCE(MAX(CustomerID), 0) FROM customer";
+
             try
             {
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
-                    con.Open();
-                    string query = "SELECT MAX(CustID) FROM customer";
-                    MySqlCommand cmd = new MySqlCommand(query, con);
-                    object result = cmd.ExecuteScalar();
-                    int nextId = 1; // Default to 1 if the table is completely empty
-                    if (result != null && result != DBNull.Value)
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
-                        nextId = Convert.ToInt32(result) + 1;
+                        con.Open();
+
+                        int maxId = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        // 🎯 終極精簡：直接讓全域的 int 變數精準 +1 即可，完全不需要任何字串轉換！
+                        custID = maxId + 1;
                     }
-                    custID = nextId.ToString("D3");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error generating Customer ID: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine("Error generating Customer ID: " + ex.Message);
+                custID = 1; // 發生異常時的安全預設值
             }
         }
 
@@ -79,31 +81,55 @@ namespace _4915project
 
         private void btCustSave_Click(object sender, EventArgs e)
         {
-            string insertQuery = "INSERT INTO customer " +
-                "(CustomerID, Name, Company, Email, Phone, Address) " +
-                "VALUES (@CustomerID, @Name, @Company, @Email, @Phone, @Address)";
+            // 1. 前端 UI 基礎防呆驗證
+            if (string.IsNullOrEmpty(tbCustName.Text.Trim()))
+            {
+                MessageBox.Show("Please enter the Customer Name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 🎯 修正點：確保這裡的欄位對齊 CustomerID，與 GenCustID 遙相呼應
+            string insertQuery = @"
+        INSERT INTO customer (CustomerID, Name, Company, Email, Phone, Address) 
+        VALUES (@CustomerID, @Name, @Company, @Email, @Phone, @Address);";
+
             using (MySqlConnection con = new MySqlConnection(constring))
             {
-                con.Open();
                 using (MySqlCommand cmd = new MySqlCommand(insertQuery, con))
                 {
-                    cmd.Parameters.AddWithValue("@CustomerID", custID);
-                    cmd.Parameters.AddWithValue("@Name", tbCustName.Text);
-                    cmd.Parameters.AddWithValue("@Company", cmbCustCompany.Text);
-                    cmd.Parameters.AddWithValue("@Email", tbCustEmail.Text);
-                    cmd.Parameters.AddWithValue("@Phone", tbCustPhone.Text);
-                    cmd.Parameters.AddWithValue("@Address", tbCustAddress.Text);
+                    cmd.Parameters.AddWithValue("@CustomerID", custID); // 完美傳入 int 變數
+                    cmd.Parameters.AddWithValue("@Name", tbCustName.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Company", cmbCustCompany.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Email", tbCustEmail.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Phone", tbCustPhone.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Address", tbCustAddress.Text.Trim());
+
                     try
                     {
+                        con.Open();
                         cmd.ExecuteNonQuery();
-                        MessageBox.Show("Customer added successfully!");
+
+                        MessageBox.Show("Customer added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                         CreateCustAudit();
-                        GenCustID(); // Generate the next Customer ID for the next entry
-                        btCustReset_Click(sender, e); // Clear the form for the next entry
+                        GenCustID();                  // 重新計算下一組整數單號
+                        btCustReset_Click(sender, e); // 呼叫您的清空重設事件
+                    }
+                    catch (MySqlException ex)
+                    {
+                        if (ex.Number == 1062) // 主鍵重複衝突防禦
+                        {
+                            MessageBox.Show("This Customer ID already exists. The system is recalculating a new ID. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            GenCustID();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Database error adding customer: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error adding customer: " + ex.Message);
+                        MessageBox.Show("An unexpected system error occurred: " + ex.Message, "System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

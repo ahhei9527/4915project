@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             label1SystemName = new Label();
-            lblWelcome = new Label();
-            Logoutbt = new LinkLabel();
             Customer = new TabPage();
             panel1 = new Panel();
             tbCustAddress = new TextBox();
@@ -69,10 +67,6 @@
             Company = new TabPage();
             panel2 = new Panel();
             cmbCompanyName = new ComboBox();
-            checkBox6 = new CheckBox();
-            checkBox5 = new CheckBox();
-            label5 = new Label();
-            dateTimePicker1 = new DateTimePicker();
             btAddCom = new Button();
             buttonCancel = new Button();
             buttonSave = new Button();
@@ -104,24 +98,6 @@
             label1SystemName.Size = new Size(407, 24);
             label1SystemName.TabIndex = 18;
             label1SystemName.Text = "Premium Living Centralized Manage System";
-            // 
-            // lblWelcome
-            // 
-            lblWelcome.Font = new Font("Microsoft JhengHei UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            lblWelcome.Location = new Point(514, 6);
-            lblWelcome.Name = "lblWelcome";
-            lblWelcome.Size = new Size(228, 39);
-            lblWelcome.TabIndex = 26;
-            // 
-            // Logoutbt
-            // 
-            Logoutbt.AutoSize = true;
-            Logoutbt.Location = new Point(748, 14);
-            Logoutbt.Name = "Logoutbt";
-            Logoutbt.Size = new Size(50, 15);
-            Logoutbt.TabIndex = 27;
-            Logoutbt.TabStop = true;
-            Logoutbt.Text = "LogOut";
             // 
             // Customer
             // 
@@ -186,6 +162,7 @@
             cmbCustName.Name = "cmbCustName";
             cmbCustName.Size = new Size(223, 23);
             cmbCustName.TabIndex = 38;
+            cmbCustName.SelectedIndexChanged += cmbCustName_SelectedIndexChanged;
             // 
             // label2
             // 
@@ -217,6 +194,7 @@
             button2.TabIndex = 32;
             button2.Text = "Cancel";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
@@ -401,6 +379,7 @@
             cmbUserName.Name = "cmbUserName";
             cmbUserName.Size = new Size(115, 23);
             cmbUserName.TabIndex = 47;
+            cmbUserName.SelectedIndexChanged += cmbUserName_SelectedIndexChanged;
             // 
             // label17
             // 
@@ -521,10 +500,6 @@
             panel2.BackColor = Color.Gainsboro;
             panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.Controls.Add(cmbCompanyName);
-            panel2.Controls.Add(checkBox6);
-            panel2.Controls.Add(checkBox5);
-            panel2.Controls.Add(label5);
-            panel2.Controls.Add(dateTimePicker1);
             panel2.Controls.Add(btAddCom);
             panel2.Controls.Add(buttonCancel);
             panel2.Controls.Add(buttonSave);
@@ -549,47 +524,7 @@
             cmbCompanyName.Name = "cmbCompanyName";
             cmbCompanyName.Size = new Size(223, 23);
             cmbCompanyName.TabIndex = 22;
-            // 
-            // checkBox6
-            // 
-            checkBox6.AutoSize = true;
-            checkBox6.Location = new Point(295, 260);
-            checkBox6.Margin = new Padding(2);
-            checkBox6.Name = "checkBox6";
-            checkBox6.Size = new Size(227, 19);
-            checkBox6.TabIndex = 21;
-            checkBox6.Text = "Show English + Chinese field names";
-            checkBox6.UseVisualStyleBackColor = true;
-            // 
-            // checkBox5
-            // 
-            checkBox5.AutoSize = true;
-            checkBox5.Location = new Point(294, 229);
-            checkBox5.Margin = new Padding(2);
-            checkBox5.Name = "checkBox5";
-            checkBox5.Size = new Size(153, 19);
-            checkBox5.TabIndex = 20;
-            checkBox5.Text = "Enable bilingual labels";
-            checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(214, 142);
-            label5.Margin = new Padding(2, 0, 2, 0);
-            label5.Name = "label5";
-            label5.RightToLeft = RightToLeft.No;
-            label5.Size = new Size(80, 15);
-            label5.TabIndex = 19;
-            label5.Text = "Date Format:";
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Location = new Point(295, 138);
-            dateTimePicker1.Margin = new Padding(2);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(224, 23);
-            dateTimePicker1.TabIndex = 18;
+            cmbCompanyName.SelectedIndexChanged += cmbCompanyName_SelectedIndexChanged;
             // 
             // btAddCom
             // 
@@ -650,7 +585,7 @@
             // 
             cmbComCurr.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
             cmbComCurr.FormattingEnabled = true;
-            cmbComCurr.Location = new Point(294, 197);
+            cmbComCurr.Location = new Point(295, 167);
             cmbComCurr.Margin = new Padding(2);
             cmbComCurr.Name = "cmbComCurr";
             cmbComCurr.Size = new Size(224, 23);
@@ -671,7 +606,7 @@
             // 
             labelDefaultWarehouse.AutoSize = true;
             labelDefaultWarehouse.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            labelDefaultWarehouse.Location = new Point(178, 172);
+            labelDefaultWarehouse.Location = new Point(179, 142);
             labelDefaultWarehouse.Margin = new Padding(2, 0, 2, 0);
             labelDefaultWarehouse.Name = "labelDefaultWarehouse";
             labelDefaultWarehouse.Size = new Size(118, 15);
@@ -682,7 +617,7 @@
             // 
             labelDefaultCurrency.AutoSize = true;
             labelDefaultCurrency.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            labelDefaultCurrency.Location = new Point(190, 199);
+            labelDefaultCurrency.Location = new Point(191, 169);
             labelDefaultCurrency.Margin = new Padding(2, 0, 2, 0);
             labelDefaultCurrency.Name = "labelDefaultCurrency";
             labelDefaultCurrency.Size = new Size(103, 15);
@@ -693,7 +628,7 @@
             // 
             cmbComWH.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
             cmbComWH.FormattingEnabled = true;
-            cmbComWH.Location = new Point(294, 170);
+            cmbComWH.Location = new Point(295, 140);
             cmbComWH.Margin = new Padding(2);
             cmbComWH.Name = "cmbComWH";
             cmbComWH.Size = new Size(224, 23);
@@ -725,8 +660,6 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(872, 561);
-            Controls.Add(Logoutbt);
-            Controls.Add(lblWelcome);
             Controls.Add(settingTab);
             Controls.Add(label1SystemName);
             Margin = new Padding(2);
@@ -750,8 +683,6 @@
         #endregion
 
         private Label label1SystemName;
-        private Label lblWelcome;
-        private LinkLabel Logoutbt;
         private TabPage Customer;
         private Panel panel1;
         private ComboBox cmbCustName;
@@ -789,10 +720,6 @@
         private TabPage Company;
         private Panel panel2;
         private ComboBox cmbCompanyName;
-        private CheckBox checkBox6;
-        private CheckBox checkBox5;
-        private Label label5;
-        private DateTimePicker dateTimePicker1;
         private Button btAddCom;
         private Button buttonCancel;
         private Button buttonSave;

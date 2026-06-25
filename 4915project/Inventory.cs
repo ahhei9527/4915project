@@ -99,10 +99,10 @@ namespace _4915project
             cmbCStatus.Items.AddRange(new string[] { "In Stock", "Delivered" });
             cmbCStatus.SelectedIndex = 0;
             tbSN.ReadOnly = true;
-
+            GenerateBatchID();
             GenerateInventoryID();
-
             LoadInward();
+            LoadBatchIDs();
             LoadStock();
             LoadPID();
             GenSN();
@@ -110,8 +110,9 @@ namespace _4915project
 
         private void LoadPID()
         {
-
             string query = "SELECT ProductID FROM product";
+            List<string> productIds = new List<string>();
+
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -123,13 +124,19 @@ namespace _4915project
                         {
                             while (reader.Read())
                             {
-                                cmbPID.Items.Add(reader["ProductID"].ToString());
+                                productIds.Add(reader["ProductID"].ToString());
                             }
                         }
+
+                        // 優化 UI 寫入效能
+                        cmbPID.BeginUpdate();
+                        cmbPID.Items.Clear();
+                        cmbPID.Items.AddRange(productIds.ToArray());
+                        cmbPID.EndUpdate();
                     }
                     catch (MySqlException ex)
                     {
-                        MessageBox.Show("載入產品資料失敗: " + ex.Message);
+                        MessageBox.Show("Failed to load product information: " + ex.Message);
                     }
                 }
             }
@@ -204,20 +211,21 @@ namespace _4915project
 
         private void LoadInward()
         {
-
+            // 💡 最終加強版：把產品序號 (SerialNumber) 也一併撈出顯示在表格中
             string query = @"
-        SELECT 
-            i.InventoryID, 
-            r.PreferredSupplier, 
-            r.Name AS MaterialName, 
-            mr.BatchID AS BatchID, 
-            i.WarehouseLocation, 
-            i.LastUpdated,
-            i.QuantityOnHand
-        FROM Inventory i
-        INNER JOIN RawMaterial r ON i.MaterialID = r.MaterialID
-        LEFT JOIN MaterialRequestItem mri ON r.MaterialID = mri.MaterialID
-        LEFT JOIN MaterialRequest mr ON mri.RequestID = mr.RequestID;";
+            SELECT 
+                i.InventoryID, 
+                r.PreferredSupplier, 
+                r.Name AS MaterialName, 
+                pi.SerialNumber AS 'Serial Number', -- 🎯 新增：讓表格多一欄顯示產品序號
+                COALESCE(pi.BatchID, 'No Batch') AS BatchID,  
+                i.WarehouseLocation, 
+                i.LastUpdated,
+                i.QuantityOnHand
+            FROM Inventory i
+            INNER JOIN RawMaterial r ON i.MaterialID = r.MaterialID
+            LEFT JOIN productinstance pi ON i.SerialNumber = pi.SerialNumber 
+            ORDER BY i.InventoryID DESC;";
 
             using (MySqlConnection con = new MySqlConnection(constring))
             {
@@ -226,47 +234,16 @@ namespace _4915project
                     try
                     {
                         con.Open();
-
-                        // 1. 使用 DataAdapter 將所有多表聯查資料灌入 DataTable
                         using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
                         {
                             DataTable dt = new DataTable();
                             da.Fill(dt);
-
-                            // 綁定給畫面的 DataGridView
                             dataGridView2.DataSource = dt;
-
-                            // 2. 💡 核心修正：清空舊項目，直接跑記憶體 DataTable 填充 ComboBox
-                            cmbBatch.Items.Clear();
-                            cmbBatch.Items.Add("Select Batch ID"); // 補上防呆提示文字
-
-                            // 用於過濾重複 BatchID 的雜湊表 (避免選單出現一堆重複的批號)
-                            HashSet<string> uniqueBatches = new HashSet<string>();
-
-                            foreach (DataRow row in dt.Rows)
-                            {
-                                // 確保欄位不是空的，且防止將 DBNull 轉字串
-                                if (row["BatchID"] != DBNull.Value && row["BatchID"] != null)
-                                {
-                                    string batchID = row["BatchID"].ToString().Trim();
-                                    cmbBatch.Items.Add(GenerateBatchID()); // 如果批號是空的或重複的，就生成新的庫存編號
-                                }
-                            }
-
-                            // 預設選取提示字
-                            if (cmbBatch.Items.Count > 0)
-                            {
-                                cmbBatch.SelectedIndex = 0;
-                            }
                         }
                     }
                     catch (MySqlException ex)
                     {
-                        MessageBox.Show("載入庫存與批次資料失敗: " + ex.Message, "資料庫錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("發生未預期的錯誤: " + ex.Message, "系統錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Failed to load inventory list: " + ex.Message, "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -274,11 +251,8 @@ namespace _4915project
 
         private string GenerateBatchID()
         {
-
-            string prefix = "BATCH"; // 5 碼文字
-            string BATCHID = prefix + "001"; // 預設如果資料庫沒資料，就是第一筆 BATCH001
-
-            // 查詢目前最大的批次流水號
+            string prefix = "BATCH";
+            string BATCHID = prefix + "001"; // 💡 當資料庫被您清空、完全沒資料時，預設會從 BATCH001 開始發放
             string query = "SELECT BATCHID FROM productionbatch WHERE BATCHID LIKE @Prefix ORDER BY BATCHID DESC LIMIT 1";
 
             using (MySqlConnection con = new MySqlConnection(constring))
@@ -291,56 +265,110 @@ namespace _4915project
                     {
                         con.Open();
                         object result = cmd.ExecuteScalar();
-
                         int nextNumber = 1;
 
                         if (result != null && result != DBNull.Value)
                         {
-                            string lastBatchID = result.ToString();
+                            string lastBatchID = result.ToString().Trim();
 
-                            // 💡 核心修正：BATCH001 總長為 8 碼，數字佔最後 3 碼
+                            // 確保長度足夠，避免 Substring 發生 ArgumentOutOfRangeException 錯誤
                             if (lastBatchID.Length >= 8)
                             {
-                                // 🎯 精準切取最後 3 碼數字（例如從 ""BATCH005"" 切出 ""005""）
                                 string lastNumberStr = lastBatchID.Substring(lastBatchID.Length - 3);
 
                                 if (int.TryParse(lastNumberStr, out int lastNumber))
                                 {
-                                    nextNumber = lastNumber + 1; // 序號順利加 1
+                                    nextNumber = lastNumber + 1; // 順利取得下一碼數字
+                                }
+                                else
+                                {
+                                    // 💡 改進 1：若格式有誤，彈窗提示管理員，但不直接讓程式閃退
+                                    MessageBox.Show($"Database BatchID format is invalid ({lastBatchID}). Fallback to BATCH001.", "Data Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 }
                             }
                         }
 
-                        // 💡 完美對齊：將新序號格式化為 3 位數（例如 9 變 009，12 變 012）
+                        // 格式化為 3 位數（如 1 變成 001，12 變成 012）
                         BATCHID = prefix + nextNumber.ToString("D3");
+                    }
+                    catch (MySqlException ex)
+                    {
+                        // 💡 改進 2：明確捕獲資料庫異常，提示錯誤訊息
+                        MessageBox.Show("Failed to query next Batch ID from database: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return prefix + "001"; // 發生錯誤時回傳安全預設值，確保主流程能繼續走下去
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.WriteLine("無法取得資料庫流水號: " + ex.Message);
-                        // 發生異常時，維持回傳預設的 BATCH001，避免程式直接當機
+                        MessageBox.Show("An unexpected error occurred while generating Batch ID: " + ex.Message, "System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return prefix + "001";
                     }
                 }
             }
             return BATCHID;
         }
 
+        private void LoadBatchIDs()
+        {
+            // 直接查詢真實的批次資料表，保證剛寫入的新批號能立刻被抓到
+            string query = "SELECT BATCHID FROM productionbatch ORDER BY BATCHID DESC";
+
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    try
+                    {
+                        con.Open();
+                        List<string> batchList = new List<string>();
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                if (reader["BATCHID"] != DBNull.Value)
+                                {
+                                    batchList.Add(reader["BATCHID"].ToString().Trim());
+                                }
+                            }
+                        }
+
+                        // 批次更新 ComboBox 畫面，防止卡頓
+                        cmbBatch.BeginUpdate();
+                        cmbBatch.Items.Clear();
+                        cmbBatch.Items.Add("Select Batch ID");
+                        cmbBatch.Items.AddRange(batchList.ToArray());
+
+                        if (cmbBatch.Items.Count > 0)
+                        {
+                            cmbBatch.SelectedIndex = 0; // 預設選中提示字或最新批號
+                        }
+                        cmbBatch.EndUpdate();
+                    }
+                    catch (MySqlException ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed to load batch list: " + ex.Message);
+                    }
+                }
+            }
+        }
+
         private void LoadStock()
         {
-
+            // 💡 修正 1：改用標準的 INNER JOIN 語法，結構更清晰且不易出錯
             string query = @"
-            SELECT 
-            r.Name as 'Material Name',
-            i.QuantityOnHand as 'Current Stock',
-            r.ReorderLevel as 'Minimum Stock',
-            i.WarehouseLocation as 'Warehouse',
-            CASE 
-                WHEN i.QuantityOnHand <= r.ReorderLevel THEN 'Low Stock' 
-                ELSE 'OK' 
-            END as 'Status'
-            FROM inventory i,
-            rawmaterial r
-        WHERE i.MaterialID = r.MaterialID
-        ORDER BY i.QuantityOnHand ASC";
+    SELECT 
+        r.Name as 'Material Name',
+        i.QuantityOnHand as 'Current Stock',
+        r.ReorderLevel as 'Minimum Stock',
+        i.WarehouseLocation as 'Warehouse',
+        CASE 
+            WHEN i.QuantityOnHand <= r.ReorderLevel THEN 'Low Stock' 
+            ELSE 'OK' 
+        END as 'Status'
+    FROM inventory i
+    INNER JOIN rawmaterial r ON i.MaterialID = r.MaterialID
+    ORDER BY i.QuantityOnHand ASC";
+
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -353,136 +381,167 @@ namespace _4915project
                             DataTable dt = new DataTable();
                             da.Fill(dt);
                             dataGridView1.DataSource = dt;
+
+                            // 💡 優化 2：動態綁定格式化事件（只需綁定一次，或直接在 Form_Load 綁定）
+                            dataGridView1.CellFormatting -= DataGridView1_CellFormatting;
+                            dataGridView1.CellFormatting += DataGridView1_CellFormatting;
                         }
                     }
                     catch (MySqlException ex)
                     {
-                        MessageBox.Show("載入庫存資料失敗: " + ex.Message);
+                        MessageBox.Show("Failed to load inventory data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                }
+            }
+        }
+
+        // 🎯 新增事件：當庫存不足時，將該列或該格塗上紅色警告
+        private void DataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // 檢查目前格式化的欄位是否為 "Status" 欄位
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "Status" && e.Value != null)
+            {
+                if (e.Value.ToString() == "Low Stock")
+                {
+                    // 將 "Status" 這格變成紅底白字
+                    e.CellStyle.BackColor = Color.LightPink;
+                    e.CellStyle.ForeColor = Color.DarkRed;
+                    e.CellStyle.SelectionBackColor = Color.Red; // 選取時的顏色
+
+                    /* 
+                    // 💡 如果您希望「整列」都變紅底，可以改用以下程式碼：
+                    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightPink;
+                    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.DarkRed;
+                    */
+                }
+                else
+                {
+                    // 恢復預設顏色（避免捲動時顏色錯亂）
+                    e.CellStyle.BackColor = dataGridView1.DefaultCellStyle.BackColor;
+                    e.CellStyle.ForeColor = dataGridView1.DefaultCellStyle.ForeColor;
                 }
             }
         }
 
         private void btSubmit_Click(object sender, EventArgs e)
         {
-
-
-            // 1. 定義所有的 SQL 語句
+            // 1. 純粹的新增 SQL 語句
             string queryGetMaterialInfo = "SELECT MaterialID, ReorderLevel FROM rawmaterial WHERE Name = @MaterialName LIMIT 1";
-            string queryInsertInventory = @"INSERT INTO Inventory 
-             (InventoryID, MaterialID, ProductID, SerialNumber, WarehouseLocation, QuantityOnHand, LastUpdated, ReorderLevel) 
-             VALUES 
-             (@InventoryID, @MaterialID, @ProductID, @SerialNumber, @WarehouseLocation, @QuantityOnHand, @LastUpdated, @ReorderLevel);";
-            string queryInsertBatch = @"INSERT INTO productionbatch
-            (BatchID, StartDate, EndDate, Status)
-            VALUES(@BatchID, @StartDate, @EndDate, @Status)";
-            string queryInsertInstance = @"INSERT INTO productinstance(
-            SerialNumber, ProductID, BatchID, ProductionDate, CurrentStatus, WarrantyEndDate)
-            VALUES(@SerialNumber, @ProductID, @BatchID, @ProductionDate, @CurrentStatus, @WarrantyEndDate)";
-
-            // 預設暫存變數
+            string queryInsertInventory = @"INSERT INTO Inventory (InventoryID, MaterialID, ProductID, SerialNumber, WarehouseLocation, QuantityOnHand, LastUpdated, ReorderLevel) VALUES (@InventoryID, @MaterialID, @ProductID, @SerialNumber, @WarehouseLocation, @QuantityOnHand, @LastUpdated, @ReorderLevel);";
+            string queryInsertBatch = @"INSERT INTO productionbatch (BatchID, StartDate, EndDate, Status) VALUES (@BatchID, @StartDate, @EndDate, @Status)";
+            string queryInsertInstance = @"INSERT INTO productinstance (SerialNumber, ProductID, BatchID, ProductionDate, CurrentStatus, WarrantyEndDate) VALUES (@SerialNumber, @ProductID, @BatchID, @ProductionDate, @CurrentStatus, @WarrantyEndDate)";
             string materialID = "";
             int reorderLevel = 0;
 
-            // 驗證前端輸入
-            if (cmItem.SelectedItem == null)
+            // 💡 1. 核心鎖定：在最開頭就把要用的 BatchID 死死鎖定在 targetBatchID 變數中
+            string targetBatchID = "";
+
+            if (cmbBatch.SelectedItem != null && !cmbBatch.SelectedItem.ToString().StartsWith("Select", StringComparison.OrdinalIgnoreCase))
             {
-                MessageBox.Show("請先選擇原材料名稱。");
-                return;
+                targetBatchID = cmbBatch.SelectedItem.ToString().Trim(); // 🎯 這裡正確拿到了 "BATCH008"
             }
-            if (cbWearhouse.SelectedItem == null)
+            else if (!string.IsNullOrEmpty(cmbBatch.Text) && !cmbBatch.Text.StartsWith("Select", StringComparison.OrdinalIgnoreCase))
             {
-                MessageBox.Show("請選擇儲存的倉庫位置。");
-                return;
+                targetBatchID = cmbBatch.Text.Trim();
+            }
+            else
+            {
+                targetBatchID = GenerateBatchID();
             }
 
             using (MySqlConnection con = new MySqlConnection(constring))
             {
+                MySqlTransaction tran = null;
                 try
                 {
-                    con.Open(); // 🔍 修正 1：全程只在最開頭 Open 一次
+                    con.Open();
 
-                    // 步驟 1：查詢該原材料的 MaterialID 與 ReorderLevel
-                    using (MySqlCommand cmdGet = new MySqlCommand(queryGetMaterialInfo, con))
+                    // 步驟 1：查詢原材料資訊... (略)
+
+                    tran = con.BeginTransaction();
+
+                    // 步驟 2：直接執行庫存 INSERT
+                    using (MySqlCommand cmdInv = new MySqlCommand(queryInsertInventory, con, tran))
                     {
-                        cmdGet.Parameters.AddWithValue("@MaterialName", cmItem.SelectedItem?.ToString());
+                        cmdInv.Parameters.AddWithValue("@InventoryID", tbInventoryID.Text.Trim());
+                        cmdInv.Parameters.AddWithValue("@MaterialID", materialID);
+                        cmdInv.Parameters.AddWithValue("@ProductID", cmbPID.SelectedItem?.ToString() ?? "");
+                        cmdInv.Parameters.AddWithValue("@SerialNumber", tbSN.Text.Trim());
+                        cmdInv.Parameters.AddWithValue("@WarehouseLocation", cbWearhouse.SelectedItem.ToString());
+                        cmdInv.Parameters.AddWithValue("@QuantityOnHand", (int)numQuantity.Value);
+                        cmdInv.Parameters.AddWithValue("@LastUpdated", date.Value);
+                        cmdInv.Parameters.AddWithValue("@ReorderLevel", reorderLevel);
+                        cmdInv.ExecuteNonQuery();
+                    }
 
-                        using (MySqlDataReader reader = cmdGet.ExecuteReader())
+                    // 步驟 3：防撞號檢查 (確保檢查的是 targetBatchID)
+                    bool isBatchExist = false;
+                    string queryCheckBatch = "SELECT COUNT(*) FROM productionbatch WHERE BatchID = @BatchID";
+                    using (MySqlCommand cmdCheck = new MySqlCommand(queryCheckBatch, con, tran))
+                    {
+                        cmdCheck.Parameters.AddWithValue("@BatchID", targetBatchID); // 💡 帶入 BATCH008
+                        isBatchExist = Convert.ToInt32(cmdCheck.ExecuteScalar()) > 0;
+                    }
+
+                    if (!isBatchExist)
+                    {
+                        using (MySqlCommand cmdBatch = new MySqlCommand(queryInsertBatch, con, tran))
                         {
-                            if (reader.Read())
-                            {
-                                materialID = reader["MaterialID"].ToString();
-                                reorderLevel = Convert.ToInt32(reader["ReorderLevel"]);
-                            }
-                            else
-                            {
-                                MessageBox.Show("無法找到對應的原材料資料，請確認原材料名稱是否正確。");
-                                return; // 找不到就攔截，不往下執行
-                            }
-                        } // reader 在這裡會自動關閉，釋放連線
+                            // ❌ 核心檢查點：請確認您原本這裡有沒有誤寫成 GenerateBatchID()？
+                            // 🎯 修正：必須一律帶入鎖定好的 targetBatchID 變數！
+                            cmdBatch.Parameters.AddWithValue("@BatchID", targetBatchID);
+                            cmdBatch.Parameters.AddWithValue("@StartDate", date.Value);
+                            cmdBatch.Parameters.AddWithValue("@EndDate", date.Value.AddDays(7));
+                            cmdBatch.Parameters.AddWithValue("@Status", cmbStatus.SelectedItem?.ToString() ?? "Pending");
+                            cmdBatch.ExecuteNonQuery();
+                        }
                     }
 
-                    // 步驟 2：執行庫存寫入
-                    using (MySqlCommand cmdInsert = new MySqlCommand(queryInsertInventory, con))
+                    // 步驟 4：產品個體執行個體處理 (INSERT)
+                    using (MySqlCommand cmdInstance = new MySqlCommand(queryInsertInstance, con, tran))
                     {
-                        // 依序綁定所有控制項數值
-                        cmdInsert.Parameters.AddWithValue("@InventoryID", tbInventoryID.Text);
-                        cmdInsert.Parameters.AddWithValue("@MaterialID", materialID);
-                        cmdInsert.Parameters.AddWithValue("@ProductID", cmbPID.SelectedItem?.ToString());
-                        cmdInsert.Parameters.AddWithValue("@SerialNumber", tbSN.Text.ToString());
+                        cmdInstance.Parameters.AddWithValue("@SerialNumber", tbSN.Text.Trim());
+                        cmdInstance.Parameters.AddWithValue("@ProductID", cmbPID.SelectedItem?.ToString() ?? "");
 
-                        // 🔍 修正 4：改用 SelectedItem.ToString() 取得實際選中的倉庫字串 (例如 "WH-A-12-03")
-                        cmdInsert.Parameters.AddWithValue("@WarehouseLocation", cbWearhouse.SelectedItem.ToString());
-
-                        // 🔍 修正 5：NumericUpDown 控制項建議直接用 (int)Value 讀取
-                        cmdInsert.Parameters.AddWithValue("@QuantityOnHand", (int)numQuantity.Value);
-                        cmdInsert.Parameters.AddWithValue("@LastUpdated", date.Value);
-
-                        // 🔍 修正 2：成功將剛剛查到的 ReorderLevel 綁定給參數
-                        cmdInsert.Parameters.AddWithValue("@ReorderLevel", reorderLevel);
-
-                        cmdInsert.ExecuteNonQuery();
-                        InwardAddAudit(tbInventoryID.Text.ToString(), materialID.ToString(),
-                            cbWearhouse.SelectedItem.ToString(), numQuantity.Value.ToString(),
-                            date.Value.ToString(), reorderLevel.ToString(),
-                            cmbPID.SelectedItem?.ToString(), tbSN.Text.ToString());
-                    }
-                    using (MySqlCommand cmdBatch = new MySqlCommand(queryInsertBatch, con))
-                    {
-                        cmdBatch.Parameters.AddWithValue("@BatchID", cmbBatch.SelectedItem?.ToString());
-                        cmdBatch.Parameters.AddWithValue("@StartDate", date.Value.ToString());
-                        cmdBatch.Parameters.AddWithValue("@EndDate", date.Value.AddDays(7).ToString()); // 假設生產批次一週內完成
-                        cmdBatch.Parameters.AddWithValue("@Status", cmbStatus.SelectedItem?.ToString());
-                        cmdBatch.ExecuteNonQuery();
-                        AddBatchAudit(cmbBatch.SelectedItem?.ToString(), date.Value.ToString(),
-                            date.Value.AddDays(7).ToString(), cmbStatus.SelectedItem?.ToString());
-
-                    }
-
-                    using (MySqlCommand cmdInstance = new MySqlCommand(queryInsertInstance, con))
-                    {
-                        cmdInstance.Parameters.AddWithValue("@SerialNumber", tbSN.Text.ToString());
-                        cmdInstance.Parameters.AddWithValue("@ProductID", cmbPID.SelectedItem?.ToString());
-                        cmdInstance.Parameters.AddWithValue("@BatchID", cmbBatch.SelectedItem?.ToString());
-                        cmdInstance.Parameters.AddWithValue("@ProductionDate", date.Value.ToString());
-                        cmdInstance.Parameters.AddWithValue("@CurrentStatus", cmbCStatus.SelectedItem?.ToString());
-                        cmdInstance.Parameters.AddWithValue("@WarrantyEndDate", date.Value.AddYears(3).ToString()); // 假設保固一年
+                        // ❌ 核心檢查點：請確認您原本這裡有沒有誤打成 GenerateBatchID()？
+                        // 🎯 修正：一律帶入鎖定好的 targetBatchID 變數！
+                        cmdInstance.Parameters.AddWithValue("@BatchID", targetBatchID);
+                        cmdInstance.Parameters.AddWithValue("@ProductionDate", date.Value);
+                        cmdInstance.Parameters.AddWithValue("@CurrentStatus", cmbCStatus.SelectedItem?.ToString() ?? "OK");
+                        cmdInstance.Parameters.AddWithValue("@WarrantyEndDate", date.Value.AddYears(3));
                         cmdInstance.ExecuteNonQuery();
-                        AddProductInstance(tbSN.Text.ToString(), cmbPID.SelectedItem?.ToString(),
-                            cmbBatch.SelectedItem?.ToString(), date.Value.ToString(),
-                            cmbCStatus.SelectedItem?.ToString(), date.Value.AddYears(3).ToString());
                     }
-                    MessageBox.Show("庫存資料新增成功！");
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show("資料庫存取失敗: " + ex.Message);
+
+                    tran.Commit();
+                    MessageBox.Show($"New record successfully added! Assigned Batch ID: {targetBatchID}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("系統發生非預期錯誤: " + ex.Message);
+                    tran?.Rollback();
+                    MessageBox.Show("Failed to save: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
             }
+
+            // 數據刷新與強制同步
+            LoadInward();
+            LoadBatchIDs();
+
+            // 強迫 ComboBox 選中我們剛剛指定的 targetBatchID (如 BATCH008)
+            int index = cmbBatch.FindStringExact(targetBatchID);
+            if (index != -1)
+            {
+                cmbBatch.SelectedIndex = index;
+            }
+            else
+            {
+                cmbBatch.Text = targetBatchID;
+            }
+
+            LoadStock();
+            LoadPID();
+            GenSN();
+            GenerateInventoryID();
         }
 
         private void InwardAddAudit(string tbInventoryID, string materialID, string cbWearhouse, string numQuantity, string date, string reorderLevel, string PID, string SN)
@@ -624,54 +683,55 @@ namespace _4915project
         }
         private void btSearch_Click(object sender, EventArgs e)
         {
-
-
-            // 1. 先寫好基礎的 SQL 語句（必定會執行的部分）
+            // 1. 定義基礎的 SQL 語句
             string query = @"SELECT
-                        r.Name as 'Material Name',
-                        i.QuantityOnHand as 'Current Stock',
-                        r.ReorderLevel as 'Minimum Stock',
-                        i.WarehouseLocation as 'Warehouse',
-                        CASE
-                            WHEN i.QuantityOnHand <= r.ReorderLevel THEN 'Low Stock'
-                            ELSE 'OK'
-                        END as 'Status'
-                     FROM inventory i
-                     INNER JOIN rawmaterial r ON i.MaterialID = r.MaterialID
-                     WHERE 1=1"; // 💡 技巧：WHERE 1=1 方便後面直接塞 "AND ..."
+                r.Name as 'Material Name',
+                i.QuantityOnHand as 'Current Stock',
+                r.ReorderLevel as 'Minimum Stock',
+                i.WarehouseLocation as 'Warehouse',
+                CASE
+                    WHEN i.QuantityOnHand <= r.ReorderLevel THEN 'Low Stock'
+                    ELSE 'OK'
+                END as 'Status'
+             FROM inventory i
+             INNER JOIN rawmaterial r ON i.MaterialID = r.MaterialID
+             WHERE 1=1"; // 💡 技巧：WHERE 1=1 方便後面動態串接 "AND ..."
 
             using (MySqlConnection con = new MySqlConnection(constring))
             {
-                using (MySqlCommand cmd = new MySqlCommand("", con)) // 先建立空命令，後面動態塞入
+                using (MySqlCommand cmd = new MySqlCommand("", con))
                 {
-                    // 2. 動態檢查第一個條件：ItemID (假設對應的是庫存編號 InventoryID)
-                    string itemName = tbItemID.Text;
+                    // 2. 動態檢查第一個條件：物料名稱關鍵字查詢 (支援模糊搜尋)
+                    string itemName = tbItemID.Text.Trim();
                     if (!string.IsNullOrEmpty(itemName))
                     {
-                        query += " AND r.Name LIKE @Name"; // 🔍 補上欄位名稱
-                        cmd.Parameters.AddWithValue("@Name", itemName);
+                        query += " AND r.Name LIKE @Name";
+                        cmd.Parameters.AddWithValue("@Name", "%" + itemName + "%"); // 💡 加上 % 才能達成模糊搜尋
                     }
 
-                    // 3. 動態檢查第二個條件：倉庫位置 (假設第 0 項是 "請選擇" 或 "全部")
-                    // 💡 修正：cmWearhouse 應該是 comboBox 的拼錯，請確認你畫面上的名稱
-                    string selectedWarehouse = cmWearhouse.SelectedItem?.ToString();
-
-                    // 確保選中的項目不是 null，也不是空白字串
-                    if (!string.IsNullOrEmpty(selectedWarehouse))
+                    // 3. 動態檢查第二個條件：倉庫位置 (排除未選擇、"Select..." 或 "All" 的情況)
+                    if (cbWearhouse.SelectedItem != null)
                     {
-                        query += " AND i.WarehouseLocation = @WarehouseLocation";
-                        cmd.Parameters.AddWithValue("@WarehouseLocation", selectedWarehouse);
+                        string selectedWarehouse = cbWearhouse.SelectedItem.ToString();
+
+                        // 排除預設的提示字（請根據您實際的 UI 填入文字，例如 "All" 或 "Select Warehouse"）
+                        if (selectedWarehouse != "Select Location" && selectedWarehouse != "All" && !string.IsNullOrEmpty(selectedWarehouse))
+                        {
+                            query += " AND i.WarehouseLocation = @WarehouseLocation";
+                            cmd.Parameters.AddWithValue("@WarehouseLocation", selectedWarehouse);
+                        }
                     }
 
+                    // 4. 動態檢查第三個條件：是否勾選「只顯示庫存不足」
                     if (cbLowStock.Checked)
                     {
                         query += " AND i.QuantityOnHand <= r.ReorderLevel";
                     }
 
-                    // 4. 最後補上排序（注意前面要留空格）
+                    // 5. 最後補上排序
                     query += " ORDER BY i.QuantityOnHand ASC;";
 
-                    // 將組合好的完整 SQL 賦值給命令
+                    // 將組合好的完整 SQL 字串賦值給 Command
                     cmd.CommandText = query;
 
                     try
@@ -683,16 +743,16 @@ namespace _4915project
                             da.Fill(dt);
                             dataGridView1.DataSource = dt;
 
-                            // 可選：若查無資料給予提示
+                            // 若查無資料，給予友善提示
                             if (dt.Rows.Count == 0)
                             {
-                                MessageBox.Show("找不到符合條件的庫存資料。");
+                                MessageBox.Show("No matching inventory data could be found.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                     }
                     catch (MySqlException ex)
                     {
-                        MessageBox.Show("搜尋庫存資料失敗: " + ex.Message);
+                        MessageBox.Show("Search for inventory data failed: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

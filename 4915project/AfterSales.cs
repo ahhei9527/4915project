@@ -392,54 +392,104 @@ namespace _4915project
 
         private void btSearch_Click(object sender, EventArgs e)
         {
-            
+            // 1. 定義基礎 SQL（必定會執行的部分）
             string query = @"
-                SELECT 
-                    c.ComplaintID,
-                    cu.Name AS CustomerName,
-                    c.OrderID,
-                    c.SerialNumber,
-                    u.Name AS Employee,
-                    c.IssueDate,
-                    c.Description,
-                    c.TYPE,
-                    c.Resolution,
-                    c.ResolutionDate
-                FROM complaint c
-                INNER JOIN customer cu ON c.CustomerID = cu.CustomerID
-                INNER JOIN user u ON c.UserID = u.UserID
-                WHERE (@ComplaintID = '' OR c.ComplaintID LIKE CONCAT('%', @ComplaintID, '%'))
-                  AND (@OrderID = '' OR c.OrderID LIKE CONCAT('%', @OrderID, '%'))
-                  AND (@CustomerName = '' OR cu.Name LIKE CONCAT('%', @CustomerName, '%'))
-                  AND (@TypeFilter = 'All' OR c.TYPE = @TypeFilter)
-                  AND (@UserFilter = 'All' OR u.Name = @UserFilter)
-                  AND c.IssueDate BETWEEN @StartDate AND @EndDate
-                ORDER BY c.IssueDate DESC;";
+        SELECT 
+            c.ComplaintID,
+            cu.Name AS CustomerName,
+            c.OrderID,
+            c.SerialNumber,
+            u.Name AS Employee,
+            c.IssueDate,
+            c.Description,
+            c.TYPE,
+            c.Resolution,
+            c.ResolutionDate
+        FROM complaint c
+        INNER JOIN customer cu ON c.CustomerID = cu.CustomerID
+        INNER JOIN user u ON c.UserID = u.UserID
+        WHERE c.IssueDate BETWEEN @StartDate AND @EndDate"; // 💡 將日期作為必選的基礎條件
 
             using (MySqlConnection con = new MySqlConnection(constring))
-            using (MySqlCommand cmd = new MySqlCommand(query, con))
             {
-                cmd.Parameters.AddWithValue("@ComplaintID", tbComplainID.Text.Trim());
-                cmd.Parameters.AddWithValue("@OrderID", tbOrderID.Text.Trim());
-                cmd.Parameters.AddWithValue("@CustomerName", tbCustomer.Text.Trim());
-                cmd.Parameters.AddWithValue("@TypeFilter", cmbType.SelectedItem?.ToString() ?? "All");
-                cmd.Parameters.AddWithValue("@UserFilter", cmbUser.SelectedItem?.ToString() ?? "All");
-                cmd.Parameters.AddWithValue("@StartDate", SDate.Value.Date);
-                cmd.Parameters.AddWithValue("@EndDate", EDate.Value.Date.AddDays(1).AddSeconds(-1));
-
-                try
+                using (MySqlCommand cmd = new MySqlCommand("", con))
                 {
-                    con.Open();
-                    DataTable dt = new DataTable();
-                    using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                    // 2. 動態檢查第一個條件：ComplaintID
+                    string complaintID = tbComplainID.Text.Trim();
+                    if (!string.IsNullOrEmpty(complaintID))
                     {
-                        da.Fill(dt);
+                        query += " AND c.ComplaintID LIKE @ComplaintID";
+                        cmd.Parameters.AddWithValue("@ComplaintID", "%" + complaintID + "%");
                     }
-                    dataGridView1.DataSource = dt;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Failed to search complaints: " + ex.Message, "Search Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    // 3. 動態檢查第二個條件：OrderID
+                    string orderID = tbOrderID.Text.Trim();
+                    if (!string.IsNullOrEmpty(orderID))
+                    {
+                        query += " AND c.OrderID LIKE @OrderID";
+                        cmd.Parameters.AddWithValue("@OrderID", "%" + orderID + "%");
+                    }
+
+                    // 4. 動態檢查第三個條件：CustomerName
+                    string customerName = tbCustomer.Text.Trim();
+                    if (!string.IsNullOrEmpty(customerName))
+                    {
+                        query += " AND cu.Name LIKE @CustomerName";
+                        cmd.Parameters.AddWithValue("@CustomerName", "%" + customerName + "%");
+                    }
+
+                    // 5. 動態檢查第四個條件：TypeFilter 下拉選單
+                    if (cmbType.SelectedItem != null)
+                    {
+                        string typeFilter = cmbType.SelectedItem.ToString().Trim();
+                        // 💡 自動防呆：排除 "All"、"Select Type" 或空白，只有選了特定類型才加入過濾
+                        if (typeFilter != "All" && typeFilter != "Select Type" && !string.IsNullOrEmpty(typeFilter))
+                        {
+                            query += " AND c.TYPE = @TypeFilter";
+                            cmd.Parameters.AddWithValue("@TypeFilter", typeFilter);
+                        }
+                    }
+
+                    // 6. 動態檢查第五個條件：UserFilter 下拉選單
+                    if (cmbUser.SelectedItem != null)
+                    {
+                        string userFilter = cmbUser.SelectedItem.ToString().Trim();
+                        if (userFilter != "All" && userFilter != "Select User" && !string.IsNullOrEmpty(userFilter))
+                        {
+                            query += " AND u.Name = @UserFilter";
+                            cmd.Parameters.AddWithValue("@UserFilter", userFilter);
+                        }
+                    }
+
+                    // 7. 補上排序並將完整 SQL 賦值給 Command
+                    query += " ORDER BY c.IssueDate DESC;";
+                    cmd.CommandText = query;
+
+                    // 8. 綁定必定存在的日期參數 (時間精準補滿)
+                    cmd.Parameters.AddWithValue("@StartDate", SDate.Value.Date);
+                    cmd.Parameters.AddWithValue("@EndDate", EDate.Value.Date.AddDays(1).AddSeconds(-1));
+
+                    try
+                    {
+                        con.Open();
+                        DataTable dt = new DataTable();
+                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                        {
+                            da.Fill(dt);
+                        }
+
+                        dataGridView1.DataSource = dt;
+
+                        // 可選：若查無資料給予提示
+                        if (dt.Rows.Count == 0)
+                        {
+                            MessageBox.Show("No matching complaint records could be found.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Failed to search complaints: " + ex.Message, "Search Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
             }
         }
@@ -477,7 +527,6 @@ namespace _4915project
         {
             FormSetting setting = new FormSetting();
             setting.Show();
-            this.Close();
         }
 
         private void Production_Click(object sender, EventArgs e)

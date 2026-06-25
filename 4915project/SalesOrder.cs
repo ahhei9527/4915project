@@ -210,7 +210,7 @@ namespace _4915project
                     string query = @"SELECT s.*, c.name AS custName
                              FROM salesorder s
                              INNER JOIN customer c ON s.CustomerID = c.CustomerID
-                             WHERE c.Name LIKE @CustName 
+                             WHERE (c.Name LIKE @CustName or s.CustomerID like @CustName) 
                                AND s.OrderDate > @StartDate 
                                AND s.OrderDate < @EndDate;";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -256,7 +256,7 @@ namespace _4915project
                         }
                         catch (MySqlException ex)
                         {
-                            MessageBox.Show("查詢訂單失敗: " + ex.Message);
+                            MessageBox.Show("Order inquiry failed: " + ex.Message);
                         }
                     }
                 }

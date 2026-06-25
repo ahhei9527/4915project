@@ -98,7 +98,7 @@ namespace _4915project
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("系統錯誤: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("System error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -227,7 +227,7 @@ namespace _4915project
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("查詢失敗: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Query failed:" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -313,7 +313,7 @@ namespace _4915project
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("系統錯誤: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("System error:" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -374,8 +374,8 @@ namespace _4915project
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.WriteLine("無法取得資料庫流水號: " + ex.Message);
-                        MessageBox.Show("無法自動產生單號，請手動輸入或稍後再試。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        System.Diagnostics.Debug.WriteLine("Unable to retrieve database serial number:" + ex.Message);
+                        MessageBox.Show("Order number cannot be generated automatically. Please enter it manually or try again later.", "Prompt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
@@ -400,7 +400,7 @@ namespace _4915project
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("系統錯誤: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("System error:" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -425,7 +425,7 @@ namespace _4915project
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("系統錯誤: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("System error:" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -516,7 +516,7 @@ namespace _4915project
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("讀取申請單失敗: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Failed to read application form: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         } // 💡 修正 3：補齊方法的大括號
@@ -565,8 +565,8 @@ namespace _4915project
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.WriteLine("無法取得物料明細流水號: " + ex.Message);
-                        MessageBox.Show("無法自動產生明細單號，請手動輸入或稍後再試。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        System.Diagnostics.Debug.WriteLine("Unable to obtain material serial number: " + ex.Message);
+                        MessageBox.Show("The detailed order number could not be generated automatically. Please enter it manually or try again later.", "Prompt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
@@ -595,7 +595,7 @@ namespace _4915project
             // 💡 防呆機制：確保必填欄位都有輸入
             if (string.IsNullOrEmpty(tbRequestItemID.Text) || string.IsNullOrEmpty(cmbRequestID.Text))
             {
-                MessageBox.Show("請確認單號與明細編號已生成！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please confirm that the order number and detail number have been generated!", "Prompt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -649,7 +649,7 @@ namespace _4915project
                         cmd.ExecuteNonQuery();
                     }
 
-                    MessageBox.Show("物料明細新增成功！", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Material details added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // 3. 重新讀取資料庫，將最新明細刷回 DataGridView
                     DataTable dt = new DataTable();
@@ -674,7 +674,7 @@ namespace _4915project
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("新增明細失敗: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Adding details failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -700,71 +700,90 @@ namespace _4915project
             // 💡 安全防呆：確保主要必填欄位沒有留白
             if (string.IsNullOrEmpty(cmbRequestID.Text) || string.IsNullOrEmpty(cmbRequestBy.Text))
             {
-                MessageBox.Show("請確認「申請單號」與「申請人」皆已填寫！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please make sure that both the \"Application Number\" and \"Applicant\" fields are filled in!", "Prompt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            // 🎯 宣告兩種 SQL 語句：因應存在與否動態抽換
             string insertQuery = @"
-    INSERT INTO materialrequest
-    (RequestID, UserID, BatchID, RequestDate, RequestByDate, Urgency, Status) 
-    VALUES 
-    (@RequestID, @UserID, @BatchID, @RequestDate, @RequestByDate, @Urgency, @Status);";
+    INSERT INTO materialrequest (RequestID, UserID, BatchID, RequestDate, RequestByDate, Urgency, Status) 
+    VALUES (@RequestID, @UserID, @BatchID, @RequestDate, @RequestByDate, @Urgency, @Status);";
 
+            string updateQuery = @"
+    UPDATE materialrequest 
+    SET UserID = @UserID, BatchID = @BatchID, RequestDate = @RequestDate, RequestByDate = @RequestByDate, Urgency = @Urgency, Status = @Status 
+    WHERE RequestID = @RequestID;";
+
+            string checkQuery = "SELECT COUNT(*) FROM materialrequest WHERE RequestID = @RequestID;";
             string UserIDQuery = "SELECT UserID FROM user WHERE Name = @Name;";
+
             int userID = 0;
+            string currentRequestID = cmbRequestID.Text.Trim();
 
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 try
                 {
-                    // 💡 修正 1：務必先打開資料庫連線！
                     con.Open();
 
                     // 1. 根據申請人名稱查詢 UserID
                     using (MySqlCommand cmd = new MySqlCommand(UserIDQuery, con))
                     {
-                        cmd.Parameters.AddWithValue("@Name", cmbRequestBy.Text);
+                        cmd.Parameters.AddWithValue("@Name", cmbRequestBy.Text.Trim());
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
-                            // 💡 修正 2：必須呼叫 .Read() 成功後才能讀取欄位，並加上找不到人的防呆
                             if (reader.Read())
                             {
                                 userID = reader.GetInt32(0);
                             }
                             else
                             {
-                                MessageBox.Show($"找不到名為「{cmbRequestBy.Text}」的使用者，請確認輸入是否正確。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return; // 中止後續的新增動作
+                                MessageBox.Show($"The user named \"{cmbRequestBy.Text}\" could not be found. Please verify that your input is correct.", "Prompt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
                             }
-                        } // 這裡第一個 Reader 會被自動關閉
+                        }
                     }
 
-                    // 2. 執行主檔寫入 (INSERT)
-                    using (MySqlCommand cmd2 = new MySqlCommand(insertQuery, con))
+                    // 🎯 核心修正 1：檢查該 RequestID 是否已經存在於資料庫中
+                    bool isRequestExist = false;
+                    using (MySqlCommand cmdCheck = new MySqlCommand(checkQuery, con))
                     {
-                        cmd2.Parameters.AddWithValue("@RequestID", cmbRequestID.Text);
-                        cmd2.Parameters.AddWithValue("@UserID", userID);
-                        cmd2.Parameters.AddWithValue("@BatchID", cmbBatchID.Text);
+                        cmdCheck.Parameters.AddWithValue("@RequestID", currentRequestID);
+                        isRequestExist = Convert.ToInt32(cmdCheck.ExecuteScalar()) > 0;
+                    }
 
-                        // 💡 提示：此處使用 .Value.Date 只保留日期部分，抹除時間，更符合資料庫的 DATE 型態
+                    // 🎯 核心修正 2：根據檢查結果，動態決定是要 INSERT 還是 UPDATE，徹底解決 Primary Key 重複衝突！
+                    string finalQuery = isRequestExist ? updateQuery : insertQuery;
+
+                    using (MySqlCommand cmd2 = new MySqlCommand(finalQuery, con))
+                    {
+                        cmd2.Parameters.AddWithValue("@RequestID", currentRequestID);
+                        cmd2.Parameters.AddWithValue("@UserID", userID);
+                        cmd2.Parameters.AddWithValue("@BatchID", cmbBatchID.Text.Trim());
                         cmd2.Parameters.AddWithValue("@RequestDate", RequestDate.Value.Date);
                         cmd2.Parameters.AddWithValue("@RequestByDate", RequestByDate.Value.Date);
+                        cmd2.Parameters.AddWithValue("@Urgency", cmbUrgency.Text.Trim());
+                        cmd2.Parameters.AddWithValue("@Status", cmbRequestStatus.Text.Trim());
 
-                        cmd2.Parameters.AddWithValue("@Urgency", cmbUrgency.Text);
-                        cmd2.Parameters.AddWithValue("@Status", cmbRequestStatus.Text);
-
-                        // 💡 修正 3：必須呼叫此行，資料才會真正進資料庫！
                         cmd2.ExecuteNonQuery();
                     }
 
-                    MessageBox.Show("物料申請主檔新增成功！", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // 提示訊息根據模式自動調整，體驗更專業
+                    if (isRequestExist)
+                    {
+                        MessageBox.Show($"Material requisition master file '{currentRequestID}' updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Material requisition master file '{currentRequestID}' added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
 
-                    // 💡 建議擴充：主檔新增成功後，通常會解鎖明細新增按鈕（btAdd.Enabled = true）
-                    // 或者觸發你的 genRequestItemID() 讓使用者接著輸入明細
+                    // 💡 可以在這裡呼叫您畫面右下角的 Clear 按鈕事件，或是自動生成下一個 REQ 單號的方法
+                    // GenerateNextRequestID(); 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("儲存申請主檔失敗: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Failed to store master file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

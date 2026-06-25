@@ -39,7 +39,7 @@ namespace _4915project
         {
             if (string.IsNullOrWhiteSpace(textBoxEmail.Text) || string.IsNullOrWhiteSpace(textBoxPwd.Text))
             {
-                MessageBox.Show("請輸入電子郵件與密碼。", "輸入錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please enter your email address and password.", "Input error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -94,7 +94,7 @@ namespace _4915project
                             }
                             else
                             {
-                                MessageBox.Show("帳號不存在。", "登入失敗", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("The account does not exist.", "Login failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
                             }
                         } // 💡 關鍵：第一個 reader 在這裡被完全釋放、關閉連線佔用！
@@ -122,7 +122,7 @@ namespace _4915project
                         CurrentUser.Login(0, loggedInName, loggedInRole);
                     }
 
-                    MessageBox.Show("登入成功！", "系統提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Login successful!", "System prompt", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // 頁面導向邏輯
                     if (loggedInRole == "ADMIN")
@@ -134,17 +134,17 @@ namespace _4915project
                     else
                     {
                         // 如果未來一般用戶也要放行，直接在這裡 new 一般用戶的表單即可
-                        MessageBox.Show("登入成功，但目前僅提供管理員使用。", "權限不足", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Login successful, but currently only available to administrators.", "Insufficient permissions", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("密碼錯誤。", "登入失敗", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Incorrect password.", "Login failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("系統錯誤: " + ex.Message, "系統錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("System error: " + ex.Message, "System error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

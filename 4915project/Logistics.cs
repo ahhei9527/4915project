@@ -233,7 +233,7 @@ namespace _4915project
                             }
                             else
                             {
-                                MessageBox.Show("找不到該訂單的詳細資料。");
+                                MessageBox.Show("Can't find Order information.");
                             }
                         }
                     }
@@ -247,11 +247,11 @@ namespace _4915project
                 }
                 catch (MySqlException ex)
                 {
-                    MessageBox.Show("讀取訂單詳細資料時發生資料庫錯誤: " + ex.Message);
+                    MessageBox.Show("A database error occurred while reading order details: " + ex.Message);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("發生未預期的錯誤: " + ex.Message);
+                    MessageBox.Show("An unexpected error occurred:" + ex.Message);
                 }
             }
         }
@@ -760,8 +760,8 @@ namespace _4915project
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.WriteLine("無法取得送貨單流水號: " + ex.Message);
-                        MessageBox.Show("無法自動產生送貨單號，請檢查資料庫連線。");
+                        System.Diagnostics.Debug.WriteLine("Unable to obtain delivery note serial number: " + ex.Message);
+                        MessageBox.Show("Unable to generate delivery tracking number automatically. Please check database connection.");
                         tbDeliveryNoteID.ReadOnly = false;
                     }
                 }
@@ -827,7 +827,7 @@ namespace _4915project
                             }
                             else
                             {
-                                MessageBox.Show("找不到該出貨單對應的訂單資訊。");
+                                MessageBox.Show("Order information corresponding to this shipment order cannot be found.");
                                 return;
                             }
                         }
@@ -871,7 +871,7 @@ namespace _4915project
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("載入出貨單資料失敗: " + ex.Message);
+                    MessageBox.Show("Failed to load shipping order data:" + ex.Message);
                 }
             }
         }
@@ -934,7 +934,7 @@ namespace _4915project
 
                         if (visibleColumnCount == 0)
                         {
-                            MessageBox.Show("沒有可導出的資料。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("No data is available for export.", "Prompt message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             document.Close();
                             return;
                         }
@@ -985,11 +985,11 @@ namespace _4915project
                         }
 
                         document.Add(dataTable);
-                        MessageBox.Show("PDF 檔案已成功產生！", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("The PDF file has been successfully generated!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("產生 PDF 時發生錯誤: " + ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("An error occurred while generating the PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     finally
                     {

@@ -43,7 +43,7 @@ namespace _4915project
         private void LoadCompany()
         {
             // Code to load company data into the form
-            string query = "SELECT Companyname FROM company";
+            string query = "SELECT CompanyName FROM company";
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -54,7 +54,7 @@ namespace _4915project
                         MySqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            //cmbCompanyName.Items.Add(reader["CompanyName"].ToString());
+                            cmbCompanyName.Items.Add(reader["CompanyName"].ToString());
                         }
                     }
                     catch (Exception ex)
@@ -569,6 +569,11 @@ namespace _4915project
         {
             AddCust addCust = new AddCust();
             addCust.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
