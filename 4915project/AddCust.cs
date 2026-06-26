@@ -142,7 +142,7 @@ namespace _4915project
                 CurrentUser.CreateOrder(CurrentUser.UserID, CurrentUser.Username,
                                       CurrentUser.Role, CurrentUser.Email);
 
-                AuditHelper.Log("customer", custID, "Create Customer", CurrentUser.UserID);
+                AuditHelper.Log("customer", custID.ToString(), "Create Customer", CurrentUser.UserID);
             }
             catch (Exception ex)
             {
