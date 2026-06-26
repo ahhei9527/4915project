@@ -352,9 +352,9 @@ namespace _4915project
             }
         }
 
-        private void LoadStock()
+        private void LoadStock(string selectedWarehouse = "")
         {
-            // 💡 修正 1：改用標準的 INNER JOIN 語法，結構更清晰且不易出錯
+            // 💡 重點：加入 WHERE 1=1 方便後面動態拼接條件
             string query = @"
     SELECT 
         r.Name as 'Material Name',
@@ -367,12 +367,26 @@ namespace _4915project
         END as 'Status'
     FROM inventory i
     INNER JOIN rawmaterial r ON i.MaterialID = r.MaterialID
-    ORDER BY i.QuantityOnHand ASC";
+    WHERE 1=1";
+
+            // 💡 判斷如果下拉選單有選特定的倉庫，才加入 SQL 篩選條件
+            if (!string.IsNullOrEmpty(selectedWarehouse) && selectedWarehouse != "All")
+            {
+                query += " AND i.WarehouseLocation = @Warehouse";
+            }
+
+            query += " ORDER BY i.QuantityOnHand ASC";
 
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
+                    // 安全防範：傳入倉庫參數
+                    if (!string.IsNullOrEmpty(selectedWarehouse) && selectedWarehouse != "All")
+                    {
+                        cmd.Parameters.AddWithValue("@Warehouse", selectedWarehouse);
+                    }
+
                     try
                     {
                         con.Open();
@@ -382,7 +396,6 @@ namespace _4915project
                             da.Fill(dt);
                             dataGridView1.DataSource = dt;
 
-                            // 💡 優化 2：動態綁定格式化事件（只需綁定一次，或直接在 Form_Load 綁定）
                             dataGridView1.CellFormatting -= DataGridView1_CellFormatting;
                             dataGridView1.CellFormatting += DataGridView1_CellFormatting;
                         }
@@ -683,79 +696,11 @@ namespace _4915project
         }
         private void btSearch_Click(object sender, EventArgs e)
         {
-            // 1. 定義基礎的 SQL 語句
-            string query = @"SELECT
-                r.Name as 'Material Name',
-                i.QuantityOnHand as 'Current Stock',
-                r.ReorderLevel as 'Minimum Stock',
-                i.WarehouseLocation as 'Warehouse',
-                CASE
-                    WHEN i.QuantityOnHand <= r.ReorderLevel THEN 'Low Stock'
-                    ELSE 'OK'
-                END as 'Status'
-             FROM inventory i
-             INNER JOIN rawmaterial r ON i.MaterialID = r.MaterialID
-             WHERE 1=1"; // 💡 技巧：WHERE 1=1 方便後面動態串接 "AND ..."
+            // 1. 取得數值
+            string warehouse = cmWearhouse.SelectedItem?.ToString();
 
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand("", con))
-                {
-                    // 2. 動態檢查第一個條件：物料名稱關鍵字查詢 (支援模糊搜尋)
-                    string itemName = tbItemID.Text.Trim();
-                    if (!string.IsNullOrEmpty(itemName))
-                    {
-                        query += " AND r.Name LIKE @Name";
-                        cmd.Parameters.AddWithValue("@Name", "%" + itemName + "%"); // 💡 加上 % 才能達成模糊搜尋
-                    }
-
-                    // 3. 動態檢查第二個條件：倉庫位置 (排除未選擇、"Select..." 或 "All" 的情況)
-                    if (cbWearhouse.SelectedItem != null)
-                    {
-                        string selectedWarehouse = cbWearhouse.SelectedItem.ToString();
-
-                        // 排除預設的提示字（請根據您實際的 UI 填入文字，例如 "All" 或 "Select Warehouse"）
-                        if (selectedWarehouse != "Select Location" && selectedWarehouse != "All" && !string.IsNullOrEmpty(selectedWarehouse))
-                        {
-                            query += " AND i.WarehouseLocation = @WarehouseLocation";
-                            cmd.Parameters.AddWithValue("@WarehouseLocation", selectedWarehouse);
-                        }
-                    }
-
-                    // 4. 動態檢查第三個條件：是否勾選「只顯示庫存不足」
-                    if (cbLowStock.Checked)
-                    {
-                        query += " AND i.QuantityOnHand <= r.ReorderLevel";
-                    }
-
-                    // 5. 最後補上排序
-                    query += " ORDER BY i.QuantityOnHand ASC;";
-
-                    // 將組合好的完整 SQL 字串賦值給 Command
-                    cmd.CommandText = query;
-
-                    try
-                    {
-                        con.Open();
-                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
-                        {
-                            DataTable dt = new DataTable();
-                            da.Fill(dt);
-                            dataGridView1.DataSource = dt;
-
-                            // 若查無資料，給予友善提示
-                            if (dt.Rows.Count == 0)
-                            {
-                                MessageBox.Show("No matching inventory data could be found.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                        }
-                    }
-                    catch (MySqlException ex)
-                    {
-                        MessageBox.Show("Search for inventory data failed: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
+            // 2. 呼叫函數
+            LoadStock(warehouse);
         }
 
         private void Logoutbt_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
