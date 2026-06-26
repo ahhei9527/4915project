@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2026-06-25 17:22:03
+-- 產生時間： 2026-06-26 16:27:43
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -247,9 +247,7 @@ INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserI
 (198, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-31 15:38:42', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (199, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-31 15:41:58', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (200, 'shipment', 'ORD000003', 'Create Shipment', 101, 'System', '2026-05-31 15:42:10', NULL, '\"SHIP003, Pending, Standard\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
-(201, 'SalesOrder', 'ORD000003', 'Update SalesOrder', 101, 'System', '2026-05-31 15:42:10', NULL, '\"ORD000003, Confirmed, 2025/5/22 00:00:00\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (202, 'shipment', 'ORD000004', 'Create Shipment', 101, 'System', '2026-05-31 15:52:21', NULL, '\"SHIP004, In Transit, Standard\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
-(203, 'SalesOrder', 'ORD000004', 'Update SalesOrder', 101, 'System', '2026-05-31 15:52:21', NULL, '\"ORD000004, Confirmed, 2026/6/5 00:00:00\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (204, 'salesorder', 'CONF001', 'Update Order', 101, 'System', '2026-05-31 15:53:44', '\", \"', '\"2025-04-08, Good\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (205, 'salesorder', 'CONF003', 'Update Order', 101, 'System', '2026-05-31 15:54:04', '\", \"', '\"2025-04-08, Good\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (206, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-05-31 15:56:25', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
@@ -296,7 +294,6 @@ INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserI
 (247, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 17:53:38', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (248, 'salesorder', 'ORD000007', 'Create Order', 101, 'System', '2026-06-01 17:53:57', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (249, 'shipment', 'ORD000007', 'Create Shipment', 101, 'System', '2026-06-01 17:55:43', NULL, '\"SHIP005, In Transit, Standard\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
-(250, 'SalesOrder', 'ORD000007', 'Update SalesOrder', 101, 'System', '2026-06-01 17:55:43', NULL, '\"ORD000007, Paid, 2026/6/8 00:00:00\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (251, 'salesorder', 'CONF004', 'Update Order', 101, 'System', '2026-06-01 17:56:29', '\", \"', '\"2026-06-01, Good\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (252, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 18:33:08', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (253, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 18:34:08', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
@@ -316,7 +313,6 @@ INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserI
 (267, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 19:28:23', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (268, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 19:29:51', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (269, 'shipment', 'ORD000009', 'Create Shipment', 101, 'System', '2026-06-01 19:30:10', NULL, '\"SHIP006, In Transit, Standard\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
-(270, 'SalesOrder', 'ORD000009', 'Update SalesOrder', 101, 'System', '2026-06-01 19:30:10', NULL, '\"ORD000009, Processing, 2026/6/8 00:00:00\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (271, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 19:30:32', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (272, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 19:36:16', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (273, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 19:37:21', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
@@ -353,12 +349,12 @@ INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserI
 (304, 'replyslip', 'RS001', 'Create replyslip', 101, 'System', '2026-06-01 22:31:35', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (305, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 22:34:32', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (306, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 22:35:02', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
-(307, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 22:36:33', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC');
-INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserID`, `Username`, `ChangedDate`, `OldValues`, `NewValues`, `Description`, `IpAddress`, `MachineName`) VALUES
+(307, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 22:36:33', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (308, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 22:36:46', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (309, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 22:38:11', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (310, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 22:38:58', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
-(311, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 22:42:09', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
+(311, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 22:42:09', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC');
+INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserID`, `Username`, `ChangedDate`, `OldValues`, `NewValues`, `Description`, `IpAddress`, `MachineName`) VALUES
 (312, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 22:42:56', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (313, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-01 23:22:19', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (314, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-01 23:22:43', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
@@ -385,17 +381,12 @@ INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserI
 (335, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 21:01:39', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (336, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 21:03:09', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (337, 'salesorder', 'ORD000010', 'Create Order', 101, 'System', '2026-06-04 21:03:36', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
-(338, 'salesorder', 'ORD000010', 'Update Order', 101, 'System', '2026-06-04 21:03:51', '\"2026/6/4 00:00:00, Quoted\"', '\"2026/6/4 21:03:37, Paid\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (339, 'shipment', 'ORD000010', 'Create Shipment', 101, 'System', '2026-06-04 21:04:22', NULL, '\"SHIP007, In Transit, Standard\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
-(340, 'SalesOrder', 'ORD000010', 'Update SalesOrder', 101, 'System', '2026-06-04 21:04:22', NULL, '\"ORD000010, Processing, 2026/6/11 00:00:00\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (341, 'shipment', 'SHIP007', 'Update Shipment Stat', 101, 'System', '2026-06-04 21:05:03', '\"Pending, Standard\"', '\"In Transit, Standard\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
-(342, 'SalesOrder', 'ORD000010', 'Update SalesOrder', 101, 'System', '2026-06-04 21:05:03', NULL, '\"ORD000010, Processing, 2026/6/11 00:00:00\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (343, 'shipment', 'SHIP007', 'Update Shipment Stat', 101, 'System', '2026-06-04 21:05:14', '\"In Transit, Standard\"', '\"In Transit, Standard\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
-(344, 'SalesOrder', 'ORD000010', 'Update SalesOrder', 101, 'System', '2026-06-04 21:05:14', NULL, '\"ORD000010, Processing, 2026/6/11 00:00:00\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (345, 'deliverynote', 'DN002', 'Create deliverynote', 101, 'System', '2026-06-04 21:06:02', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (346, 'salesorder', 'CONF006', 'Update Order', 101, 'System', '2026-06-04 21:06:42', '\", \"', '\"2026-06-04, Good\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (347, 'shipment', 'SHIP007', 'Update Shipment Stat', 101, 'System', '2026-06-04 21:07:55', '\"In Transit, Standard\"', '\"Delivered, Standard\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
-(348, 'SalesOrder', 'ORD000010', 'Update SalesOrder', 101, 'System', '2026-06-04 21:07:55', NULL, '\"ORD000010, Delivered, 2026/6/11 00:00:00\"', '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (349, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-04 21:09:52', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (350, 'replyslip', 'RS002', 'Create replyslip', 101, 'System', '2026-06-04 21:10:03', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
 (351, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-04 21:11:00', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%21', 'AHHEI-PC'),
@@ -427,7 +418,6 @@ INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserI
 (377, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-22 17:01:38', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
 (378, 'user', '101', 'LOGIN', 101, 'Alice Cheung', '2026-06-22 17:09:00', NULL, NULL, 'User Alice Cheung logged in', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
 (379, 'salesorder', 'ORD000011', 'Create Order', 0, 'System', '2026-06-22 18:54:43', NULL, NULL, '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
-(380, 'salesorder', 'ORD000011', 'Update Order', 0, 'System', '2026-06-22 18:55:00', '\"2026/6/22 00:00:00, Quoted\"', '\"2026/6/22 18:54:48, Paid\"', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
 (381, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-22 23:49:48', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
 (382, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 21:08:48', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
 (383, 'Inventory', 'INV006', 'Add Inward', 101, 'System', '2026-06-25 21:39:19', NULL, '{\"InventoryID\":\"INV006\",\"MaterialID\":\"MAT001\",\"ProductID\":\"PROD001\",\"SerialNumber\":\"SN00000007\",\"WarehouseLocation\":\"WH-A-12-03\",\"QuantityOnHand\":\"1\",\"LastUpdated\":\"2026/6/25 21:38:48\",\"ReorderLevel\":\"50\"}', '', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
@@ -456,7 +446,8 @@ INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserI
 (406, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 23:01:13', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
 (407, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 23:07:52', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
 (408, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 23:11:21', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
-(409, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 23:13:10', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC');
+(409, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 23:13:10', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(410, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-26 22:10:08', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC');
 
 -- --------------------------------------------------------
 
@@ -1333,7 +1324,7 @@ ALTER TABLE `user_productionbatch`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `audit_log`
 --
 ALTER TABLE `audit_log`
-  MODIFY `AuditLogId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=410;
+  MODIFY `AuditLogId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=411;
 
 --
 -- 已傾印資料表的限制式
