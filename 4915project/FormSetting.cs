@@ -278,79 +278,101 @@ namespace _4915project
 
         private void button9_Click(object sender, EventArgs e)
         {
-            if (cbRole.Checked == false)
+            // 檢查是否至少勾選了一個更新項目
+            if (!cbPwd.Checked && !cbRole.Checked)
             {
-                string userQuery = "UPDATE user SET " +
-                "Role = @Role, " +
-                "position = @position, " +
-                "Department = Department " +
-                "WHERE Name = @Name";
-                using (MySqlConnection con = new MySqlConnection(constring))
+                MessageBox.Show("Please select whether you want to update the password or personnel information.");
+                return;
+            }
+
+            if (cmbUserName.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a user.");
+                return;
+            }
+
+            // 動態組合 SET 子句
+            string setClause = "";
+
+            if (cbPwd.Checked)
+            {
+                if (string.IsNullOrWhiteSpace(tbPassword.Text))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(userQuery, con))
+                    MessageBox.Show("Password cannot be empty.");
+                    return;
+                }
+
+                setClause += "Password = @Password";
+            }
+
+            if (cbRole.Checked)
+            {
+                if (cmbRole.SelectedItem == null)
+                {
+                    MessageBox.Show("Please select a role.");
+                    return;
+                }
+
+                // 【新增防呆】如果部門也是必填項，建議加上此檢查。若允許不填則可移除此 if 區塊。
+                if (cmbDepartment.SelectedItem == null)
+                {
+                    MessageBox.Show("Please select a department.");
+                    return;
+                }
+
+                if (!string.IsNullOrEmpty(setClause))
+                    setClause += ", ";
+
+                setClause += "Role = @Role, position = @position, Department = @Department";
+            }
+
+            string userQuery = "UPDATE user SET " + setClause + " WHERE Name = @Name";
+
+            // 執行資料庫操作
+            using (MySqlConnection con = new MySqlConnection(constring))
+            using (MySqlCommand cmd = new MySqlCommand(userQuery, con))
+            {
+                // 共通參數
+                cmd.Parameters.AddWithValue("@Name", cmbUserName.SelectedItem.ToString());
+
+                // 動態參數
+                if (cbPwd.Checked)
+                {
+                    // 【優化】使用 .Trim() 防止使用者誤輸入前後空格
+                    string hashedPassword = ComputeSha256Hash(tbPassword.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Password", hashedPassword);
+                }
+
+                if (cbRole.Checked)
+                {
+                    cmd.Parameters.AddWithValue("@Role", cmbRole.SelectedItem.ToString());
+
+                    // 【優化】職位文字也建議加上 .Trim() 清除前後空白
+                    cmd.Parameters.AddWithValue("@position", string.IsNullOrWhiteSpace(tbPosit.Text)
+                        ? (object)DBNull.Value
+                        : tbPosit.Text.Trim());
+
+                    cmd.Parameters.AddWithValue("@Department", cmbDepartment.SelectedItem.ToString());
+                }
+
+                try
+                {
+                    con.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
                     {
-                        cmd.Parameters.AddWithValue("@Role", cmbRole.SelectedItem?.ToString());
-                        cmd.Parameters.AddWithValue("@position", tbPosit.Text.ToString());
-                        cmd.Parameters.AddWithValue("@Department", cmbDepartment.SelectedItem?.ToString());
-                        cmd.Parameters.AddWithValue("@Name", cmbUserName.SelectedItem?.ToString());
-                        try
-                        {
-                            con.Open();
-                            int rowsAffected = cmd.ExecuteNonQuery();
-                            if (rowsAffected > 0)
-                            {
-                                MessageBox.Show("Employee data updated successfully.");
-                                UpdateUserSettingsAudit();
-                            }
-                            else
-                            {
-                                MessageBox.Show("No changes were made to the employee settings.");
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error saving employee settings: " + ex.Message);
-                        }
+                        MessageBox.Show("Data update successful.");
+                        UpdateUserSettingsAudit();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No matching user found or no changes made.");
                     }
                 }
-            }
-            else
-            {
-                string userQuery = "UPDATE user SET " +
-                "Password = @Password, " +
-                "Role = @Role, " +
-                "position = @position, " +
-                "Department = Department " +
-                "WHERE Name = @Name";
-                string hashedPassword = ComputeSha256Hash(tbPassword.Text);
-                using (MySqlConnection con = new MySqlConnection(constring))
+                catch (Exception ex)
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(userQuery, con))
-                    {
-                        cmd.Parameters.AddWithValue("@Password", hashedPassword);
-                        cmd.Parameters.AddWithValue("@Role", cmbRole.SelectedItem?.ToString());
-                        cmd.Parameters.AddWithValue("@position", tbPosit.Text.ToString());
-                        cmd.Parameters.AddWithValue("@Department", cmbDepartment.SelectedItem?.ToString());
-                        cmd.Parameters.AddWithValue("@Name", cmbUserName.SelectedItem?.ToString());
-                        try
-                        {
-                            con.Open();
-                            int rowsAffected = cmd.ExecuteNonQuery();
-                            if (rowsAffected > 0)
-                            {
-                                MessageBox.Show("Company settings updated successfully.");
-                                UpdateUserSettingsAudit();
-                            }
-                            else
-                            {
-                                MessageBox.Show("No changes were made to the company settings.");
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error saving company settings: " + ex.Message);
-                        }
-                    }
+                    MessageBox.Show("Update failed: " + ex.Message);
                 }
             }
         }
@@ -574,6 +596,11 @@ namespace _4915project
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cbPwd_CheckedChanged(object sender, EventArgs e)
+        {
+            tbPassword.Enabled = true;
         }
     }
 }

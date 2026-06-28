@@ -370,6 +370,7 @@
             cbPwd.TabIndex = 48;
             cbPwd.Text = "Charge Password";
             cbPwd.UseVisualStyleBackColor = true;
+            cbPwd.CheckedChanged += cbPwd_CheckedChanged;
             // 
             // cmbUserName
             // 
