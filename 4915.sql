@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2026-06-26 16:27:43
+-- 產生時間： 2026-06-28 20:53:49
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -447,7 +447,16 @@ INSERT INTO `audit_log` (`AuditLogId`, `TableName`, `RecordId`, `Action`, `UserI
 (407, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 23:07:52', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
 (408, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 23:11:21', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
 (409, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-25 23:13:10', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
-(410, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-26 22:10:08', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC');
+(410, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-26 22:10:08', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(411, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-26 22:43:54', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(412, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-28 23:54:53', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(413, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-29 00:11:12', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(414, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-29 00:37:10', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(415, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-29 00:39:17', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(416, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-29 01:13:41', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(417, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-29 01:16:19', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(418, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-29 01:34:27', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC'),
+(419, 'user', '101', 'LOGOUT', 101, 'Alice Cheung', '2026-06-29 02:28:58', NULL, NULL, 'User Alice Cheung logged out', 'fe80::2701:4f47:ed53:2876%20', 'AHHEI-PC');
 
 -- --------------------------------------------------------
 
@@ -709,7 +718,9 @@ CREATE TABLE `materialrequest` (
 INSERT INTO `materialrequest` (`RequestID`, `UserID`, `BatchID`, `RequestDate`, `RequestByDate`, `Urgency`, `Status`) VALUES
 ('REQ001', 103, 'BATCH003', '2025-05-01', '2025-05-10', 'High', 'Approved'),
 ('REQ002', 101, 'BATCH001', '2026-06-22', '2026-06-22', 'Low', 'In Progress'),
-('REQ003', 102, 'BATCH002', '2026-06-25', '2026-06-25', 'High', 'Completed');
+('REQ003', 102, 'BATCH002', '2026-06-25', '2026-06-25', 'High', 'Completed'),
+('REQ004', 102, 'BATCH001', '2026-06-29', '2026-06-29', 'Low', 'In Progress'),
+('REQ005', 102, 'BATCH002', '2026-06-29', '2026-06-29', 'Low', 'In Progress');
 
 -- --------------------------------------------------------
 
@@ -733,7 +744,10 @@ CREATE TABLE `materialrequestitem` (
 INSERT INTO `materialrequestitem` (`RequestItemID`, `RequestID`, `MaterialID`, `QuantityRequested`, `QuantityApproved`, `QuantityIssued`) VALUES
 ('RITEM001', 'REQ001', 'MAT001', 80, 80, '75'),
 ('RITEM002', 'REQ002', 'MAT003', 80, 80, '40'),
-('RITEM003', 'REQ003', 'MAT005', 0, 3, '3');
+('RITEM003', 'REQ003', 'MAT005', 0, 3, '3'),
+('RITEM004', 'REQ004', 'MAT005', 2, 2, '1'),
+('RITEM005', 'REQ005', 'MAT003', 80, 80, '75'),
+('RITEM006', 'REQ005', 'MAT004', 100, 100, '50');
 
 -- --------------------------------------------------------
 
@@ -1324,7 +1338,7 @@ ALTER TABLE `user_productionbatch`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `audit_log`
 --
 ALTER TABLE `audit_log`
-  MODIFY `AuditLogId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=411;
+  MODIFY `AuditLogId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=420;
 
 --
 -- 已傾印資料表的限制式
