@@ -82,6 +82,7 @@
             Inventory = new Button();
             Logoutbt = new LinkLabel();
             lblWelcome = new Label();
+            btRawMaterial = new Button();
             tabAfterSales.SuspendLayout();
             tabPageShipConfirmation.SuspendLayout();
             panel1.SuspendLayout();
@@ -121,7 +122,7 @@
             tabPageShipConfirmation.Controls.Add(panel1);
             tabPageShipConfirmation.Location = new Point(4, 24);
             tabPageShipConfirmation.Name = "tabPageShipConfirmation";
-            tabPageShipConfirmation.Padding = new Padding(3, 3, 3, 3);
+            tabPageShipConfirmation.Padding = new Padding(3);
             tabPageShipConfirmation.Size = new Size(668, 402);
             tabPageShipConfirmation.TabIndex = 1;
             tabPageShipConfirmation.Text = "Shipment Confirmation";
@@ -151,7 +152,7 @@
             panel1.Controls.Add(cmbConID);
             panel1.Controls.Add(lblComID);
             panel1.Location = new Point(5, 6);
-            panel1.Margin = new Padding(2, 2, 2, 2);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
             panel1.Size = new Size(660, 395);
             panel1.TabIndex = 20;
@@ -317,7 +318,7 @@
             tabPageComplaint.Controls.Add(panel3);
             tabPageComplaint.Location = new Point(4, 24);
             tabPageComplaint.Name = "tabPageComplaint";
-            tabPageComplaint.Padding = new Padding(3, 3, 3, 3);
+            tabPageComplaint.Padding = new Padding(3);
             tabPageComplaint.Size = new Size(668, 402);
             tabPageComplaint.TabIndex = 0;
             tabPageComplaint.Text = "Complaint";
@@ -349,7 +350,7 @@
             panel3.Controls.Add(label15);
             panel3.Controls.Add(lblSearch);
             panel3.Location = new Point(5, 7);
-            panel3.Margin = new Padding(2, 2, 2, 2);
+            panel3.Margin = new Padding(2);
             panel3.Name = "panel3";
             panel3.Size = new Size(660, 395);
             panel3.TabIndex = 1;
@@ -371,7 +372,7 @@
             // btRefreshComplaint
             // 
             btRefreshComplaint.Location = new Point(121, 367);
-            btRefreshComplaint.Margin = new Padding(2, 2, 2, 2);
+            btRefreshComplaint.Margin = new Padding(2);
             btRefreshComplaint.Name = "btRefreshComplaint";
             btRefreshComplaint.Size = new Size(75, 23);
             btRefreshComplaint.TabIndex = 20;
@@ -382,7 +383,7 @@
             // btViewComplaint
             // 
             btViewComplaint.Location = new Point(500, 367);
-            btViewComplaint.Margin = new Padding(2, 2, 2, 2);
+            btViewComplaint.Margin = new Padding(2);
             btViewComplaint.Name = "btViewComplaint";
             btViewComplaint.Size = new Size(86, 22);
             btViewComplaint.TabIndex = 19;
@@ -393,7 +394,7 @@
             // btNewComplaint
             // 
             btNewComplaint.Location = new Point(374, 367);
-            btNewComplaint.Margin = new Padding(2, 2, 2, 2);
+            btNewComplaint.Margin = new Padding(2);
             btNewComplaint.Name = "btNewComplaint";
             btNewComplaint.Size = new Size(111, 22);
             btNewComplaint.TabIndex = 18;
@@ -405,7 +406,7 @@
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(6, 172);
-            dataGridView1.Margin = new Padding(2, 2, 2, 2);
+            dataGridView1.Margin = new Padding(2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.Size = new Size(633, 188);
@@ -414,7 +415,7 @@
             // btCLears
             // 
             btCLears.Location = new Point(535, 146);
-            btCLears.Margin = new Padding(2, 2, 2, 2);
+            btCLears.Margin = new Padding(2);
             btCLears.Name = "btCLears";
             btCLears.Size = new Size(71, 22);
             btCLears.TabIndex = 7;
@@ -425,7 +426,7 @@
             // btSearch
             // 
             btSearch.Location = new Point(450, 146);
-            btSearch.Margin = new Padding(2, 2, 2, 2);
+            btSearch.Margin = new Padding(2);
             btSearch.Name = "btSearch";
             btSearch.Size = new Size(71, 22);
             btSearch.TabIndex = 8;
@@ -457,7 +458,7 @@
             // 
             cmbUser.FormattingEnabled = true;
             cmbUser.Location = new Point(92, 79);
-            cmbUser.Margin = new Padding(2, 2, 2, 2);
+            cmbUser.Margin = new Padding(2);
             cmbUser.Name = "cmbUser";
             cmbUser.Size = new Size(128, 23);
             cmbUser.TabIndex = 12;
@@ -476,7 +477,7 @@
             // 
             cmbType.FormattingEnabled = true;
             cmbType.Location = new Point(288, 79);
-            cmbType.Margin = new Padding(2, 2, 2, 2);
+            cmbType.Margin = new Padding(2);
             cmbType.Name = "cmbType";
             cmbType.Size = new Size(128, 23);
             cmbType.TabIndex = 10;
@@ -494,7 +495,7 @@
             // tbCustomer
             // 
             tbCustomer.Location = new Point(484, 42);
-            tbCustomer.Margin = new Padding(2, 2, 2, 2);
+            tbCustomer.Margin = new Padding(2);
             tbCustomer.Name = "tbCustomer";
             tbCustomer.Size = new Size(122, 23);
             tbCustomer.TabIndex = 8;
@@ -512,7 +513,7 @@
             // tbOrderID
             // 
             tbOrderID.Location = new Point(288, 43);
-            tbOrderID.Margin = new Padding(2, 2, 2, 2);
+            tbOrderID.Margin = new Padding(2);
             tbOrderID.Name = "tbOrderID";
             tbOrderID.Size = new Size(128, 23);
             tbOrderID.TabIndex = 6;
@@ -530,7 +531,7 @@
             // tbComplainID
             // 
             tbComplainID.Location = new Point(92, 43);
-            tbComplainID.Margin = new Padding(2, 2, 2, 2);
+            tbComplainID.Margin = new Padding(2);
             tbComplainID.Name = "tbComplainID";
             tbComplainID.Size = new Size(128, 23);
             tbComplainID.TabIndex = 4;
@@ -558,6 +559,7 @@
             // 
             // gbMenu
             // 
+            gbMenu.Controls.Add(btRawMaterial);
             gbMenu.Controls.Add(btSetting);
             gbMenu.Controls.Add(btLog);
             gbMenu.Controls.Add(Production);
@@ -567,7 +569,7 @@
             gbMenu.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
             gbMenu.Location = new Point(13, 61);
             gbMenu.Name = "gbMenu";
-            gbMenu.Size = new Size(145, 337);
+            gbMenu.Size = new Size(145, 394);
             gbMenu.TabIndex = 14;
             gbMenu.TabStop = false;
             gbMenu.Text = "After Sales";
@@ -575,7 +577,7 @@
             // btSetting
             // 
             btSetting.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            btSetting.Location = new Point(15, 275);
+            btSetting.Location = new Point(15, 335);
             btSetting.Name = "btSetting";
             btSetting.Size = new Size(117, 31);
             btSetting.TabIndex = 7;
@@ -657,6 +659,16 @@
             lblWelcome.Size = new Size(228, 39);
             lblWelcome.TabIndex = 8;
             // 
+            // btRawMaterial
+            // 
+            btRawMaterial.Location = new Point(15, 279);
+            btRawMaterial.Name = "btRawMaterial";
+            btRawMaterial.Size = new Size(117, 34);
+            btRawMaterial.TabIndex = 13;
+            btRawMaterial.Text = "Raw Material";
+            btRawMaterial.UseVisualStyleBackColor = true;
+            btRawMaterial.Click += btRawMaterial_Click;
+            // 
             // AfterSales
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -667,7 +679,7 @@
             Controls.Add(lblWelcome);
             Controls.Add(tabAfterSales);
             Controls.Add(label1SystemName);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "AfterSales";
             Text = "AfterSales";
             Load += AfterSales_Load;
@@ -741,5 +753,6 @@
         private TextBox tbShipID;
         private ComboBox cmbConID;
         private Label lblComID;
+        private Button btRawMaterial;
     }
 }

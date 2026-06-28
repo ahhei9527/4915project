@@ -76,6 +76,7 @@
             Logoutbt = new LinkLabel();
             lblWelcome = new Label();
             LTitle = new Label();
+            btRawMaterial = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -92,7 +93,7 @@
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Location = new Point(169, 63);
-            tabControl1.Margin = new Padding(2, 2, 2, 2);
+            tabControl1.Margin = new Padding(2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(659, 462);
@@ -103,9 +104,9 @@
             tabPage1.BackColor = Color.DarkGray;
             tabPage1.Controls.Add(groupBox1);
             tabPage1.Location = new Point(4, 24);
-            tabPage1.Margin = new Padding(2, 2, 2, 2);
+            tabPage1.Margin = new Padding(2);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(2, 2, 2, 2);
+            tabPage1.Padding = new Padding(2);
             tabPage1.Size = new Size(651, 434);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Stock Overview";
@@ -123,9 +124,9 @@
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(cmWearhouse);
             groupBox1.Location = new Point(4, 4);
-            groupBox1.Margin = new Padding(2, 2, 2, 2);
+            groupBox1.Margin = new Padding(2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(2, 2, 2, 2);
+            groupBox1.Padding = new Padding(2);
             groupBox1.Size = new Size(647, 430);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
@@ -144,7 +145,7 @@
             // button1
             // 
             button1.Location = new Point(267, 398);
-            button1.Margin = new Padding(2, 2, 2, 2);
+            button1.Margin = new Padding(2);
             button1.Name = "button1";
             button1.Size = new Size(95, 22);
             button1.TabIndex = 6;
@@ -156,7 +157,7 @@
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(4, 179);
-            dataGridView1.Margin = new Padding(2, 2, 2, 2);
+            dataGridView1.Margin = new Padding(2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.Size = new Size(633, 201);
@@ -165,7 +166,7 @@
             // btSearch
             // 
             btSearch.Location = new Point(551, 133);
-            btSearch.Margin = new Padding(2, 2, 2, 2);
+            btSearch.Margin = new Padding(2);
             btSearch.Name = "btSearch";
             btSearch.Size = new Size(71, 22);
             btSearch.TabIndex = 5;
@@ -177,7 +178,7 @@
             // 
             cbLowStock.AutoSize = true;
             cbLowStock.Location = new Point(88, 96);
-            cbLowStock.Margin = new Padding(2, 2, 2, 2);
+            cbLowStock.Margin = new Padding(2);
             cbLowStock.Name = "cbLowStock";
             cbLowStock.Size = new Size(146, 19);
             cbLowStock.TabIndex = 4;
@@ -187,7 +188,7 @@
             // tbItemID
             // 
             tbItemID.Location = new Point(104, 24);
-            tbItemID.Margin = new Padding(2, 2, 2, 2);
+            tbItemID.Margin = new Padding(2);
             tbItemID.Name = "tbItemID";
             tbItemID.Size = new Size(125, 23);
             tbItemID.TabIndex = 3;
@@ -216,7 +217,7 @@
             // 
             cmWearhouse.FormattingEnabled = true;
             cmWearhouse.Location = new Point(104, 53);
-            cmWearhouse.Margin = new Padding(2, 2, 2, 2);
+            cmWearhouse.Margin = new Padding(2);
             cmWearhouse.Name = "cmWearhouse";
             cmWearhouse.Size = new Size(125, 23);
             cmWearhouse.TabIndex = 0;
@@ -226,9 +227,9 @@
             tabPage2.BackColor = Color.DarkGray;
             tabPage2.Controls.Add(groupBox2);
             tabPage2.Location = new Point(4, 24);
-            tabPage2.Margin = new Padding(2, 2, 2, 2);
+            tabPage2.Margin = new Padding(2);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(2, 2, 2, 2);
+            tabPage2.Padding = new Padding(2);
             tabPage2.Size = new Size(651, 434);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Inward Goods";
@@ -261,9 +262,9 @@
             groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(lbInventoryID);
             groupBox2.Location = new Point(4, 4);
-            groupBox2.Margin = new Padding(2, 2, 2, 2);
+            groupBox2.Margin = new Padding(2);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(2, 2, 2, 2);
+            groupBox2.Padding = new Padding(2);
             groupBox2.Size = new Size(647, 430);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
@@ -351,7 +352,7 @@
             // 
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.Location = new Point(4, 179);
-            dataGridView2.Margin = new Padding(2, 2, 2, 2);
+            dataGridView2.Margin = new Padding(2);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowHeadersWidth = 62;
             dataGridView2.Size = new Size(633, 201);
@@ -360,7 +361,7 @@
             // date
             // 
             date.Location = new Point(341, 19);
-            date.Margin = new Padding(2, 2, 2, 2);
+            date.Margin = new Padding(2);
             date.Name = "date";
             date.Size = new Size(124, 23);
             date.TabIndex = 14;
@@ -368,7 +369,7 @@
             // numQuantity
             // 
             numQuantity.Location = new Point(342, 67);
-            numQuantity.Margin = new Padding(2, 2, 2, 2);
+            numQuantity.Margin = new Padding(2);
             numQuantity.Name = "numQuantity";
             numQuantity.Size = new Size(122, 23);
             numQuantity.TabIndex = 13;
@@ -376,7 +377,7 @@
             // btSubmit
             // 
             btSubmit.Location = new Point(510, 147);
-            btSubmit.Margin = new Padding(2, 2, 2, 2);
+            btSubmit.Margin = new Padding(2);
             btSubmit.Name = "btSubmit";
             btSubmit.Size = new Size(112, 22);
             btSubmit.TabIndex = 12;
@@ -388,7 +389,7 @@
             // 
             cbWearhouse.FormattingEnabled = true;
             cbWearhouse.Location = new Point(341, 42);
-            cbWearhouse.Margin = new Padding(2, 2, 2, 2);
+            cbWearhouse.Margin = new Padding(2);
             cbWearhouse.Name = "cbWearhouse";
             cbWearhouse.Size = new Size(124, 23);
             cbWearhouse.TabIndex = 11;
@@ -397,7 +398,7 @@
             // 
             cmItem.FormattingEnabled = true;
             cmItem.Location = new Point(118, 68);
-            cmItem.Margin = new Padding(2, 2, 2, 2);
+            cmItem.Margin = new Padding(2);
             cmItem.Name = "cmItem";
             cmItem.Size = new Size(117, 23);
             cmItem.TabIndex = 10;
@@ -406,7 +407,7 @@
             // 
             cbSupplier.FormattingEnabled = true;
             cbSupplier.Location = new Point(118, 44);
-            cbSupplier.Margin = new Padding(2, 2, 2, 2);
+            cbSupplier.Margin = new Padding(2);
             cbSupplier.Name = "cbSupplier";
             cbSupplier.Size = new Size(117, 23);
             cbSupplier.TabIndex = 9;
@@ -414,7 +415,7 @@
             // tbInventoryID
             // 
             tbInventoryID.Location = new Point(118, 21);
-            tbInventoryID.Margin = new Padding(2, 2, 2, 2);
+            tbInventoryID.Margin = new Padding(2);
             tbInventoryID.Name = "tbInventoryID";
             tbInventoryID.Size = new Size(117, 23);
             tbInventoryID.TabIndex = 7;
@@ -491,6 +492,7 @@
             // 
             // gbMenu
             // 
+            gbMenu.Controls.Add(btRawMaterial);
             gbMenu.Controls.Add(btSetting);
             gbMenu.Controls.Add(AfterSales);
             gbMenu.Controls.Add(Production);
@@ -500,7 +502,7 @@
             gbMenu.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
             gbMenu.Location = new Point(13, 61);
             gbMenu.Name = "gbMenu";
-            gbMenu.Size = new Size(145, 337);
+            gbMenu.Size = new Size(145, 396);
             gbMenu.TabIndex = 7;
             gbMenu.TabStop = false;
             gbMenu.Text = "Inventory";
@@ -508,7 +510,7 @@
             // btSetting
             // 
             btSetting.Font = new Font("Microsoft JhengHei UI", 10F);
-            btSetting.Location = new Point(15, 280);
+            btSetting.Location = new Point(15, 340);
             btSetting.Name = "btSetting";
             btSetting.Size = new Size(116, 31);
             btSetting.TabIndex = 7;
@@ -519,7 +521,7 @@
             // AfterSales
             // 
             AfterSales.Font = new Font("Microsoft JhengHei UI", 10F);
-            AfterSales.Location = new Point(15, 226);
+            AfterSales.Location = new Point(15, 284);
             AfterSales.Name = "AfterSales";
             AfterSales.Size = new Size(116, 31);
             AfterSales.TabIndex = 5;
@@ -563,7 +565,7 @@
             // Logistics
             // 
             Logistics.Font = new Font("Microsoft JhengHei UI", 10F);
-            Logistics.Location = new Point(15, 123);
+            Logistics.Location = new Point(15, 126);
             Logistics.Name = "Logistics";
             Logistics.Size = new Size(116, 31);
             Logistics.TabIndex = 0;
@@ -600,6 +602,16 @@
             LTitle.Text = "Premium Living Centralized Manage System";
             LTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // btRawMaterial
+            // 
+            btRawMaterial.Location = new Point(14, 226);
+            btRawMaterial.Name = "btRawMaterial";
+            btRawMaterial.Size = new Size(117, 34);
+            btRawMaterial.TabIndex = 13;
+            btRawMaterial.Text = "Raw Material";
+            btRawMaterial.UseVisualStyleBackColor = true;
+            btRawMaterial.Click += btRawMaterial_Click;
+            // 
             // Inventory
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -611,7 +623,7 @@
             Controls.Add(gbMenu);
             Controls.Add(tabControl1);
             Location = new Point(28, 19);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "Inventory";
             Text = "Inventory";
             Load += Inventory_Load;
@@ -679,5 +691,6 @@
         private ComboBox cmbCStatus;
         private Label lblCurrentStus;
         private Label LTitle;
+        private Button btRawMaterial;
     }
 }

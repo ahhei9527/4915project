@@ -10,6 +10,9 @@
     <Compile Update="AfterSales.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="CreateRawMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="DashBoard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -20,6 +23,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="AddEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EditRawMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MaterialRequest.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="LinkSNtoOrder.cs">
@@ -38,6 +47,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Production.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RawMaterial.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="SalesOrder.cs">

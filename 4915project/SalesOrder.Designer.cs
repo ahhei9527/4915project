@@ -56,6 +56,7 @@
             btDashBoard = new Button();
             Logistics = new Button();
             LTitle = new Label();
+            btRawMaterial = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvOrderItems).BeginInit();
             gbMenu.SuspendLayout();
@@ -275,6 +276,7 @@
             // 
             // gbMenu
             // 
+            gbMenu.Controls.Add(btRawMaterial);
             gbMenu.Controls.Add(btSetting);
             gbMenu.Controls.Add(AfterSales);
             gbMenu.Controls.Add(Production);
@@ -284,7 +286,7 @@
             gbMenu.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
             gbMenu.Location = new Point(13, 61);
             gbMenu.Name = "gbMenu";
-            gbMenu.Size = new Size(145, 337);
+            gbMenu.Size = new Size(145, 388);
             gbMenu.TabIndex = 12;
             gbMenu.TabStop = false;
             gbMenu.Text = "Order";
@@ -292,7 +294,7 @@
             // btSetting
             // 
             btSetting.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            btSetting.Location = new Point(15, 280);
+            btSetting.Location = new Point(15, 321);
             btSetting.Name = "btSetting";
             btSetting.Size = new Size(116, 31);
             btSetting.TabIndex = 7;
@@ -303,7 +305,7 @@
             // AfterSales
             // 
             AfterSales.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            AfterSales.Location = new Point(15, 226);
+            AfterSales.Location = new Point(15, 272);
             AfterSales.Name = "AfterSales";
             AfterSales.Size = new Size(116, 31);
             AfterSales.TabIndex = 5;
@@ -365,6 +367,16 @@
             LTitle.Text = "Premium Living Centralized Manage System";
             LTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // btRawMaterial
+            // 
+            btRawMaterial.Location = new Point(16, 222);
+            btRawMaterial.Name = "btRawMaterial";
+            btRawMaterial.Size = new Size(117, 34);
+            btRawMaterial.TabIndex = 13;
+            btRawMaterial.Text = "Raw Material";
+            btRawMaterial.UseVisualStyleBackColor = true;
+            btRawMaterial.Click += btRawMaterial_Click;
+            // 
             // SalesOrder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -419,5 +431,6 @@
         private Button btSetting;
         private Label LTitle;
         private Label label2Order;
+        private Button btRawMaterial;
     }
 }

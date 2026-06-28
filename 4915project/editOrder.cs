@@ -96,7 +96,7 @@ namespace _4915project
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 con.Open();
-                string Query = "SELECT OrderID FROM salesorder";
+                string Query = "SELECT OrderID FROM salesorder WHERE Status != 'Cancel' ORDER BY OrderID ASC";
                 using (MySqlCommand cmd = new MySqlCommand(Query, con))
                 {
                     cmOrderID.Items.Clear();
@@ -129,7 +129,7 @@ namespace _4915project
             // 使用參數化查詢（@OrderID），避免字串拼接產生的語法錯誤與資安風險
             string Query = "SELECT * FROM orderitem WHERE OrderID = @OrderID";
             string Query2 = @"
-                SELECT c.Name, c.Address, s.Status
+                SELECT c.Name, c.Address, s.Status, s.TotalAmount
                 FROM salesorder s 
                 INNER JOIN customer c ON s.CustomerID = c.CustomerID 
                 WHERE s.OrderID = @OrderID 
@@ -169,6 +169,7 @@ namespace _4915project
                                 tbCustName.Text = custReader["Name"].ToString();
                                 tbAddress.Text = custReader["Address"].ToString();
                                 cbStatus.Text = custReader["Status"].ToString();
+                                tbTotal.Text = custReader["TotalAmount"].ToString();
                             }
                             else
                             {

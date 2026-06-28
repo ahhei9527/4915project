@@ -29,37 +29,24 @@
         private void InitializeComponent()
         {
             TabPage tabPage2;
-            cmbMaterialName = new ComboBox();
-            label3 = new Label();
-            QuantityIssued = new NumericUpDown();
-            label2 = new Label();
-            QuantityApproved = new NumericUpDown();
-            label1 = new Label();
             cmbRequestID = new ComboBox();
-            cmbBatchID = new ComboBox();
-            cmbRequestBy = new ComboBox();
-            tbRequestItemID = new TextBox();
+            label23 = new Label();
+            dataGridView3 = new DataGridView();
+            btSearchRequest = new Button();
+            requestEndDate = new DateTimePicker();
+            requestStartDate = new DateTimePicker();
             cmbRequestStatus = new ComboBox();
-            RequestByDate = new DateTimePicker();
-            RequestDate = new DateTimePicker();
-            QuantityRequested = new NumericUpDown();
             cmbUrgency = new ComboBox();
-            btAdd = new Button();
+            cmbUser = new ComboBox();
+            label6 = new Label();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
             button10 = new Button();
             button8 = new Button();
             dataGridView2 = new DataGridView();
-            label35 = new Label();
-            label33 = new Label();
-            label32 = new Label();
-            label31 = new Label();
-            label30 = new Label();
-            label29 = new Label();
-            label28 = new Label();
-            label27 = new Label();
-            label26 = new Label();
-            label25 = new Label();
-            label24 = new Label();
-            label23 = new Label();
             label1SystemName = new Label();
             groupBox1 = new GroupBox();
             btSetting = new Button();
@@ -89,11 +76,10 @@
             label16 = new Label();
             lblWelcome = new Label();
             Logoutbt = new LinkLabel();
+            btRawMaterial = new Button();
             tabPage2 = new TabPage();
             tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)QuantityIssued).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)QuantityApproved).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)QuantityRequested).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             groupBox1.SuspendLayout();
             tabControl1.SuspendLayout();
@@ -105,37 +91,24 @@
             // 
             tabPage2.BackColor = Color.Gainsboro;
             tabPage2.BorderStyle = BorderStyle.FixedSingle;
-            tabPage2.Controls.Add(cmbMaterialName);
-            tabPage2.Controls.Add(label3);
-            tabPage2.Controls.Add(QuantityIssued);
-            tabPage2.Controls.Add(label2);
-            tabPage2.Controls.Add(QuantityApproved);
-            tabPage2.Controls.Add(label1);
             tabPage2.Controls.Add(cmbRequestID);
-            tabPage2.Controls.Add(cmbBatchID);
-            tabPage2.Controls.Add(cmbRequestBy);
-            tabPage2.Controls.Add(tbRequestItemID);
+            tabPage2.Controls.Add(label23);
+            tabPage2.Controls.Add(dataGridView3);
+            tabPage2.Controls.Add(btSearchRequest);
+            tabPage2.Controls.Add(requestEndDate);
+            tabPage2.Controls.Add(requestStartDate);
             tabPage2.Controls.Add(cmbRequestStatus);
-            tabPage2.Controls.Add(RequestByDate);
-            tabPage2.Controls.Add(RequestDate);
-            tabPage2.Controls.Add(QuantityRequested);
             tabPage2.Controls.Add(cmbUrgency);
-            tabPage2.Controls.Add(btAdd);
+            tabPage2.Controls.Add(cmbUser);
+            tabPage2.Controls.Add(label6);
+            tabPage2.Controls.Add(label5);
+            tabPage2.Controls.Add(label4);
+            tabPage2.Controls.Add(label3);
+            tabPage2.Controls.Add(label2);
+            tabPage2.Controls.Add(label1);
             tabPage2.Controls.Add(button10);
             tabPage2.Controls.Add(button8);
             tabPage2.Controls.Add(dataGridView2);
-            tabPage2.Controls.Add(label35);
-            tabPage2.Controls.Add(label33);
-            tabPage2.Controls.Add(label32);
-            tabPage2.Controls.Add(label31);
-            tabPage2.Controls.Add(label30);
-            tabPage2.Controls.Add(label29);
-            tabPage2.Controls.Add(label28);
-            tabPage2.Controls.Add(label27);
-            tabPage2.Controls.Add(label26);
-            tabPage2.Controls.Add(label25);
-            tabPage2.Controls.Add(label24);
-            tabPage2.Controls.Add(label23);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Margin = new Padding(2);
             tabPage2.Name = "tabPage2";
@@ -144,149 +117,138 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Material Request";
             // 
-            // cmbMaterialName
-            // 
-            cmbMaterialName.FormattingEnabled = true;
-            cmbMaterialName.Location = new Point(105, 170);
-            cmbMaterialName.Name = "cmbMaterialName";
-            cmbMaterialName.Size = new Size(106, 23);
-            cmbMaterialName.TabIndex = 41;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(5, 173);
-            label3.Margin = new Padding(2, 0, 2, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(95, 15);
-            label3.TabIndex = 40;
-            label3.Text = "Material Name:";
-            // 
-            // QuantityIssued
-            // 
-            QuantityIssued.Location = new Point(326, 231);
-            QuantityIssued.Margin = new Padding(2);
-            QuantityIssued.Name = "QuantityIssued";
-            QuantityIssued.Size = new Size(73, 23);
-            QuantityIssued.TabIndex = 39;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(254, 233);
-            label2.Margin = new Padding(2, 0, 2, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(68, 15);
-            label2.TabIndex = 38;
-            label2.Text = "Qty Issued:";
-            // 
-            // QuantityApproved
-            // 
-            QuantityApproved.Location = new Point(137, 231);
-            QuantityApproved.Margin = new Padding(2);
-            QuantityApproved.Name = "QuantityApproved";
-            QuantityApproved.Size = new Size(73, 23);
-            QuantityApproved.TabIndex = 31;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(52, 233);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(90, 15);
-            label1.TabIndex = 30;
-            label1.Text = "Qty Approved:";
-            // 
             // cmbRequestID
             // 
             cmbRequestID.FormattingEnabled = true;
-            cmbRequestID.Location = new Point(105, 29);
+            cmbRequestID.Location = new Point(94, 11);
             cmbRequestID.Name = "cmbRequestID";
-            cmbRequestID.Size = new Size(106, 23);
-            cmbRequestID.TabIndex = 37;
-            cmbRequestID.SelectedIndexChanged += cmbRequestID_SelectedIndexChanged;
+            cmbRequestID.Size = new Size(121, 23);
+            cmbRequestID.TabIndex = 34;
             // 
-            // cmbBatchID
+            // label23
             // 
-            cmbBatchID.FormattingEnabled = true;
-            cmbBatchID.Location = new Point(105, 59);
-            cmbBatchID.Name = "cmbBatchID";
-            cmbBatchID.Size = new Size(106, 23);
-            cmbBatchID.TabIndex = 36;
+            label23.AutoSize = true;
+            label23.Location = new Point(20, 252);
+            label23.Name = "label23";
+            label23.Size = new Size(81, 15);
+            label23.TabIndex = 33;
+            label23.Text = "Request Item";
             // 
-            // cmbRequestBy
+            // dataGridView3
             // 
-            cmbRequestBy.FormattingEnabled = true;
-            cmbRequestBy.Location = new Point(329, 57);
-            cmbRequestBy.Name = "cmbRequestBy";
-            cmbRequestBy.Size = new Size(121, 23);
-            cmbRequestBy.TabIndex = 35;
+            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView3.Location = new Point(10, 277);
+            dataGridView3.Margin = new Padding(2);
+            dataGridView3.Name = "dataGridView3";
+            dataGridView3.RowHeadersWidth = 62;
+            dataGridView3.Size = new Size(631, 112);
+            dataGridView3.TabIndex = 32;
             // 
-            // tbRequestItemID
+            // btSearchRequest
             // 
-            tbRequestItemID.Location = new Point(105, 142);
-            tbRequestItemID.Margin = new Padding(2);
-            tbRequestItemID.Name = "tbRequestItemID";
-            tbRequestItemID.Size = new Size(106, 23);
-            tbRequestItemID.TabIndex = 34;
+            btSearchRequest.Location = new Point(447, 103);
+            btSearchRequest.Name = "btSearchRequest";
+            btSearchRequest.Size = new Size(75, 23);
+            btSearchRequest.TabIndex = 31;
+            btSearchRequest.Text = "Search";
+            btSearchRequest.UseVisualStyleBackColor = true;
+            btSearchRequest.Click += btSearchRequest_Click;
+            // 
+            // requestEndDate
+            // 
+            requestEndDate.Location = new Point(354, 63);
+            requestEndDate.Name = "requestEndDate";
+            requestEndDate.Size = new Size(112, 23);
+            requestEndDate.TabIndex = 30;
+            // 
+            // requestStartDate
+            // 
+            requestStartDate.Location = new Point(132, 63);
+            requestStartDate.Name = "requestStartDate";
+            requestStartDate.Size = new Size(114, 23);
+            requestStartDate.TabIndex = 29;
             // 
             // cmbRequestStatus
             // 
             cmbRequestStatus.FormattingEnabled = true;
-            cmbRequestStatus.Location = new Point(94, 87);
-            cmbRequestStatus.Margin = new Padding(2);
+            cmbRequestStatus.Location = new Point(523, 63);
             cmbRequestStatus.Name = "cmbRequestStatus";
-            cmbRequestStatus.Size = new Size(117, 23);
-            cmbRequestStatus.TabIndex = 33;
-            // 
-            // RequestByDate
-            // 
-            RequestByDate.Location = new Point(326, 86);
-            RequestByDate.Margin = new Padding(2);
-            RequestByDate.Name = "RequestByDate";
-            RequestByDate.Size = new Size(124, 23);
-            RequestByDate.TabIndex = 31;
-            // 
-            // RequestDate
-            // 
-            RequestDate.Location = new Point(326, 29);
-            RequestDate.Margin = new Padding(2);
-            RequestDate.Name = "RequestDate";
-            RequestDate.Size = new Size(124, 23);
-            RequestDate.TabIndex = 30;
-            // 
-            // QuantityRequested
-            // 
-            QuantityRequested.Location = new Point(326, 140);
-            QuantityRequested.Margin = new Padding(2);
-            QuantityRequested.Name = "QuantityRequested";
-            QuantityRequested.Size = new Size(73, 23);
-            QuantityRequested.TabIndex = 29;
+            cmbRequestStatus.Size = new Size(89, 23);
+            cmbRequestStatus.TabIndex = 28;
             // 
             // cmbUrgency
             // 
             cmbUrgency.FormattingEnabled = true;
-            cmbUrgency.Location = new Point(519, 29);
-            cmbUrgency.Margin = new Padding(2);
+            cmbUrgency.Location = new Point(491, 11);
             cmbUrgency.Name = "cmbUrgency";
-            cmbUrgency.Size = new Size(117, 23);
-            cmbUrgency.TabIndex = 25;
+            cmbUrgency.Size = new Size(121, 23);
+            cmbUrgency.TabIndex = 26;
             // 
-            // btAdd
+            // cmbUser
             // 
-            btAdd.Location = new Point(562, 250);
-            btAdd.Margin = new Padding(2);
-            btAdd.Name = "btAdd";
-            btAdd.Size = new Size(62, 23);
-            btAdd.TabIndex = 22;
-            btAdd.Text = "Add Item";
-            btAdd.UseVisualStyleBackColor = true;
-            btAdd.Click += btAdd_Click;
+            cmbUser.FormattingEnabled = true;
+            cmbUser.Location = new Point(282, 11);
+            cmbUser.Name = "cmbUser";
+            cmbUser.Size = new Size(121, 23);
+            cmbUser.TabIndex = 25;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(473, 66);
+            label6.Name = "label6";
+            label6.Size = new Size(44, 15);
+            label6.TabIndex = 24;
+            label6.Text = "Status:";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(252, 66);
+            label5.Name = "label5";
+            label5.Size = new Size(96, 15);
+            label5.TabIndex = 23;
+            label5.Text = "Request fate to:";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(20, 66);
+            label4.Name = "label4";
+            label4.Size = new Size(115, 15);
+            label4.TabIndex = 22;
+            label4.Text = "Request date from:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(428, 14);
+            label3.Name = "label3";
+            label3.Size = new Size(57, 15);
+            label3.TabIndex = 21;
+            label3.Text = "Urgency:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(241, 14);
+            label2.Name = "label2";
+            label2.Size = new Size(35, 15);
+            label2.TabIndex = 20;
+            label2.Text = "User:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(20, 14);
+            label1.Name = "label1";
+            label1.Size = new Size(68, 15);
+            label1.TabIndex = 19;
+            label1.Text = "RequestID:";
             // 
             // button10
             // 
-            button10.Location = new Point(575, 393);
+            button10.Location = new Point(541, 103);
             button10.Margin = new Padding(2);
             button10.Name = "button10";
             button10.Size = new Size(71, 22);
@@ -297,147 +259,25 @@
             // 
             // button8
             // 
-            button8.Location = new Point(470, 393);
+            button8.Location = new Point(541, 393);
             button8.Margin = new Padding(2);
             button8.Name = "button8";
             button8.Size = new Size(97, 22);
             button8.TabIndex = 16;
-            button8.Text = "Save Request";
+            button8.Text = "Add Request";
             button8.UseVisualStyleBackColor = true;
             button8.Click += button8_Click;
             // 
             // dataGridView2
             // 
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(10, 279);
+            dataGridView2.Location = new Point(10, 131);
             dataGridView2.Margin = new Padding(2);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowHeadersWidth = 62;
-            dataGridView2.Size = new Size(631, 110);
+            dataGridView2.Size = new Size(631, 112);
             dataGridView2.TabIndex = 13;
-            // 
-            // label35
-            // 
-            label35.AutoSize = true;
-            label35.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            label35.Location = new Point(4, 198);
-            label35.Margin = new Padding(2, 0, 2, 0);
-            label35.Name = "label35";
-            label35.Size = new Size(232, 20);
-            label35.TabIndex = 12;
-            label35.Text = "Approval/Inventory Response";
-            // 
-            // label33
-            // 
-            label33.AutoSize = true;
-            label33.Location = new Point(241, 142);
-            label33.Margin = new Padding(2, 0, 2, 0);
-            label33.Name = "label33";
-            label33.Size = new Size(94, 15);
-            label33.TabIndex = 10;
-            label33.Text = "Qty Requested:";
-            // 
-            // label32
-            // 
-            label32.AutoSize = true;
-            label32.Location = new Point(3, 145);
-            label32.Margin = new Padding(2, 0, 2, 0);
-            label32.Name = "label32";
-            label32.Size = new Size(99, 15);
-            label32.TabIndex = 9;
-            label32.Text = "Request Item ID:";
-            // 
-            // label31
-            // 
-            label31.AutoSize = true;
-            label31.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            label31.Location = new Point(8, 109);
-            label31.Margin = new Padding(2, 0, 2, 0);
-            label31.Name = "label31";
-            label31.Size = new Size(175, 20);
-            label31.TabIndex = 8;
-            label31.Text = "Matetial Request Item";
-            // 
-            // label30
-            // 
-            label30.AutoSize = true;
-            label30.Location = new Point(232, 89);
-            label30.Margin = new Padding(2, 0, 2, 0);
-            label30.Name = "label30";
-            label30.Size = new Size(102, 15);
-            label30.TabIndex = 7;
-            label30.Text = "Request By Date:";
-            // 
-            // label29
-            // 
-            label29.AutoSize = true;
-            label29.Location = new Point(55, 91);
-            label29.Margin = new Padding(2, 0, 2, 0);
-            label29.Name = "label29";
-            label29.Size = new Size(44, 15);
-            label29.TabIndex = 6;
-            label29.Text = "Status:";
-            // 
-            // label28
-            // 
-            label28.AutoSize = true;
-            label28.Location = new Point(248, 60);
-            label28.Margin = new Padding(2, 0, 2, 0);
-            label28.Name = "label28";
-            label28.Size = new Size(87, 15);
-            label28.TabIndex = 5;
-            label28.Text = "Requested By:";
-            // 
-            // label27
-            // 
-            label27.AutoSize = true;
-            label27.Location = new Point(42, 62);
-            label27.Margin = new Padding(2, 0, 2, 0);
-            label27.Name = "label27";
-            label27.Size = new Size(56, 15);
-            label27.TabIndex = 4;
-            label27.Text = "Batch ID:";
-            // 
-            // label26
-            // 
-            label26.AutoSize = true;
-            label26.Location = new Point(470, 31);
-            label26.Margin = new Padding(2, 0, 2, 0);
-            label26.Name = "label26";
-            label26.Size = new Size(57, 15);
-            label26.TabIndex = 3;
-            label26.Text = "Urgency:";
-            // 
-            // label25
-            // 
-            label25.AutoSize = true;
-            label25.Location = new Point(248, 31);
-            label25.Margin = new Padding(2, 0, 2, 0);
-            label25.Name = "label25";
-            label25.Size = new Size(86, 15);
-            label25.TabIndex = 2;
-            label25.Text = "Request Date:";
-            // 
-            // label24
-            // 
-            label24.AutoSize = true;
-            label24.Location = new Point(30, 33);
-            label24.Margin = new Padding(2, 0, 2, 0);
-            label24.Name = "label24";
-            label24.Size = new Size(71, 15);
-            label24.TabIndex = 1;
-            label24.Text = "Request ID:";
-            // 
-            // label23
-            // 
-            label23.AutoSize = true;
-            label23.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            label23.Location = new Point(8, 7);
-            label23.Margin = new Padding(2, 0, 2, 0);
-            label23.Name = "label23";
-            label23.Size = new Size(129, 20);
-            label23.TabIndex = 0;
-            label23.Text = "Request Header";
+            dataGridView2.CellClick += dataGridView2_CellClick;
             // 
             // label1SystemName
             // 
@@ -453,6 +293,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btRawMaterial);
             groupBox1.Controls.Add(btSetting);
             groupBox1.Controls.Add(btSales);
             groupBox1.Controls.Add(btAfterSales);
@@ -464,7 +305,7 @@
             groupBox1.Margin = new Padding(2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(2);
-            groupBox1.Size = new Size(145, 337);
+            groupBox1.Size = new Size(145, 387);
             groupBox1.TabIndex = 5;
             groupBox1.TabStop = false;
             groupBox1.Text = "Production";
@@ -472,7 +313,7 @@
             // btSetting
             // 
             btSetting.Font = new Font("Microsoft JhengHei UI", 10F);
-            btSetting.Location = new Point(13, 279);
+            btSetting.Location = new Point(13, 332);
             btSetting.Margin = new Padding(2);
             btSetting.Name = "btSetting";
             btSetting.Size = new Size(117, 31);
@@ -496,7 +337,7 @@
             // btAfterSales
             // 
             btAfterSales.Font = new Font("Microsoft JhengHei UI", 10F);
-            btAfterSales.Location = new Point(13, 230);
+            btAfterSales.Location = new Point(13, 279);
             btAfterSales.Margin = new Padding(2);
             btAfterSales.Name = "btAfterSales";
             btAfterSales.Size = new Size(117, 31);
@@ -766,6 +607,16 @@
             Logoutbt.Text = "LogOut";
             Logoutbt.LinkClicked += Logoutbt_LinkClicked;
             // 
+            // btRawMaterial
+            // 
+            btRawMaterial.Location = new Point(13, 227);
+            btRawMaterial.Name = "btRawMaterial";
+            btRawMaterial.Size = new Size(117, 34);
+            btRawMaterial.TabIndex = 12;
+            btRawMaterial.Text = "Raw Material";
+            btRawMaterial.UseVisualStyleBackColor = true;
+            btRawMaterial.Click += btRawMaterial_Click;
+            // 
             // Production
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -782,9 +633,7 @@
             Load += Production_Load;
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)QuantityIssued).EndInit();
-            ((System.ComponentModel.ISupportInitialize)QuantityApproved).EndInit();
-            ((System.ComponentModel.ISupportInitialize)QuantityRequested).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             groupBox1.ResumeLayout(false);
             tabControl1.ResumeLayout(false);
@@ -817,7 +666,7 @@
         private Label label6;
         private Label label5;
         private Button button2;
-        private Button button1;
+        private Button btSearchRequest;
         private CheckBox checkBox2;
         private CheckBox checkBox1;
         private Label label15;
@@ -834,20 +683,8 @@
         private TextBox textBox4;
         private TextBox textBox3;
         private TextBox textBox2;
-        private TextBox textBox1;
         private TextBox textBox11;
         private TextBox textBox10;
-        private Label label33;
-        private Label label32;
-        private Label label31;
-        private Label label30;
-        private Label label29;
-        private Label label28;
-        private Label label27;
-        private Label label26;
-        private Label label25;
-        private Label label24;
-        private Label label23;
         private DateTimePicker EndDate;
         private DateTimePicker StartDate;
         private ComboBox cmbStatus;
@@ -868,25 +705,21 @@
         private Button button9;
         private Button button8;
         private DataGridView dataGridView2;
-        private Label label35;
-        private DateTimePicker RequestByDate;
-        private DateTimePicker RequestDate;
-        private NumericUpDown QuantityRequested;
-        private ComboBox cmbUrgency;
-        private Button btAdd;
         private TextBox textBox20;
-        private TextBox tbRequestItemID;
-        private ComboBox cmbRequestStatus;
         private ComboBox cmbOrderID;
         private ComboBox cmbCust;
-        private ComboBox cmbRequestBy;
-        private ComboBox cmbBatchID;
-        private ComboBox cmbMaterialName;
         private Label label3;
-        private NumericUpDown QuantityIssued;
         private Label label2;
-        private NumericUpDown QuantityApproved;
         private Label label1;
+        private DateTimePicker requestEndDate;
+        private DateTimePicker requestStartDate;
+        private ComboBox cmbRequestStatus;
+        private ComboBox cmbUrgency;
+        private ComboBox cmbUser;
+        private Label label4;
+        private Label label23;
+        private DataGridView dataGridView3;
         private ComboBox cmbRequestID;
+        private Button btRawMaterial;
     }
 }

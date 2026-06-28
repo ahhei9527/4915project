@@ -92,6 +92,7 @@
             btSales = new Button();
             Logoutbt = new LinkLabel();
             lblWelcome = new Label();
+            btRawMaterial = new Button();
             tabControl1.SuspendLayout();
             tabPage2.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -648,6 +649,7 @@
             // 
             // gbMenu
             // 
+            gbMenu.Controls.Add(btRawMaterial);
             gbMenu.Controls.Add(btSetting);
             gbMenu.Controls.Add(AfterSales);
             gbMenu.Controls.Add(Production);
@@ -657,7 +659,7 @@
             gbMenu.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
             gbMenu.Location = new Point(13, 61);
             gbMenu.Name = "gbMenu";
-            gbMenu.Size = new Size(145, 337);
+            gbMenu.Size = new Size(145, 418);
             gbMenu.TabIndex = 13;
             gbMenu.TabStop = false;
             gbMenu.Text = "Logistics/Delivery";
@@ -665,7 +667,7 @@
             // btSetting
             // 
             btSetting.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            btSetting.Location = new Point(15, 280);
+            btSetting.Location = new Point(13, 355);
             btSetting.Name = "btSetting";
             btSetting.Size = new Size(117, 31);
             btSetting.TabIndex = 7;
@@ -676,7 +678,7 @@
             // AfterSales
             // 
             AfterSales.Font = new Font("Microsoft JhengHei UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            AfterSales.Location = new Point(15, 226);
+            AfterSales.Location = new Point(13, 289);
             AfterSales.Name = "AfterSales";
             AfterSales.Size = new Size(117, 31);
             AfterSales.TabIndex = 5;
@@ -746,6 +748,16 @@
             lblWelcome.Name = "lblWelcome";
             lblWelcome.Size = new Size(228, 39);
             lblWelcome.TabIndex = 12;
+            // 
+            // btRawMaterial
+            // 
+            btRawMaterial.Location = new Point(13, 228);
+            btRawMaterial.Name = "btRawMaterial";
+            btRawMaterial.Size = new Size(117, 34);
+            btRawMaterial.TabIndex = 13;
+            btRawMaterial.Text = "Raw Material";
+            btRawMaterial.UseVisualStyleBackColor = true;
+            btRawMaterial.Click += btRawMaterial_Click;
             // 
             // FormLogistics
             // 
@@ -844,5 +856,6 @@
         private ComboBox cmbDeliveryID;
         private Label lblCompleted;
         private DateTimePicker dateDeliveryDate;
+        private Button btRawMaterial;
     }
 }

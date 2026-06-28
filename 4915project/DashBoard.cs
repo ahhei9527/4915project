@@ -43,7 +43,7 @@ namespace _4915project
 
         private void LoadAuditLogs(string filterTable = "All")
         {
-            
+
 
             try
             {
@@ -253,7 +253,7 @@ namespace _4915project
         }
         private void LoadReportToGrid(string query, string reportTitle)
         {
-            
+
 
             try
             {
@@ -315,7 +315,7 @@ namespace _4915project
 
         private int GetPendingOrdersCount()
         {
-            
+
             // Use COUNT(*) and join the tables on a matching ID (e.g., MaterialID)
             string penOrder = @"
         SELECT COUNT(*) 
@@ -348,7 +348,7 @@ namespace _4915project
 
         private int GetLowStockCount()
         {
-            
+
             // Use COUNT(*) and join the tables on a matching ID (e.g., MaterialID)
             string lowStock = @"
         SELECT COUNT(*) 
@@ -382,7 +382,7 @@ namespace _4915project
 
         private int GetOpenComplaintsCount()
         {
-            
+
             // Use COUNT(*) and join the tables on a matching ID (e.g., MaterialID)
             string complaint = @"
         SELECT COUNT(*) 
@@ -416,7 +416,7 @@ namespace _4915project
         {
             try
             {
-                
+
 
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -524,6 +524,13 @@ namespace _4915project
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btRawMaterial_Click(object sender, EventArgs e)
+        {
+            RawMaterial rawMaterial = new RawMaterial();
+            rawMaterial.Show();
+            this.Close();
         }
     }
 }

@@ -40,7 +40,7 @@ namespace _4915project
 
 
 
-            
+
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 try
@@ -124,7 +124,7 @@ namespace _4915project
             }
 
             string selectedConID = cmbConID.SelectedItem.ToString();
-            
+
 
             string queryDetails = @"
         SELECT 
@@ -184,7 +184,7 @@ namespace _4915project
 
         private void LoadReport()
         {
-            
+
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 con.Open();
@@ -201,7 +201,7 @@ namespace _4915project
 
         private void LoadComplaint()
         {
-            
+
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 con.Open();
@@ -238,7 +238,7 @@ namespace _4915project
             cmbType.Items.Add("All");
             cmbUser.Items.Add("All");
 
-            
+
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 try
@@ -279,7 +279,7 @@ namespace _4915project
 
         private void btSave_Click(object sender, EventArgs e)
         {
-            
+
             string updateQuery = @"UPDATE deliveryconfirmation
             SET ShipmentID = @ShipmentID, 
             ReceiverName = @ReceiverName, 
@@ -540,7 +540,7 @@ namespace _4915project
         {
             try
             {
-                
+
 
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -590,6 +590,13 @@ namespace _4915project
             }
 
             Application.Exit();
+        }
+
+        private void btRawMaterial_Click(object sender, EventArgs e)
+        {
+            RawMaterial rawMaterial = new RawMaterial();
+            rawMaterial.Show();
+            this.Close();
         }
     }
 }

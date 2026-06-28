@@ -785,5 +785,12 @@ namespace _4915project
             production.Show();
             this.Close();
         }
+
+        private void btRawMaterial_Click(object sender, EventArgs e)
+        {
+            RawMaterial rawMaterial = new RawMaterial();
+            rawMaterial.Show();
+            this.Close();
+        }
     }
 }

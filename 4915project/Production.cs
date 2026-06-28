@@ -2,6 +2,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Globalization;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace _4915project
@@ -17,15 +18,11 @@ namespace _4915project
         private void Production_Load(object sender, EventArgs e)
         {
             getSN();
+            getRequest();
             SetupWelcomeMessage();
-            getRequestID();
-            genRequestID();
-            getBatchID();
-            getUser();
-            genRequestItemID();
-            getMaterialName();
             cmbUrgency.Items.AddRange(new string[] { "Low", "High" });
-            cmbRequestStatus.Items.AddRange(new string[] { "In Progress", "Completed" });
+            cmbRequestStatus.Items.AddRange(new string[] { "Approved", "In Progress", "Completed" });
+
         }
         private void SetupWelcomeMessage()
         {
@@ -293,499 +290,218 @@ namespace _4915project
 
             Application.Exit();
         }
-        private void getRequestID()
-        {
-            string query = @"Select RequestID from materialrequest order by RequestID ASC";
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    try
-                    {
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                cmbRequestID.Items.Add(reader["RequestID"].ToString());
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("System error:" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-        }
-        private void genRequestID()
-        {
-            // 💡 修正 1：SQL 補上 LIKE @Prefix 篩選，並將 LIMIT BY 1 改為正確的 LIMIT 1
-            string query = @"
-        SELECT RequestID 
-        FROM materialrequest 
-        WHERE RequestID LIKE @Prefix 
-        ORDER BY RequestID DESC 
-        LIMIT 1;";
-
-            string prefix = "REQ";
-
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    // 💡 修正 2：現在 SQL 內有 @Prefix 了，這裡的參數綁定才會生效
-                    cmd.Parameters.AddWithValue("@Prefix", prefix + "%");
-
-                    try
-                    {
-                        con.Open();
-                        object result = cmd.ExecuteScalar();
-
-                        int nextNumber = 1;
-
-                        if (result != null && result != DBNull.Value)
-                        {
-                            string lastOrderID = result.ToString();
-
-                            // 防呆：確保字串長度大於前置詞（3碼），才去切取後方的流水號
-                            if (lastOrderID.Length > prefix.Length)
-                            {
-                                // 💡 優化：直接從前置詞長度之後開始切到尾，避免硬編碼數字導致算錯
-                                string lastNumberStr = lastOrderID.Substring(prefix.Length);
-
-                                if (int.TryParse(lastNumberStr, out int lastNumber))
-                                {
-                                    nextNumber = lastNumber + 1;
-                                }
-                            }
-                        }
-
-                        string newRequestID = prefix + nextNumber.ToString("D3");
-
-                        // 將新單號帶入控制項
-                        cmbRequestID.Text = newRequestID;
-
-                        // 避免重複加入
-                        if (!cmbRequestID.Items.Contains(newRequestID))
-                        {
-                            cmbRequestID.Items.Add(newRequestID);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Debug.WriteLine("Unable to retrieve database serial number:" + ex.Message);
-                        MessageBox.Show("Order number cannot be generated automatically. Please enter it manually or try again later.", "Prompt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-            }
-        }
-        private void getBatchID()
-        {
-            string query = @"Select BatchID from productionbatch order by BatchID ASC";
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    try
-                    {
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                cmbBatchID.Items.Add(reader["BatchID"].ToString());
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("System error:" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-        }
-        private void getUser()
-        {
-            string query = @"SELECT Name From User;";
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    try
-                    {
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                cmbRequestBy.Items.Add(reader["Name"].ToString());
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("System error:" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-        }
-
-        private void cmbRequestID_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbRequestID.SelectedIndex == -1) return;
-
-            string query = @"
-    SELECT 
-        m.BatchID, 
-        u.Name AS UserName, 
-        m.RequestDate, 
-        m.Urgency, 
-        m.Status, 
-        m.RequestByDate
-    FROM materialrequest m
-    INNER JOIN User u ON m.UserID = u.UserID
-    WHERE m.RequestID = @RequestID;";
-
-            string query2 = @"SELECT * FROM materialrequestitem WHERE RequestID = @RequestID;";
-
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                try
-                {
-                    con.Open();
-
-                    // ==================== 1. 讀取主檔資料 (使用 DataReader) ====================
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
-                    {
-                        cmd.Parameters.AddWithValue("@RequestID", cmbRequestID.SelectedItem?.ToString());
-
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                cmbBatchID.Text = reader["BatchID"].ToString();
-                                RequestDate.Text = reader["RequestDate"].ToString();
-                                cmbUrgency.Text = reader["Urgency"].ToString();
-                                cmbRequestStatus.Text = reader["Status"].ToString();
-                                RequestByDate.Text = reader["RequestByDate"].ToString();
-                                cmbRequestBy.Text = reader["UserName"].ToString();
-                            }
-                        } // 👈 這裡的 using 結束，第一個 reader 會被徹底關閉並釋放連線
-                    }
-
-                    // ==================== 2. 讀取明細資料 (直接用 DataAdapter，不開 Reader) ====================
-                    DataTable dt = new DataTable();
-                    using (MySqlCommand cmd2 = new MySqlCommand(query2, con))
-                    {
-                        cmd2.Parameters.AddWithValue("@RequestID", cmbRequestID.SelectedItem?.ToString());
-
-                        // 💡 關鍵優化：直接交給 DataAdapter 處理，它會內部自己管好連線，不會有任何衝突
-                        using (MySqlDataAdapter da2 = new MySqlDataAdapter(cmd2))
-                        {
-                            da2.Fill(dt);
-                        }
-                    }
-
-                    // ==================== 3. 根據明細有無，控制介面 UI 狀態 ====================
-                    if (dt.Rows.Count > 0)
-                    {
-                        // 💡 有明細資料：將明細表格綁定，並鎖定輸入控制項（唯讀模式）
-                        dataGridView2.DataSource = dt;
-
-                        tbRequestItemID.Enabled = false;
-                        QuantityRequested.Enabled = false;
-                        cmbMaterialName.Enabled = false;
-                        btAdd.Enabled = false;
-                        QuantityApproved.Enabled = false;
-                        QuantityIssued.Enabled = false;
-                    }
-                    else
-                    {
-                        // 💡 沒有明細資料：清空 DataGridView 並解除鎖定，允許使用者新增品項
-                        dataGridView2.DataSource = null;
-                        tbRequestItemID.Enabled = true;
-
-                        // 如果需要，其他控制項也可以在這裡設為 true 恢復編輯
-                        QuantityRequested.Enabled = true;
-                        cmbMaterialName.Enabled = true;
-                        btAdd.Enabled = true;
-                        QuantityApproved.Enabled = true;
-                        QuantityIssued.Enabled = true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Failed to read application form: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        } // 💡 修正 3：補齊方法的大括號
-        private void genRequestItemID()
-        {
-            string query = @"
-            SELECT RequestItemID FROM materialrequestitem 
-            WHERE RequestItemID LIKE @Prefix 
-            ORDER BY RequestItemID DESC 
-            LIMIT 1;";
-
-            string prefix = "RITEM";
-
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@Prefix", prefix + "%");
-
-                    try
-                    {
-                        con.Open();
-                        object result = cmd.ExecuteScalar();
-
-                        int nextNumber = 1;
-
-                        if (result != null && result != DBNull.Value)
-                        {
-                            string lastItemID = result.ToString();
-
-                            if (lastItemID.Length > prefix.Length)
-                            {
-                                string lastNumberStr = lastItemID.Substring(prefix.Length);
-
-                                if (int.TryParse(lastNumberStr, out int lastNumber))
-                                {
-                                    nextNumber = lastNumber + 1;
-                                }
-                            }
-                        }
-
-                        string newRequestItemID = prefix + nextNumber.ToString("D3");
-
-                        // 💡 修正 2：將明細單號塞入正確的明細控制項（此處以 tbRequestItemID 為例）
-                        tbRequestItemID.Text = newRequestItemID;
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Debug.WriteLine("Unable to obtain material serial number: " + ex.Message);
-                        MessageBox.Show("The detailed order number could not be generated automatically. Please enter it manually or try again later.", "Prompt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-            }
-        }
-        private void getMaterialName()
-        {
-            string query = @"select Name from rawmaterial order by Name ASC";
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                con.Open();
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            cmbMaterialName.Items.Add(reader["Name"]);
-                        }
-                    }
-                }
-            }
-        }
-
-        private void btAdd_Click(object sender, EventArgs e)
-        {
-            // 💡 防呆機制：確保必填欄位都有輸入
-            if (string.IsNullOrEmpty(tbRequestItemID.Text) || string.IsNullOrEmpty(cmbRequestID.Text))
-            {
-                MessageBox.Show("Please confirm that the order number and detail number have been generated!", "Prompt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            string insertQuery = @"
-        INSERT INTO materialrequestitem 
-        (RequestItemID, RequestID, MaterialID, QuantityRequested, QuantityApproved, QuantityIssued) 
-        VALUES 
-        (@RequestItemID, @RequestID, @MaterialID, @QuantityRequested, @QuantityApproved, @QuantityIssued);";
-
-            string MaterialIDQuery = "SELECT MaterialID FROM rawmaterial WHERE Name = @Name;";
-            string query2 = "SELECT * FROM materialrequestitem WHERE RequestID = @RequestID;";
-
-            string MaterialID = "MAT0"; // 預設值
-
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                try
-                {
-                    con.Open();
-
-                    // 1. 根據物料名稱查詢物料 ID
-                    using (MySqlCommand cmd2 = new MySqlCommand(MaterialIDQuery, con))
-                    {
-                        cmd2.Parameters.AddWithValue("@Name", cmbMaterialName.Text);
-                        using (MySqlDataReader reader = cmd2.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                MaterialID = reader["MaterialID"].ToString();
-                            }
-                        }
-                    } // 💡 第一個 Reader 在這裡結束並正確關閉，避免後續衝突
-
-                    // 2. 執行資料寫入 (INSERT)
-                    using (MySqlCommand cmd = new MySqlCommand(insertQuery, con))
-                    {
-                        cmd.Parameters.AddWithValue("@RequestItemID", tbRequestItemID.Text);
-                        cmd.Parameters.AddWithValue("@RequestID", cmbRequestID.Text);
-                        cmd.Parameters.AddWithValue("@MaterialID", MaterialID);
-
-                        // 💡 安全機制：將字串轉換為數字型態，若轉換失敗則代入 0，防止資料庫崩潰
-                        int.TryParse(QuantityRequested.Text, out int reqQty);
-                        int.TryParse(QuantityApproved.Text, out int appQty);
-                        int.TryParse(QuantityIssued.Text, out int issQty);
-
-                        cmd.Parameters.AddWithValue("@QuantityRequested", reqQty);
-                        cmd.Parameters.AddWithValue("@QuantityApproved", appQty);
-                        cmd.Parameters.AddWithValue("@QuantityIssued", issQty);
-
-                        // 💡 修正 1：必須呼叫 ExecuteNonQuery 才會真正把資料寫進資料庫
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    MessageBox.Show("Material details added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // 3. 重新讀取資料庫，將最新明細刷回 DataGridView
-                    DataTable dt = new DataTable();
-                    using (MySqlCommand cmd3 = new MySqlCommand(query2, con))
-                    {
-                        cmd3.Parameters.AddWithValue("@RequestID", cmbRequestID.Text);
-                        using (MySqlDataAdapter da2 = new MySqlDataAdapter(cmd3))
-                        {
-                            da2.Fill(dt);
-                        }
-                    }
-
-                    // 💡 修正 3：務必將資料來源指派給 DataGridView，畫面才會同步更新
-                    dataGridView2.DataSource = dt;
-
-                    // 4. 清空輸入框（保留單號），並自動生成下一個明細序號
-                    QuantityRequested.Value = 0;
-                    QuantityApproved.Value = 0;
-                    QuantityIssued.Value = 0;
-
-                    genRequestItemID(); // 自動幫使用者準備好下一個 RITEM 號碼
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Adding details failed: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
 
         private void button10_Click(object sender, EventArgs e)
         {
+            cmbRequestID.SelectedIndex = -1;
+            cmbUser.SelectedIndex = -1;
             cmbUrgency.SelectedIndex = -1;
-            cmbRequestBy.SelectedIndex = -1;
-            cmbBatchID.SelectedIndex = -1;
             cmbRequestStatus.SelectedIndex = -1;
-            RequestByDate.Value = DateTime.Now;
-            RequestDate.Value = DateTime.Now;
-            tbRequestItemID.Clear();
-            cmbMaterialName.SelectedIndex = -1;
-            QuantityRequested.Value = 0;
-            QuantityApproved.Value = 0;
-            QuantityIssued.Value = 0;
-            dataGridView2.DataSource = null;
+            requestStartDate.Value = DateTime.Now;
+            requestEndDate.Value = DateTime.Now;
+            getRequest();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            // 💡 安全防呆：確保主要必填欄位沒有留白
-            if (string.IsNullOrEmpty(cmbRequestID.Text) || string.IsNullOrEmpty(cmbRequestBy.Text))
-            {
-                MessageBox.Show("Please make sure that both the \"Application Number\" and \"Applicant\" fields are filled in!", "Prompt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            MaterialRequest materialRequest = new MaterialRequest();
+            materialRequest.Show();
+        }
 
-            // 🎯 宣告兩種 SQL 語句：因應存在與否動態抽換
-            string insertQuery = @"
-    INSERT INTO materialrequest (RequestID, UserID, BatchID, RequestDate, RequestByDate, Urgency, Status) 
-    VALUES (@RequestID, @UserID, @BatchID, @RequestDate, @RequestByDate, @Urgency, @Status);";
-
-            string updateQuery = @"
-    UPDATE materialrequest 
-    SET UserID = @UserID, BatchID = @BatchID, RequestDate = @RequestDate, RequestByDate = @RequestByDate, Urgency = @Urgency, Status = @Status 
-    WHERE RequestID = @RequestID;";
-
-            string checkQuery = "SELECT COUNT(*) FROM materialrequest WHERE RequestID = @RequestID;";
-            string UserIDQuery = "SELECT UserID FROM user WHERE Name = @Name;";
-
-            int userID = 0;
-            string currentRequestID = cmbRequestID.Text.Trim();
+        private void getRequest()
+        {
+            string query = @"
+    SELECT 
+        m.RequestID,
+        u.Name,
+        m.BatchID,
+        m.RequestDate,
+        m.RequestByDate,
+        m.Urgency,
+        m.Status
+    FROM materialrequest m
+    INNER JOIN user u ON u.UserID = m.UserID
+    ORDER BY m.RequestID ASC;";
 
             using (MySqlConnection con = new MySqlConnection(constring))
             {
-                try
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
-                    con.Open();
-
-                    // 1. 根據申請人名稱查詢 UserID
-                    using (MySqlCommand cmd = new MySqlCommand(UserIDQuery, con))
+                    DataTable dt = new DataTable();
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
                     {
-                        cmd.Parameters.AddWithValue("@Name", cmbRequestBy.Text.Trim());
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                userID = reader.GetInt32(0);
-                            }
-                            else
-                            {
-                                MessageBox.Show($"The user named \"{cmbRequestBy.Text}\" could not be found. Please verify that your input is correct.", "Prompt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                        }
+                        // DataAdapter 會自動開關連線，不需要手動 con.Open()
+                        da.Fill(dt);
                     }
 
-                    // 🎯 核心修正 1：檢查該 RequestID 是否已經存在於資料庫中
-                    bool isRequestExist = false;
-                    using (MySqlCommand cmdCheck = new MySqlCommand(checkQuery, con))
+                    // 1. 先將完整的資料綁定到 DataGridView 顯示
+                    dataGridView2.DataSource = dt;
+
+                    // 2. 清空 ComboBox 舊有的資料，避免重複重疊
+                    cmbRequestID.Items.Clear();
+                    cmbUser.Items.Clear();
+
+                    // 3. 在索引 0 插入預設的「全部」選項（對應你前面寫的 Index > 0 篩選）
+                    cmbRequestID.Items.Add("-- All IDs --");
+                    cmbUser.Items.Add("-- All Users --");
+
+                    // 4. 利用 DataView 技術，直接在記憶體中進行「去重複 (Distinct)」並排序
+
+                    // 提取不重複的 RequestID
+                    DataView viewRequest = new DataView(dt);
+                    DataTable dtDistinctRequest = viewRequest.ToTable(true, "RequestID");
+                    foreach (DataRow row in dtDistinctRequest.Rows)
                     {
-                        cmdCheck.Parameters.AddWithValue("@RequestID", currentRequestID);
-                        isRequestExist = Convert.ToInt32(cmdCheck.ExecuteScalar()) > 0;
+                        cmbRequestID.Items.Add(row["RequestID"].ToString());
                     }
 
-                    // 🎯 核心修正 2：根據檢查結果，動態決定是要 INSERT 還是 UPDATE，徹底解決 Primary Key 重複衝突！
-                    string finalQuery = isRequestExist ? updateQuery : insertQuery;
+                    // 提取不重複的 User Name
+                    DataView viewUser = new DataView(dt);
+                    DataTable dtDistinctUser = viewUser.ToTable(true, "Name");
+                    // 排序人名，讓下拉選單更好找
+                    dtDistinctUser.DefaultView.Sort = "Name ASC";
+                    DataTable dtSortedUser = dtDistinctUser.DefaultView.ToTable();
 
-                    using (MySqlCommand cmd2 = new MySqlCommand(finalQuery, con))
+                    foreach (DataRow row in dtSortedUser.Rows)
                     {
-                        cmd2.Parameters.AddWithValue("@RequestID", currentRequestID);
-                        cmd2.Parameters.AddWithValue("@UserID", userID);
-                        cmd2.Parameters.AddWithValue("@BatchID", cmbBatchID.Text.Trim());
-                        cmd2.Parameters.AddWithValue("@RequestDate", RequestDate.Value.Date);
-                        cmd2.Parameters.AddWithValue("@RequestByDate", RequestByDate.Value.Date);
-                        cmd2.Parameters.AddWithValue("@Urgency", cmbUrgency.Text.Trim());
-                        cmd2.Parameters.AddWithValue("@Status", cmbRequestStatus.Text.Trim());
-
-                        cmd2.ExecuteNonQuery();
+                        cmbUser.Items.Add(row["Name"].ToString());
                     }
 
-                    // 提示訊息根據模式自動調整，體驗更專業
-                    if (isRequestExist)
-                    {
-                        MessageBox.Show($"Material requisition master file '{currentRequestID}' updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Material requisition master file '{currentRequestID}' added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
-                    // 💡 可以在這裡呼叫您畫面右下角的 Clear 按鈕事件，或是自動生成下一個 REQ 單號的方法
-                    // GenerateNextRequestID(); 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Failed to store master file: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // 5. 預設選取第一個選項 (-- All --)
+                    cmbRequestID.SelectedIndex = 0;
+                    cmbUser.SelectedIndex = 0;
                 }
             }
+        }
+
+        private void btSearchRequest_Click(object sender, EventArgs e)
+        {
+            // 1. 基本 SQL 主體：先進行 JOIN，並用 WHERE 1=1 作為動態拼接的安全起點
+            string query = @"
+    SELECT 
+        m.RequestID,
+        u.Name,
+        m.BatchID,
+        m.RequestDate,
+        m.RequestByDate,
+        m.Urgency,
+        m.Status
+    FROM materialrequest m
+    INNER JOIN user u ON u.UserID = m.UserID
+    WHERE 1=1";
+
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    cmd.Connection = con;
+
+                    // 2. 動態拼接欄位與安全綁定參數
+
+                    // 【修正】改為 > 0，有效排除 -1 (未選) 與 0 (預設/全部)
+                    if (cmbRequestID.SelectedIndex > 0)
+                    {
+                        query += " AND m.RequestID = @RID";
+                        cmd.Parameters.AddWithValue("@RID", cmbRequestID.SelectedItem.ToString());
+                    }
+
+                    // 【修正】改為 > 0，避免 SelectedItem 為 null 時呼叫 ToString() 導致崩潰
+                    if (cmbUser.SelectedIndex > 0)
+                    {
+                        query += " AND u.Name LIKE @Uname";
+                        cmd.Parameters.AddWithValue("@Uname", "%" + cmbUser.SelectedItem.ToString() + "%");
+                    }
+
+                    // 篩選緊急程度 (下拉選單有選取時)
+                    if (cmbUrgency.SelectedItem != null && !string.IsNullOrWhiteSpace(cmbUrgency.SelectedItem.ToString()))
+                    {
+                        query += " AND m.Urgency = @Urgency";
+                        cmd.Parameters.AddWithValue("@Urgency", cmbUrgency.SelectedItem.ToString());
+                    }
+
+                    // 篩選狀態 (下拉選單有選取時)
+                    if (cmbStatus.SelectedItem != null && !string.IsNullOrWhiteSpace(cmbStatus.SelectedItem.ToString()))
+                    {
+                        query += " AND m.Status = @Status";
+                        cmd.Parameters.AddWithValue("@Status", cmbStatus.SelectedItem.ToString());
+                    }
+
+                    // 3. 拼接日期範圍（包含結束日的整天）
+                    query += " AND m.RequestDate >= @startDate AND m.RequestDate <= @EndDate";
+                    cmd.Parameters.AddWithValue("@startDate", requestStartDate.Value.Date); // 00:00:00
+                    cmd.Parameters.AddWithValue("@EndDate", requestEndDate.Value.Date.AddDays(1).AddSeconds(-1)); // 23:59:59
+
+                    // 4. 加上排序並賦值
+                    query += " ORDER BY m.RequestID ASC;";
+                    cmd.CommandText = query;
+
+                    try
+                    {
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        // 更新畫面控制項
+                        dataGridView2.DataSource = dt;
+                    }
+                    catch (MySqlException ex)
+                    {
+                        MessageBox.Show("Search failed: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // 1. 防呆：確保點擊的是有效資料列，而不是標頭欄（Header Row 索引為 -1）
+            if (e.RowIndex < 0) return;
+
+            // 2. 獲取點擊列的 RequestID (請確保欄位名稱 "RequestID" 與你主表的 SQL 查詢欄位一致)
+            object cellValue = dataGridView2.Rows[e.RowIndex].Cells["RequestID"].Value;
+
+            if (cellValue == null || cellValue == DBNull.Value) return;
+
+            string selectedRequestID = cellValue.ToString();
+
+            // 3. 去資料庫查詢對應的明細資料 (從表)
+            // 提示：請根據你實際的資料表名稱與欄位修改此 SQL 語句
+            string detailQuery = @"
+        SELECT 
+        *
+        FROM materialrequestitem 
+        WHERE RequestID = @RequestID;";
+
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(detailQuery, con))
+                {
+                    // 安全綁定主鍵參數
+                    cmd.Parameters.AddWithValue("@RequestID", selectedRequestID);
+
+                    try
+                    {
+                        // 使用 DataAdapter 自動填充資料至第二個 DataGridView
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        // 將明細顯示在另一個 DataGridView 上
+                        dataGridView3.DataSource = dt;
+                    }
+                    catch (MySqlException ex)
+                    {
+                        MessageBox.Show("Failed to load details: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void btRawMaterial_Click(object sender, EventArgs e)
+        {
+            RawMaterial rawMaterial = new RawMaterial();
+            rawMaterial.Show();
+            this.Close();
         }
     }
 }

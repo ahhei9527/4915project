@@ -143,7 +143,7 @@ namespace _4915project
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 con.Open();
-                string query = @"Select * from salesorder";
+                string query = @"Select * from salesorder WHERE Status != 'Cancel' ORDER BY OrderID ASC";
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -156,108 +156,53 @@ namespace _4915project
 
         private void btnSearch_click(object sender, EventArgs e)
         {
-            string OrderIDSearch = textOrderID.Text;
-            string CustSearch = textCust.Text;
-
-            string startDate = dateTimePickerStart.Value.ToString("yyyy-MM-dd");
-            string endDate = dateTimePickerEnd.Value.ToString("yyyy-MM-dd");
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                con.Open();
-                if ((textOrderID.Text != "") && (textCust.Text != ""))
-                {
-                    string query = @"SELECT s.*, c.name AS custName
-                             FROM salesorder s
-                             INNER JOIN customer c ON s.CustomerID = c.CustomerID
-                             WHERE s.orderID LIKE @OrderID 
-                               AND c.Name LIKE @CustName 
-                               AND s.OrderDate > @StartDate 
-                               AND s.OrderDate < @EndDate;";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
-                    {
-                        cmd.Parameters.AddWithValue("@OrderID", "%" + OrderIDSearch + "%");
-                        cmd.Parameters.AddWithValue("@CustName", "%" + CustSearch + "%");
-                        cmd.Parameters.AddWithValue("@StartDate", startDate);
-                        cmd.Parameters.AddWithValue("@EndDate", endDate);
-                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        dgvOrderItems.DataSource = dt;
-                    }
-                }
-                else if ((textOrderID.Text != "") && (textCust.Text == ""))
-                {
-                    string query = @"SELECT s.*, c.name AS custName
-                             FROM salesorder s
-                             INNER JOIN customer c ON s.CustomerID = c.CustomerID
-                             WHERE s.orderID LIKE @OrderID
-                               AND s.OrderDate > @StartDate 
-                               AND s.OrderDate < @EndDate;";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
-                    {
-                        cmd.Parameters.AddWithValue("@OrderID", "%" + OrderIDSearch + "%");
-                        cmd.Parameters.AddWithValue("@CustName", "%" + CustSearch + "%");
-                        cmd.Parameters.AddWithValue("@StartDate", startDate);
-                        cmd.Parameters.AddWithValue("@EndDate", endDate);
-                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        dgvOrderItems.DataSource = dt;
-                    }
-                }
-                else if ((textOrderID.Text == "") && (textCust.Text != ""))
-                {
-                    string query = @"SELECT s.*, c.name AS custName
-                             FROM salesorder s
-                             INNER JOIN customer c ON s.CustomerID = c.CustomerID
-                             WHERE (c.Name LIKE @CustName or s.CustomerID like @CustName) 
-                               AND s.OrderDate > @StartDate 
-                               AND s.OrderDate < @EndDate;";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
-                    {
-                        cmd.Parameters.AddWithValue("@OrderID", "%" + OrderIDSearch + "%");
-                        cmd.Parameters.AddWithValue("@CustName", "%" + CustSearch + "%");
-                        cmd.Parameters.AddWithValue("@StartDate", startDate);
-                        cmd.Parameters.AddWithValue("@EndDate", endDate);
-                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        dgvOrderItems.DataSource = dt;
-                    }
-                }
-                else
-                {
-                    // 1. 修正拼字（Sataus -> Status），並將狀態改為安全的參數 @Status
-                    string query = @"SELECT s.*, c.name AS custName
+            // 1. 基本 SQL 語句：使用 WHERE 1=1 作為安全的起點，並排除 Cancel 狀態
+            string query = @"SELECT s.*, c.name AS custName
                      FROM salesorder s
                      INNER JOIN customer c ON s.CustomerID = c.CustomerID
-                     WHERE s.OrderDate >= @StartDate 
-                       AND s.OrderDate <= @EndDate
-                       AND s.Status = @Status;";
+                     WHERE s.Status != 'Cancel' AND 1=1";
 
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    cmd.Connection = con;
+
+                    // 2. 動態拼接字串與綁定參數
+                    if (!string.IsNullOrWhiteSpace(textOrderID.Text))
                     {
-                        // 2. 依序安全地綁定所有參數
-                        cmd.Parameters.AddWithValue("@StartDate", startDate);
-                        cmd.Parameters.AddWithValue("@EndDate", endDate);
+                        query += " AND s.orderID LIKE @OrderID";
+                        cmd.Parameters.AddWithValue("@OrderID", "%" + textOrderID.Text.Trim() + "%");
+                    }
 
-                        // 防呆：確保選取的值不為 null，若為 null 則帶入空字串
-                        cmd.Parameters.AddWithValue("@Status", comboBoxStatus.SelectedItem?.ToString() ?? "");
+                    if (!string.IsNullOrWhiteSpace(textCust.Text))
+                    {
+                        query += " AND (c.Name LIKE @CustName OR s.CustomerID LIKE @CustName)";
+                        cmd.Parameters.AddWithValue("@CustName", "%" + textCust.Text.Trim() + "%");
+                    }
 
-                        try
-                        {
-                            // 如果你的 con 在外面還沒 open()，記得在這邊加上 con.Open(); 
-                            // （不過 DataAdapter.Fill 其實會自動處理連線開啟與關閉，但手動確保更安全）
+                    // 3. 拼接日期範圍（確保包含結束日的整天）
+                    query += " AND s.OrderDate >= @StartDate AND s.OrderDate <= @EndDate";
 
-                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                            DataTable dt = new DataTable();
-                            da.Fill(dt);
-                            dgvOrderItems.DataSource = dt;
-                        }
-                        catch (MySqlException ex)
-                        {
-                            MessageBox.Show("Order inquiry failed: " + ex.Message);
-                        }
+                    cmd.Parameters.AddWithValue("@StartDate", dateTimePickerStart.Value.Date); // 00:00:00
+                    cmd.Parameters.AddWithValue("@EndDate", dateTimePickerEnd.Value.Date.AddDays(1).AddSeconds(-1)); // 23:59:59
+
+                    // 4. 加上排序並將最終字串賦值給 CommandText
+                    query += " ORDER BY s.OrderID ASC;";
+                    cmd.CommandText = query;
+
+                    try
+                    {
+                        // MySqlDataAdapter 會自動開啟與關閉連線，不需要手動 con.Open()
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        dgvOrderItems.DataSource = dt;
+                    }
+                    catch (MySqlException ex)
+                    {
+                        MessageBox.Show("Order inquiry failed: " + ex.Message);
                     }
                 }
             }
@@ -311,6 +256,13 @@ namespace _4915project
         {
             Production production = new Production();
             production.Show();
+            this.Close();
+        }
+
+        private void btRawMaterial_Click(object sender, EventArgs e)
+        {
+            RawMaterial rawMaterial = new RawMaterial();
+            rawMaterial.Show();
             this.Close();
         }
     }
