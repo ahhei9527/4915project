@@ -36,7 +36,7 @@ namespace _4915project
             tbPassword.Enabled = false;
             cmbRole.Enabled = false;
             cmbDepartment.Enabled = false;
-            tbPosit.Enabled = false;
+            cmbPosit.Enabled = false;
 
         }
 
@@ -227,7 +227,7 @@ namespace _4915project
                         {
                             cmbRole.SelectedItem = reader["Role"].ToString();
                             cmbDepartment.SelectedItem = reader["Department"].ToString();
-                            tbPosit.Text = reader["position"].ToString();
+                            cmbPosit.Text = reader["position"].ToString();
                         }
                     }
                     catch (Exception ex)
@@ -266,13 +266,13 @@ namespace _4915project
             {
                 cmbRole.Enabled = true;
                 cmbDepartment.Enabled = true;
-                tbPosit.Enabled = true;
+                cmbPosit.Enabled = true;
             }
             else
             {
                 cmbRole.Enabled = false;
                 cmbDepartment.Enabled = false;
-                tbPosit.Enabled = false;
+                cmbPosit.Enabled = false;
             }
         }
 
@@ -348,9 +348,9 @@ namespace _4915project
                     cmd.Parameters.AddWithValue("@Role", cmbRole.SelectedItem.ToString());
 
                     // 【優化】職位文字也建議加上 .Trim() 清除前後空白
-                    cmd.Parameters.AddWithValue("@position", string.IsNullOrWhiteSpace(tbPosit.Text)
+                    cmd.Parameters.AddWithValue("@position", string.IsNullOrWhiteSpace(cmbPosit.Text)
                         ? (object)DBNull.Value
-                        : tbPosit.Text.Trim());
+                        : cmbPosit.Text.Trim());
 
                     cmd.Parameters.AddWithValue("@Department", cmbDepartment.SelectedItem.ToString());
                 }
@@ -409,7 +409,7 @@ namespace _4915project
                     newValues: new
                     {
                         Role = cmbRole.SelectedItem?.ToString(),
-                        position = tbPosit.Text.ToString(),
+                        position = cmbPosit.Text.ToString(),
                         Department = cmbDepartment.SelectedItem?.ToString()
                     }
                     );
@@ -601,6 +601,13 @@ namespace _4915project
         private void cbPwd_CheckedChanged(object sender, EventArgs e)
         {
             tbPassword.Enabled = true;
+        }
+
+        private void cbRole_CheckedChanged(object sender, EventArgs e)
+        {
+            cmbRole.Enabled = true;
+            cmbDepartment.Enabled = true;
+            cmbPosit.Enabled = true;
         }
     }
 }

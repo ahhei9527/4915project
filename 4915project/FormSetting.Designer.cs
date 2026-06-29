@@ -48,7 +48,7 @@
             Employee = new TabPage();
             panel4 = new Panel();
             cbRole = new CheckBox();
-            tbPosit = new ComboBox();
+            cmbPosit = new ComboBox();
             label1 = new Label();
             cmbDepartment = new ComboBox();
             label18 = new Label();
@@ -289,7 +289,7 @@
             panel4.BackColor = Color.Gainsboro;
             panel4.BorderStyle = BorderStyle.FixedSingle;
             panel4.Controls.Add(cbRole);
-            panel4.Controls.Add(tbPosit);
+            panel4.Controls.Add(cmbPosit);
             panel4.Controls.Add(label1);
             panel4.Controls.Add(cmbDepartment);
             panel4.Controls.Add(label18);
@@ -321,15 +321,16 @@
             cbRole.TabIndex = 53;
             cbRole.Text = "Charge Role";
             cbRole.UseVisualStyleBackColor = true;
+            cbRole.CheckedChanged += cbRole_CheckedChanged;
             // 
-            // tbPosit
+            // cmbPosit
             // 
-            tbPosit.FormattingEnabled = true;
-            tbPosit.Location = new Point(188, 282);
-            tbPosit.Margin = new Padding(2);
-            tbPosit.Name = "tbPosit";
-            tbPosit.Size = new Size(117, 23);
-            tbPosit.TabIndex = 52;
+            cmbPosit.FormattingEnabled = true;
+            cmbPosit.Location = new Point(188, 282);
+            cmbPosit.Margin = new Padding(2);
+            cmbPosit.Name = "cmbPosit";
+            cmbPosit.Size = new Size(117, 23);
+            cmbPosit.TabIndex = 52;
             // 
             // label1
             // 
@@ -702,7 +703,7 @@
         private TabPage Employee;
         private Panel panel4;
         private CheckBox cbRole;
-        private ComboBox tbPosit;
+        private ComboBox cmbPosit;
         private Label label1;
         private ComboBox cmbDepartment;
         private Label label18;

@@ -3,19 +3,47 @@
   "WorkspaceRootPath": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\createrawmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\createrawmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\formsetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\formsetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\createrawmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\formsetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\formsetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\createrawmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\createrawmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\dashboard.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\dashboard.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\editrawmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\editrawmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\editrawmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\editrawmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\createrawmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\createrawmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\rawmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\rawmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|c:\\users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\rawmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\rawmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{D54E67C7-6805-04EB-1409-66C83B60B5BB}|4915project\\4915project.csproj|solutionrelative:4915project\\rawmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -39,19 +67,107 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "FormSetting.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\FormSetting.cs",
+              "RelativeDocumentMoniker": "4915project\\FormSetting.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\FormSetting.cs",
+              "RelativeToolTip": "4915project\\FormSetting.cs",
+              "ViewState": "AgIAAEwCAAAAAAAAAAAYwGECAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-29T09:04:39.74Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FormSetting.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\FormSetting.cs",
+              "RelativeDocumentMoniker": "4915project\\FormSetting.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\FormSetting.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "4915project\\FormSetting.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-29T09:04:34.667Z",
+              "EditorCaption": " [\u8A2D\u8A08]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DashBoard.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\DashBoard.Designer.cs",
+              "RelativeDocumentMoniker": "4915project\\DashBoard.Designer.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\DashBoard.Designer.cs",
+              "RelativeToolTip": "4915project\\DashBoard.Designer.cs",
+              "ViewState": "AgIAAAkBAAAAAAAAAAAYwBMBAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-29T09:02:23.235Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DashBoard.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\DashBoard.cs",
+              "RelativeDocumentMoniker": "4915project\\DashBoard.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\DashBoard.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "4915project\\DashBoard.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-29T09:01:48.305Z",
+              "EditorCaption": " [\u8A2D\u8A08]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DashBoard.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\DashBoard.cs",
+              "RelativeDocumentMoniker": "4915project\\DashBoard.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\DashBoard.cs",
+              "RelativeToolTip": "4915project\\DashBoard.cs",
+              "ViewState": "AgIAAGwAAAAAAAAAAAA2wFwAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-29T09:01:16.927Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "EditRawMaterial.cs",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\EditRawMaterial.cs",
+              "RelativeDocumentMoniker": "4915project\\EditRawMaterial.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\EditRawMaterial.cs",
+              "RelativeToolTip": "4915project\\EditRawMaterial.cs",
+              "ViewState": "AgIAAMQAAAAAAAAAAAAowLUAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-28T18:35:06.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EditRawMaterial.cs [\u8A2D\u8A08]",
+              "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\EditRawMaterial.cs",
+              "RelativeDocumentMoniker": "4915project\\EditRawMaterial.cs",
+              "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\EditRawMaterial.cs [\u8A2D\u8A08]",
+              "RelativeToolTip": "4915project\\EditRawMaterial.cs [\u8A2D\u8A08]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-28T18:33:04.041Z",
+              "EditorCaption": " [\u8A2D\u8A08]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "CreateRawMaterial.cs",
               "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\CreateRawMaterial.cs",
               "RelativeDocumentMoniker": "4915project\\CreateRawMaterial.cs",
               "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\CreateRawMaterial.cs",
               "RelativeToolTip": "4915project\\CreateRawMaterial.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAowFoAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-28T18:05:37.439Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "CreateRawMaterial.cs [\u8A2D\u8A08]",
               "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\CreateRawMaterial.cs",
               "RelativeDocumentMoniker": "4915project\\CreateRawMaterial.cs",
@@ -63,28 +179,27 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 9,
               "Title": "RawMaterial.cs",
               "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\RawMaterial.cs",
               "RelativeDocumentMoniker": "4915project\\RawMaterial.cs",
               "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\RawMaterial.cs",
               "RelativeToolTip": "4915project\\RawMaterial.cs",
-              "ViewState": "AgIAAM4AAAAAAAAAAAAjwOIAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAANUAAAAAAAAAAADgv+gAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-28T17:36:41.868Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 10,
               "Title": "RawMaterial.cs [\u8A2D\u8A08]",
               "DocumentMoniker": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\RawMaterial.cs",
               "RelativeDocumentMoniker": "4915project\\RawMaterial.cs",
               "ToolTip": "C:\\Users\\hoche\\source\\repos\\ahhei9527\\4915project\\4915project\\RawMaterial.cs [\u8A2D\u8A08]",
               "RelativeToolTip": "4915project\\RawMaterial.cs [\u8A2D\u8A08]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-28T17:21:39.48Z",
-              "EditorCaption": " [\u8A2D\u8A08]"
+              "WhenOpened": "2026-06-28T17:21:39.48Z"
             }
           ]
         }
