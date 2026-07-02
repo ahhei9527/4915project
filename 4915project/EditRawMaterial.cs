@@ -126,18 +126,22 @@ namespace _4915project
                                 cmbSupplier.Text = reader["PreferredSupplier"]?.ToString() ?? "";
                                 cmbUnit.Text = reader["Unit"]?.ToString() ?? "";
 
-                                // 2. 【關鍵修正】單價欄位轉為 Decimal，符合 NumericUpDown 的 Value 型態
+                                // 2. 【關鍵修正】單價欄位轉為 Decimal
                                 if (reader["UnitCost"] != DBNull.Value)
                                 {
-                                    cost.Value = Convert.ToDecimal(reader["UnitCost"]);
+                                    decimal costVal = Convert.ToDecimal(reader["UnitCost"]);
+                                    // 確保控制項的最大值大於等於要輸入的值，防止破表
+                                    if (costVal > cost.Maximum) cost.Maximum = costVal * 2;
+                                    cost.Value = costVal;
                                 }
 
-                                // 3. 【關鍵修正】安全庫存量欄位對齊 ReorderLevel，並安全轉為整數/小數
+                                // 3. 【關鍵修正】安全庫存量欄位
                                 if (reader["ReorderLevel"] != DBNull.Value)
                                 {
-                                    // 雖然 level 是整數，但 NumericUpDown.Value 接收 decimal，
-                                    // 使用 Convert.ToDecimal 繫結最安全
-                                    level.Value = Convert.ToDecimal(reader["ReorderLevel"]);
+                                    decimal levelVal = Convert.ToDecimal(reader["ReorderLevel"]);
+                                    // 同理，若資料庫的庫存量大於目前控制項最大值，動態拉大最大值
+                                    if (levelVal > level.Maximum) level.Maximum = levelVal * 2;
+                                    level.Value = levelVal;
                                 }
                             }
                         }
