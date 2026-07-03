@@ -49,6 +49,7 @@ namespace _4915project
             string loggedInUserId = "";
             string loggedInName = "";
             string loggedInRole = "";
+            string loggedInDepartment = "";
             string hashedInput = ComputeSha256Hash(textBoxPwd.Text);
 
             try
@@ -56,7 +57,7 @@ namespace _4915project
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
                     con.Open();
-                    string query = "SELECT userid, name, password, role, Department, email FROM user WHERE Email = @Email LIMIT 1";
+                    string query = "SELECT UserID, Name, password, Role, Department, Email FROM user WHERE Email = @Email LIMIT 1";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
@@ -87,9 +88,10 @@ namespace _4915project
                                 if (isAuthenticated)
                                 {
                                     // 暫存查出來的用戶資訊
-                                    loggedInUserId = reader["userid"].ToString();
-                                    loggedInName = reader["name"].ToString();
-                                    loggedInRole = reader["role"].ToString();
+                                    loggedInUserId = reader["UserID"].ToString();
+                                    loggedInName = reader["Name"].ToString();
+                                    loggedInRole = reader["Role"].ToString();
+                                    loggedInDepartment = reader["Department"].ToString();
                                 }
                             }
                             else
@@ -131,10 +133,34 @@ namespace _4915project
                         dashBoard.Show();
                         this.Hide();
                     }
+                    else if (loggedInRole == "STAFF" && loggedInDepartment == "Sales")
+                    {
+                        SalesOrder salesOrder = new SalesOrder();
+                        salesOrder.Show();
+                        this.Hide();
+                    }
+                    else if (loggedInRole == "STAFF" && loggedInDepartment == "Production")
+                    {
+                        Production production = new Production();
+                        production.Show();
+                        this.Hide();
+                    }
+                    else if (loggedInRole == "STAFF" && loggedInDepartment == "Warehouse")
+                    {
+                        Inventory inventory = new Inventory();
+                        inventory.Show();
+                        this.Hide();
+                    }
+                    else if (loggedInRole == "STAFF" && loggedInDepartment == "Logistics")
+                    {
+                        FormLogistics logistics = new FormLogistics();
+                        logistics.Show();
+                        this.Hide();
+                    }
                     else
                     {
                         // 如果未來一般用戶也要放行，直接在這裡 new 一般用戶的表單即可
-                        MessageBox.Show("Login successful, but currently only available to administrators.", "Insufficient permissions", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Login successful, but currently your role not available, please wait the administrators update.", "Insufficient permissions", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
