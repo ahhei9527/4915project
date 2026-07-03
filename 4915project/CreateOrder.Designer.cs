@@ -155,6 +155,7 @@
             // 
             // dgvOrderItems
             // 
+            dgvOrderItems.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvOrderItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvOrderItems.Location = new Point(16, 110);
             dgvOrderItems.Name = "dgvOrderItems";

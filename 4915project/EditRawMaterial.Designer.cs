@@ -51,57 +51,64 @@
             // 
             // level
             // 
-            level.Location = new Point(568, 135);
+            level.Location = new Point(755, 331);
+            level.Margin = new Padding(5, 5, 5, 5);
             level.Name = "level";
-            level.Size = new Size(121, 23);
+            level.Size = new Size(83, 30);
             level.TabIndex = 38;
             // 
             // cost
             // 
-            cost.Location = new Point(359, 135);
+            cost.Location = new Point(520, 331);
+            cost.Margin = new Padding(5, 5, 5, 5);
             cost.Name = "cost";
-            cost.Size = new Size(100, 23);
+            cost.Size = new Size(83, 30);
             cost.TabIndex = 37;
             // 
             // cmbSupplier
             // 
             cmbSupplier.FormattingEnabled = true;
-            cmbSupplier.Location = new Point(188, 188);
+            cmbSupplier.Location = new Point(520, 431);
+            cmbSupplier.Margin = new Padding(5, 5, 5, 5);
             cmbSupplier.Name = "cmbSupplier";
-            cmbSupplier.Size = new Size(204, 23);
+            cmbSupplier.Size = new Size(318, 31);
             cmbSupplier.TabIndex = 36;
             // 
             // cmbUnit
             // 
             cmbUnit.FormattingEnabled = true;
-            cmbUnit.Location = new Point(148, 135);
+            cmbUnit.Location = new Point(520, 277);
+            cmbUnit.Margin = new Padding(5, 5, 5, 5);
             cmbUnit.Name = "cmbUnit";
-            cmbUnit.Size = new Size(100, 23);
+            cmbUnit.Size = new Size(318, 31);
             cmbUnit.TabIndex = 35;
             // 
             // cmbType
             // 
             cmbType.FormattingEnabled = true;
-            cmbType.Location = new Point(568, 72);
+            cmbType.Location = new Point(520, 380);
+            cmbType.Margin = new Padding(5, 5, 5, 5);
             cmbType.Name = "cmbType";
-            cmbType.Size = new Size(121, 23);
+            cmbType.Size = new Size(318, 31);
             cmbType.TabIndex = 34;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("Microsoft JhengHei UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            label8.Location = new Point(12, 9);
+            label8.Font = new Font("Microsoft JhengHei UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 136);
+            label8.Location = new Point(19, 14);
+            label8.Margin = new Padding(5, 0, 5, 0);
             label8.Name = "label8";
-            label8.Size = new Size(321, 47);
+            label8.Size = new Size(313, 46);
             label8.TabIndex = 33;
             label8.Text = "Edit Raw Material";
             // 
             // button2
             // 
-            button2.Location = new Point(583, 235);
+            button2.Location = new Point(698, 500);
+            button2.Margin = new Padding(5, 5, 5, 5);
             button2.Name = "button2";
-            button2.Size = new Size(75, 23);
+            button2.Size = new Size(118, 35);
             button2.TabIndex = 32;
             button2.Text = "Cancel";
             button2.UseVisualStyleBackColor = true;
@@ -109,9 +116,10 @@
             // 
             // button1
             // 
-            button1.Location = new Point(474, 235);
+            button1.Location = new Point(523, 500);
+            button1.Margin = new Padding(5, 5, 5, 5);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(118, 35);
             button1.TabIndex = 31;
             button1.Text = "Save";
             button1.UseVisualStyleBackColor = true;
@@ -120,87 +128,96 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(74, 191);
+            label7.Location = new Point(357, 434);
+            label7.Margin = new Padding(5, 0, 5, 0);
             label7.Name = "label7";
-            label7.Size = new Size(109, 15);
+            label7.Size = new Size(163, 23);
             label7.TabIndex = 30;
             label7.Text = "PreferredSupplier:";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(474, 137);
+            label6.Location = new Point(627, 333);
+            label6.Margin = new Padding(5, 0, 5, 0);
             label6.Name = "label6";
-            label6.Size = new Size(88, 15);
+            label6.Size = new Size(130, 23);
             label6.TabIndex = 29;
             label6.Text = "Reorder Level:";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(285, 138);
+            label5.Location = new Point(428, 333);
+            label5.Margin = new Padding(5, 0, 5, 0);
             label5.Name = "label5";
-            label5.Size = new Size(61, 15);
+            label5.Size = new Size(93, 23);
             label5.TabIndex = 28;
             label5.Text = "Unit Cost:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(74, 138);
+            label4.Location = new Point(471, 280);
+            label4.Margin = new Padding(5, 0, 5, 0);
             label4.Name = "label4";
-            label4.Size = new Size(33, 15);
+            label4.Size = new Size(50, 23);
             label4.TabIndex = 27;
             label4.Text = "Unit:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(509, 78);
+            label3.Location = new Point(466, 383);
+            label3.Margin = new Padding(5, 0, 5, 0);
             label3.Name = "label3";
-            label3.Size = new Size(38, 15);
+            label3.Size = new Size(54, 23);
             label3.TabIndex = 26;
             label3.Text = "Type:";
             // 
             // tbName
             // 
-            tbName.Location = new Point(359, 72);
+            tbName.Location = new Point(520, 237);
+            tbName.Margin = new Padding(5, 5, 5, 5);
             tbName.Name = "tbName";
-            tbName.Size = new Size(100, 23);
+            tbName.Size = new Size(318, 30);
             tbName.TabIndex = 25;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(285, 75);
+            label2.Location = new Point(455, 237);
+            label2.Margin = new Padding(5, 0, 5, 0);
             label2.Name = "label2";
-            label2.Size = new Size(45, 15);
+            label2.Size = new Size(66, 23);
             label2.TabIndex = 24;
             label2.Text = "Name:";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(74, 75);
+            label1.Location = new Point(417, 204);
+            label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new Size(69, 15);
+            label1.Size = new Size(104, 23);
             label1.TabIndex = 22;
             label1.Text = "MaterialID:";
             // 
             // cmbMterialID
             // 
             cmbMterialID.FormattingEnabled = true;
-            cmbMterialID.Location = new Point(149, 72);
+            cmbMterialID.Location = new Point(520, 197);
+            cmbMterialID.Margin = new Padding(5, 5, 5, 5);
             cmbMterialID.Name = "cmbMterialID";
-            cmbMterialID.Size = new Size(121, 23);
+            cmbMterialID.Size = new Size(318, 31);
             cmbMterialID.TabIndex = 39;
             cmbMterialID.SelectedIndexChanged += cmbMterialID_SelectedIndexChanged;
             // 
             // EditRawMaterial
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(11F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(704, 275);
+            ClientSize = new Size(1370, 860);
             Controls.Add(cmbMterialID);
             Controls.Add(level);
             Controls.Add(cost);
@@ -218,6 +235,7 @@
             Controls.Add(tbName);
             Controls.Add(label2);
             Controls.Add(label1);
+            Margin = new Padding(5, 5, 5, 5);
             Name = "EditRawMaterial";
             Text = "EditRawMaterial";
             Load += EditRawMaterial_Load;

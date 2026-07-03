@@ -67,6 +67,7 @@
             label5 = new Label();
             lbInventoryID = new Label();
             gbMenu = new GroupBox();
+            btRawMaterial = new Button();
             btSetting = new Button();
             AfterSales = new Button();
             Production = new Button();
@@ -76,7 +77,6 @@
             Logoutbt = new LinkLabel();
             lblWelcome = new Label();
             LTitle = new Label();
-            btRawMaterial = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -92,22 +92,20 @@
             // 
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
-            tabControl1.Location = new Point(169, 63);
-            tabControl1.Margin = new Padding(2);
+            tabControl1.Location = new Point(266, 97);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(659, 462);
+            tabControl1.Size = new Size(1036, 708);
             tabControl1.TabIndex = 4;
             // 
             // tabPage1
             // 
             tabPage1.BackColor = Color.DarkGray;
             tabPage1.Controls.Add(groupBox1);
-            tabPage1.Location = new Point(4, 24);
-            tabPage1.Margin = new Padding(2);
+            tabPage1.Location = new Point(4, 32);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(2);
-            tabPage1.Size = new Size(651, 434);
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(1028, 672);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Stock Overview";
             // 
@@ -123,20 +121,19 @@
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(cmWearhouse);
-            groupBox1.Location = new Point(4, 4);
-            groupBox1.Margin = new Padding(2);
+            groupBox1.Location = new Point(6, 6);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(2);
-            groupBox1.Size = new Size(647, 430);
+            groupBox1.Size = new Size(1017, 659);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Search / Filter";
             // 
             // btRefresh
             // 
-            btRefresh.Location = new Point(455, 132);
+            btRefresh.Location = new Point(715, 202);
+            btRefresh.Margin = new Padding(5);
             btRefresh.Name = "btRefresh";
-            btRefresh.Size = new Size(75, 23);
+            btRefresh.Size = new Size(118, 35);
             btRefresh.TabIndex = 7;
             btRefresh.Text = "Refresh";
             btRefresh.UseVisualStyleBackColor = true;
@@ -144,10 +141,9 @@
             // 
             // button1
             // 
-            button1.Location = new Point(267, 398);
-            button1.Margin = new Padding(2);
+            button1.Location = new Point(420, 610);
             button1.Name = "button1";
-            button1.Size = new Size(95, 22);
+            button1.Size = new Size(149, 34);
             button1.TabIndex = 6;
             button1.Text = "Export to Excel";
             button1.UseCompatibleTextRendering = true;
@@ -155,20 +151,19 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(4, 179);
-            dataGridView1.Margin = new Padding(2);
+            dataGridView1.Location = new Point(6, 274);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(633, 201);
+            dataGridView1.Size = new Size(995, 308);
             dataGridView1.TabIndex = 1;
             // 
             // btSearch
             // 
-            btSearch.Location = new Point(551, 133);
-            btSearch.Margin = new Padding(2);
+            btSearch.Location = new Point(866, 204);
             btSearch.Name = "btSearch";
-            btSearch.Size = new Size(71, 22);
+            btSearch.Size = new Size(112, 34);
             btSearch.TabIndex = 5;
             btSearch.Text = "Search";
             btSearch.UseVisualStyleBackColor = true;
@@ -177,60 +172,54 @@
             // cbLowStock
             // 
             cbLowStock.AutoSize = true;
-            cbLowStock.Location = new Point(88, 96);
-            cbLowStock.Margin = new Padding(2);
+            cbLowStock.Location = new Point(138, 147);
             cbLowStock.Name = "cbLowStock";
-            cbLowStock.Size = new Size(146, 19);
+            cbLowStock.Size = new Size(218, 27);
             cbLowStock.TabIndex = 4;
             cbLowStock.Text = "Show Low Stock Only";
             cbLowStock.UseVisualStyleBackColor = true;
             // 
             // tbItemID
             // 
-            tbItemID.Location = new Point(104, 24);
-            tbItemID.Margin = new Padding(2);
+            tbItemID.Location = new Point(163, 37);
             tbItemID.Name = "tbItemID";
-            tbItemID.Size = new Size(125, 23);
+            tbItemID.Size = new Size(194, 30);
             tbItemID.TabIndex = 3;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(13, 26);
-            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Location = new Point(20, 40);
             label3.Name = "label3";
-            label3.Size = new Size(90, 15);
+            label3.Size = new Size(137, 23);
             label3.TabIndex = 2;
             label3.Text = "Item Name/ID:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(30, 55);
-            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Location = new Point(47, 84);
             label2.Name = "label2";
-            label2.Size = new Size(74, 15);
+            label2.Size = new Size(110, 23);
             label2.TabIndex = 1;
             label2.Text = "Warehouse:";
             // 
             // cmWearhouse
             // 
             cmWearhouse.FormattingEnabled = true;
-            cmWearhouse.Location = new Point(104, 53);
-            cmWearhouse.Margin = new Padding(2);
+            cmWearhouse.Location = new Point(163, 81);
             cmWearhouse.Name = "cmWearhouse";
-            cmWearhouse.Size = new Size(125, 23);
+            cmWearhouse.Size = new Size(194, 31);
             cmWearhouse.TabIndex = 0;
             // 
             // tabPage2
             // 
             tabPage2.BackColor = Color.DarkGray;
             tabPage2.Controls.Add(groupBox2);
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Margin = new Padding(2);
+            tabPage2.Location = new Point(4, 32);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(2);
-            tabPage2.Size = new Size(651, 434);
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(1028, 672);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Inward Goods";
             // 
@@ -261,11 +250,9 @@
             groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(lbInventoryID);
-            groupBox2.Location = new Point(4, 4);
-            groupBox2.Margin = new Padding(2);
+            groupBox2.Location = new Point(6, 6);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(2);
-            groupBox2.Size = new Size(647, 430);
+            groupBox2.Size = new Size(1017, 659);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "Record New Inward Goods";
@@ -273,113 +260,112 @@
             // cmbCStatus
             // 
             cmbCStatus.FormattingEnabled = true;
-            cmbCStatus.Location = new Point(118, 145);
+            cmbCStatus.Location = new Point(185, 222);
+            cmbCStatus.Margin = new Padding(5);
             cmbCStatus.Name = "cmbCStatus";
-            cmbCStatus.Size = new Size(117, 23);
+            cmbCStatus.Size = new Size(182, 31);
             cmbCStatus.TabIndex = 25;
             // 
             // lblCurrentStus
             // 
             lblCurrentStus.AutoSize = true;
-            lblCurrentStus.Location = new Point(25, 147);
-            lblCurrentStus.Margin = new Padding(2, 0, 2, 0);
+            lblCurrentStus.Location = new Point(39, 225);
             lblCurrentStus.Name = "lblCurrentStus";
-            lblCurrentStus.Size = new Size(93, 15);
+            lblCurrentStus.Size = new Size(143, 23);
             lblCurrentStus.TabIndex = 24;
             lblCurrentStus.Text = "Instance Status:";
             // 
             // tbSN
             // 
-            tbSN.Location = new Point(341, 117);
+            tbSN.Location = new Point(536, 179);
+            tbSN.Margin = new Padding(5);
             tbSN.Name = "tbSN";
-            tbSN.Size = new Size(124, 23);
+            tbSN.Size = new Size(193, 30);
             tbSN.TabIndex = 23;
             // 
             // lblSN
             // 
             lblSN.AutoSize = true;
-            lblSN.Location = new Point(311, 119);
-            lblSN.Margin = new Padding(2, 0, 2, 0);
+            lblSN.Location = new Point(489, 182);
             lblSN.Name = "lblSN";
-            lblSN.Size = new Size(27, 15);
+            lblSN.Size = new Size(39, 23);
             lblSN.TabIndex = 21;
             lblSN.Text = "SN:";
             // 
             // cmbPID
             // 
             cmbPID.FormattingEnabled = true;
-            cmbPID.Location = new Point(118, 120);
+            cmbPID.Location = new Point(185, 184);
+            cmbPID.Margin = new Padding(5);
             cmbPID.Name = "cmbPID";
-            cmbPID.Size = new Size(117, 23);
+            cmbPID.Size = new Size(182, 31);
             cmbPID.TabIndex = 20;
             // 
             // lblProductID
             // 
             lblProductID.AutoSize = true;
-            lblProductID.Location = new Point(51, 122);
-            lblProductID.Margin = new Padding(2, 0, 2, 0);
+            lblProductID.Location = new Point(80, 187);
             lblProductID.Name = "lblProductID";
-            lblProductID.Size = new Size(66, 15);
+            lblProductID.Size = new Size(100, 23);
             lblProductID.TabIndex = 19;
             lblProductID.Text = "ProductID:";
             // 
             // cmbStatus
             // 
             cmbStatus.FormattingEnabled = true;
-            cmbStatus.Location = new Point(341, 90);
+            cmbStatus.Location = new Point(536, 138);
+            cmbStatus.Margin = new Padding(5);
             cmbStatus.Name = "cmbStatus";
-            cmbStatus.Size = new Size(124, 23);
+            cmbStatus.Size = new Size(193, 31);
             cmbStatus.TabIndex = 18;
             // 
             // lblStatus
             // 
             lblStatus.AutoSize = true;
-            lblStatus.Location = new Point(297, 92);
+            lblStatus.Location = new Point(467, 141);
+            lblStatus.Margin = new Padding(5, 0, 5, 0);
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(47, 15);
+            lblStatus.Size = new Size(72, 23);
             lblStatus.TabIndex = 17;
             lblStatus.Text = "Status: ";
             // 
             // cmbBatch
             // 
             cmbBatch.FormattingEnabled = true;
-            cmbBatch.Location = new Point(118, 93);
+            cmbBatch.Location = new Point(185, 143);
+            cmbBatch.Margin = new Padding(5);
             cmbBatch.Name = "cmbBatch";
-            cmbBatch.Size = new Size(117, 23);
+            cmbBatch.Size = new Size(182, 31);
             cmbBatch.TabIndex = 16;
             // 
             // dataGridView2
             // 
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(4, 179);
-            dataGridView2.Margin = new Padding(2);
+            dataGridView2.Location = new Point(6, 274);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowHeadersWidth = 62;
-            dataGridView2.Size = new Size(633, 201);
+            dataGridView2.Size = new Size(995, 308);
             dataGridView2.TabIndex = 15;
             // 
             // date
             // 
-            date.Location = new Point(341, 19);
-            date.Margin = new Padding(2);
+            date.Location = new Point(536, 29);
             date.Name = "date";
-            date.Size = new Size(124, 23);
+            date.Size = new Size(193, 30);
             date.TabIndex = 14;
             // 
             // numQuantity
             // 
-            numQuantity.Location = new Point(342, 67);
-            numQuantity.Margin = new Padding(2);
+            numQuantity.Location = new Point(537, 103);
             numQuantity.Name = "numQuantity";
-            numQuantity.Size = new Size(122, 23);
+            numQuantity.Size = new Size(192, 30);
             numQuantity.TabIndex = 13;
             // 
             // btSubmit
             // 
-            btSubmit.Location = new Point(510, 147);
-            btSubmit.Margin = new Padding(2);
+            btSubmit.Location = new Point(801, 225);
             btSubmit.Name = "btSubmit";
-            btSubmit.Size = new Size(112, 22);
+            btSubmit.Size = new Size(176, 34);
             btSubmit.TabIndex = 12;
             btSubmit.Text = "Submit Receipt";
             btSubmit.UseVisualStyleBackColor = true;
@@ -388,105 +374,94 @@
             // cbWearhouse
             // 
             cbWearhouse.FormattingEnabled = true;
-            cbWearhouse.Location = new Point(341, 42);
-            cbWearhouse.Margin = new Padding(2);
+            cbWearhouse.Location = new Point(536, 64);
             cbWearhouse.Name = "cbWearhouse";
-            cbWearhouse.Size = new Size(124, 23);
+            cbWearhouse.Size = new Size(193, 31);
             cbWearhouse.TabIndex = 11;
             // 
             // cmItem
             // 
             cmItem.FormattingEnabled = true;
-            cmItem.Location = new Point(118, 68);
-            cmItem.Margin = new Padding(2);
+            cmItem.Location = new Point(185, 104);
             cmItem.Name = "cmItem";
-            cmItem.Size = new Size(117, 23);
+            cmItem.Size = new Size(182, 31);
             cmItem.TabIndex = 10;
             // 
             // cbSupplier
             // 
             cbSupplier.FormattingEnabled = true;
-            cbSupplier.Location = new Point(118, 44);
-            cbSupplier.Margin = new Padding(2);
+            cbSupplier.Location = new Point(185, 67);
             cbSupplier.Name = "cbSupplier";
-            cbSupplier.Size = new Size(117, 23);
+            cbSupplier.Size = new Size(182, 31);
             cbSupplier.TabIndex = 9;
             // 
             // tbInventoryID
             // 
-            tbInventoryID.Location = new Point(118, 21);
-            tbInventoryID.Margin = new Padding(2);
+            tbInventoryID.Location = new Point(185, 32);
             tbInventoryID.Name = "tbInventoryID";
-            tbInventoryID.Size = new Size(117, 23);
+            tbInventoryID.Size = new Size(182, 30);
             tbInventoryID.TabIndex = 7;
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(286, 68);
-            label10.Margin = new Padding(2, 0, 2, 0);
+            label10.Location = new Point(449, 104);
             label10.Name = "label10";
-            label10.Size = new Size(58, 15);
+            label10.Size = new Size(89, 23);
             label10.TabIndex = 6;
             label10.Text = "Quantity:";
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(273, 44);
-            label9.Margin = new Padding(2, 0, 2, 0);
+            label9.Location = new Point(429, 67);
             label9.Name = "label9";
-            label9.Size = new Size(74, 15);
+            label9.Size = new Size(110, 23);
             label9.TabIndex = 5;
             label9.Text = "Warehouse:";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(308, 21);
-            label8.Margin = new Padding(2, 0, 2, 0);
+            label8.Location = new Point(484, 32);
             label8.Name = "label8";
-            label8.Size = new Size(37, 15);
+            label8.Size = new Size(55, 23);
             label8.TabIndex = 4;
             label8.Text = "Date:";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(53, 95);
-            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Location = new Point(83, 146);
             label7.Name = "label7";
-            label7.Size = new Size(64, 15);
+            label7.Size = new Size(97, 23);
             label7.TabIndex = 3;
             label7.Text = "Batch/Lot:";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(81, 70);
-            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Location = new Point(127, 107);
             label6.Name = "label6";
-            label6.Size = new Size(35, 15);
+            label6.Size = new Size(53, 23);
             label6.TabIndex = 2;
             label6.Text = "Item:";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(61, 46);
-            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Location = new Point(96, 71);
             label5.Name = "label5";
-            label5.Size = new Size(57, 15);
+            label5.Size = new Size(84, 23);
             label5.TabIndex = 1;
             label5.Text = "Supplier:";
             // 
             // lbInventoryID
             // 
             lbInventoryID.AutoSize = true;
-            lbInventoryID.Location = new Point(43, 23);
-            lbInventoryID.Margin = new Padding(2, 0, 2, 0);
+            lbInventoryID.Location = new Point(68, 35);
             lbInventoryID.Name = "lbInventoryID";
-            lbInventoryID.Size = new Size(74, 15);
+            lbInventoryID.Size = new Size(113, 23);
             lbInventoryID.TabIndex = 0;
             lbInventoryID.Text = "InventoryID:";
             // 
@@ -500,19 +475,34 @@
             gbMenu.Controls.Add(SalesOrder);
             gbMenu.Controls.Add(Logistics);
             gbMenu.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            gbMenu.Location = new Point(13, 61);
+            gbMenu.Location = new Point(20, 94);
+            gbMenu.Margin = new Padding(5);
             gbMenu.Name = "gbMenu";
-            gbMenu.Size = new Size(145, 396);
+            gbMenu.Padding = new Padding(5);
+            gbMenu.Size = new Size(228, 607);
             gbMenu.TabIndex = 7;
             gbMenu.TabStop = false;
             gbMenu.Text = "Inventory";
             // 
+            // btRawMaterial
+            // 
+            btRawMaterial.Font = new Font("Microsoft JhengHei UI", 10F);
+            btRawMaterial.Location = new Point(22, 347);
+            btRawMaterial.Margin = new Padding(5);
+            btRawMaterial.Name = "btRawMaterial";
+            btRawMaterial.Size = new Size(184, 48);
+            btRawMaterial.TabIndex = 13;
+            btRawMaterial.Text = "Raw Material";
+            btRawMaterial.UseVisualStyleBackColor = true;
+            btRawMaterial.Click += btRawMaterial_Click;
+            // 
             // btSetting
             // 
             btSetting.Font = new Font("Microsoft JhengHei UI", 10F);
-            btSetting.Location = new Point(15, 340);
+            btSetting.Location = new Point(24, 521);
+            btSetting.Margin = new Padding(5);
             btSetting.Name = "btSetting";
-            btSetting.Size = new Size(116, 31);
+            btSetting.Size = new Size(184, 48);
             btSetting.TabIndex = 7;
             btSetting.Text = "Setting";
             btSetting.UseVisualStyleBackColor = true;
@@ -521,9 +511,10 @@
             // AfterSales
             // 
             AfterSales.Font = new Font("Microsoft JhengHei UI", 10F);
-            AfterSales.Location = new Point(15, 284);
+            AfterSales.Location = new Point(24, 435);
+            AfterSales.Margin = new Padding(5);
             AfterSales.Name = "AfterSales";
-            AfterSales.Size = new Size(116, 31);
+            AfterSales.Size = new Size(184, 48);
             AfterSales.TabIndex = 5;
             AfterSales.Text = "AfterSales";
             AfterSales.UseVisualStyleBackColor = true;
@@ -532,9 +523,10 @@
             // Production
             // 
             Production.Font = new Font("Microsoft JhengHei UI", 10F);
-            Production.Location = new Point(15, 174);
+            Production.Location = new Point(24, 267);
+            Production.Margin = new Padding(5);
             Production.Name = "Production";
-            Production.Size = new Size(116, 31);
+            Production.Size = new Size(184, 48);
             Production.TabIndex = 4;
             Production.Text = "Production";
             Production.UseVisualStyleBackColor = true;
@@ -543,9 +535,10 @@
             // btDashBoard
             // 
             btDashBoard.Font = new Font("Microsoft JhengHei UI", 10F);
-            btDashBoard.Location = new Point(15, 30);
+            btDashBoard.Location = new Point(24, 46);
+            btDashBoard.Margin = new Padding(5);
             btDashBoard.Name = "btDashBoard";
-            btDashBoard.Size = new Size(116, 31);
+            btDashBoard.Size = new Size(184, 48);
             btDashBoard.TabIndex = 2;
             btDashBoard.Text = "DashBoard";
             btDashBoard.UseVisualStyleBackColor = true;
@@ -554,9 +547,10 @@
             // SalesOrder
             // 
             SalesOrder.Font = new Font("Microsoft JhengHei UI", 10F);
-            SalesOrder.Location = new Point(15, 74);
+            SalesOrder.Location = new Point(24, 113);
+            SalesOrder.Margin = new Padding(5);
             SalesOrder.Name = "SalesOrder";
-            SalesOrder.Size = new Size(116, 31);
+            SalesOrder.Size = new Size(184, 48);
             SalesOrder.TabIndex = 1;
             SalesOrder.Text = "Sales/Order";
             SalesOrder.UseVisualStyleBackColor = true;
@@ -565,9 +559,10 @@
             // Logistics
             // 
             Logistics.Font = new Font("Microsoft JhengHei UI", 10F);
-            Logistics.Location = new Point(15, 126);
+            Logistics.Location = new Point(24, 193);
+            Logistics.Margin = new Padding(5);
             Logistics.Name = "Logistics";
-            Logistics.Size = new Size(116, 31);
+            Logistics.Size = new Size(184, 48);
             Logistics.TabIndex = 0;
             Logistics.Text = "Logistics/Delivery";
             Logistics.UseVisualStyleBackColor = true;
@@ -576,9 +571,10 @@
             // Logoutbt
             // 
             Logoutbt.AutoSize = true;
-            Logoutbt.Location = new Point(748, 14);
+            Logoutbt.Location = new Point(1175, 21);
+            Logoutbt.Margin = new Padding(5, 0, 5, 0);
             Logoutbt.Name = "Logoutbt";
-            Logoutbt.Size = new Size(50, 15);
+            Logoutbt.Size = new Size(74, 23);
             Logoutbt.TabIndex = 13;
             Logoutbt.TabStop = true;
             Logoutbt.Text = "LogOut";
@@ -587,43 +583,34 @@
             // lblWelcome
             // 
             lblWelcome.Font = new Font("Microsoft JhengHei UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            lblWelcome.Location = new Point(514, 6);
+            lblWelcome.Location = new Point(808, 9);
+            lblWelcome.Margin = new Padding(5, 0, 5, 0);
             lblWelcome.Name = "lblWelcome";
-            lblWelcome.Size = new Size(228, 39);
+            lblWelcome.Size = new Size(358, 60);
             lblWelcome.TabIndex = 12;
             // 
             // LTitle
             // 
             LTitle.Font = new Font("Microsoft JhengHei UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            LTitle.Location = new Point(26, 14);
+            LTitle.Location = new Point(41, 21);
+            LTitle.Margin = new Padding(5, 0, 5, 0);
             LTitle.Name = "LTitle";
-            LTitle.Size = new Size(383, 47);
+            LTitle.Size = new Size(602, 72);
             LTitle.TabIndex = 14;
             LTitle.Text = "Premium Living Centralized Manage System";
             LTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // btRawMaterial
-            // 
-            btRawMaterial.Location = new Point(14, 226);
-            btRawMaterial.Name = "btRawMaterial";
-            btRawMaterial.Size = new Size(117, 34);
-            btRawMaterial.TabIndex = 13;
-            btRawMaterial.Text = "Raw Material";
-            btRawMaterial.UseVisualStyleBackColor = true;
-            btRawMaterial.Click += btRawMaterial_Click;
-            // 
             // Inventory
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(11F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(872, 561);
+            ClientSize = new Size(1370, 860);
             Controls.Add(LTitle);
             Controls.Add(Logoutbt);
             Controls.Add(lblWelcome);
             Controls.Add(gbMenu);
             Controls.Add(tabControl1);
             Location = new Point(28, 19);
-            Margin = new Padding(2);
             Name = "Inventory";
             Text = "Inventory";
             Load += Inventory_Load;

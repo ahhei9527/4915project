@@ -91,7 +91,7 @@
             // tbPhone
             // 
             tbPhone.Location = new Point(542, 234);
-            tbPhone.Margin = new Padding(5, 5, 5, 5);
+            tbPhone.Margin = new Padding(5);
             tbPhone.Name = "tbPhone";
             tbPhone.Size = new Size(275, 30);
             tbPhone.TabIndex = 36;
@@ -109,7 +109,7 @@
             // tbEmail
             // 
             tbEmail.Location = new Point(542, 194);
-            tbEmail.Margin = new Padding(5, 5, 5, 5);
+            tbEmail.Margin = new Padding(5);
             tbEmail.Name = "tbEmail";
             tbEmail.Size = new Size(275, 30);
             tbEmail.TabIndex = 34;
@@ -127,7 +127,7 @@
             // tbUserName
             // 
             tbUserName.Location = new Point(542, 143);
-            tbUserName.Margin = new Padding(5, 5, 5, 5);
+            tbUserName.Margin = new Padding(5);
             tbUserName.Name = "tbUserName";
             tbUserName.Size = new Size(275, 30);
             tbUserName.TabIndex = 32;
@@ -135,7 +135,7 @@
             // tbPosit
             // 
             tbPosit.Location = new Point(542, 485);
-            tbPosit.Margin = new Padding(5, 5, 5, 5);
+            tbPosit.Margin = new Padding(5);
             tbPosit.Name = "tbPosit";
             tbPosit.Size = new Size(275, 30);
             tbPosit.TabIndex = 31;
@@ -143,7 +143,7 @@
             // tbPassword
             // 
             tbPassword.Location = new Point(542, 274);
-            tbPassword.Margin = new Padding(5, 5, 5, 5);
+            tbPassword.Margin = new Padding(5);
             tbPassword.Name = "tbPassword";
             tbPassword.Size = new Size(275, 30);
             tbPassword.TabIndex = 28;
@@ -246,7 +246,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            label8.Location = new Point(505, 318);
+            label8.Location = new Point(580, 327);
             label8.Name = "label8";
             label8.Size = new Size(192, 30);
             label8.TabIndex = 4;
@@ -258,7 +258,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1370, 860);
             Controls.Add(panel4);
-            Margin = new Padding(5, 5, 5, 5);
+            Margin = new Padding(5);
             Name = "AddEmployee";
             Text = "Add Employee";
             Load += AddEmployee_Load;

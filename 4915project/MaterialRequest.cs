@@ -523,5 +523,15 @@ namespace _4915project
                 }
             }
         }
+
+        private void QuantityIssued_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void QuantityRequested_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

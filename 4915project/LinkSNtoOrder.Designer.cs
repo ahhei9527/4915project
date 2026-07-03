@@ -47,75 +47,84 @@
             // lblOrder
             // 
             lblOrder.AutoSize = true;
-            lblOrder.Location = new Point(49, 43);
+            lblOrder.Location = new Point(520, 262);
+            lblOrder.Margin = new Padding(5, 0, 5, 0);
             lblOrder.Name = "lblOrder";
-            lblOrder.Size = new Size(52, 15);
+            lblOrder.Size = new Size(83, 23);
             lblOrder.TabIndex = 0;
-            lblOrder.Text = "OrderID";
+            lblOrder.Text = "OrderID:";
             // 
             // cmbOrderID
             // 
             cmbOrderID.FormattingEnabled = true;
-            cmbOrderID.Location = new Point(107, 40);
+            cmbOrderID.Location = new Point(610, 254);
+            cmbOrderID.Margin = new Padding(5, 5, 5, 5);
             cmbOrderID.Name = "cmbOrderID";
-            cmbOrderID.Size = new Size(121, 23);
+            cmbOrderID.Size = new Size(188, 31);
             cmbOrderID.TabIndex = 1;
             // 
             // cmbSN
             // 
             cmbSN.FormattingEnabled = true;
-            cmbSN.Location = new Point(336, 40);
+            cmbSN.Location = new Point(610, 305);
+            cmbSN.Margin = new Padding(5, 5, 5, 5);
             cmbSN.Name = "cmbSN";
-            cmbSN.Size = new Size(121, 23);
+            cmbSN.Size = new Size(188, 31);
             cmbSN.TabIndex = 3;
             cmbSN.SelectedIndexChanged += cmbSN_SelectedIndexChanged;
             // 
             // lblSN
             // 
             lblSN.AutoSize = true;
-            lblSN.Location = new Point(306, 43);
+            lblSN.Location = new Point(565, 313);
+            lblSN.Margin = new Padding(5, 0, 5, 0);
             lblSN.Name = "lblSN";
-            lblSN.Size = new Size(24, 15);
+            lblSN.Size = new Size(39, 23);
             lblSN.TabIndex = 2;
-            lblSN.Text = "SN";
+            lblSN.Text = "SN:";
             // 
             // lblBatch
             // 
             lblBatch.AutoSize = true;
-            lblBatch.Location = new Point(63, 86);
+            lblBatch.Location = new Point(542, 360);
+            lblBatch.Margin = new Padding(5, 0, 5, 0);
             lblBatch.Name = "lblBatch";
-            lblBatch.Size = new Size(38, 15);
+            lblBatch.Size = new Size(62, 23);
             lblBatch.TabIndex = 4;
-            lblBatch.Text = "Batch";
+            lblBatch.Text = "Batch:";
             // 
             // lblProduct
             // 
             lblProduct.AutoSize = true;
-            lblProduct.Location = new Point(278, 89);
+            lblProduct.Location = new Point(522, 413);
+            lblProduct.Margin = new Padding(5, 0, 5, 0);
             lblProduct.Name = "lblProduct";
-            lblProduct.Size = new Size(51, 15);
+            lblProduct.Size = new Size(81, 23);
             lblProduct.TabIndex = 6;
-            lblProduct.Text = "Product";
+            lblProduct.Text = "Product:";
             // 
             // tbBatch
             // 
-            tbBatch.Location = new Point(107, 81);
+            tbBatch.Location = new Point(610, 357);
+            tbBatch.Margin = new Padding(5, 5, 5, 5);
             tbBatch.Name = "tbBatch";
-            tbBatch.Size = new Size(121, 23);
+            tbBatch.Size = new Size(188, 30);
             tbBatch.TabIndex = 7;
             // 
             // tbProduct
             // 
-            tbProduct.Location = new Point(336, 83);
+            tbProduct.Location = new Point(610, 406);
+            tbProduct.Margin = new Padding(5, 5, 5, 5);
             tbProduct.Name = "tbProduct";
-            tbProduct.Size = new Size(121, 23);
+            tbProduct.Size = new Size(188, 30);
             tbProduct.TabIndex = 8;
             // 
             // btSave
             // 
-            btSave.Location = new Point(360, 165);
+            btSave.Location = new Point(528, 565);
+            btSave.Margin = new Padding(5, 5, 5, 5);
             btSave.Name = "btSave";
-            btSave.Size = new Size(75, 23);
+            btSave.Size = new Size(118, 35);
             btSave.TabIndex = 9;
             btSave.Text = "Save";
             btSave.UseVisualStyleBackColor = true;
@@ -123,9 +132,10 @@
             // 
             // btClose
             // 
-            btClose.Location = new Point(49, 165);
+            btClose.Location = new Point(680, 565);
+            btClose.Margin = new Padding(5, 5, 5, 5);
             btClose.Name = "btClose";
-            btClose.Size = new Size(75, 23);
+            btClose.Size = new Size(118, 35);
             btClose.TabIndex = 10;
             btClose.Text = "Close";
             btClose.UseVisualStyleBackColor = true;
@@ -134,40 +144,44 @@
             // lblProductionDate
             // 
             lblProductionDate.AutoSize = true;
-            lblProductionDate.Location = new Point(5, 129);
+            lblProductionDate.Location = new Point(455, 457);
+            lblProductionDate.Margin = new Padding(5, 0, 5, 0);
             lblProductionDate.Name = "lblProductionDate";
-            lblProductionDate.Size = new Size(96, 15);
+            lblProductionDate.Size = new Size(149, 23);
             lblProductionDate.TabIndex = 11;
-            lblProductionDate.Text = "ProductionDate";
+            lblProductionDate.Text = "ProductionDate:";
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(107, 123);
+            dateTimePicker1.Location = new Point(610, 451);
+            dateTimePicker1.Margin = new Padding(5, 5, 5, 5);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(121, 23);
+            dateTimePicker1.Size = new Size(188, 30);
             dateTimePicker1.TabIndex = 12;
             // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Location = new Point(336, 123);
+            dateTimePicker2.Location = new Point(610, 500);
+            dateTimePicker2.Margin = new Padding(5, 5, 5, 5);
             dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(121, 23);
+            dateTimePicker2.Size = new Size(188, 30);
             dateTimePicker2.TabIndex = 14;
             // 
             // lblEndDate
             // 
             lblEndDate.AutoSize = true;
-            lblEndDate.Location = new Point(273, 129);
+            lblEndDate.Location = new Point(517, 506);
+            lblEndDate.Margin = new Padding(5, 0, 5, 0);
             lblEndDate.Name = "lblEndDate";
-            lblEndDate.Size = new Size(56, 15);
+            lblEndDate.Size = new Size(87, 23);
             lblEndDate.TabIndex = 13;
-            lblEndDate.Text = "EndDate";
+            lblEndDate.Text = "EndDate:";
             // 
             // LinkSNtoOrder
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(11F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(478, 214);
+            ClientSize = new Size(1370, 860);
             Controls.Add(dateTimePicker2);
             Controls.Add(lblEndDate);
             Controls.Add(dateTimePicker1);
@@ -182,6 +196,7 @@
             Controls.Add(lblSN);
             Controls.Add(cmbOrderID);
             Controls.Add(lblOrder);
+            Margin = new Padding(5, 5, 5, 5);
             Name = "LinkSNtoOrder";
             Text = "Link SN to Order";
             Load += LinkSNtoOrder_Load;

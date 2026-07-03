@@ -92,10 +92,9 @@
             // 
             label1SystemName.AutoSize = true;
             label1SystemName.Font = new Font("Microsoft JhengHei UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            label1SystemName.Location = new Point(26, 14);
-            label1SystemName.Margin = new Padding(2, 0, 2, 0);
+            label1SystemName.Location = new Point(41, 21);
             label1SystemName.Name = "label1SystemName";
-            label1SystemName.Size = new Size(407, 24);
+            label1SystemName.Size = new Size(592, 36);
             label1SystemName.TabIndex = 18;
             label1SystemName.Text = "Premium Living Centralized Manage System";
             // 
@@ -103,9 +102,10 @@
             // 
             Customer.BorderStyle = BorderStyle.FixedSingle;
             Customer.Controls.Add(panel1);
-            Customer.Location = new Point(4, 24);
+            Customer.Location = new Point(4, 32);
+            Customer.Margin = new Padding(5, 5, 5, 5);
             Customer.Name = "Customer";
-            Customer.Size = new Size(805, 459);
+            Customer.Size = new Size(1270, 711);
             Customer.TabIndex = 2;
             Customer.Text = "Customer";
             Customer.UseVisualStyleBackColor = true;
@@ -128,58 +128,61 @@
             panel1.Controls.Add(label6);
             panel1.Controls.Add(label7);
             panel1.Controls.Add(label9);
-            panel1.Location = new Point(13, 9);
-            panel1.Margin = new Padding(2);
+            panel1.Location = new Point(20, 14);
             panel1.Name = "panel1";
-            panel1.Size = new Size(782, 442);
+            panel1.Size = new Size(1228, 677);
             panel1.TabIndex = 36;
             // 
             // tbCustAddress
             // 
-            tbCustAddress.Location = new Point(294, 183);
+            tbCustAddress.Location = new Point(462, 281);
+            tbCustAddress.Margin = new Padding(5, 5, 5, 5);
             tbCustAddress.Name = "tbCustAddress";
-            tbCustAddress.Size = new Size(223, 23);
+            tbCustAddress.Size = new Size(348, 30);
             tbCustAddress.TabIndex = 41;
             // 
             // tbCustPhone
             // 
-            tbCustPhone.Location = new Point(294, 153);
+            tbCustPhone.Location = new Point(462, 235);
+            tbCustPhone.Margin = new Padding(5, 5, 5, 5);
             tbCustPhone.Name = "tbCustPhone";
-            tbCustPhone.Size = new Size(223, 23);
+            tbCustPhone.Size = new Size(348, 30);
             tbCustPhone.TabIndex = 40;
             // 
             // tbCustEmail
             // 
-            tbCustEmail.Location = new Point(294, 121);
+            tbCustEmail.Location = new Point(462, 186);
+            tbCustEmail.Margin = new Padding(5, 5, 5, 5);
             tbCustEmail.Name = "tbCustEmail";
-            tbCustEmail.Size = new Size(223, 23);
+            tbCustEmail.Size = new Size(348, 30);
             tbCustEmail.TabIndex = 39;
             // 
             // cmbCustName
             // 
             cmbCustName.FormattingEnabled = true;
-            cmbCustName.Location = new Point(294, 92);
+            cmbCustName.Location = new Point(462, 141);
+            cmbCustName.Margin = new Padding(5, 5, 5, 5);
             cmbCustName.Name = "cmbCustName";
-            cmbCustName.Size = new Size(223, 23);
+            cmbCustName.Size = new Size(348, 31);
             cmbCustName.TabIndex = 38;
             cmbCustName.SelectedIndexChanged += cmbCustName_SelectedIndexChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(186, 156);
-            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Location = new Point(292, 239);
             label2.Name = "label2";
             label2.RightToLeft = RightToLeft.No;
-            label2.Size = new Size(103, 15);
+            label2.Size = new Size(156, 23);
             label2.TabIndex = 35;
             label2.Text = "Customer Phone:";
             // 
             // btAddCust
             // 
-            btAddCust.Location = new Point(156, 325);
+            btAddCust.Location = new Point(245, 498);
+            btAddCust.Margin = new Padding(5, 5, 5, 5);
             btAddCust.Name = "btAddCust";
-            btAddCust.Size = new Size(122, 23);
+            btAddCust.Size = new Size(192, 35);
             btAddCust.TabIndex = 33;
             btAddCust.Text = "Add Customer";
             btAddCust.UseVisualStyleBackColor = true;
@@ -187,10 +190,9 @@
             // 
             // button2
             // 
-            button2.Location = new Point(553, 325);
-            button2.Margin = new Padding(2);
+            button2.Location = new Point(869, 498);
             button2.Name = "button2";
-            button2.Size = new Size(71, 22);
+            button2.Size = new Size(112, 34);
             button2.TabIndex = 32;
             button2.Text = "Cancel";
             button2.UseVisualStyleBackColor = true;
@@ -198,20 +200,18 @@
             // 
             // button3
             // 
-            button3.Location = new Point(470, 326);
-            button3.Margin = new Padding(2);
+            button3.Location = new Point(739, 500);
             button3.Name = "button3";
-            button3.Size = new Size(71, 22);
+            button3.Size = new Size(112, 34);
             button3.TabIndex = 31;
             button3.Text = "Save";
             button3.UseVisualStyleBackColor = true;
             // 
             // btCustReset
             // 
-            btCustReset.Location = new Point(283, 326);
-            btCustReset.Margin = new Padding(2);
+            btCustReset.Location = new Point(445, 500);
             btCustReset.Name = "btCustReset";
-            btCustReset.Size = new Size(93, 22);
+            btCustReset.Size = new Size(146, 34);
             btCustReset.TabIndex = 30;
             btCustReset.TabStop = false;
             btCustReset.Text = "Reset Default";
@@ -222,10 +222,9 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            label4.Location = new Point(193, 95);
-            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Location = new Point(303, 146);
             label4.Name = "label4";
-            label4.Size = new Size(102, 15);
+            label4.Size = new Size(154, 23);
             label4.TabIndex = 23;
             label4.Text = "Customer Name:";
             // 
@@ -233,20 +232,18 @@
             // 
             cmbCustCompany.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
             cmbCustCompany.FormattingEnabled = true;
-            cmbCustCompany.Location = new Point(293, 211);
-            cmbCustCompany.Margin = new Padding(2);
+            cmbCustCompany.Location = new Point(460, 324);
             cmbCustCompany.Name = "cmbCustCompany";
-            cmbCustCompany.Size = new Size(224, 23);
+            cmbCustCompany.Size = new Size(350, 31);
             cmbCustCompany.TabIndex = 29;
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            label6.Location = new Point(191, 124);
-            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Location = new Point(300, 190);
             label6.Name = "label6";
-            label6.Size = new Size(98, 15);
+            label6.Size = new Size(149, 23);
             label6.TabIndex = 24;
             label6.Text = "Customer Email:";
             // 
@@ -254,10 +251,9 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            label7.Location = new Point(177, 186);
-            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Location = new Point(278, 285);
             label7.Name = "label7";
-            label7.Size = new Size(112, 15);
+            label7.Size = new Size(169, 23);
             label7.TabIndex = 26;
             label7.Text = "Customer Address:";
             // 
@@ -265,10 +261,9 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            label9.Location = new Point(167, 214);
-            label9.Margin = new Padding(2, 0, 2, 0);
+            label9.Location = new Point(262, 328);
             label9.Name = "label9";
-            label9.Size = new Size(122, 15);
+            label9.Size = new Size(183, 23);
             label9.TabIndex = 25;
             label9.Text = "Customer Company:";
             // 
@@ -276,10 +271,11 @@
             // 
             Employee.BorderStyle = BorderStyle.FixedSingle;
             Employee.Controls.Add(panel4);
-            Employee.Location = new Point(4, 24);
+            Employee.Location = new Point(4, 32);
+            Employee.Margin = new Padding(5, 5, 5, 5);
             Employee.Name = "Employee";
-            Employee.Padding = new Padding(3);
-            Employee.Size = new Size(805, 459);
+            Employee.Padding = new Padding(5, 5, 5, 5);
+            Employee.Size = new Size(1270, 711);
             Employee.TabIndex = 1;
             Employee.Text = "Security Settings";
             Employee.UseVisualStyleBackColor = true;
@@ -305,19 +301,17 @@
             panel4.Controls.Add(button9);
             panel4.Controls.Add(button10);
             panel4.Controls.Add(label8);
-            panel4.Location = new Point(10, 10);
-            panel4.Margin = new Padding(2);
+            panel4.Location = new Point(16, 15);
             panel4.Name = "panel4";
-            panel4.Size = new Size(785, 441);
+            panel4.Size = new Size(1232, 675);
             panel4.TabIndex = 16;
             // 
             // cbRole
             // 
             cbRole.AutoSize = true;
-            cbRole.Location = new Point(443, 286);
-            cbRole.Margin = new Padding(2);
+            cbRole.Location = new Point(718, 282);
             cbRole.Name = "cbRole";
-            cbRole.Size = new Size(96, 19);
+            cbRole.Size = new Size(140, 27);
             cbRole.TabIndex = 53;
             cbRole.Text = "Charge Role";
             cbRole.UseVisualStyleBackColor = true;
@@ -326,48 +320,43 @@
             // cmbPosit
             // 
             cmbPosit.FormattingEnabled = true;
-            cmbPosit.Location = new Point(188, 282);
-            cmbPosit.Margin = new Padding(2);
+            cmbPosit.Location = new Point(530, 325);
             cmbPosit.Name = "cmbPosit";
-            cmbPosit.Size = new Size(117, 23);
+            cmbPosit.Size = new Size(182, 31);
             cmbPosit.TabIndex = 52;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(129, 285);
-            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Location = new Point(441, 328);
             label1.Name = "label1";
-            label1.Size = new Size(55, 15);
+            label1.Size = new Size(83, 23);
             label1.TabIndex = 51;
             label1.Text = "Position:";
             // 
             // cmbDepartment
             // 
             cmbDepartment.FormattingEnabled = true;
-            cmbDepartment.Location = new Point(449, 214);
-            cmbDepartment.Margin = new Padding(2);
+            cmbDepartment.Location = new Point(530, 376);
             cmbDepartment.Name = "cmbDepartment";
-            cmbDepartment.Size = new Size(117, 23);
+            cmbDepartment.Size = new Size(182, 31);
             cmbDepartment.TabIndex = 50;
             // 
             // label18
             // 
             label18.AutoSize = true;
-            label18.Location = new Point(367, 217);
-            label18.Margin = new Padding(2, 0, 2, 0);
+            label18.Location = new Point(409, 379);
             label18.Name = "label18";
-            label18.Size = new Size(78, 15);
+            label18.Size = new Size(118, 23);
             label18.TabIndex = 49;
             label18.Text = "Deoartment:";
             // 
             // cbPwd
             // 
             cbPwd.AutoSize = true;
-            cbPwd.Location = new Point(443, 136);
-            cbPwd.Margin = new Padding(2);
+            cbPwd.Location = new Point(714, 169);
             cbPwd.Name = "cbPwd";
-            cbPwd.Size = new Size(123, 19);
+            cbPwd.Size = new Size(182, 27);
             cbPwd.TabIndex = 48;
             cbPwd.Text = "Charge Password";
             cbPwd.UseVisualStyleBackColor = true;
@@ -376,65 +365,60 @@
             // cmbUserName
             // 
             cmbUserName.FormattingEnabled = true;
-            cmbUserName.Location = new Point(190, 100);
-            cmbUserName.Margin = new Padding(2);
+            cmbUserName.Location = new Point(530, 114);
             cmbUserName.Name = "cmbUserName";
-            cmbUserName.Size = new Size(115, 23);
+            cmbUserName.Size = new Size(178, 31);
             cmbUserName.TabIndex = 47;
             cmbUserName.SelectedIndexChanged += cmbUserName_SelectedIndexChanged;
             // 
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new Point(120, 102);
-            label17.Margin = new Padding(2, 0, 2, 0);
+            label17.Location = new Point(415, 117);
             label17.Name = "label17";
-            label17.Size = new Size(73, 15);
+            label17.Size = new Size(109, 23);
             label17.TabIndex = 46;
             label17.Text = "User Name:";
             // 
             // tbPassword
             // 
-            tbPassword.Location = new Point(451, 98);
-            tbPassword.Margin = new Padding(2);
+            tbPassword.Location = new Point(530, 167);
             tbPassword.Name = "tbPassword";
-            tbPassword.Size = new Size(115, 23);
+            tbPassword.Size = new Size(178, 30);
             tbPassword.TabIndex = 45;
             // 
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new Point(350, 100);
-            label16.Margin = new Padding(2, 0, 2, 0);
+            label16.Location = new Point(366, 170);
             label16.Name = "label16";
-            label16.Size = new Size(107, 15);
+            label16.Size = new Size(158, 23);
             label16.TabIndex = 44;
             label16.Text = "Modify Password:";
             // 
             // cmbRole
             // 
             cmbRole.FormattingEnabled = true;
-            cmbRole.Location = new Point(188, 214);
-            cmbRole.Margin = new Padding(2);
+            cmbRole.Location = new Point(530, 278);
             cmbRole.Name = "cmbRole";
-            cmbRole.Size = new Size(117, 23);
+            cmbRole.Size = new Size(182, 31);
             cmbRole.TabIndex = 43;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(148, 217);
-            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Location = new Point(472, 281);
             label3.Name = "label3";
-            label3.Size = new Size(36, 15);
+            label3.Size = new Size(52, 23);
             label3.TabIndex = 32;
             label3.Text = "Role:";
             // 
             // btAddUser
             // 
-            btAddUser.Location = new Point(142, 364);
+            btAddUser.Location = new Point(223, 558);
+            btAddUser.Margin = new Padding(5, 5, 5, 5);
             btAddUser.Name = "btAddUser";
-            btAddUser.Size = new Size(110, 23);
+            btAddUser.Size = new Size(173, 35);
             btAddUser.TabIndex = 26;
             btAddUser.Text = "Add Employee";
             btAddUser.UseVisualStyleBackColor = true;
@@ -442,10 +426,9 @@
             // 
             // button8
             // 
-            button8.Location = new Point(508, 365);
-            button8.Margin = new Padding(2);
+            button8.Location = new Point(798, 560);
             button8.Name = "button8";
-            button8.Size = new Size(71, 22);
+            button8.Size = new Size(112, 34);
             button8.TabIndex = 19;
             button8.Text = "Cancel";
             button8.UseVisualStyleBackColor = true;
@@ -453,10 +436,9 @@
             // 
             // button9
             // 
-            button9.Location = new Point(419, 364);
-            button9.Margin = new Padding(2);
+            button9.Location = new Point(658, 558);
             button9.Name = "button9";
-            button9.Size = new Size(71, 22);
+            button9.Size = new Size(112, 34);
             button9.TabIndex = 18;
             button9.Text = "Save";
             button9.UseVisualStyleBackColor = true;
@@ -464,10 +446,9 @@
             // 
             // button10
             // 
-            button10.Location = new Point(260, 364);
-            button10.Margin = new Padding(2);
+            button10.Location = new Point(409, 558);
             button10.Name = "button10";
-            button10.Size = new Size(93, 22);
+            button10.Size = new Size(146, 34);
             button10.TabIndex = 17;
             button10.TabStop = false;
             button10.Text = "Reset Default";
@@ -478,10 +459,9 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            label8.Location = new Point(143, 185);
-            label8.Margin = new Padding(2, 0, 2, 0);
+            label8.Location = new Point(520, 230);
             label8.Name = "label8";
-            label8.Size = new Size(128, 20);
+            label8.Size = new Size(192, 30);
             label8.TabIndex = 4;
             label8.Text = "Role Permission";
             // 
@@ -489,10 +469,11 @@
             // 
             Company.BorderStyle = BorderStyle.FixedSingle;
             Company.Controls.Add(panel2);
-            Company.Location = new Point(4, 24);
+            Company.Location = new Point(4, 32);
+            Company.Margin = new Padding(5, 5, 5, 5);
             Company.Name = "Company";
-            Company.Padding = new Padding(3);
-            Company.Size = new Size(805, 459);
+            Company.Padding = new Padding(5, 5, 5, 5);
+            Company.Size = new Size(1270, 711);
             Company.TabIndex = 0;
             Company.Text = "General Settings";
             Company.UseVisualStyleBackColor = true;
@@ -513,26 +494,27 @@
             panel2.Controls.Add(labelDefaultCurrency);
             panel2.Controls.Add(cmbComWH);
             panel2.Controls.Add(cmbComLan);
-            panel2.Location = new Point(10, 10);
-            panel2.Margin = new Padding(2);
+            panel2.Location = new Point(16, 15);
             panel2.Name = "panel2";
-            panel2.Size = new Size(785, 441);
+            panel2.Size = new Size(1232, 675);
             panel2.TabIndex = 12;
             // 
             // cmbCompanyName
             // 
             cmbCompanyName.FormattingEnabled = true;
-            cmbCompanyName.Location = new Point(295, 78);
+            cmbCompanyName.Location = new Point(464, 120);
+            cmbCompanyName.Margin = new Padding(5, 5, 5, 5);
             cmbCompanyName.Name = "cmbCompanyName";
-            cmbCompanyName.Size = new Size(223, 23);
+            cmbCompanyName.Size = new Size(348, 31);
             cmbCompanyName.TabIndex = 22;
             cmbCompanyName.SelectedIndexChanged += cmbCompanyName_SelectedIndexChanged;
             // 
             // btAddCom
             // 
-            btAddCom.Location = new Point(157, 311);
+            btAddCom.Location = new Point(247, 477);
+            btAddCom.Margin = new Padding(5, 5, 5, 5);
             btAddCom.Name = "btAddCom";
-            btAddCom.Size = new Size(122, 23);
+            btAddCom.Size = new Size(192, 35);
             btAddCom.TabIndex = 17;
             btAddCom.Text = "Add Company";
             btAddCom.UseVisualStyleBackColor = true;
@@ -540,10 +522,9 @@
             // 
             // buttonCancel
             // 
-            buttonCancel.Location = new Point(554, 311);
-            buttonCancel.Margin = new Padding(2);
+            buttonCancel.Location = new Point(871, 477);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(71, 22);
+            buttonCancel.Size = new Size(112, 34);
             buttonCancel.TabIndex = 15;
             buttonCancel.Text = "Cancel";
             buttonCancel.UseVisualStyleBackColor = true;
@@ -551,10 +532,9 @@
             // 
             // buttonSave
             // 
-            buttonSave.Location = new Point(471, 312);
-            buttonSave.Margin = new Padding(2);
+            buttonSave.Location = new Point(740, 478);
             buttonSave.Name = "buttonSave";
-            buttonSave.Size = new Size(71, 22);
+            buttonSave.Size = new Size(112, 34);
             buttonSave.TabIndex = 14;
             buttonSave.Text = "Save";
             buttonSave.UseVisualStyleBackColor = true;
@@ -562,10 +542,9 @@
             // 
             // buttonResetDefault
             // 
-            buttonResetDefault.Location = new Point(284, 312);
-            buttonResetDefault.Margin = new Padding(2);
+            buttonResetDefault.Location = new Point(446, 478);
             buttonResetDefault.Name = "buttonResetDefault";
-            buttonResetDefault.Size = new Size(93, 22);
+            buttonResetDefault.Size = new Size(146, 34);
             buttonResetDefault.TabIndex = 13;
             buttonResetDefault.TabStop = false;
             buttonResetDefault.Text = "Reset Default";
@@ -576,10 +555,9 @@
             // 
             labelCompanyName.AutoSize = true;
             labelCompanyName.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            labelCompanyName.Location = new Point(194, 81);
-            labelCompanyName.Margin = new Padding(2, 0, 2, 0);
+            labelCompanyName.Location = new Point(305, 124);
             labelCompanyName.Name = "labelCompanyName";
-            labelCompanyName.Size = new Size(103, 15);
+            labelCompanyName.Size = new Size(152, 23);
             labelCompanyName.TabIndex = 0;
             labelCompanyName.Text = "Company Name:";
             // 
@@ -587,20 +565,18 @@
             // 
             cmbComCurr.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
             cmbComCurr.FormattingEnabled = true;
-            cmbComCurr.Location = new Point(295, 167);
-            cmbComCurr.Margin = new Padding(2);
+            cmbComCurr.Location = new Point(464, 256);
             cmbComCurr.Name = "cmbComCurr";
-            cmbComCurr.Size = new Size(224, 23);
+            cmbComCurr.Size = new Size(350, 31);
             cmbComCurr.TabIndex = 9;
             // 
             // labelDefaultLanguage
             // 
             labelDefaultLanguage.AutoSize = true;
             labelDefaultLanguage.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            labelDefaultLanguage.Location = new Point(186, 110);
-            labelDefaultLanguage.Margin = new Padding(2, 0, 2, 0);
+            labelDefaultLanguage.Location = new Point(292, 169);
             labelDefaultLanguage.Name = "labelDefaultLanguage";
-            labelDefaultLanguage.Size = new Size(111, 15);
+            labelDefaultLanguage.Size = new Size(165, 23);
             labelDefaultLanguage.TabIndex = 1;
             labelDefaultLanguage.Text = "Default Language:";
             // 
@@ -608,10 +584,9 @@
             // 
             labelDefaultWarehouse.AutoSize = true;
             labelDefaultWarehouse.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            labelDefaultWarehouse.Location = new Point(179, 142);
-            labelDefaultWarehouse.Margin = new Padding(2, 0, 2, 0);
+            labelDefaultWarehouse.Location = new Point(281, 218);
             labelDefaultWarehouse.Name = "labelDefaultWarehouse";
-            labelDefaultWarehouse.Size = new Size(118, 15);
+            labelDefaultWarehouse.Size = new Size(178, 23);
             labelDefaultWarehouse.TabIndex = 4;
             labelDefaultWarehouse.Text = "Default Warehouse:";
             // 
@@ -619,10 +594,9 @@
             // 
             labelDefaultCurrency.AutoSize = true;
             labelDefaultCurrency.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
-            labelDefaultCurrency.Location = new Point(191, 169);
-            labelDefaultCurrency.Margin = new Padding(2, 0, 2, 0);
+            labelDefaultCurrency.Location = new Point(300, 259);
             labelDefaultCurrency.Name = "labelDefaultCurrency";
-            labelDefaultCurrency.Size = new Size(103, 15);
+            labelDefaultCurrency.Size = new Size(158, 23);
             labelDefaultCurrency.TabIndex = 3;
             labelDefaultCurrency.Text = "Default Currency:";
             // 
@@ -630,20 +604,18 @@
             // 
             cmbComWH.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
             cmbComWH.FormattingEnabled = true;
-            cmbComWH.Location = new Point(295, 140);
-            cmbComWH.Margin = new Padding(2);
+            cmbComWH.Location = new Point(464, 215);
             cmbComWH.Name = "cmbComWH";
-            cmbComWH.Size = new Size(224, 23);
+            cmbComWH.Size = new Size(350, 31);
             cmbComWH.TabIndex = 7;
             // 
             // cmbComLan
             // 
             cmbComLan.Font = new Font("Microsoft JhengHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 136);
             cmbComLan.FormattingEnabled = true;
-            cmbComLan.Location = new Point(294, 108);
-            cmbComLan.Margin = new Padding(2);
+            cmbComLan.Location = new Point(462, 166);
             cmbComLan.Name = "cmbComLan";
-            cmbComLan.Size = new Size(224, 23);
+            cmbComLan.Size = new Size(350, 31);
             cmbComLan.TabIndex = 6;
             // 
             // settingTab
@@ -651,20 +623,20 @@
             settingTab.Controls.Add(Company);
             settingTab.Controls.Add(Employee);
             settingTab.Controls.Add(Customer);
-            settingTab.Location = new Point(26, 48);
+            settingTab.Location = new Point(41, 74);
+            settingTab.Margin = new Padding(5, 5, 5, 5);
             settingTab.Name = "settingTab";
             settingTab.SelectedIndex = 0;
-            settingTab.Size = new Size(813, 487);
+            settingTab.Size = new Size(1278, 747);
             settingTab.TabIndex = 25;
             // 
             // FormSetting
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(11F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(872, 561);
+            ClientSize = new Size(1370, 860);
             Controls.Add(settingTab);
             Controls.Add(label1SystemName);
-            Margin = new Padding(2);
             Name = "FormSetting";
             Text = "Settings";
             Load += FormSetting_Load;

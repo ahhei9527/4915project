@@ -230,5 +230,10 @@ namespace _4915project
             // 重新生成下一組新序號 (呼叫你之前寫好的 GenID 函式)
             GenID();
         }
+
+        private void cost_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
