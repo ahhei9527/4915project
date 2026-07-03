@@ -150,7 +150,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1009, 582);
             panel2.TabIndex = 10;
-            panel2.Paint += panel2_Paint;
             // 
             // tbCom
             // 
@@ -259,7 +258,6 @@
             label2.Size = new Size(124, 23);
             label2.TabIndex = 9;
             label2.Text = "Select Report";
-            label2.Click += label2_Click;
             // 
             // btnRefreshReport
             // 
@@ -323,7 +321,6 @@
             Menu.TabIndex = 6;
             Menu.TabStop = false;
             Menu.Text = "Home";
-            Menu.Enter += Menu_Enter;
             // 
             // btRawMaterial
             // 

@@ -259,11 +259,11 @@ namespace _4915project
                     cmd2.Parameters.AddWithValue("@OrderID", cmbOrderID.SelectedItem?.ToString());
                     cmd2.Parameters.AddWithValue("@SerialNumber", tbSN.Text);
                     cmd2.Parameters.AddWithValue("@UserID", UserID);
-                    cmd2.Parameters.AddWithValue("@IssueDate", receivedDate.Value.ToString());
+                    cmd2.Parameters.AddWithValue("@IssueDate", receivedDate.Value);
                     cmd2.Parameters.AddWithValue("@Description", tbDescription.Text);
                     cmd2.Parameters.AddWithValue("@Type", cbType.SelectedItem?.ToString());
                     cmd2.Parameters.AddWithValue("@Resolution", tbResolution.Text); // 預設空白，後續可更新
-                    cmd2.Parameters.AddWithValue("@ResolutionDate", resolutionDate.Value.ToString()); // 預設 NULL，後續可更新
+                    cmd2.Parameters.AddWithValue("@ResolutionDate", resolutionDate.Value); // 預設 NULL，後續可更新
                     try
                     {
                         cmd2.ExecuteNonQuery();

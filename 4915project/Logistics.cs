@@ -414,12 +414,12 @@ namespace _4915project
                             string updateOrder = @"
                             UPDATE salesorder 
                             SET Status = @OrderStatus, 
-                                EstimatedDeliveryDate = @EstimatedDeliveryDate
+                                ActualDeliveryDate = @ActualDeliveryDate
                             WHERE OrderID = @OrderID;";
                             using (MySqlCommand cmd = new MySqlCommand(updateOrder, con, transaction))
                             {
                                 cmd.Parameters.AddWithValue("@OrderStatus", newOrderStatus);
-                                cmd.Parameters.AddWithValue("@EstimatedDeliveryDate", newEstimatedDate);
+                                cmd.Parameters.AddWithValue("@ActualDeliveryDate", DelivDate.Value);
                                 cmd.Parameters.AddWithValue("@OrderID", newOrderID); // 🎯 已修正：改用畫面上取得的 newOrderID
                                 cmd.ExecuteNonQuery();
 
@@ -499,6 +499,61 @@ namespace _4915project
 
                             // 可在此處呼叫重新整理 DataGridView 的方法
                             // RefreshDataGridView();
+                            string query = @"
+                    SELECT 
+                        s.ShipmentID,
+                        so.OrderID, 
+                        s.Status AS ShipmentStatus,     -- 如果尚未出貨，這裡在 C# 讀出來會是 NULL
+                        so.Status AS OrderStatus,       
+                        s.DeliveryMethod, 
+                        so.EstimatedDeliveryDate
+                    FROM salesorder so
+                    LEFT JOIN shipment s ON so.OrderID = s.OrderID;"; // 👈 改為 LEFT JOIN 確保以訂單主檔為主
+
+                            using (MySqlCommand cmd = new MySqlCommand(query, con))
+                            {
+                                using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                                {
+                                    DataTable dt = new DataTable();
+                                    adapter.Fill(dt);
+                                    dataGridView2.DataSource = dt;
+
+                                    // 清空舊項目，避免重複疊加
+                                    cbOrderID.Items.Clear();
+
+                                    foreach (DataRow row in dt.Rows)
+                                    {
+                                        // 1. 將所有訂單編號加進 ComboBox 中
+                                        if (row["OrderID"] != DBNull.Value)
+                                        {
+                                            cbOrderID.Items.Add(row["OrderID"].ToString());
+                                        }
+                                    }
+
+                                    // 2. 初始化畫面控制項（填入第一筆資料作為預設）
+                                    if (dt.Rows.Count > 0)
+                                    {
+                                        DataRow firstRow = dt.Rows[0];
+                                        cbOrderID.Text = firstRow["OrderID"]?.ToString() ?? "";
+                                        cbOrderstat.Text = firstRow["OrderStatus"]?.ToString() ?? "";
+
+                                        // 💡 安全處理：如果新訂單還沒有出貨狀態，給予預設文字
+                                        cbshipStat.Text = firstRow["ShipmentStatus"] == DBNull.Value ? "Pending" : firstRow["ShipmentStatus"].ToString();
+                                        cbMethod.Text = firstRow["DeliveryMethod"] == DBNull.Value ? "Standard" : firstRow["DeliveryMethod"].ToString();
+                                    }
+                                }
+                                string shipQuery = "SELECT ShipmentID FROM shipment ORDER BY ShipmentID";
+                                using (MySqlCommand shipCmd = new MySqlCommand(shipQuery, con))
+                                {
+                                    using (MySqlDataReader shipReader = shipCmd.ExecuteReader())
+                                    {
+                                        while (shipReader.Read())
+                                        {
+                                            cmbShipID.Items.Add(shipReader["ShipmentID"].ToString());
+                                        }
+                                    }
+                                }
+                            }
                         }
                         catch (Exception ex)
                         {

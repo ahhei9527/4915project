@@ -49,7 +49,7 @@ namespace _4915project
                     con.Open();
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read())
+                        while (reader.Read())
                         {
                             cmbComID.Text = reader["ComplaintID"].ToString();
                             cmbComID.Items.Add(reader["ComplaintID"].ToString());
@@ -178,7 +178,7 @@ namespace _4915project
         {
             LoadComplaint();
             string connectionString = "server=localhost;user id=root;password=;database=4915";
-            string query = @"SELECT c.ComplaintID, u.UserID FROM complaint c, user.u";
+            string query = @"SELECT c.*, u.UserID FROM complaint c, user u";
             using (MySqlConnection con = new MySqlConnection(connectionString))
             {
                 using (MySqlCommand cmd = new MySqlCommand(query, con))

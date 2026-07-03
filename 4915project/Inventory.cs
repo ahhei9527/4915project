@@ -73,39 +73,47 @@ namespace _4915project
                         }
                     }
                 }
+                string queryM = @"select Name from rawmaterial";
+                using (MySqlCommand cmdM = new MySqlCommand(queryM, con))
+                {
+                    using (MySqlDataReader reader = cmdM.ExecuteReader())
+                    {
+
+                        while (reader.Read())
+                        {
+                            cmItem.Items.Add(reader["Name"]);
+                        }
+                    }
+                }
+
+                cmItem.SelectedIndex = 0;
+                cbSupplier.Items.Add("Timber Supplies HK");
+                cbSupplier.Items.Add("MetalWorks Ltd");
+                cbSupplier.Items.Add("Textile Depot");
+                cbSupplier.Items.Add("Crystal Glass Co");
+                cbSupplier.Items.Add("Comfort Materials");
+                cbSupplier.SelectedIndex = 0;
+                cbWearhouse.Items.Add("WH-A-12-03");
+                cbWearhouse.Items.Add("WH-A-12-04");
+                cbWearhouse.Items.Add("WH-B-05-01");
+                cbWearhouse.Items.Add("WH-C-08-02");
+                cbWearhouse.SelectedIndex = 0;
+                cmWearhouse.Items.Add("WH-A-12-03");
+                cmWearhouse.Items.Add("WH-A-12-04");
+                cmWearhouse.Items.Add("WH-B-05-01");
+                cmWearhouse.Items.Add("WH-C-08-02");
+                cmWearhouse.SelectedIndex = 0;
+                cmbCStatus.Items.AddRange(new string[] { "In Stock", "Delivered" });
+                cmbCStatus.SelectedIndex = 0;
+                tbSN.ReadOnly = true;
+                GenerateBatchID();
+                GenerateInventoryID();
+                LoadInward();
+                LoadBatchIDs();
+                LoadStock();
+                LoadPID();
+                GenSN();
             }
-            cmItem.Items.Add("Oak Wood Panel");
-            cmItem.Items.Add("Steel Frame");
-            cmItem.Items.Add("Fabric Cover");
-            cmItem.Items.Add("Glass Panel");
-            cmItem.Items.Add("Foam Padding");
-            cmItem.SelectedIndex = 0;
-            cbSupplier.Items.Add("Timber Supplies HK");
-            cbSupplier.Items.Add("MetalWorks Ltd");
-            cbSupplier.Items.Add("Textile Depot");
-            cbSupplier.Items.Add("Crystal Glass Co");
-            cbSupplier.Items.Add("Comfort Materials");
-            cbSupplier.SelectedIndex = 0;
-            cbWearhouse.Items.Add("WH-A-12-03");
-            cbWearhouse.Items.Add("WH-A-12-04");
-            cbWearhouse.Items.Add("WH-B-05-01");
-            cbWearhouse.Items.Add("WH-C-08-02");
-            cbWearhouse.SelectedIndex = 0;
-            cmWearhouse.Items.Add("WH-A-12-03");
-            cmWearhouse.Items.Add("WH-A-12-04");
-            cmWearhouse.Items.Add("WH-B-05-01");
-            cmWearhouse.Items.Add("WH-C-08-02");
-            cmWearhouse.SelectedIndex = 0;
-            cmbCStatus.Items.AddRange(new string[] { "In Stock", "Delivered" });
-            cmbCStatus.SelectedIndex = 0;
-            tbSN.ReadOnly = true;
-            GenerateBatchID();
-            GenerateInventoryID();
-            LoadInward();
-            LoadBatchIDs();
-            LoadStock();
-            LoadPID();
-            GenSN();
         }
 
         private void LoadPID()
@@ -470,6 +478,17 @@ namespace _4915project
                     con.Open();
 
                     // 步驟 1：查詢原材料資訊... (略)
+                    using(MySqlCommand cmdMID = new MySqlCommand(queryGetMaterialInfo, con))
+                    {
+                        cmdMID.Parameters.AddWithValue("@MaterialName", cmItem.SelectedItem?.ToString());
+                        using (MySqlDataReader reader = cmdMID.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                materialID = reader["MaterialID"].ToString();
+                            }
+                        }
+                    }
 
                     tran = con.BeginTransaction();
 

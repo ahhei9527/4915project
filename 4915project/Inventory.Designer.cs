@@ -35,7 +35,6 @@
             button1 = new Button();
             dataGridView1 = new DataGridView();
             btSearch = new Button();
-            cbLowStock = new CheckBox();
             tbItemID = new TextBox();
             label3 = new Label();
             label2 = new Label();
@@ -116,7 +115,6 @@
             groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(dataGridView1);
             groupBox1.Controls.Add(btSearch);
-            groupBox1.Controls.Add(cbLowStock);
             groupBox1.Controls.Add(tbItemID);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
@@ -169,19 +167,9 @@
             btSearch.UseVisualStyleBackColor = true;
             btSearch.Click += btSearch_Click;
             // 
-            // cbLowStock
-            // 
-            cbLowStock.AutoSize = true;
-            cbLowStock.Location = new Point(138, 147);
-            cbLowStock.Name = "cbLowStock";
-            cbLowStock.Size = new Size(218, 27);
-            cbLowStock.TabIndex = 4;
-            cbLowStock.Text = "Show Low Stock Only";
-            cbLowStock.UseVisualStyleBackColor = true;
-            // 
             // tbItemID
             // 
-            tbItemID.Location = new Point(163, 37);
+            tbItemID.Location = new Point(235, 124);
             tbItemID.Name = "tbItemID";
             tbItemID.Size = new Size(194, 30);
             tbItemID.TabIndex = 3;
@@ -189,7 +177,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(20, 40);
+            label3.Location = new Point(92, 127);
             label3.Name = "label3";
             label3.Size = new Size(137, 23);
             label3.TabIndex = 2;
@@ -198,7 +186,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(47, 84);
+            label2.Location = new Point(523, 126);
             label2.Name = "label2";
             label2.Size = new Size(110, 23);
             label2.TabIndex = 1;
@@ -207,7 +195,7 @@
             // cmWearhouse
             // 
             cmWearhouse.FormattingEnabled = true;
-            cmWearhouse.Location = new Point(163, 81);
+            cmWearhouse.Location = new Point(639, 123);
             cmWearhouse.Name = "cmWearhouse";
             cmWearhouse.Size = new Size(194, 31);
             cmWearhouse.TabIndex = 0;

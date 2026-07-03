@@ -24,6 +24,9 @@ namespace _4915project
         }
         private void loadRawMaterial()
         {
+            cmbSupplier.Items.Add("");
+            cmbType.Items.Add("");
+            cmbUnit.Items.Add("");
             string query = @"select * from rawmaterial order by MaterialID ASC";
             using (MySqlConnection conn = new MySqlConnection(constring))
             {
@@ -181,29 +184,37 @@ namespace _4915project
 
         private void btSearch_Click(object sender, EventArgs e)
         {
-            string query = @"select * from rawmaterial where 1=1";
+            // 💡 修正：在 "where 1=1" 後面或接下來的 " and" 前面加上空格
+            string query = @"select * from rawmaterial where 1=1 ";
+
             using (MySqlConnection con = new MySqlConnection(constring))
             {
-                using (MySqlCommand cmd = new MySqlCommand())
+                // 💡 優化：直接將 query 與 con 傳入建構子
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
-                    cmd.Connection = con;
-                    if (cmbType.SelectedIndex > 0)
+                    if (cmbType.SelectedIndex >= 0)
                     {
-                        query += "and Type = @type";
+                        cmd.CommandText += " and Type = @Type";
                         cmd.Parameters.AddWithValue("@Type", cmbType.SelectedItem?.ToString());
                     }
-                    if (cmbSupplier.SelectedIndex > 0)
+
+                    // 💡 修正 2：供應商下拉選單也一併修正
+                    if (cmbSupplier.SelectedIndex >= 0)
                     {
-                        query += "and PreferredSupplier = @Supplier";
+                        cmd.CommandText += " and PreferredSupplier = @Supplier";
                         cmd.Parameters.AddWithValue("@Supplier", cmbSupplier.SelectedItem?.ToString());
                     }
-                    if (cmbUnit.SelectedIndex > 0)
+
+                    // 💡 修正 3：單位下拉選單也一併修正
+                    if (cmbUnit.SelectedIndex >= 0)
                     {
-                        query += "and Unit = @Unit";
+                        cmd.CommandText += " and Unit = @Unit";
                         cmd.Parameters.AddWithValue("@Unit", cmbUnit.SelectedItem?.ToString());
                     }
-                    query += "order by MaterialID ASC";
-                    cmd.CommandText = query;
+
+                    // 💡 修正：前方加上空格 " order by..."
+                    cmd.CommandText += " order by MaterialID ASC";
+
                     try
                     {
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);

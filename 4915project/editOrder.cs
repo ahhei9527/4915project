@@ -46,7 +46,7 @@ namespace _4915project
                 WHERE OrderID = @OrderID;";
                     using (MySqlCommand cmdUpdate = new MySqlCommand(queryUpdateOrder, con))
                     {
-                        cmdUpdate.Parameters.AddWithValue("@RequestDeliveryDate", newDate);
+                        cmdUpdate.Parameters.AddWithValue("@RequestDeliveryDate", deliveryDate.Value);
                         cmdUpdate.Parameters.AddWithValue("@Status", newStatus);
                         cmdUpdate.Parameters.AddWithValue("@OrderID", orderID);
                         int rowsAffected = cmdUpdate.ExecuteNonQuery();

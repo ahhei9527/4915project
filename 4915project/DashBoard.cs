@@ -502,28 +502,11 @@ namespace _4915project
             this.Close();
         }
 
-        private void Menu_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-
         private void Production_Click(object sender, EventArgs e)
         {
             Production production = new Production();
             production.Show();
             this.Close();
-        }
-
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btRawMaterial_Click(object sender, EventArgs e)

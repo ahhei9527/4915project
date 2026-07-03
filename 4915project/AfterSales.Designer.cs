@@ -320,6 +320,7 @@
             cmbConID.Name = "cmbConID";
             cmbConID.Size = new Size(188, 31);
             cmbConID.TabIndex = 21;
+            cmbConID.SelectedIndexChanged += cmbConID_SelectedIndexChanged;
             // 
             // lblComID
             // 

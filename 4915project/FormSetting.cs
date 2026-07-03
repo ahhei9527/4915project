@@ -248,34 +248,6 @@ namespace _4915project
             this.Close();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbPwd.Checked)
-            {
-                tbPassword.Enabled = true;
-            }
-            else
-            {
-                tbPassword.Enabled = false;
-            }
-        }
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbRole.Checked)
-            {
-                cmbRole.Enabled = true;
-                cmbDepartment.Enabled = true;
-                cmbPosit.Enabled = true;
-            }
-            else
-            {
-                cmbRole.Enabled = false;
-                cmbDepartment.Enabled = false;
-                cmbPosit.Enabled = false;
-            }
-        }
-
         private void button9_Click(object sender, EventArgs e)
         {
             // 檢查是否至少勾選了一個更新項目
@@ -600,14 +572,30 @@ namespace _4915project
 
         private void cbPwd_CheckedChanged(object sender, EventArgs e)
         {
-            tbPassword.Enabled = true;
+            if (cbPwd.Checked)
+            {
+                tbPassword.Enabled = true;
+            }
+            else
+            {
+                tbPassword.Enabled = false;
+            }
         }
 
         private void cbRole_CheckedChanged(object sender, EventArgs e)
         {
-            cmbRole.Enabled = true;
-            cmbDepartment.Enabled = true;
-            cmbPosit.Enabled = true;
+            if (cbRole.Checked)
+            {
+                cmbRole.Enabled = true;
+                cmbDepartment.Enabled = true;
+                cmbPosit.Enabled = true;
+            }
+            else
+            {
+                cmbRole.Enabled = false;
+                cmbDepartment.Enabled = false;
+                cmbPosit.Enabled = false;
+            }
         }
     }
 }
